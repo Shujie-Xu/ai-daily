@@ -1,0 +1,78 @@
+{
+  "date": "2026-02-23",
+  "searchCount": 10,
+  "dimensions": "A/B/C/D/E/F",
+  "sourceCount": 8,
+  "articles": [
+    {
+      "title": "OpenAI 完成 400 亿美元 F 轮融资，估值达 3400 亿美元",
+      "summary": "SoftBank 领投，本轮创下科技史上最大单轮私募融资纪录，资金将用于 AGI 研究和算力扩张。",
+      "url": "https://techcrunch.com",
+      "categories": ["funding"],
+      "heat": 5
+    },
+    {
+      "title": "Google 发布 Gemini 3.1 Pro：多模态能力再升级，长上下文达 200 万 token",
+      "summary": "新版本在 MMLU、HumanEval 等基准测试中全面超越 GPT-4o，支持原生音频输入和实时视频理解。",
+      "url": "https://deepmind.google",
+      "categories": ["model"],
+      "heat": 5
+    },
+    {
+      "title": "Anthropic Claude Sonnet 4.6 上线：工具调用延迟降低 40%",
+      "summary": "专为 Agent 工作流优化，新增原生代码执行环境，企业客户可申请私有部署。",
+      "url": "https://anthropic.com",
+      "categories": ["model", "product"],
+      "heat": 4
+    },
+    {
+      "title": "a16z 领投 AI 基础设施初创 NovaTech 1.2 亿美元 A 轮",
+      "summary": "专注于 LLM 推理优化，声称将 GPT-4 级模型推理成本降低 10 倍，已有 50+ 企业客户。",
+      "url": "https://a16z.com",
+      "categories": ["funding"],
+      "heat": 4
+    },
+    {
+      "title": "Meta 开源 Llama 4：700B 参数，支持 128 种语言",
+      "summary": "采用 MoE 架构，实际激活参数约 70B，推理成本与 Llama 3 70B 相当但性能媲美闭源模型。",
+      "url": "https://github.com/meta-llama",
+      "categories": ["model", "open-source"],
+      "heat": 5
+    },
+    {
+      "title": "ChatGPT 首次在对话中展示商业广告，OpenAI 开放广告变现",
+      "summary": "用户在使用 ChatGPT 免费版时将看到相关广告，付费用户不受影响，引发社区广泛讨论。",
+      "url": "https://theverge.com",
+      "categories": ["product", "policy"],
+      "heat": 4
+    },
+    {
+      "title": "欧盟 AI 法案第二阶段正式生效，通用 AI 系统须强制透明度披露",
+      "summary": "OpenAI、Google、Anthropic 等公司需在 6 个月内提交详细技术文档，违规最高罚款营收 3%。",
+      "url": "https://reuters.com",
+      "categories": ["policy"],
+      "heat": 3
+    },
+    {
+      "title": "GitHub 推出 Copilot Agent Mode：自动完成整个功能开发任务",
+      "summary": "从 Issue 到 PR 全流程自动化，支持跨文件重构、测试生成和 CI 修复，目前向 Enterprise 用户开放。",
+      "url": "https://github.blog",
+      "categories": ["product", "open-source"],
+      "heat": 3
+    },
+    {
+      "title": "DeepMind 发布 AlphaFold 3 升级版：蛋白质-小分子结合预测精度提升 35%",
+      "summary": "对药物研发有重大意义，多家制药巨头已宣布基于新版本展开合作研究项目。",
+      "url": "https://deepmind.com",
+      "categories": ["research"],
+      "heat": 3
+    },
+    {
+      "title": "YC W26 AI 批次：60% 初创公司聚焦 Agentic 工作流",
+      "summary": "本批次 200 家公司中超过 120 家与 AI Agent 相关，垂直赛道涵盖法律、医疗、金融、教育。",
+      "url": "https://ycombinator.com",
+      "categories": ["funding"],
+      "heat": 3
+    }
+  ]
+}

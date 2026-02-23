@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Daily · 2026/02/23</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --bg: #08080f;
+      --bg2: #0d0d1a;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --cyan: #00f5ff;
+      --purple: #a855f7;
+      --pink: #ec4899;
+      --green: #22d3ee;
+      --yellow: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #64748b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,245,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168,85,247,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(236,72,153,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* Header */
+    header {
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(0,245,255,0.3);
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-sub {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .date-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pulse {
+      width: 8px; height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 0 0 rgba(0,245,255,0.4);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0,245,255,0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(0,245,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,245,255,0); }
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: rgba(0,245,255,0.3); }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Category tabs */
+    .category-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .cat-tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .cat-tag[data-cat="funding"] { color: var(--yellow); border-color: rgba(251,191,36,0.3); }
+    .cat-tag[data-cat="model"] { color: var(--cyan); border-color: rgba(0,245,255,0.3); }
+    .cat-tag[data-cat="product"] { color: var(--purple); border-color: rgba(168,85,247,0.3); }
+    .cat-tag[data-cat="research"] { color: var(--green); border-color: rgba(34,211,238,0.3); }
+    .cat-tag[data-cat="policy"] { color: var(--pink); border-color: rgba(236,72,153,0.3); }
+    .cat-tag[data-cat="open-source"] { color: #a3e635; border-color: rgba(163,230,53,0.3); }
+
+    /* News grid */
+    .news-section { margin-bottom: 48px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .heat-label { font-size: 18px; }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .news-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .news-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .news-card:hover {
+      border-color: rgba(0,245,255,0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .news-card:hover::before { opacity: 1; }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-cats {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-funding { background: rgba(251,191,36,0.15); color: var(--yellow); }
+    .badge-model { background: rgba(0,245,255,0.12); color: var(--cyan); }
+    .badge-product { background: rgba(168,85,247,0.15); color: var(--purple); }
+    .badge-research { background: rgba(34,211,238,0.12); color: var(--green); }
+    .badge-policy { background: rgba(236,72,153,0.15); color: var(--pink); }
+    .badge-open-source { background: rgba(163,230,53,0.12); color: #a3e635; }
+
+    .heat-score {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .card-summary {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .card-source {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card-link {
+      font-size: 11px;
+      color: var(--cyan);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .card-link:hover { opacity: 1; }
+
+    /* Featured card (top story) */
+    .news-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      gap: 24px;
+      background: linear-gradient(135deg, rgba(0,245,255,0.06), rgba(168,85,247,0.06));
+      border-color: rgba(0,245,255,0.15);
+    }
+
+    .news-card.featured .card-title { font-size: 18px; }
+
+    .news-card.featured .featured-accent {
+      width: 4px;
+      min-width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, var(--cyan), var(--purple));
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .footer-brand {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-brand span {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    /* Scan line effect */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .news-card.featured { flex-direction: column; }
+      .news-card.featured .featured-accent { width: 100%; min-width: unset; height: 4px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">🤖</div>
+        <div>
+          <div class="logo-text">AI Daily</div>
+          <div class="logo-sub">powered by 小豹包</div>
+        </div>
+      </div>
+      <div class="date-badge">
+        <div class="pulse"></div>
+        2026/02/23 · 17:53 CST
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value">10</div>
+      <div class="stat-label">今日新闻</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">融资动态</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">模型发布</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">10</div>
+      <div class="stat-label">信息来源</div>
+    </div>
+  </div>
+
+  <!-- News sections by heat -->
+  
+    <div class="news-section">
+      <div class="section-header">
+        <span class="heat-label">⭐⭐⭐⭐⭐</span>
+        <span class="section-title">顶级热点</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="news-grid">
+        
+    <div class="news-card featured">
+      <div class="featured-accent"></div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
+          <div class="heat-score" title="顶级热点">🔥🔥🔥🔥🔥</div>
+        </div>
+        <div class="card-title">OpenAI 完成 400 亿美元 F 轮融资，估值达 3400 亿美元</div>
+        <div class="card-summary">SoftBank 领投，本轮创下科技史上最大单轮私募融资纪录，资金将用于 AGI 研究和算力扩张。</div>
+        <div class="card-footer">
+          <span class="card-source">techcrunch.com</span>
+          <a href="https://techcrunch.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
+          <div class="heat-score" title="顶级热点">🔥🔥🔥🔥🔥</div>
+        </div>
+        <div class="card-title">Google 发布 Gemini 3.1 Pro：多模态能力再升级，长上下文达 200 万 token</div>
+        <div class="card-summary">新版本在 MMLU、HumanEval 等基准测试中全面超越 GPT-4o，支持原生音频输入和实时视频理解。</div>
+        <div class="card-footer">
+          <span class="card-source">deepmind.google</span>
+          <a href="https://deepmind.google" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span><span class="badge badge-open-source">💻 开源</span></div>
+          <div class="heat-score" title="顶级热点">🔥🔥🔥🔥🔥</div>
+        </div>
+        <div class="card-title">Meta 开源 Llama 4：700B 参数，支持 128 种语言</div>
+        <div class="card-summary">采用 MoE 架构，实际激活参数约 70B，推理成本与 Llama 3 70B 相当但性能媲美闭源模型。</div>
+        <div class="card-footer">
+          <span class="card-source">github.com</span>
+          <a href="https://github.com/meta-llama" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="news-section">
+      <div class="section-header">
+        <span class="heat-label">⭐⭐⭐⭐</span>
+        <span class="section-title">高热度</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="news-grid">
+        
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span><span class="badge badge-product">📦 产品</span></div>
+          <div class="heat-score" title="高热度">🔥🔥🔥🔥</div>
+        </div>
+        <div class="card-title">Anthropic Claude Sonnet 4.6 上线：工具调用延迟降低 40%</div>
+        <div class="card-summary">专为 Agent 工作流优化，新增原生代码执行环境，企业客户可申请私有部署。</div>
+        <div class="card-footer">
+          <span class="card-source">anthropic.com</span>
+          <a href="https://anthropic.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
+          <div class="heat-score" title="高热度">🔥🔥🔥🔥</div>
+        </div>
+        <div class="card-title">a16z 领投 AI 基础设施初创 NovaTech 1.2 亿美元 A 轮</div>
+        <div class="card-summary">专注于 LLM 推理优化，声称将 GPT-4 级模型推理成本降低 10 倍，已有 50+ 企业客户。</div>
+        <div class="card-footer">
+          <span class="card-source">a16z.com</span>
+          <a href="https://a16z.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-product">📦 产品</span><span class="badge badge-policy">📜 政策</span></div>
+          <div class="heat-score" title="高热度">🔥🔥🔥🔥</div>
+        </div>
+        <div class="card-title">ChatGPT 首次在对话中展示商业广告，OpenAI 开放广告变现</div>
+        <div class="card-summary">用户在使用 ChatGPT 免费版时将看到相关广告，付费用户不受影响，引发社区广泛讨论。</div>
+        <div class="card-footer">
+          <span class="card-source">theverge.com</span>
+          <a href="https://theverge.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="news-section">
+      <div class="section-header">
+        <span class="heat-label">⭐⭐⭐</span>
+        <span class="section-title">中等热度</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="news-grid">
+        
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-policy">📜 政策</span></div>
+          <div class="heat-score" title="中等热度">🔥🔥🔥</div>
+        </div>
+        <div class="card-title">欧盟 AI 法案第二阶段正式生效，通用 AI 系统须强制透明度披露</div>
+        <div class="card-summary">OpenAI、Google、Anthropic 等公司需在 6 个月内提交详细技术文档，违规最高罚款营收 3%。</div>
+        <div class="card-footer">
+          <span class="card-source">reuters.com</span>
+          <a href="https://reuters.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-product">📦 产品</span><span class="badge badge-open-source">💻 开源</span></div>
+          <div class="heat-score" title="中等热度">🔥🔥🔥</div>
+        </div>
+        <div class="card-title">GitHub 推出 Copilot Agent Mode：自动完成整个功能开发任务</div>
+        <div class="card-summary">从 Issue 到 PR 全流程自动化，支持跨文件重构、测试生成和 CI 修复，目前向 Enterprise 用户开放。</div>
+        <div class="card-footer">
+          <span class="card-source">github.blog</span>
+          <a href="https://github.blog" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-research">🔬 研究</span></div>
+          <div class="heat-score" title="中等热度">🔥🔥🔥</div>
+        </div>
+        <div class="card-title">DeepMind 发布 AlphaFold 3 升级版：蛋白质-小分子结合预测精度提升 35%</div>
+        <div class="card-summary">对药物研发有重大意义，多家制药巨头已宣布基于新版本展开合作研究项目。</div>
+        <div class="card-footer">
+          <span class="card-source">deepmind.com</span>
+          <a href="https://deepmind.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
+          <div class="heat-score" title="中等热度">🔥🔥🔥</div>
+        </div>
+        <div class="card-title">YC W26 AI 批次：60% 初创公司聚焦 Agentic 工作流</div>
+        <div class="card-summary">本批次 200 家公司中超过 120 家与 AI Agent 相关，垂直赛道涵盖法律、医疗、金融、教育。</div>
+        <div class="card-footer">
+          <span class="card-source">ycombinator.com</span>
+          <a href="https://ycombinator.com" target="_blank" class="card-link">阅读原文 →</a>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+
+  <footer>
+    <div class="footer-text">更新于 2026/02/23 17:53 · 10 次搜索 · 覆盖维度 A/B/C/D/E/F</div>
+    <div class="footer-brand">by <span>小豹包🍞</span> · AI Daily Dashboard</div>
+  </footer>
+</div>
+</body>
+</html>

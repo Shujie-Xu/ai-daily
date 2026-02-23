@@ -1,77 +1,161 @@
 {
   "date": "2026-02-23",
-  "searchCount": 10,
+  "searchCount": 15,
   "dimensions": "A/B/C/D/E/F",
-  "sourceCount": 8,
+  "sourceCount": 28,
   "articles": [
     {
-      "title": "OpenAI 完成 400 亿美元 F 轮融资，估值达 3400 亿美元",
-      "summary": "SoftBank 领投，本轮创下科技史上最大单轮私募融资纪录，资金将用于 AGI 研究和算力扩张。",
-      "url": "https://techcrunch.com",
+      "title": "OpenAI 正式推进史上最大融资：$1000亿轮次，估值$8500亿",
+      "summary": "OpenAI接近完成超过1000亿美元的新融资，亚马逊、英伟达、软银、微软等参与，投后估值将超8500亿美元，刷新私募融资历史记录。",
+      "url": "https://techcrunch.com/2026/02/19/openai-reportedly-finalizing-100b-deal-at-more-than-850b-valuation/",
       "categories": ["funding"],
       "heat": 5
     },
     {
-      "title": "Google 发布 Gemini 3.1 Pro：多模态能力再升级，长上下文达 200 万 token",
-      "summary": "新版本在 MMLU、HumanEval 等基准测试中全面超越 GPT-4o，支持原生音频输入和实时视频理解。",
-      "url": "https://deepmind.google",
+      "title": "Anthropic 完成 $300亿 G轮融资，估值飙升至 $3800亿",
+      "summary": "Anthropic宣布完成300亿美元G轮融资，由GIC与Coatue领投，Founders Fund、D.E. Shaw等跟投，成为2026年最大风险投资轮次之一，估值达3800亿美元。",
+      "url": "https://techcrunch.com/2026/02/12/anthropic-raises-another-30-billion-in-series-g-with-a-new-value-of-380-billion/",
+      "categories": ["funding"],
+      "heat": 5
+    },
+    {
+      "title": "Google 发布 Gemini 3.1 Pro：百万Token上下文，ARC-AGI-2得分77.1%",
+      "summary": "Google DeepMind发布Gemini 3.1 Pro，支持100万token上下文窗口，多模态推理覆盖文本、图像、音频、视频和代码，在ARC-AGI-2基准上得分77.1%。",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
       "categories": ["model"],
       "heat": 5
     },
     {
-      "title": "Anthropic Claude Sonnet 4.6 上线：工具调用延迟降低 40%",
-      "summary": "专为 Agent 工作流优化，新增原生代码执行环境，企业客户可申请私有部署。",
-      "url": "https://anthropic.com",
-      "categories": ["model", "product"],
+      "title": "Anthropic 发布 Claude Opus 4.6 与 Sonnet 4.6，抢先OpenAI一天",
+      "summary": "Anthropic于2月5日发布Claude Opus 4.6，同日OpenAI发布GPT-5.3-Codex，随后Anthropic又推出Sonnet 4.6，三大实验室掀起2026年2月模型大战。",
+      "url": "https://www.reuters.com/business/retail-consumer/anthropic-releases-ai-upgrade-market-punishes-software-stocks-2026-02-05/",
+      "categories": ["model"],
+      "heat": 5
+    },
+    {
+      "title": "新德里AI峰会：88国签署AI宣言，刻意回避具体安全约束",
+      "summary": "第四届全球AI峰会在新德里举行，88个国家签署《德里AI宣言》，宣言包含安全目标却无任何具体约束条款，峰会重心已从安全监管转向促进AI应用推广。",
+      "url": "https://www.politico.com/news/2026/02/21/dozens-of-countries-steer-clear-of-safety-commitment-in-global-ai-pledge-00792298",
+      "categories": ["policy"],
       "heat": 4
     },
     {
-      "title": "a16z 领投 AI 基础设施初创 NovaTech 1.2 亿美元 A 轮",
-      "summary": "专注于 LLM 推理优化，声称将 GPT-4 级模型推理成本降低 10 倍，已有 50+ 企业客户。",
-      "url": "https://a16z.com",
+      "title": "阿里巴巴发布 Qwen3.5：专为 Agentic AI 时代设计",
+      "summary": "阿里巴巴于农历新年前夕发布Qwen3.5，专为Agentic AI时代构建，强调在相同算力下实现更高性能与更低成本，同时推出机器人专用AI模型。",
+      "url": "https://www.cnbc.com/2026/02/17/china-alibaba-qwen-ai-agent-latest-model.html",
+      "categories": ["model", "open-source"],
+      "heat": 4
+    },
+    {
+      "title": "Google Gemini 3 Deep Think 重大升级：专攻科学与工程难题",
+      "summary": "Google对Gemini 3 Deep Think进行重大升级，聚焦科学研究与工程应用场景，面向Google AI Ultra订阅用户开放，同时向企业用户提供API早期访问。",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "categories": ["model"],
+      "heat": 4
+    },
+    {
+      "title": "印度Reliance与Adani承诺联合投资$2100亿用于国内AI基础设施",
+      "summary": "在新德里AI峰会上，印度两大财团信实集团（Reliance）与阿达尼集团（Adani）宣布联合投资2100亿美元，建设国内AI数据中心和基础设施。",
+      "url": "https://www.nbcnews.com/world/asia/indias-ai-summit-draws-global-leaders-big-pledges-chaos-rcna259855",
       "categories": ["funding"],
       "heat": 4
     },
     {
-      "title": "Meta 开源 Llama 4：700B 参数，支持 128 种语言",
-      "summary": "采用 MoE 架构，实际激活参数约 70B，推理成本与 Llama 3 70B 相当但性能媲美闭源模型。",
-      "url": "https://github.com/meta-llama",
-      "categories": ["model", "open-source"],
-      "heat": 5
-    },
-    {
-      "title": "ChatGPT 首次在对话中展示商业广告，OpenAI 开放广告变现",
-      "summary": "用户在使用 ChatGPT 免费版时将看到相关广告，付费用户不受影响，引发社区广泛讨论。",
-      "url": "https://theverge.com",
-      "categories": ["product", "policy"],
+      "title": "斯坦福研究：AI仅凭一晚睡眠数据即可预测未来患病风险",
+      "summary": "斯坦福大学研究人员开发出一种AI系统，只需分析一晚上的睡眠生理信号，即可识别大脑、心脏、呼吸中的隐藏模式，精准预测多种疾病的未来风险。",
+      "url": "https://www.sciencedaily.com/news/computers_math/artificial_intelligence/",
+      "categories": ["research"],
       "heat": 4
     },
     {
-      "title": "欧盟 AI 法案第二阶段正式生效，通用 AI 系统须强制透明度披露",
-      "summary": "OpenAI、Google、Anthropic 等公司需在 6 个月内提交详细技术文档，违规最高罚款营收 3%。",
-      "url": "https://reuters.com",
+      "title": "NASA 毅力号火星车首次由AI全自主规划路线行驶",
+      "summary": "NASA毅力号火星车创造历史，首次使用AI系统分析图像和地形数据独立规划路线行驶，取代了传统人类操控模式，标志着太空探索自主化新里程碑。",
+      "url": "https://www.sciencedaily.com/news/computers_math/artificial_intelligence/",
+      "categories": ["research"],
+      "heat": 4
+    },
+    {
+      "title": "特朗普签署行政令：禁止各州自行执行AI监管规定",
+      "summary": "特朗普签署行政令阻止各州执行自己的AI监管法规，但加州、德州等已颁布的AI法规能否被联邦令推翻仍面临法律挑战，各方争议持续升温。",
+      "url": "https://www.ucdavis.edu/curiosity/blog/does-presidential-order-ai-regulation-affect-states",
       "categories": ["policy"],
+      "heat": 4
+    },
+    {
+      "title": "2026年2月：17家美国AI公司完成超$1亿融资",
+      "summary": "TechCrunch梳理发现，截至2月17日，2026年已有17家美国AI公司融资超过1亿美元，AI融资热度持续高涨，整体延续了2025年历史峰值势头。",
+      "url": "https://techcrunch.com/2026/02/17/here-are-the-17-us-based-ai-companies-that-have-raised-100m-or-more-in-2026/",
+      "categories": ["funding"],
+      "heat": 4
+    },
+    {
+      "title": "Taalas HC1 AI芯片发布：声称速度是英伟达GPU的数倍",
+      "summary": "Taalas发布HC1芯片，采用「Hardcore AI」架构，宣称每秒处理17000个token，性能大幅超越英伟达GPU，同时功耗和成本更低，引发业界广泛关注。",
+      "url": "https://www.financialexpress.com/life/technology-taalas-hc1-ai-chip-hype-explained-why-this-nvidia-gpu-beating-chip-with-17000-tokens-per-second-speed-is-viral-4151518/",
+      "categories": ["product"],
       "heat": 3
     },
     {
-      "title": "GitHub 推出 Copilot Agent Mode：自动完成整个功能开发任务",
-      "summary": "从 Issue 到 PR 全流程自动化，支持跨文件重构、测试生成和 CI 修复，目前向 Enterprise 用户开放。",
-      "url": "https://github.blog",
-      "categories": ["product", "open-source"],
-      "heat": 3
-    },
-    {
-      "title": "DeepMind 发布 AlphaFold 3 升级版：蛋白质-小分子结合预测精度提升 35%",
-      "summary": "对药物研发有重大意义，多家制药巨头已宣布基于新版本展开合作研究项目。",
-      "url": "https://deepmind.com",
+      "title": "AI助力发现25种高温稳定磁性材料，或取代电动车稀土磁铁",
+      "summary": "研究人员利用AI构建超6.7万种磁性材料数据库，发现25种在高温下保持磁性的有潜力化合物，有望减少电动汽车对稀土元素的依赖。",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260218031611.htm",
       "categories": ["research"],
       "heat": 3
     },
     {
-      "title": "YC W26 AI 批次：60% 初创公司聚焦 Agentic 工作流",
-      "summary": "本批次 200 家公司中超过 120 家与 AI Agent 相关，垂直赛道涵盖法律、医疗、金融、教育。",
-      "url": "https://ycombinator.com",
+      "title": "Jump AI 完成$8000万 B轮融资，打造顾问AI平台",
+      "summary": "面向财务顾问的AI笔记与通讯管理平台Jump获得8000万美元B轮融资，由Insight Partners领投，将用于扩展其AI驱动的顾问沟通与会议管理功能。",
+      "url": "https://www.wealthmanagement.com/artificial-intelligence/jump_secures_series_b",
       "categories": ["funding"],
+      "heat": 3
+    },
+    {
+      "title": "Google称朝鲜黑客利用Gemini AI辅助网络侦察攻击",
+      "summary": "Google披露朝鲜关联黑客组织UNC2970使用Gemini生成式AI对攻击目标进行侦察，标志着国家背景黑客开始将AI武器化用于网络作战。",
+      "url": "https://thehackernews.com/2026/02/google-reports-state-backed-hackers.html",
+      "categories": ["research", "policy"],
+      "heat": 3
+    },
+    {
+      "title": "AI增强攻击者入侵全球55国逾600台FortiGate设备",
+      "summary": "亚马逊安全报告披露，AI辅助威胁行为者利用弱凭证和暴露端口，在全球55个国家入侵超过600台FortiGate网络设备，AI赋能网络攻击趋势明显。",
+      "url": "https://thehackernews.com/2026/02/ai-assisted-threat-actor-compromises.html",
+      "categories": ["research"],
+      "heat": 3
+    },
+    {
+      "title": "GitHub Trending：Heretic 工具走红，可自动化移除大模型审查限制",
+      "summary": "GitHub趋势榜新晋项目Heretic由开发者p-e-w发布，专注于全自动移除大语言模型的审查机制，2月21日上榜后引发开源社区热烈讨论。",
+      "url": "https://aitoolly.com/ai-news/article/b44c2fdb-3d67-40b2-a6c8-8fc448593245",
+      "categories": ["open-source"],
+      "heat": 3
+    },
+    {
+      "title": "OpenAI退役GPT-4o等旧版模型，ChatGPT全面升级至GPT-5.2",
+      "summary": "OpenAI正式宣布退役GPT-4o、GPT-4.1、o4-mini及GPT-5旧版，全面推送用户迁移至GPT-5.2，并同步升级ChatGPT支持最多20文件上传及多项功能改进。",
+      "url": "https://releasebot.io/updates/openai",
+      "categories": ["product", "model"],
+      "heat": 3
+    },
+    {
+      "title": "MIT Technology Review：可解释AI（机械可解释性）入选2026年十大突破技术",
+      "summary": "MIT科技评论将机械可解释性（Mechanistic Interpretability）列入2026年十大突破技术，Anthropic、Google DeepMind等正通过新技术尝试揭开AI模型内部运作机制。",
+      "url": "https://www.technologyreview.com/2026/01/12/1130003/mechanistic-interpretability-ai-research-models-2026-breakthrough-technologies/",
+      "categories": ["research"],
+      "heat": 3
+    },
+    {
+      "title": "OpenAI与Anthropic公开论战：AI产品应不应该加广告？",
+      "summary": "OpenAI宣布将引入广告后，Anthropic发布反广告对比测试引发口水战，Sam Altman在X上强调OpenAI广告不会以刻板形式出现，双方激烈争论AI普惠路径。",
+      "url": "https://www.theguardian.com/technology/2026/feb/07/ai-chatbots-anthropic-openai-claude-chatgpt",
+      "categories": ["product"],
+      "heat": 3
+    },
+    {
+      "title": "2026年2月 AI 模型大爆发：单月7个重量级模型同期竞逐",
+      "summary": "分析文章梳理，2026年2月是历史上AI模型最密集发布的月份，Gemini 3 Pro、Sonnet 5、GPT-5.3、Qwen3.5、GLM-5、DeepSeek v4和Grok 4.20相继亮相。",
+      "url": "https://jangwook.net/en/blog/en/ai-model-rush-february-2026/",
+      "categories": ["model"],
       "heat": 3
     }
   ]

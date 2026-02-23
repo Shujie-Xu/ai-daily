@@ -4,6 +4,14 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Daily · {{DATE}}</title>
+  <meta property="og:title" content="🤖 AI 日报 · {{DATE}}"/>
+  <meta property="og:description" content="{{OG_DESC}}"/>
+  <meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og.png"/>
+  <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="🤖 AI 日报 · {{DATE}}"/>
+  <meta name="twitter:description" content="{{OG_DESC}}"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -223,6 +231,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      cursor: pointer;
     }
 
     .news-card::before {
@@ -384,11 +393,318 @@
       z-index: 999;
     }
 
+    /* Archive */
+    .archive-section { margin-bottom: 48px; }
+    .archive-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .archive-item {
+      padding: 7px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .archive-item:hover {
+      border-color: rgba(0,245,255,0.3);
+      color: var(--cyan);
+    }
+    .archive-today {
+      border-color: rgba(0,245,255,0.3);
+      color: var(--cyan);
+      background: rgba(0,245,255,0.06);
+    }
+    .today-tag {
+      background: rgba(0,245,255,0.15);
+      color: var(--cyan);
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      margin-left: 4px;
+    }
+
+    /* ===================== */
+    /* Detail Overlay        */
+    /* ===================== */
+    .detail-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .detail-overlay.open {
+      transform: translateX(0);
+    }
+
+    /* Top nav bar */
+    .detail-topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .detail-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .detail-back:hover {
+      border-color: rgba(0,245,255,0.4);
+      color: var(--cyan);
+    }
+
+    .detail-pager {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+
+    .detail-arrows {
+      display: flex;
+      gap: 6px;
+    }
+
+    .detail-arrow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    .detail-arrow:hover {
+      border-color: rgba(0,245,255,0.4);
+      color: var(--cyan);
+    }
+    .detail-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    /* Swipe hint (mobile) */
+    .swipe-hint {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      padding: 6px;
+      flex-shrink: 0;
+    }
+    @media (min-width: 640px) { .swipe-hint { display: none; } }
+
+    /* Scrollable content */
+    .detail-scroll {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .detail-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    .detail-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .detail-heat {
+      font-size: 16px;
+    }
+
+    .detail-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 640px) {
+      .detail-title { font-size: 18px; }
+    }
+
+    /* Content body */
+    .detail-content-body {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #c8d3e0;
+    }
+
+    .detail-content-body p {
+      margin-bottom: 16px;
+    }
+
+    .detail-content-body h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin: 24px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-content-body ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .detail-content-body li {
+      margin-bottom: 8px;
+    }
+
+    .detail-content-body strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Divider */
+    .detail-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+
+    /* Source link */
+    .detail-source-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .detail-source-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .detail-source-domain {
+      font-size: 13px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .detail-read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(168,85,247,0.15));
+      border: 1px solid rgba(0,245,255,0.25);
+      color: var(--cyan);
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .detail-read-link:hover {
+      background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(168,85,247,0.25));
+      border-color: rgba(0,245,255,0.4);
+    }
+
+    /* Bottom nav (mobile) */
+    .detail-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px 20px;
+      background: rgba(8,8,15,0.95);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      z-index: 2;
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .detail-bottom-nav { display: flex; }
+      .detail-body { padding-bottom: 90px; }
+    }
+
+    .detail-bottom-nav .detail-arrow {
+      flex: 1;
+      font-size: 14px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .detail-bottom-pager {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 60px;
+    }
+
+    /* Slide animation for content swap */
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .anim-right { animation: slideInRight 0.22s ease; }
+    .anim-left  { animation: slideInLeft  0.22s ease; }
+
     /* Responsive */
     @media (max-width: 640px) {
       .news-card.featured { flex-direction: column; }
       .news-card.featured .featured-accent { width: 100%; min-width: unset; height: 4px; }
       .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .detail-topbar .detail-arrows { display: none; }
     }
   </style>
 </head>
@@ -438,5 +754,213 @@
     <div class="footer-brand">by <span>小豹包🍞</span> · AI Daily Dashboard</div>
   </footer>
 </div>
+
+<!-- ============================= -->
+<!-- Detail Overlay                -->
+<!-- ============================= -->
+<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true">
+  <!-- Top nav -->
+  <div class="detail-topbar">
+    <button class="detail-back" onclick="closeDetail()">← 返回</button>
+    <div class="detail-pager" id="detailPager">1 / 1</div>
+    <div class="detail-arrows">
+      <button class="detail-arrow" id="btnPrev" onclick="navigateDetail(-1)" title="上一条 (←)">‹</button>
+      <button class="detail-arrow" id="btnNext" onclick="navigateDetail(1)"  title="下一条 (→)">›</button>
+    </div>
+  </div>
+
+  <!-- Swipe hint (mobile only) -->
+  <div class="swipe-hint">← 左右滑动切换 →</div>
+
+  <!-- Scrollable body -->
+  <div class="detail-scroll" id="detailScroll">
+    <div class="detail-body" id="detailBody">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- Bottom nav (mobile only) -->
+  <div class="detail-bottom-nav">
+    <button class="detail-arrow" id="btnPrevMobile" onclick="navigateDetail(-1)">‹ 上一条</button>
+    <div class="detail-bottom-pager" id="detailPagerMobile">1 / 1</div>
+    <button class="detail-arrow" id="btnNextMobile" onclick="navigateDetail(1)">下一条 ›</button>
+  </div>
+</div>
+
+<!-- Embedded article data -->
+<script>
+window.ARTICLES_DATA = {{ARTICLES_JSON}};
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  const overlay   = document.getElementById('detailOverlay');
+  const body      = document.getElementById('detailBody');
+  const scroll    = document.getElementById('detailScroll');
+  const pager     = document.getElementById('detailPager');
+  const pagerMob  = document.getElementById('detailPagerMobile');
+  const btnPrev   = document.getElementById('btnPrev');
+  const btnNext   = document.getElementById('btnNext');
+  const btnPrevM  = document.getElementById('btnPrevMobile');
+  const btnNextM  = document.getElementById('btnNextMobile');
+
+  // Sorted article list (same order as cards in the DOM)
+  const articles = window.ARTICLES_DATA || [];
+  let currentIdx = 0;
+  let isOpen = false;
+
+  // ── Category helpers ──────────────────────────────────────────
+  const CAT_LABEL = {
+    funding: '💰 融资', model: '🧠 模型', product: '📦 产品',
+    research: '🔬 研究', policy: '📜 政策', 'open-source': '💻 开源',
+  };
+  const CAT_CLASS = {
+    funding: 'badge-funding', model: 'badge-model', product: 'badge-product',
+    research: 'badge-research', policy: 'badge-policy', 'open-source': 'badge-open-source',
+  };
+  function heatStars(n) {
+    return '🔥'.repeat(Math.min(5, Math.max(1, n)));
+  }
+  function getBadges(cats) {
+    return (cats || ['product']).map(c =>
+      `<span class="badge ${CAT_CLASS[c] || 'badge-product'}">${CAT_LABEL[c] || c}</span>`
+    ).join('');
+  }
+
+  // ── Render detail content ──────────────────────────────────────
+  function renderDetail(dir) {
+    const a = articles[currentIdx];
+    if (!a) return;
+
+    const total = articles.length;
+    pager.textContent = `${currentIdx + 1} / ${total}`;
+    pagerMob.textContent = `${currentIdx + 1} / ${total}`;
+    btnPrev.disabled  = currentIdx === 0;
+    btnNext.disabled  = currentIdx === total - 1;
+    btnPrevM.disabled = currentIdx === 0;
+    btnNextM.disabled = currentIdx === total - 1;
+
+    // Content: prefer full_content, fall back to summary
+    const hasFullContent = a.full_content && a.full_content.trim().length > 0;
+    let contentHtml = '';
+
+    if (hasFullContent) {
+      // If full_content is plain text paragraphs, wrap each in <p>
+      const raw = a.full_content.trim();
+      if (raw.startsWith('<')) {
+        // Already HTML
+        contentHtml = raw;
+      } else {
+        // Plain text — split on double newline into paragraphs
+        contentHtml = raw.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+      }
+    } else {
+      // Only summary available
+      contentHtml = `<p>${a.summary}</p>
+        <p style="color:var(--muted);font-size:13px;font-style:italic;">
+          📌 暂无详细正文。点击下方链接阅读原文。
+        </p>`;
+    }
+
+    // Best URL (prefer best_url field, fall back to url)
+    const bestUrl = a.best_url || a.url || '';
+    let domain = '';
+    try { domain = new URL(bestUrl).hostname.replace('www.', ''); } catch {}
+
+    const sourceHtml = bestUrl ? `
+      <div class="detail-source-box">
+        <div>
+          <div class="detail-source-label">最佳来源</div>
+          <div class="detail-source-domain">${domain}</div>
+        </div>
+        <a href="${bestUrl}" target="_blank" rel="noopener" class="detail-read-link">
+          阅读原文 →
+        </a>
+      </div>` : '';
+
+    const animClass = dir === 1 ? 'anim-right' : dir === -1 ? 'anim-left' : '';
+
+    body.innerHTML = `
+      <div class="${animClass}">
+        <div class="detail-meta">
+          ${getBadges(a.categories)}
+          <span class="detail-heat">${heatStars(a.heat || 3)}</span>
+        </div>
+        <div class="detail-title">${a.title}</div>
+        <div class="detail-content-body">${contentHtml}</div>
+        ${sourceHtml ? `<div class="detail-divider"></div>${sourceHtml}` : ''}
+      </div>
+    `;
+    scroll.scrollTop = 0;
+  }
+
+  // ── Open / close ───────────────────────────────────────────────
+  window.openDetail = function (idx) {
+    currentIdx = idx;
+    renderDetail(0);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    isOpen = true;
+    // Push history state so browser back button works
+    history.pushState({ detailOpen: true, idx }, '', '');
+  };
+
+  window.closeDetail = function () {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    isOpen = false;
+  };
+
+  // ── Navigate ───────────────────────────────────────────────────
+  window.navigateDetail = function (dir) {
+    const next = currentIdx + dir;
+    if (next < 0 || next >= articles.length) return;
+    currentIdx = next;
+    renderDetail(dir);
+    history.replaceState({ detailOpen: true, idx: currentIdx }, '', '');
+  };
+
+  // ── Browser back button ────────────────────────────────────────
+  window.addEventListener('popstate', function (e) {
+    if (isOpen) closeDetail();
+  });
+
+  // ── Keyboard ───────────────────────────────────────────────────
+  document.addEventListener('keydown', function (e) {
+    if (!isOpen) return;
+    if (e.key === 'Escape')      closeDetail();
+    if (e.key === 'ArrowRight')  navigateDetail(1);
+    if (e.key === 'ArrowLeft')   navigateDetail(-1);
+  });
+
+  // ── Touch / swipe ──────────────────────────────────────────────
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isSwiping   = false;
+
+  scroll.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+    isSwiping = false;
+  }, { passive: true });
+
+  scroll.addEventListener('touchmove', function (e) {
+    const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+    // Horizontal swipe intent — prevent vertical scroll only when clearly swiping sideways
+    if (dx > dy && dx > 10) isSwiping = true;
+  }, { passive: true });
+
+  scroll.addEventListener('touchend', function (e) {
+    if (!isSwiping) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 60) navigateDetail(dx < 0 ? 1 : -1);
+    isSwiping = false;
+  }, { passive: true });
+
+})();
+</script>
 </body>
 </html>

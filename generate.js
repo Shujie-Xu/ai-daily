@@ -51,7 +51,7 @@ function getCatLabel(cat) {
   return map[cat] || cat;
 }
 
-function renderCard(item, featured = false) {
+function renderCard(item, featured = false, globalIdx = 0) {
   const cats = (item.categories || ['product']).map(c =>
     `<span class="badge ${getBadgeClass(c)}">${getCatLabel(c)}</span>`
   ).join('');
@@ -64,7 +64,8 @@ function renderCard(item, featured = false) {
   })();
 
   return `
-    <div class="${cardClass}">
+    <div class="${cardClass}" onclick="openDetail(${globalIdx})" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(${globalIdx})">
       ${featureAccent}
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
@@ -75,12 +76,13 @@ function renderCard(item, featured = false) {
         <div class="card-summary">${item.summary}</div>
         <div class="card-footer">
           <span class="card-source">${domain}</span>
-          ${item.url ? `<a href="${item.url}" target="_blank" class="card-link">阅读原文 →</a>` : ''}
+          <span class="card-link" style="pointer-events:none">查看详情 →</span>
         </div>
       </div>
     </div>`;
 }
 
+// Returns { html, sortedArticles } — sortedArticles is in display order (by heat desc)
 function renderSections(articles) {
   const groups = [
     { min: 5, label: '⭐⭐⭐⭐⭐ 顶级热点' },
@@ -89,16 +91,23 @@ function renderSections(articles) {
     { min: 0, label: '⭐⭐ 值得关注' },
   ];
 
+  // Sort once — this is the canonical display order; indices used in openDetail()
+  const sorted = [...articles].sort((a, b) => (b.heat || 3) - (a.heat || 3));
+  // Map each article object → its position in the sorted array
+  const idxMap = new Map(sorted.map((a, i) => [a, i]));
+
   let html = '';
-  let remaining = [...articles].sort((a, b) => (b.heat || 3) - (a.heat || 3));
 
   for (let i = 0; i < groups.length; i++) {
     const g = groups[i];
-    const nextMin = groups[i + 1]?.min ?? -1;
-    const items = remaining.filter(a => (a.heat || 3) >= g.min && (a.heat || 3) < (groups[i-1]?.min ?? 99));
+    const prevMin = groups[i - 1]?.min ?? 99;
+    const items = sorted.filter(a => (a.heat || 3) >= g.min && (a.heat || 3) < prevMin);
     if (items.length === 0) continue;
 
-    const cards = items.map((item, idx) => renderCard(item, i === 0 && idx === 0)).join('\n');
+    const cards = items.map((item, localIdx) =>
+      renderCard(item, i === 0 && localIdx === 0, idxMap.get(item))
+    ).join('\n');
+
     html += `
     <div class="news-section">
       <div class="section-header">
@@ -112,7 +121,32 @@ function renderSections(articles) {
     </div>`;
   }
 
-  return html;
+  return { html, sortedArticles: sorted };
+}
+
+function renderArchive(outputDir, currentDate) {
+  const files = fs.readdirSync(outputDir)
+    .filter(f => /^\d{4}-\d{2}-\d{2}\.html$/.test(f))
+    .sort()
+    .reverse();
+
+  if (files.length <= 1) return '';
+
+  const items = files.map(f => {
+    const date = f.replace('.html', '');
+    const isToday = date === currentDate;
+    return `<a href="./${f}" class="archive-item ${isToday ? 'archive-today' : ''}">${date}${isToday ? ' <span class="today-tag">今天</span>' : ''}</a>`;
+  }).join('\n');
+
+  return `
+  <div class="archive-section">
+    <div class="section-header" style="margin-bottom:16px">
+      <span class="heat-label">📅</span>
+      <span class="section-title">历史归档</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="archive-list">${items}</div>
+  </div>`;
 }
 
 function generate(newsData) {
@@ -129,6 +163,27 @@ function generate(newsData) {
     try { return new URL(a.url).hostname; } catch { return ''; }
   }).filter(Boolean))].length;
 
+  const archiveHtml = renderArchive(OUTPUT_DIR, fileDate);
+
+  // OG description: top 3 headlines
+  const top3 = articles.slice(0, 3).map(a => a.title).join(' · ');
+  const ogDesc = `今日 ${articles.length} 条 | 💰融资 ${fundingCount} 条 | 🧠模型 ${modelCount} 条 · ${top3}`;
+
+  // Render sections (returns html + sortedArticles in display order)
+  const { html: sectionsHtml, sortedArticles } = renderSections(articles);
+
+  // Serialize article data for the detail overlay JS
+  // Only include fields needed by the detail view (omit heavy fields not needed for card rendering)
+  const articlesJson = JSON.stringify(sortedArticles.map(a => ({
+    title:        a.title        || '',
+    summary:      a.summary      || '',
+    full_content: a.full_content || '',
+    url:          a.url          || '',
+    best_url:     a.best_url     || a.url || '',
+    categories:   a.categories   || ['product'],
+    heat:         a.heat         || 3,
+  })));
+
   const html = TEMPLATE
     .replace(/{{DATE}}/g, dateStr)
     .replace(/{{TIME}}/g, timeStr)
@@ -139,7 +194,9 @@ function generate(newsData) {
     .replace(/{{SOURCES}}/g, sources || newsData.sourceCount || '?')
     .replace(/{{SEARCH_COUNT}}/g, newsData.searchCount || '?')
     .replace(/{{DIMENSIONS}}/g, newsData.dimensions || 'A/B/C/D/E/F')
-    .replace(/{{SECTIONS}}/g, renderSections(articles));
+    .replace(/{{OG_DESC}}/g, ogDesc)
+    .replace(/{{ARTICLES_JSON}}/g, articlesJson)
+    .replace(/{{SECTIONS}}/g, sectionsHtml + archiveHtml);
 
   // Save as dated file + latest
   const outFile = path.join(OUTPUT_DIR, `${fileDate}.html`);

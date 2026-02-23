@@ -430,63 +430,68 @@
     }
 
     /* ===================== */
-    /* Detail Overlay        */
+    /* Detail Modal Card     */
     /* ===================== */
+
+    /* Backdrop */
     .detail-overlay {
       position: fixed;
       inset: 0;
       z-index: 1000;
       display: flex;
-      flex-direction: column;
-      background: var(--bg);
-      transform: translateX(100%);
-      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      transition: background 0.25s ease, backdrop-filter 0.25s ease;
+      pointer-events: none;
     }
 
     .detail-overlay.open {
-      transform: translateX(0);
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      pointer-events: all;
     }
 
-    /* Top nav bar */
+    /* The card itself */
+    .detail-card {
+      position: relative;
+      background: #0f0f1e;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,245,255,0.06);
+      width: 100%;
+      max-width: 720px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.92) translateY(16px);
+      opacity: 0;
+      transition: transform 0.28s cubic-bezier(0.34, 1.3, 0.64, 1), opacity 0.22s ease;
+      overflow: hidden;
+    }
+
+    .detail-overlay.open .detail-card {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    /* Card top bar */
     .detail-topbar {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
+      gap: 10px;
+      padding: 14px 16px 14px 20px;
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
       flex-shrink: 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .detail-back {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 7px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Inter', sans-serif;
-      white-space: nowrap;
-    }
-    .detail-back:hover {
-      border-color: rgba(0,245,255,0.4);
-      color: var(--cyan);
     }
 
     .detail-pager {
+      flex: 1;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--muted);
-      white-space: nowrap;
-      flex: 1;
       text-align: center;
     }
 
@@ -500,32 +505,51 @@
       border: 1px solid var(--border);
       color: var(--text);
       border-radius: 8px;
-      padding: 7px 12px;
-      font-size: 16px;
+      width: 34px;
+      height: 34px;
+      font-size: 18px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.18s;
       line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
     }
-    .detail-arrow:hover {
-      border-color: rgba(0,245,255,0.4);
+    .detail-arrow:hover:not(:disabled) {
+      border-color: rgba(0,245,255,0.45);
       color: var(--cyan);
+      background: rgba(0,245,255,0.07);
     }
     .detail-arrow:disabled {
-      opacity: 0.3;
+      opacity: 0.25;
       cursor: default;
     }
 
-    /* Swipe hint (mobile) */
-    .swipe-hint {
-      font-size: 11px;
+    /* Close button */
+    .detail-close {
+      background: var(--surface);
+      border: 1px solid var(--border);
       color: var(--muted);
-      text-align: center;
-      padding: 6px;
+      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
       flex-shrink: 0;
     }
-    @media (min-width: 640px) { .swipe-hint { display: none; } }
+    .detail-close:hover {
+      border-color: rgba(236,72,153,0.45);
+      color: var(--pink);
+      background: rgba(236,72,153,0.07);
+    }
 
-    /* Scrollable content */
+    /* Scrollable body */
     .detail-scroll {
       flex: 1;
       overflow-y: auto;
@@ -534,63 +558,58 @@
     }
 
     .detail-body {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 32px 24px 60px;
+      padding: 28px 28px 32px;
+    }
+
+    @media (max-width: 480px) {
+      .detail-body { padding: 20px 18px 28px; }
     }
 
     .detail-meta {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
-    .detail-heat {
-      font-size: 16px;
-    }
+    .detail-heat { font-size: 15px; }
 
     .detail-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.45;
       color: var(--text);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
-    @media (max-width: 640px) {
-      .detail-title { font-size: 18px; }
-    }
+    @media (max-width: 480px) { .detail-title { font-size: 17px; } }
 
     /* Content body */
     .detail-content-body {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.85;
-      color: #c8d3e0;
+      color: #c0ccdc;
     }
 
-    .detail-content-body p {
-      margin-bottom: 16px;
-    }
+    .detail-content-body p { margin-bottom: 14px; }
+    .detail-content-body p:last-child { margin-bottom: 0; }
 
     .detail-content-body h3 {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--cyan);
-      margin: 24px 0 10px;
+      margin: 22px 0 8px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
     .detail-content-body ul {
-      padding-left: 20px;
-      margin-bottom: 16px;
+      padding-left: 18px;
+      margin-bottom: 14px;
     }
 
-    .detail-content-body li {
-      margin-bottom: 8px;
-    }
+    .detail-content-body li { margin-bottom: 7px; }
 
     .detail-content-body strong {
       color: var(--text);
@@ -601,33 +620,33 @@
     .detail-divider {
       height: 1px;
       background: var(--border);
-      margin: 28px 0;
+      margin: 24px 0;
     }
 
-    /* Source link */
+    /* Source link box */
     .detail-source-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--surface);
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px 20px;
-      gap: 16px;
+      padding: 14px 18px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .detail-source-label {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .detail-source-domain {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
     }
@@ -636,75 +655,51 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(168,85,247,0.15));
-      border: 1px solid rgba(0,245,255,0.25);
+      background: linear-gradient(135deg, rgba(0,245,255,0.14), rgba(168,85,247,0.14));
+      border: 1px solid rgba(0,245,255,0.22);
       color: var(--cyan);
       text-decoration: none;
-      padding: 9px 18px;
+      padding: 8px 16px;
       border-radius: 8px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      transition: all 0.2s;
+      transition: all 0.18s;
       white-space: nowrap;
     }
     .detail-read-link:hover {
-      background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(168,85,247,0.25));
+      background: linear-gradient(135deg, rgba(0,245,255,0.22), rgba(168,85,247,0.22));
       border-color: rgba(0,245,255,0.4);
     }
 
-    /* Bottom nav (mobile) */
-    .detail-bottom-nav {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      padding: 12px 20px;
-      background: rgba(8,8,15,0.95);
-      border-top: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      z-index: 2;
-      gap: 12px;
-    }
-
-    @media (max-width: 640px) {
-      .detail-bottom-nav { display: flex; }
-      .detail-body { padding-bottom: 90px; }
-    }
-
-    .detail-bottom-nav .detail-arrow {
-      flex: 1;
-      font-size: 14px;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .detail-bottom-pager {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+    /* Swipe hint strip */
+    .swipe-hint {
+      font-size: 11px;
       color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 60px;
+      text-align: center;
+      padding: 6px 0 2px;
+      flex-shrink: 0;
     }
+    @media (min-width: 600px) { .swipe-hint { display: none; } }
 
     /* Slide animation for content swap */
     @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(24px); }
+      from { opacity: 0; transform: translateX(28px); }
       to   { opacity: 1; transform: translateX(0); }
     }
     @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-24px); }
+      from { opacity: 0; transform: translateX(-28px); }
       to   { opacity: 1; transform: translateX(0); }
     }
-    .anim-right { animation: slideInRight 0.22s ease; }
-    .anim-left  { animation: slideInLeft  0.22s ease; }
+    .anim-right { animation: slideInRight 0.2s ease; }
+    .anim-left  { animation: slideInLeft  0.2s ease; }
 
     /* Responsive */
     @media (max-width: 640px) {
       .news-card.featured { flex-direction: column; }
       .news-card.featured .featured-accent { width: 100%; min-width: unset; height: 4px; }
       .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .detail-topbar .detail-arrows { display: none; }
+      .detail-overlay { padding: 12px 8px; }
+      .detail-card { max-height: 92vh; border-radius: 16px; }
     }
   </style>
 </head>
@@ -721,7 +716,7 @@
       </div>
       <div class="date-badge">
         <div class="pulse"></div>
-        2026/02/24 · 02:12 CST
+        2026/02/24 · 02:14 CST
       </div>
     </div>
   </header>
@@ -1160,40 +1155,36 @@
   </div>
 
   <footer>
-    <div class="footer-text">更新于 2026/02/24 02:12 · 15 次搜索 · 覆盖维度 A/B/C/D/E/F</div>
+    <div class="footer-text">更新于 2026/02/24 02:14 · 15 次搜索 · 覆盖维度 A/B/C/D/E/F</div>
     <div class="footer-brand">by <span>小豹包🍞</span> · AI Daily Dashboard</div>
   </footer>
 </div>
 
 <!-- ============================= -->
-<!-- Detail Overlay                -->
+<!-- Detail Modal                  -->
 <!-- ============================= -->
-<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true">
-  <!-- Top nav -->
-  <div class="detail-topbar">
-    <button class="detail-back" onclick="closeDetail()">← 返回</button>
-    <div class="detail-pager" id="detailPager">1 / 1</div>
-    <div class="detail-arrows">
+<!-- Backdrop (click outside to close) -->
+<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true" onclick="handleBackdropClick(event)">
+  <div class="detail-card" id="detailCard">
+
+    <!-- Top bar: prev · pager · next · close -->
+    <div class="detail-topbar">
       <button class="detail-arrow" id="btnPrev" onclick="navigateDetail(-1)" title="上一条 (←)">‹</button>
+      <div class="detail-pager" id="detailPager">1 / 1</div>
       <button class="detail-arrow" id="btnNext" onclick="navigateDetail(1)"  title="下一条 (→)">›</button>
+      <button class="detail-close" onclick="closeDetail()" title="关闭 (Esc)">✕</button>
     </div>
-  </div>
 
-  <!-- Swipe hint (mobile only) -->
-  <div class="swipe-hint">← 左右滑动切换 →</div>
+    <!-- Swipe hint (mobile only) -->
+    <div class="swipe-hint">← 左右滑动切换 →</div>
 
-  <!-- Scrollable body -->
-  <div class="detail-scroll" id="detailScroll">
-    <div class="detail-body" id="detailBody">
-      <!-- filled by JS -->
+    <!-- Scrollable content -->
+    <div class="detail-scroll" id="detailScroll">
+      <div class="detail-body" id="detailBody">
+        <!-- filled by JS -->
+      </div>
     </div>
-  </div>
 
-  <!-- Bottom nav (mobile only) -->
-  <div class="detail-bottom-nav">
-    <button class="detail-arrow" id="btnPrevMobile" onclick="navigateDetail(-1)">‹ 上一条</button>
-    <div class="detail-bottom-pager" id="detailPagerMobile">1 / 1</div>
-    <button class="detail-arrow" id="btnNextMobile" onclick="navigateDetail(1)">下一条 ›</button>
   </div>
 </div>
 
@@ -1206,17 +1197,14 @@ window.ARTICLES_DATA = [{"title":"OpenAI 正式推进史上最大融资：$1000�
 (function () {
   'use strict';
 
-  const overlay   = document.getElementById('detailOverlay');
-  const body      = document.getElementById('detailBody');
-  const scroll    = document.getElementById('detailScroll');
-  const pager     = document.getElementById('detailPager');
-  const pagerMob  = document.getElementById('detailPagerMobile');
-  const btnPrev   = document.getElementById('btnPrev');
-  const btnNext   = document.getElementById('btnNext');
-  const btnPrevM  = document.getElementById('btnPrevMobile');
-  const btnNextM  = document.getElementById('btnNextMobile');
+  const overlay = document.getElementById('detailOverlay');
+  const card    = document.getElementById('detailCard');
+  const body    = document.getElementById('detailBody');
+  const scroll  = document.getElementById('detailScroll');
+  const pager   = document.getElementById('detailPager');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
 
-  // Sorted article list (same order as cards in the DOM)
   const articles = window.ARTICLES_DATA || [];
   let currentIdx = 0;
   let isOpen = false;
@@ -1239,81 +1227,61 @@ window.ARTICLES_DATA = [{"title":"OpenAI 正式推进史上最大融资：$1000�
     ).join('');
   }
 
-  // ── Render detail content ──────────────────────────────────────
+  // ── Render ────────────────────────────────────────────────────
   function renderDetail(dir) {
     const a = articles[currentIdx];
     if (!a) return;
 
     const total = articles.length;
     pager.textContent = `${currentIdx + 1} / ${total}`;
-    pagerMob.textContent = `${currentIdx + 1} / ${total}`;
-    btnPrev.disabled  = currentIdx === 0;
-    btnNext.disabled  = currentIdx === total - 1;
-    btnPrevM.disabled = currentIdx === 0;
-    btnNextM.disabled = currentIdx === total - 1;
+    btnPrev.disabled = currentIdx === 0;
+    btnNext.disabled = currentIdx === total - 1;
 
-    // Content: prefer full_content, fall back to summary
-    const hasFullContent = a.full_content && a.full_content.trim().length > 0;
-    let contentHtml = '';
-
-    if (hasFullContent) {
-      // If full_content is plain text paragraphs, wrap each in <p>
+    const hasFC = a.full_content && a.full_content.trim().length > 0;
+    let contentHtml;
+    if (hasFC) {
       const raw = a.full_content.trim();
-      if (raw.startsWith('<')) {
-        // Already HTML
-        contentHtml = raw;
-      } else {
-        // Plain text — split on double newline into paragraphs
-        contentHtml = raw.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
-      }
+      contentHtml = raw.startsWith('<')
+        ? raw
+        : raw.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
     } else {
-      // Only summary available
       contentHtml = `<p>${a.summary}</p>
-        <p style="color:var(--muted);font-size:13px;font-style:italic;">
-          📌 暂无详细正文。点击下方链接阅读原文。
-        </p>`;
+        <p style="color:var(--muted);font-size:13px;font-style:italic;">📌 暂无详细正文，请阅读原文。</p>`;
     }
 
-    // Best URL (prefer best_url field, fall back to url)
     const bestUrl = a.best_url || a.url || '';
     let domain = '';
     try { domain = new URL(bestUrl).hostname.replace('www.', ''); } catch {}
 
     const sourceHtml = bestUrl ? `
+      <div class="detail-divider"></div>
       <div class="detail-source-box">
         <div>
-          <div class="detail-source-label">最佳来源</div>
+          <div class="detail-source-label">来源</div>
           <div class="detail-source-domain">${domain}</div>
         </div>
-        <a href="${bestUrl}" target="_blank" rel="noopener" class="detail-read-link">
-          阅读原文 →
-        </a>
+        <a href="${bestUrl}" target="_blank" rel="noopener" class="detail-read-link">阅读原文 →</a>
       </div>` : '';
 
     const animClass = dir === 1 ? 'anim-right' : dir === -1 ? 'anim-left' : '';
 
     body.innerHTML = `
       <div class="${animClass}">
-        <div class="detail-meta">
-          ${getBadges(a.categories)}
-          <span class="detail-heat">${heatStars(a.heat || 3)}</span>
-        </div>
+        <div class="detail-meta">${getBadges(a.categories)}<span class="detail-heat">${heatStars(a.heat || 3)}</span></div>
         <div class="detail-title">${a.title}</div>
         <div class="detail-content-body">${contentHtml}</div>
-        ${sourceHtml ? `<div class="detail-divider"></div>${sourceHtml}` : ''}
-      </div>
-    `;
+        ${sourceHtml}
+      </div>`;
     scroll.scrollTop = 0;
   }
 
-  // ── Open / close ───────────────────────────────────────────────
+  // ── Open / close ──────────────────────────────────────────────
   window.openDetail = function (idx) {
     currentIdx = idx;
     renderDetail(0);
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     isOpen = true;
-    // Push history state so browser back button works
     history.pushState({ detailOpen: true, idx }, '', '');
   };
 
@@ -1323,7 +1291,12 @@ window.ARTICLES_DATA = [{"title":"OpenAI 正式推进史上最大融资：$1000�
     isOpen = false;
   };
 
-  // ── Navigate ───────────────────────────────────────────────────
+  // Click outside card (on backdrop) → close
+  window.handleBackdropClick = function (e) {
+    if (e.target === overlay) closeDetail();
+  };
+
+  // ── Navigate ──────────────────────────────────────────────────
   window.navigateDetail = function (dir) {
     const next = currentIdx + dir;
     if (next < 0 || next >= articles.length) return;
@@ -1332,42 +1305,39 @@ window.ARTICLES_DATA = [{"title":"OpenAI 正式推进史上最大融资：$1000�
     history.replaceState({ detailOpen: true, idx: currentIdx }, '', '');
   };
 
-  // ── Browser back button ────────────────────────────────────────
-  window.addEventListener('popstate', function (e) {
+  // ── Browser back button ───────────────────────────────────────
+  window.addEventListener('popstate', function () {
     if (isOpen) closeDetail();
   });
 
-  // ── Keyboard ───────────────────────────────────────────────────
+  // ── Keyboard ──────────────────────────────────────────────────
   document.addEventListener('keydown', function (e) {
     if (!isOpen) return;
-    if (e.key === 'Escape')      closeDetail();
-    if (e.key === 'ArrowRight')  navigateDetail(1);
-    if (e.key === 'ArrowLeft')   navigateDetail(-1);
+    if (e.key === 'Escape')     closeDetail();
+    if (e.key === 'ArrowRight') navigateDetail(1);
+    if (e.key === 'ArrowLeft')  navigateDetail(-1);
   });
 
-  // ── Touch / swipe ──────────────────────────────────────────────
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let isSwiping   = false;
+  // ── Touch swipe (on scroll area) ─────────────────────────────
+  let tx = 0, ty = 0, swiping = false;
 
-  scroll.addEventListener('touchstart', function (e) {
-    touchStartX = e.changedTouches[0].clientX;
-    touchStartY = e.changedTouches[0].clientY;
-    isSwiping = false;
+  scroll.addEventListener('touchstart', e => {
+    tx = e.changedTouches[0].clientX;
+    ty = e.changedTouches[0].clientY;
+    swiping = false;
   }, { passive: true });
 
-  scroll.addEventListener('touchmove', function (e) {
-    const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
-    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
-    // Horizontal swipe intent — prevent vertical scroll only when clearly swiping sideways
-    if (dx > dy && dx > 10) isSwiping = true;
+  scroll.addEventListener('touchmove', e => {
+    const dx = Math.abs(e.changedTouches[0].clientX - tx);
+    const dy = Math.abs(e.changedTouches[0].clientY - ty);
+    if (dx > dy && dx > 12) swiping = true;
   }, { passive: true });
 
-  scroll.addEventListener('touchend', function (e) {
-    if (!isSwiping) return;
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 60) navigateDetail(dx < 0 ? 1 : -1);
-    isSwiping = false;
+  scroll.addEventListener('touchend', e => {
+    if (!swiping) return;
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 55) navigateDetail(dx < 0 ? 1 : -1);
+    swiping = false;
   }, { passive: true });
 
 })();

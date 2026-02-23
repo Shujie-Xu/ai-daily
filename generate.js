@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const TEMPLATE = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
-const OUTPUT_DIR = path.join(__dirname, 'public');
+const OUTPUT_DIR = path.join(__dirname, 'docs');
 
 if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 

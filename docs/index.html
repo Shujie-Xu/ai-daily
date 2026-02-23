@@ -109,6 +109,8 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .pulse {
@@ -752,12 +754,10 @@
           <div class="logo-sub">powered by 小豹包</div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
-        <div class="date-badge">
-          <div class="pulse"></div>
-          2026/02/23
-        </div>
-        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.2px;">edit: 26/02/24 02:44 CST</div>
+      <div class="date-badge">
+        <div class="pulse"></div>
+        2026/02/23
+        <span style="color:var(--muted);margin-left:8px;font-size:11px;">edit: 26/02/24 02:46 CST</span>
       </div>
     </div>
   </header>

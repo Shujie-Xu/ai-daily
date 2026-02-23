@@ -152,9 +152,12 @@ function generate(newsData) {
   return { outFile, latestFile, date: fileDate };
 }
 
-// CLI usage: node generate.js news.json
+// CLI usage: node generate.js news.json [--push]
 if (require.main === module) {
+  const { execSync } = require('child_process');
   const inputFile = process.argv[2] || path.join(__dirname, 'latest-news.json');
+  const shouldPush = process.argv.includes('--push');
+
   if (!fs.existsSync(inputFile)) {
     console.error('❌ News JSON not found:', inputFile);
     process.exit(1);
@@ -162,6 +165,15 @@ if (require.main === module) {
   const data = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
   const result = generate(data);
   console.log('🌐 Output:', result.latestFile);
+
+  if (shouldPush) {
+    try {
+      execSync(`cd ${__dirname} && git add docs/ && git commit -m "📰 AI日报更新 ${result.date}" && git push`, { stdio: 'inherit' });
+      console.log('🚀 已推送到 GitHub Pages！');
+    } catch (e) {
+      console.error('⚠️ git push 失败:', e.message);
+    }
+  }
 }
 
 module.exports = { generate };

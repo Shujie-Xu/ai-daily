@@ -151,10 +151,25 @@ function renderArchive(outputDir, currentDate) {
 
 function generate(newsData) {
   const now = new Date();
-  const dateStr = now.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Shanghai' });
-  const timeStr = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai' });
-  const datetimeStr = `${dateStr} ${timeStr}`;
-  const fileDate = dateStr.replace(/\//g, '-');
+
+  // ── 日报日期（标题 / 文件名 / 归档依据）──────────────────────
+  // 优先级：--date CLI > newsData.date 字段 > 今天系统日期
+  const dateOverride = process.env._GENERATE_DATE_OVERRIDE;
+  let fileDate;
+  if (dateOverride && /^\d{4}-\d{2}-\d{2}$/.test(dateOverride)) {
+    fileDate = dateOverride;
+  } else if (newsData.date && /^\d{4}-\d{2}-\d{2}$/.test(newsData.date)) {
+    fileDate = newsData.date;   // 从 JSON 的 date 字段读取日报日期
+  } else {
+    fileDate = now.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Shanghai' }).replace(/\//g, '-');
+  }
+  const [fy, fm, fd] = fileDate.split('-');
+  const dateStr = `${fy}/${fm}/${fd}`;   // 页面显示格式：2026/02/23
+
+  // ── 最后编辑时间（仅页脚 "更新于" 使用）─────────────────────
+  const editDate = now.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Shanghai' });
+  const editTime = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai' });
+  const datetimeStr = `${editDate} ${editTime}`;
 
   const articles = newsData.articles || [];
   const fundingCount = articles.filter(a => (a.categories || []).includes('funding')).length;
@@ -186,7 +201,7 @@ function generate(newsData) {
 
   const html = TEMPLATE
     .replace(/{{DATE}}/g, dateStr)
-    .replace(/{{TIME}}/g, timeStr)
+    .replace(/{{EDIT_TIME}}/g, editTime)
     .replace(/{{DATETIME}}/g, datetimeStr)
     .replace(/{{TOTAL}}/g, articles.length)
     .replace(/{{FUNDING_COUNT}}/g, fundingCount)
@@ -209,11 +224,17 @@ function generate(newsData) {
   return { outFile, latestFile, date: fileDate };
 }
 
-// CLI usage: node generate.js news.json [--push]
+// CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD]
 if (require.main === module) {
   const { execSync } = require('child_process');
   const inputFile = process.argv[2] || path.join(__dirname, 'latest-news.json');
   const shouldPush = process.argv.includes('--push');
+
+  // Optional --date override (e.g. --date 2026-02-23)
+  const dateArgIdx = process.argv.indexOf('--date');
+  if (dateArgIdx !== -1 && process.argv[dateArgIdx + 1]) {
+    process.env._GENERATE_DATE_OVERRIDE = process.argv[dateArgIdx + 1];
+  }
 
   if (!fs.existsSync(inputFile)) {
     console.error('❌ News JSON not found:', inputFile);

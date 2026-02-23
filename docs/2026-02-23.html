@@ -209,9 +209,15 @@
       transition: all 0.2s;
       white-space: nowrap;
       user-select: none;
+      display: inline-flex; align-items: center; gap: 5px;
     }
     .filter-tag:hover { opacity: 0.85; }
     .filter-tag.active { opacity: 1; }
+    .filter-count {
+      font-size: 10px; font-weight: 400;
+      opacity: 0.65;
+      font-family: 'JetBrains Mono', monospace;
+    }
     .filter-tag[data-cat="all"]         { color: var(--text); border-color: var(--border); }
     .filter-tag[data-cat="all"].active  { background: var(--text); color: var(--bg); border-color: var(--text); }
     .filter-tag[data-cat="model"]       { color: var(--cyan); border-color: rgba(0,245,255,0.3); }
@@ -523,7 +529,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/23
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 03:11 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 03:15 CST</span>
         </div>
       </div>
     </div>
@@ -537,14 +543,14 @@
 
   <!-- Category filter bar -->
   <div class="filter-bar" id="filterBar">
-    <button class="filter-tag active" data-cat="all"      onclick="setFilter('all')">全部</button>
-    <button class="filter-tag"        data-cat="model"    onclick="setFilter('model')">🧠 模型</button>
-    <button class="filter-tag"        data-cat="product"  onclick="setFilter('product')">📦 产品</button>
-    <button class="filter-tag"        data-cat="funding"  onclick="setFilter('funding')">💰 融资</button>
-    <button class="filter-tag"        data-cat="finance"  onclick="setFilter('finance')">📊 财务</button>
-    <button class="filter-tag"        data-cat="research" onclick="setFilter('research')">🔬 研究</button>
-    <button class="filter-tag"        data-cat="policy"   onclick="setFilter('policy')">📜 政策</button>
-    <button class="filter-tag"        data-cat="event"    onclick="setFilter('event')">🎪 事件</button>
+    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">22</span></button>
+    <button class="filter-tag" data-cat="model" onclick="setFilter('model')">🧠 模型<span class="filter-count">6</span></button>
+    <button class="filter-tag" data-cat="product" onclick="setFilter('product')">📦 产品<span class="filter-count">2</span></button>
+    <button class="filter-tag" data-cat="funding" onclick="setFilter('funding')">💰 融资<span class="filter-count">4</span></button>
+    <button class="filter-tag" data-cat="finance" onclick="setFilter('finance')">📊 财务<span class="filter-count">1</span></button>
+    <button class="filter-tag" data-cat="research" onclick="setFilter('research')">🔬 研究<span class="filter-count">5</span></button>
+    <button class="filter-tag" data-cat="policy" onclick="setFilter('policy')">📜 政策<span class="filter-count">3</span></button>
+    <button class="filter-tag" data-cat="event" onclick="setFilter('event')">🎪 事件<span class="filter-count">2</span></button>
   </div>
 
   <!-- News sections -->

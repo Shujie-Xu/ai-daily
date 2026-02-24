@@ -325,7 +325,15 @@
       background: linear-gradient(to bottom, var(--cyan), var(--purple));
     }
 
-    /* ── Archive ────────────────────────────────────────────── */
+    /* ── Archive nav (top) ───────────────────────────────────── */
+    .archive-nav {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .archive-nav-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+    .archive-nav-items { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    /* ── Archive (bottom) ────────────────────────────────────── */
     .archive-section { margin-bottom: 48px; }
     .archive-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .archive-item {
@@ -529,11 +537,19 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/24
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 14:47 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 14:49 CST</span>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- Archive nav -->
+  
+  <div class="archive-nav">
+    <span class="archive-nav-label">📅 历史归档</span>
+    <div class="archive-nav-items"><a href="./2026-02-24.html" class="archive-item archive-today">2026-02-24 <span class="today-tag">今日</span></a>
+<a href="./2026-02-23.html" class="archive-item ">2026-02-23</a></div>
+  </div>
 
   <!-- Stats -->
   <div class="stats-bar">
@@ -913,15 +929,6 @@
     </div>
       </div>
     </div>
-  <div class="archive-section">
-    <div class="section-header" style="margin-bottom:16px">
-      <span class="heat-label">📅</span>
-      <span class="section-title">历史归档</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="archive-list"><a href="./2026-02-24.html" class="archive-item archive-today">2026-02-24 <span class="today-tag">今天</span></a>
-<a href="./2026-02-23.html" class="archive-item ">2026-02-23</a></div>
-  </div>
 
   <footer>
     <div class="footer-text">11 次搜索 · 覆盖维度 A/B/C/D/E/F</div>

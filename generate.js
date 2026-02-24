@@ -29,24 +29,26 @@ function heatLabel(score) {
 
 function getBadgeClass(cat) {
   const map = {
-    'funding': 'badge-funding',
-    'model': 'badge-model',
-    'product': 'badge-product',
+    'model':    'badge-model',
+    'product':  'badge-product',
+    'funding':  'badge-funding',
+    'finance':  'badge-finance',
     'research': 'badge-research',
-    'policy': 'badge-policy',
-    'open-source': 'badge-open-source',
+    'policy':   'badge-policy',
+    'event':    'badge-event',
   };
   return map[cat] || 'badge-product';
 }
 
 function getCatLabel(cat) {
   const map = {
-    'funding': '💰 融资',
-    'model': '🧠 模型',
-    'product': '📦 产品',
+    'model':    '🧠 模型',
+    'product':  '📦 产品',
+    'funding':  '💰 融资',
+    'finance':  '📊 财务',
     'research': '🔬 研究',
-    'policy': '📜 政策',
-    'open-source': '💻 开源',
+    'policy':   '📜 政策',
+    'event':    '🎪 事件',
   };
   return map[cat] || cat;
 }
@@ -56,6 +58,11 @@ function renderCard(item, featured = false, globalIdx = 0) {
     `<span class="badge ${getBadgeClass(c)}">${getCatLabel(c)}</span>`
   ).join('');
 
+  const tags = (item.tags || []);
+  const tagsHtml = tags.length > 0
+    ? `<div class="card-tags">${tags.map(t => `<span class="tag-pill">#${t}</span>`).join('')}</div>`
+    : '';
+
   const featureAccent = featured ? '<div class="featured-accent"></div>' : '';
   const cardClass = featured ? 'news-card featured' : 'news-card';
 
@@ -64,19 +71,20 @@ function renderCard(item, featured = false, globalIdx = 0) {
   })();
 
   return `
-    <div class="${cardClass}" onclick="openDetail(${globalIdx})" role="button" tabindex="0"
+    <div class="${cardClass}" data-idx="${globalIdx}" data-cats="${(item.categories||['product']).join(' ')}"
+         onclick="openDetail(${globalIdx})" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(${globalIdx})">
       ${featureAccent}
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
           <div class="card-cats">${cats}</div>
-          <div class="heat-score" title="${heatLabel(item.heat)}">${heatToStars(item.heat)}</div>
         </div>
         <div class="card-title">${item.title}</div>
+        ${tagsHtml}
         <div class="card-summary">${item.summary}</div>
         <div class="card-footer">
           <span class="card-source">${domain}</span>
-          <span class="card-link" style="pointer-events:none">查看详情 →</span>
+          <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>`;
@@ -85,10 +93,10 @@ function renderCard(item, featured = false, globalIdx = 0) {
 // Returns { html, sortedArticles } — sortedArticles is in display order (by heat desc)
 function renderSections(articles) {
   const groups = [
-    { min: 5, label: '⭐⭐⭐⭐⭐ 顶级热点' },
-    { min: 4, label: '⭐⭐⭐⭐ 高热度' },
-    { min: 3, label: '⭐⭐⭐ 中等热度' },
-    { min: 0, label: '⭐⭐ 值得关注' },
+    { min: 5, label: '🔥🔥🔥🔥🔥 顶级热点' },
+    { min: 4, label: '🔥🔥🔥🔥 高热度' },
+    { min: 3, label: '🔥🔥🔥 中等热度' },
+    { min: 0, label: '🔥🔥 值得关注' },
   ];
 
   // Sort once — this is the canonical display order; indices used in openDetail()
@@ -124,29 +132,57 @@ function renderSections(articles) {
   return { html, sortedArticles: sorted };
 }
 
-function renderArchive(outputDir, currentDate) {
-  const files = fs.readdirSync(outputDir)
+function renderFilterBar(articles) {
+  const CAT_ORDER = ['model', 'product', 'funding', 'finance', 'research', 'policy', 'event'];
+  const CAT_LABELS = {
+    model: '🧠 模型', product: '📦 产品', funding: '💰 融资',
+    finance: '📊 财务', research: '🔬 研究', policy: '📜 政策', event: '🎪 事件',
+  };
+
+  // count articles per category (an article in multiple cats counts in each)
+  const counts = {};
+  articles.forEach(a => {
+    (a.categories || ['product']).forEach(c => {
+      counts[c] = (counts[c] || 0) + 1;
+    });
+  });
+
+  const total = articles.length;
+  const buttons = CAT_ORDER
+    .filter(c => counts[c])   // hide empty categories
+    .map(c => `<button class="filter-tag" data-cat="${c}" onclick="setFilter('${c}')">${CAT_LABELS[c]}<span class="filter-count">${counts[c]}</span></button>`)
+    .join('\n    ');
+
+  return `<div class="filter-bar" id="filterBar">
+    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">${total}</span></button>
+    ${buttons}
+  </div>`;
+}
+
+function getArchiveFiles(outputDir, currentDate) {
+  return fs.readdirSync(outputDir)
     .filter(f => /^\d{4}-\d{2}-\d{2}\.html$/.test(f))
     .sort()
     .reverse();
+}
 
+function renderArchiveNav(outputDir, currentDate) {
+  const files = getArchiveFiles(outputDir, currentDate);
   if (files.length <= 1) return '';
-
   const items = files.map(f => {
     const date = f.replace('.html', '');
     const isToday = date === currentDate;
-    return `<a href="./${f}" class="archive-item ${isToday ? 'archive-today' : ''}">${date}${isToday ? ' <span class="today-tag">今天</span>' : ''}</a>`;
+    return `<a href="./${f}" class="archive-item ${isToday ? 'archive-today' : ''}">${date}${isToday ? ' <span class="today-tag">今日</span>' : ''}</a>`;
   }).join('\n');
-
   return `
-  <div class="archive-section">
-    <div class="section-header" style="margin-bottom:16px">
-      <span class="heat-label">📅</span>
-      <span class="section-title">历史归档</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="archive-list">${items}</div>
+  <div class="archive-nav">
+    <span class="archive-nav-label">📅 历史归档</span>
+    <div class="archive-nav-items">${items}</div>
   </div>`;
+}
+
+function renderArchive(outputDir, currentDate) {
+  return ''; // 归档已移至顶部导航，底部不再重复
 }
 
 function generate(newsData) {
@@ -166,23 +202,30 @@ function generate(newsData) {
   const [fy, fm, fd] = fileDate.split('-');
   const dateStr = `${fy}/${fm}/${fd}`;   // 页面显示格式：2026/02/23
 
-  // ── 最后编辑时间（仅页脚 "更新于" 使用）─────────────────────
-  const editDate = now.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Shanghai' });
-  const editTime = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai' });
-  const datetimeStr = `${editDate} ${editTime}`;
+  // ── 最后编辑时间（格式：edit: yy/mm/dd hh:mm CST）────────────
+  const _fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: '2-digit', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hour12: false,
+  });
+  const _parts = Object.fromEntries(_fmt.formatToParts(now).map(p => [p.type, p.value]));
+  const editTime    = `${_parts.year}/${_parts.month}/${_parts.day} ${_parts.hour}:${_parts.minute} CST`;
+  const datetimeStr = editTime;  // kept for legacy {{DATETIME}} uses
 
   const articles = newsData.articles || [];
-  const fundingCount = articles.filter(a => (a.categories || []).includes('funding')).length;
-  const modelCount = articles.filter(a => (a.categories || []).includes('model')).length;
   const sources = [...new Set(articles.map(a => {
     try { return new URL(a.url).hostname; } catch { return ''; }
   }).filter(Boolean))].length;
 
   const archiveHtml = renderArchive(OUTPUT_DIR, fileDate);
+  const archiveNav = renderArchiveNav(OUTPUT_DIR, fileDate);
 
   // OG description: top 3 headlines
   const top3 = articles.slice(0, 3).map(a => a.title).join(' · ');
-  const ogDesc = `今日 ${articles.length} 条 | 💰融资 ${fundingCount} 条 | 🧠模型 ${modelCount} 条 · ${top3}`;
+  const ogDesc = `今日 ${articles.length} 条 · 来自 ${sources || newsData.sourceCount || '?'} 个信息源 · ${top3}`;
+
+  // Render filter bar with per-category counts
+  const filterBarHtml = renderFilterBar(articles);
 
   // Render sections (returns html + sortedArticles in display order)
   const { html: sectionsHtml, sortedArticles } = renderSections(articles);
@@ -196,6 +239,7 @@ function generate(newsData) {
     url:          a.url          || '',
     best_url:     a.best_url     || a.url || '',
     categories:   a.categories   || ['product'],
+    tags:         a.tags         || [],
     heat:         a.heat         || 3,
   })));
 
@@ -204,13 +248,13 @@ function generate(newsData) {
     .replace(/{{EDIT_TIME}}/g, editTime)
     .replace(/{{DATETIME}}/g, datetimeStr)
     .replace(/{{TOTAL}}/g, articles.length)
-    .replace(/{{FUNDING_COUNT}}/g, fundingCount)
-    .replace(/{{MODEL_COUNT}}/g, modelCount)
     .replace(/{{SOURCES}}/g, sources || newsData.sourceCount || '?')
     .replace(/{{SEARCH_COUNT}}/g, newsData.searchCount || '?')
-    .replace(/{{DIMENSIONS}}/g, newsData.dimensions || 'A/B/C/D/E/F')
+    .replace(/{{DIMENSIONS}}/g, newsData.dimensions || '模型/产品/融资/财务/研究/政策/事件')
     .replace(/{{OG_DESC}}/g, ogDesc)
+    .replace(/{{ARCHIVE_NAV}}/g, archiveNav)
     .replace(/{{ARTICLES_JSON}}/g, articlesJson)
+    .replace(/{{FILTER_BAR}}/g, filterBarHtml)
     .replace(/{{SECTIONS}}/g, sectionsHtml + archiveHtml);
 
   // Save as dated file + latest

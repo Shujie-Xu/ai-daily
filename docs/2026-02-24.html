@@ -529,7 +529,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/24
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 14:07 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 14:47 CST</span>
         </div>
       </div>
     </div>
@@ -913,6 +913,15 @@
     </div>
       </div>
     </div>
+  <div class="archive-section">
+    <div class="section-header" style="margin-bottom:16px">
+      <span class="heat-label">📅</span>
+      <span class="section-title">历史归档</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="archive-list"><a href="./2026-02-24.html" class="archive-item archive-today">2026-02-24 <span class="today-tag">今天</span></a>
+<a href="./2026-02-23.html" class="archive-item ">2026-02-23</a></div>
+  </div>
 
   <footer>
     <div class="footer-text">11 次搜索 · 覆盖维度 A/B/C/D/E/F</div>
@@ -1181,10 +1190,28 @@
   });
 
   // ── Touch swipe ───────────────────────────────────────────────
-  let tx = 0, ty = 0, swiping = false;
-  scroll.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY; swiping = false; }, { passive: true });
-  scroll.addEventListener('touchmove',  e => { const dx=Math.abs(e.changedTouches[0].clientX-tx),dy=Math.abs(e.changedTouches[0].clientY-ty); if(dx>dy&&dx>12) swiping=true; }, { passive: true });
-  scroll.addEventListener('touchend',   e => { if(!swiping) return; const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>55) navigateDetail(dx<0?1:-1); swiping=false; }, { passive: true });
+  let tx = 0, ty = 0, swiping = false, tStart = 0;
+  scroll.addEventListener('touchstart', e => {
+    tx = e.changedTouches[0].clientX;
+    ty = e.changedTouches[0].clientY;
+    swiping = false;
+    tStart = Date.now();
+  }, { passive: true });
+  scroll.addEventListener('touchmove', e => {
+    const dx = Math.abs(e.changedTouches[0].clientX - tx);
+    const dy = Math.abs(e.changedTouches[0].clientY - ty);
+    if (dx > dy && dx > 12) swiping = true;
+  }, { passive: true });
+  scroll.addEventListener('touchend', e => {
+    if (!swiping) return;
+    // 长按（>400ms）是选字，不翻页
+    if (Date.now() - tStart > 400) { swiping = false; return; }
+    // 有文字被选中，不翻页
+    if (window.getSelection && window.getSelection().toString().length > 0) { swiping = false; return; }
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 55) navigateDetail(dx < 0 ? 1 : -1);
+    swiping = false;
+  }, { passive: true });
 
   // ── Share ─────────────────────────────────────────────────────
   window.shareArticle = function () {

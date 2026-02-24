@@ -529,7 +529,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/23
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 03:21 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 11:22 CST</span>
         </div>
       </div>
     </div>
@@ -1236,12 +1236,13 @@
   window.shareArticle = function () {
     const a = articles[currentIdx];
     if (!a) return;
-    const url = a.best_url || a.url || location.href;
-    const text = a.title;
+    const siteUrl   = 'https://shujie-xu.github.io/ai-daily/';
+    const shareText = `📰 ${a.title}\n\n${a.summary}\n\n🤖 AI Daily`;
     if (navigator.share) {
-      navigator.share({ title: text, url }).catch(() => {});
+      navigator.share({ title: a.title, text: shareText, url: siteUrl }).catch(() => {});
     } else {
-      navigator.clipboard.writeText(url).then(() => {
+      // fallback: copy formatted card text + site link to clipboard
+      navigator.clipboard.writeText(`${shareText} · ${siteUrl}`).then(() => {
         btnShare.style.color = 'var(--green)';
         setTimeout(() => btnShare.style.color = '', 1500);
       }).catch(() => {});

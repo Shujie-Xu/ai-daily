@@ -57,7 +57,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', 'PingFang SC', 'Heiti SC', 'STHeiti', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
       font-size: 15px;
       min-height: 100vh;
       overflow-x: hidden;
@@ -89,7 +89,7 @@
 
     /* ── Terminal bar (dark only) ───────────────────────────── */
     .terminal-bar {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
       font-size: 12px;
       color: var(--matrix);
       padding: 7px 0;
@@ -205,7 +205,7 @@
       50%       { box-shadow: 0 2px 18px rgba(124,58,237,0.4); }
     }
 
-    .logo-sub { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .logo-sub { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
 
     .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
@@ -228,7 +228,7 @@
       border: 1px solid rgba(0,245,255,0.2);
       border-radius: 8px;
       padding: 8px 14px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
       font-size: 13px;
       color: var(--cyan);
       display: flex; align-items: center; gap: 8px;
@@ -271,7 +271,7 @@
     .stat-card:hover { border-color: rgba(0,245,255,0.3); box-shadow: 0 0 16px rgba(0,245,255,0.06); }
     .stat-card::before {
       content: '> ';
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
       font-size: 10px;
       position: absolute;
       top: 8px; left: 10px;
@@ -281,7 +281,7 @@
 
     .stat-value {
       font-size: 28px; font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
       background: linear-gradient(135deg, var(--cyan), var(--purple));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
@@ -315,7 +315,7 @@
     .filter-count {
       font-size: 10px; font-weight: 400;
       opacity: 0.65;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
     }
     .filter-tag[data-cat="all"]         { color: var(--text); border-color: var(--border); }
     .filter-tag[data-cat="all"].active  { background: var(--text); color: var(--bg); border-color: var(--text); }
@@ -409,7 +409,7 @@
     .card-summary { font-size: 14px; color: var(--muted); line-height: 1.65; flex: 1; }
 
     .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-    .card-source { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .card-source { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
     .card-cta    { font-size: 12px; color: var(--cyan); opacity: 0.7; }
 
     /* Featured card */
@@ -430,7 +430,7 @@
       display: flex; align-items: center; gap: 10px;
       padding: 12px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; flex-wrap: wrap;
     }
-    .archive-nav-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+    .archive-nav-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
     .archive-nav-items { display: flex; gap: 6px; flex-wrap: wrap; }
 
     /* ── Archive (bottom) ────────────────────────────────────── */
@@ -439,7 +439,7 @@
     .archive-item {
       padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border);
       background: var(--card-bg); color: var(--muted); text-decoration: none;
-      font-family: 'JetBrains Mono', monospace; font-size: 13px; transition: all 0.2s;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; font-size: 13px; transition: all 0.2s;
     }
     .archive-item:hover  { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
     .archive-today       { border-color: rgba(0,245,255,0.3); color: var(--cyan); background: rgba(0,245,255,0.06); }
@@ -450,8 +450,8 @@
       border-top: 1px solid var(--border); padding: 24px 0; margin-top: 40px;
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     }
-    .footer-text  { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
-    .footer-tick  { font-family: 'JetBrains Mono', monospace; }
+    .footer-text  { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
+    .footer-tick  { font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
     [data-theme="dark"]  .footer-tick { color: rgba(0,255,65,0.55); }
     [data-theme="light"] .footer-tick { color: rgba(10,122,58,0.55); }
     .footer-brand { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
@@ -527,7 +527,7 @@
       flex-shrink: 0;
     }
 
-    .detail-pager { flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); text-align: center; }
+    .detail-pager { flex: 1; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; font-size: 12px; color: var(--muted); text-align: center; }
 
     .detail-btn {
       background: var(--card-bg);
@@ -590,8 +590,8 @@
       background: rgba(128,128,128,0.06); border: 1px solid var(--border);
       border-radius: 12px; padding: 14px 18px; gap: 14px; flex-wrap: wrap;
     }
-    .detail-source-label  { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-family: 'JetBrains Mono', monospace; }
-    .detail-source-domain { font-size: 12px; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+    .detail-source-label  { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
+    .detail-source-domain { font-size: 12px; color: var(--text); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
 
     .detail-read-link {
       display: inline-flex; align-items: center; gap: 6px;
@@ -604,7 +604,7 @@
     .detail-read-link:hover { background: linear-gradient(135deg, rgba(0,245,255,0.22), rgba(168,85,247,0.22)); border-color: rgba(0,245,255,0.4); }
 
     /* Keyboard hint */
-    .kbd-hint { font-size: 11px; color: var(--muted); text-align: center; padding: 8px 0 4px; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
+    .kbd-hint { font-size: 11px; color: var(--muted); text-align: center; padding: 8px 0 4px; flex-shrink: 0; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
     @media (max-width: 600px) { .kbd-hint { display: none; } }
 
     /* Slide animations */
@@ -650,7 +650,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/24
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 15:48 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 15:51 CST</span>
         </div>
       </div>
     </div>

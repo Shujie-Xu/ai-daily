@@ -529,7 +529,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/23
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 11:22 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 11:27 CST</span>
         </div>
       </div>
     </div>
@@ -1190,7 +1190,7 @@
     localStorage.setItem('read_' + idx, '1');
     const cardEl = document.querySelector(`.news-card[data-idx="${idx}"]`);
     if (cardEl) cardEl.classList.add('read');
-    history.pushState({ detailOpen: true, idx }, '', '');
+    history.pushState({ detailOpen: true, idx }, '', '#article-' + idx);
   };
 
   window.closeDetail = function () {
@@ -1198,6 +1198,7 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     isOpen = false;
+    history.pushState({}, '', location.pathname + location.search);
   };
 
   window.handleBackdropClick = function (e) {
@@ -1214,10 +1215,28 @@
     localStorage.setItem('read_' + currentIdx, '1');
     const cardEl = document.querySelector(`.news-card[data-idx="${currentIdx}"]`);
     if (cardEl) cardEl.classList.add('read');
-    history.replaceState({ detailOpen: true, idx: currentIdx }, '', '');
+    history.replaceState({ detailOpen: true, idx: currentIdx }, '', '#article-' + currentIdx);
   };
 
-  window.addEventListener('popstate', () => { if (isOpen) closeDetail(); });
+  window.addEventListener('popstate', e => {
+    if (isOpen) {
+      closeDetail();
+    } else if (e.state && e.state.detailOpen) {
+      openDetail(e.state.idx);
+    }
+  });
+
+  // ── Deep-link: open article from URL hash on page load ────────
+  (function () {
+    const m = location.hash.match(/^#article-(\d+)$/);
+    if (m) {
+      const idx = parseInt(m[1], 10);
+      if (idx >= 0 && idx < articles.length) {
+        // slight delay so the page renders first
+        setTimeout(() => openDetail(idx), 80);
+      }
+    }
+  })();
 
   document.addEventListener('keydown', e => {
     if (!isOpen) return;
@@ -1236,13 +1255,13 @@
   window.shareArticle = function () {
     const a = articles[currentIdx];
     if (!a) return;
-    const siteUrl   = 'https://shujie-xu.github.io/ai-daily/';
+    const shareUrl  = location.href;   // includes #article-N
     const shareText = `📰 ${a.title}\n\n${a.summary}\n\n🤖 AI Daily`;
     if (navigator.share) {
-      navigator.share({ title: a.title, text: shareText, url: siteUrl }).catch(() => {});
+      navigator.share({ title: a.title, text: shareText, url: shareUrl }).catch(() => {});
     } else {
-      // fallback: copy formatted card text + site link to clipboard
-      navigator.clipboard.writeText(`${shareText} · ${siteUrl}`).then(() => {
+      // fallback: copy formatted card text + deep link to clipboard
+      navigator.clipboard.writeText(`${shareText} · ${shareUrl}`).then(() => {
         btnShare.style.color = 'var(--green)';
         setTimeout(() => btnShare.style.color = '', 1500);
       }).catch(() => {});

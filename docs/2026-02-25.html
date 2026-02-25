@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Daily · 2026/02/25</title>
   <meta property="og:title" content="🤖 AI 日报 · 2026/02/25"/>
-  <meta property="og:description" content="今日 12 条 · 来自 6 个信息源 · 赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈 · 英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸 · Anthropic发布10款企业插件：从投行到HR，连续冲击传统软件市场"/>
+  <meta property="og:description" content="今日 12 条 · 来自 6 个信息源 · 赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈 · 英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸 · Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据"/>
   <meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og.png"/>
   <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/"/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="🤖 AI 日报 · 2026/02/25"/>
-  <meta name="twitter:description" content="今日 12 条 · 来自 6 个信息源 · 赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈 · 英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸 · Anthropic发布10款企业插件：从投行到HR，连续冲击传统软件市场"/>
+  <meta name="twitter:description" content="今日 12 条 · 来自 6 个信息源 · 赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈 · 英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸 · Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -425,39 +425,31 @@
       background: linear-gradient(to bottom, var(--cyan), var(--purple));
     }
 
-    /* ── Archive Calendar ───────────────────────────────────── */
+    /* ── Archive Date Pill ──────────────────────────────────── */
     .archive-cal-section { margin-bottom: 24px; }
 
-    /* Header bar */
-    .archive-bar {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
-    }
-    .archive-bar-label {
-      font-size: 11px; font-weight: 600; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 0.8px;
-    }
-    .archive-cal-toggle {
-      display: flex; align-items: center; gap: 5px;
-      background: var(--card-bg); border: 1px solid var(--border);
-      color: var(--muted); border-radius: 7px; padding: 4px 10px;
-      font-size: 11px; cursor: pointer; transition: all 0.18s;
-    }
-    .archive-cal-toggle:hover  { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
-    .archive-cal-toggle.active { border-color: rgba(0,245,255,0.3); color: var(--cyan); background: rgba(0,245,255,0.06); }
+    /* Pill + calendar wrapper */
+    .archive-pill-wrap { position: relative; display: inline-block; }
 
-    /* Date chips (collapsed/default view) */
-    .archive-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .archive-item {
-      padding: 5px 13px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--card-bg); color: var(--muted); text-decoration: none;
-      font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.2s;
+    /* The date pill button */
+    .archive-pill-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 999px; padding: 6px 14px 6px 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      color: var(--text); cursor: pointer; transition: all 0.18s;
+      white-space: nowrap;
     }
-    .archive-item:hover { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
-    .archive-today { border-color: rgba(0,245,255,0.3); color: var(--cyan); background: rgba(0,245,255,0.06); }
-    .today-tag { background: rgba(0,245,255,0.15); color: var(--cyan); font-size: 10px; padding: 1px 6px; border-radius: 999px; margin-left: 4px; }
+    .archive-pill-btn:hover { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
+    .archive-pill-btn.open {
+      border-color: rgba(0,245,255,0.3); color: var(--cyan);
+      background: rgba(0,245,255,0.06);
+    }
+    .archive-pill-chevron { transition: transform 0.22s; flex-shrink: 0; }
+    .archive-pill-btn.open .archive-pill-chevron { transform: rotate(180deg); }
 
     /* Calendar panel (expanded view) */
-    .archive-cal-panel { margin-top: 10px; display: none; }
+    .archive-cal-panel { margin-top: 8px; display: none; }
     .cal-card {
       background: var(--card-bg); border: 1px solid var(--border);
       border-radius: 16px; padding: 16px 20px 18px;
@@ -728,7 +720,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/25
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 20:51 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 20:57 CST</span>
         </div>
       </div>
     </div>
@@ -1011,7 +1003,7 @@
     </div>
 
   <footer>
-    <div class="footer-text"><span class="footer-tick">✓</span> 12 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
+    <div class="footer-text"><span class="footer-tick">✓</span> 6 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
     <div class="footer-brand">powered by <span>小豹包🍞</span></div>
   </footer>
 </div>
@@ -1092,20 +1084,14 @@
     themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
   };
 
-  // ── Archive: toggle between chips view and calendar view ──────
+  // ── Archive: toggle calendar dropdown ───────────────────────
   window.toggleArchiveCal = function () {
-    const chips = document.getElementById('archiveChips');
     const panel = document.getElementById('archiveCalPanel');
     const btn   = document.getElementById('archiveCalToggleBtn');
     if (!panel) return;
     const opening = panel.style.display === 'none' || panel.style.display === '';
     panel.style.display = opening ? 'block' : 'none';
-    chips.style.display = opening ? 'none'  : '';
-    if (btn) {
-      btn.classList.toggle('active', opening);
-      const lbl = btn.querySelector('.cal-toggle-label');
-      if (lbl) lbl.textContent = opening ? '收起' : '日历视图';
-    }
+    if (btn) btn.classList.toggle('open', opening);
   };
 
   // ── Stats counter animation ──────────────────────────────────
@@ -1477,26 +1463,20 @@
   // Today's date (Asia/Shanghai)
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());
 
-  // ── Build chips HTML ────────────────────────────────────────
-  const chipsHtml = allDates.map(date => {
-    const isCurrent = date === pageDate;
-    return `<a href="./${date}.html" class="archive-item${isCurrent ? ' archive-today' : ''}">${date}${isCurrent ? ' <span class="today-tag">今天</span>' : ''}</a>`;
-  }).join('');
+  const calIconSvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+  const chevSvg = `<svg class="archive-pill-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 
-  const calIconSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
-
-  // ── Render archive section ──────────────────────────────────
+  // ── Render archive section (pill + calendar dropdown) ───────
   section.innerHTML = `
-    <div class="archive-bar">
-      <span class="archive-bar-label">📅 历史归档</span>
-      <div style="flex:1"></div>
-      <button class="archive-cal-toggle" id="archiveCalToggleBtn" onclick="toggleArchiveCal()">
-        ${calIconSvg}<span class="cal-toggle-label">日历视图</span>
+    <div class="archive-pill-wrap">
+      <button class="archive-pill-btn" id="archiveCalToggleBtn" onclick="toggleArchiveCal()">
+        ${calIconSvg}
+        <span>${pageDate}</span>
+        ${chevSvg}
       </button>
-    </div>
-    <div class="archive-chips" id="archiveChips">${chipsHtml}</div>
-    <div class="archive-cal-panel" id="archiveCalPanel" style="display:none">
-      <div id="archiveCalWidget"></div>
+      <div class="archive-cal-panel" id="archiveCalPanel" style="display:none">
+        <div id="archiveCalWidget"></div>
+      </div>
     </div>`;
 
   // ── Calendar renderer ───────────────────────────────────────

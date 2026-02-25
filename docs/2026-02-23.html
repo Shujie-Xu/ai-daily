@@ -728,7 +728,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/23
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:10 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:13 CST</span>
         </div>
       </div>
     </div>
@@ -1521,8 +1521,8 @@
     </div>`;
 
   // ── Calendar renderer ───────────────────────────────────────
-  const latest    = allDates[0];
-  const [initY, initM] = latest.split('-').map(Number);
+  // 日历初始显示当前页面日期所在月份
+  const [initY, initM] = pageDate.split('-').map(Number);
   let vy = initY, vm = initM - 1;
   const WD = ['一','二','三','四','五','六','日'];
 
@@ -1540,9 +1540,10 @@
       cells += `<div class="cal-day cal-other">${prevDim - i}</div>`;
     for (let d = 1; d <= dim; d++) {
       const str = ds(vy, vm, d);
-      const isTdy = str === today, hasArc = DATES.has(str);
-      const cls   = 'cal-day ' + (isTdy ? 'cal-today' : hasArc ? 'cal-has' : 'cal-none');
-      const click = hasArc ? `onclick="location.href='./${str}.html'"` : '';
+      const isPage = str === pageDate;   // 当前页面日期 → 蓝框
+      const hasArc = DATES.has(str);
+      const cls = 'cal-day ' + (isPage ? 'cal-today' : hasArc ? 'cal-has' : 'cal-none');
+      const click = hasArc && !isPage ? `onclick="location.href='./${str}.html'"` : '';
       cells += `<div class="${cls}" ${click}>${d}</div>`;
     }
     const tail = (offset + dim) % 7;

@@ -428,25 +428,33 @@
     /* ── Archive Date Pill ──────────────────────────────────── */
     .archive-cal-section { margin-bottom: 24px; }
 
-    /* Pill + calendar wrapper */
-    .archive-pill-wrap { position: relative; display: inline-block; }
+    /* Wrapper */
+    .archive-pill-wrap { display: inline-block; }
 
-    /* The date pill button */
-    .archive-pill-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 999px; padding: 6px 14px 6px 12px;
+    /* Row: date tag + expand button */
+    .archive-date-row { display: inline-flex; align-items: center; gap: 5px; }
+
+    /* The date label — clickable link to that page */
+    .archive-date-tag {
       font-family: 'JetBrains Mono', monospace; font-size: 13px;
-      color: var(--text); cursor: pointer; transition: all 0.18s;
+      color: var(--cyan); background: rgba(0,245,255,0.07);
+      border: 1px solid rgba(0,245,255,0.28); border-radius: 8px;
+      padding: 5px 13px; text-decoration: none; transition: background 0.15s;
       white-space: nowrap;
     }
-    .archive-pill-btn:hover { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
-    .archive-pill-btn.open {
-      border-color: rgba(0,245,255,0.3); color: var(--cyan);
-      background: rgba(0,245,255,0.06);
+    .archive-date-tag:hover { background: rgba(0,245,255,0.15); }
+
+    /* Expand/collapse button — chevron only */
+    .archive-expand-btn {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--card-bg); border: 1px solid var(--border);
+      color: var(--muted); border-radius: 7px; width: 28px; height: 28px;
+      cursor: pointer; transition: all 0.18s; flex-shrink: 0; padding: 0;
     }
-    .archive-pill-chevron { transition: transform 0.22s; flex-shrink: 0; }
-    .archive-pill-btn.open .archive-pill-chevron { transform: rotate(180deg); }
+    .archive-expand-btn:hover  { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
+    .archive-expand-btn.open   { border-color: rgba(0,245,255,0.3); color: var(--cyan); background: rgba(0,245,255,0.06); }
+    .archive-pill-chevron { transition: transform 0.22s; display: block; }
+    .archive-expand-btn.open .archive-pill-chevron { transform: rotate(180deg); }
 
     /* Calendar panel (expanded view) */
     .archive-cal-panel { margin-top: 8px; display: none; }
@@ -720,7 +728,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/25
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 20:57 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 20:59 CST</span>
         </div>
       </div>
     </div>
@@ -1463,17 +1471,15 @@
   // Today's date (Asia/Shanghai)
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());
 
-  const calIconSvg = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
-  const chevSvg = `<svg class="archive-pill-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+  const chevSvg = `<svg class="archive-pill-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 
-  // ── Render archive section (pill + calendar dropdown) ───────
+  // ── Render archive section: date tag + expand btn + calendar ─
   section.innerHTML = `
     <div class="archive-pill-wrap">
-      <button class="archive-pill-btn" id="archiveCalToggleBtn" onclick="toggleArchiveCal()">
-        ${calIconSvg}
-        <span>${pageDate}</span>
-        ${chevSvg}
-      </button>
+      <div class="archive-date-row">
+        <a href="./${pageDate}.html" class="archive-date-tag">${pageDate}</a>
+        <button class="archive-expand-btn" id="archiveCalToggleBtn" onclick="toggleArchiveCal()" title="选择日期">${chevSvg}</button>
+      </div>
       <div class="archive-cal-panel" id="archiveCalPanel" style="display:none">
         <div id="archiveCalWidget"></div>
       </div>

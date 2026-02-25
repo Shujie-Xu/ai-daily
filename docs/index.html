@@ -728,7 +728,7 @@
         <div class="date-badge" id="display-date-badge">
           <div class="pulse"></div>
           <span id="display-date">2026/02/25</span>
-          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:55 CST</span>
+          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 22:17 CST</span>
         </div>
       </div>
     </div>
@@ -1561,9 +1561,8 @@ async function loadDateData(date) {
   const section = document.getElementById('archiveSection');
   if (!section) return;
 
-  // Determine "current page" date: from URL for dated pages, else latest
-  const urlMatch   = [null, document.getElementById('display-date')?.textContent?.trim()];
-  const pageDate   = urlMatch ? urlMatch[1] : allDates[0];
+  // Current date: use latest from manifest (ISO format YYYY-MM-DD)
+  const pageDate   = allDates[0] || today;
 
   // Today's date (Asia/Shanghai)
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());

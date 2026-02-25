@@ -9,8 +9,72 @@ const path = require('path');
 
 const TEMPLATE = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const OUTPUT_DIR = path.join(__dirname, 'docs');
+const AUDIO_DIR  = path.join(OUTPUT_DIR, 'audio');
+const TTS_SCRIPT = path.join(__dirname, 'tts_gen.py');
 
 if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+if (!fs.existsSync(AUDIO_DIR))  fs.mkdirSync(AUDIO_DIR, { recursive: true });
+
+// ── TTS: 为文章生成音频 ──────────────────────────────────────
+function generateAudio(articles, date) {
+  const { spawnSync } = require('child_process');
+  const results = [];
+
+  for (let i = 0; i < articles.length; i++) {
+    const a = articles[i];
+    const filename = `${date}-${i}.mp3`;
+    const outPath  = path.join(AUDIO_DIR, filename);
+
+    // 已存在就跳过
+    if (fs.existsSync(outPath)) {
+      results.push(`audio/${filename}`);
+      continue;
+    }
+
+    // 拼接朗读文本：标题 + 正文（去除 HTML 标签）
+    const rawContent = (a.full_content || a.summary || '').replace(/<[^>]+>/g, '');
+    const ttsText = `${a.title}。${rawContent}`.slice(0, 2000); // 最多 2000 字
+
+    try {
+      const r = spawnSync('python3', [TTS_SCRIPT, outPath], {
+        input: ttsText,
+        encoding: 'utf8',
+        timeout: 30000, // 每篇最多等 30 秒
+      });
+      if (r.status === 0 && fs.existsSync(outPath)) {
+        results.push(`audio/${filename}`);
+        process.stderr.write(r.stderr || '');
+      } else {
+        console.warn(`  ⚠️ TTS 失败 [${i}]: ${r.stderr || r.error?.message || 'unknown'}`);
+        results.push(null); // 无音频 → 前端回退 Web Speech
+      }
+    } catch (e) {
+      console.warn(`  ⚠️ TTS 异常 [${i}]: ${e.message}`);
+      results.push(null);
+    }
+  }
+  return results; // 与 articles 等长，无音频时为 null
+}
+
+// ── 清理 90 天以上的音频文件 ────────────────────────────────
+function cleanupOldAudio(days = 90) {
+  if (!fs.existsSync(AUDIO_DIR)) return;
+  const cutoff = Date.now() - days * 86400 * 1000;
+  const files = fs.readdirSync(AUDIO_DIR).filter(f => f.endsWith('.mp3'));
+  let removed = 0;
+  for (const f of files) {
+    // 文件名格式 YYYY-MM-DD-N.mp3，从名称解析日期
+    const m = f.match(/^(\d{4}-\d{2}-\d{2})-\d+\.mp3$/);
+    if (m) {
+      const fileDate = new Date(m[1]).getTime();
+      if (fileDate < cutoff) {
+        fs.unlinkSync(path.join(AUDIO_DIR, f));
+        removed++;
+      }
+    }
+  }
+  if (removed > 0) console.log(`🗑️  清理了 ${removed} 个过期音频（>${days}天）`);
+}
 
 function heatToStars(score) {
   if (score >= 5) return '🔥🔥🔥🔥🔥';
@@ -240,6 +304,7 @@ function generate(newsData) {
     best_url:     a.best_url     || a.url || '',
     categories:   a.categories   || ['product'],
     tags:         a.tags         || [],
+    context:      a.context      || '',
     heat:         a.heat         || 3,
   })));
 
@@ -268,13 +333,14 @@ function generate(newsData) {
   return { outFile, latestFile, date: fileDate };
 }
 
-// CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD]
+// CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD] [--no-tts]
 if (require.main === module) {
   const { execSync } = require('child_process');
   const inputFile = process.argv[2] || path.join(__dirname, 'latest-news.json');
-  const shouldPush = process.argv.includes('--push');
+  const shouldPush  = process.argv.includes('--push');
+  const skipTts     = process.argv.includes('--no-tts');
 
-  // Optional --date override (e.g. --date 2026-02-23)
+  // Optional --date override
   const dateArgIdx = process.argv.indexOf('--date');
   if (dateArgIdx !== -1 && process.argv[dateArgIdx + 1]) {
     process.env._GENERATE_DATE_OVERRIDE = process.argv[dateArgIdx + 1];
@@ -285,6 +351,26 @@ if (require.main === module) {
     process.exit(1);
   }
   const data = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+
+  // 确定日期（与 generate() 内部逻辑保持一致）
+  const fileDate = process.env._GENERATE_DATE_OVERRIDE || data.date ||
+    new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Shanghai' });
+
+  // ── 清理 30 天以上的旧音频 ──
+  cleanupOldAudio(30);
+
+  // ── 生成 TTS 音频 ──
+  if (!skipTts) {
+    console.log(`🎙️  生成音频（${data.articles.length} 篇）...`);
+    const audioPaths = generateAudio(data.articles, fileDate);
+    // 把 audio_url 注入到文章数据里供模板使用
+    data.articles = data.articles.map((a, i) =>
+      audioPaths[i] ? { ...a, audio_url: audioPaths[i] } : a
+    );
+    const ok = audioPaths.filter(Boolean).length;
+    console.log(`  ✅ 音频生成完成：${ok}/${data.articles.length} 篇`);
+  }
+
   const result = generate(data);
   console.log('🌐 Output:', result.latestFile);
 

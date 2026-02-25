@@ -728,7 +728,7 @@
         <div class="date-badge" id="display-date-badge">
           <div class="pulse"></div>
           <span id="display-date">2026/02/25</span>
-          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:34 CST</span>
+          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:50 CST</span>
         </div>
       </div>
     </div>
@@ -736,7 +736,6 @@
 
   <!-- Archive calendar -->
   
-  <div id="archiveSection" class="archive-cal-section"></div>
 
   <!-- Stats -->
   <div class="stats-bar">
@@ -1556,7 +1555,7 @@ async function loadDateData(date) {
 (function () {
   const allDates = (window.ARCHIVE_DATES || []);   // loaded from ./archive.js
   const DATES    = new Set(allDates);
-  if (DATES.size <= 1) return;
+  if (DATES.size < 1) return;
 
   const section = document.getElementById('archiveSection');
   if (!section) return;

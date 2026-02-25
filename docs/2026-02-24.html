@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="dark">
+<html lang="zh" data-theme="light">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Daily · 2026/02/24</title>
   <meta property="og:title" content="🤖 AI 日报 · 2026/02/24"/>
-  <meta property="og:description" content="今日 13 条 · 来自 13 个信息源 · 路透独家：DeepSeek违禁使用Nvidia Blackwell芯片训练最新模型 · Anthropic指控DeepSeek等三家中国AI公司大规模蒸馏Claude模型 · IBM股价暴跌13%！Anthropic宣称Claude Code可自动化COBOL现代化"/>
+  <meta property="og:description" content="今日 12 条 · 来自 6 个信息源 · 赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈 · 英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸 · Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据"/>
   <meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og.png"/>
   <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/"/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="🤖 AI 日报 · 2026/02/24"/>
-  <meta name="twitter:description" content="今日 13 条 · 来自 13 个信息源 · 路透独家：DeepSeek违禁使用Nvidia Blackwell芯片训练最新模型 · Anthropic指控DeepSeek等三家中国AI公司大规模蒸馏Claude模型 · IBM股价暴跌13%！Anthropic宣称Claude Code可自动化COBOL现代化"/>
+  <meta name="twitter:description" content="今日 12 条 · 来自 6 个信息源 · 赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈 · 英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸 · Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -425,21 +425,38 @@
       background: linear-gradient(to bottom, var(--cyan), var(--purple));
     }
 
-    /* ── Archive nav (top) ───────────────────────────────────── */
-    .archive-nav {
-      display: flex; align-items: center; gap: 10px;
-      padding: 12px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; flex-wrap: wrap;
-    }
-    .archive-nav-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-    .archive-nav-items { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    /* ── Archive (bottom) ────────────────────────────────────── */
+    /* ── Archive ─────────────────────────────────────────────── */
     .archive-section { margin-bottom: 48px; }
-    .archive-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .archive-months  { display: flex; flex-direction: column; gap: 6px; }
+
+    .archive-month-btn {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; padding: 10px 16px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 10px; cursor: pointer;
+      color: var(--text); font-size: 13px; font-weight: 500;
+      transition: all 0.2s; text-align: left;
+    }
+    .archive-month-btn:hover { border-color: rgba(0,245,255,0.3); }
+    .archive-month-btn.open  { border-color: rgba(0,245,255,0.25); border-radius: 10px 10px 0 0; }
+    .archive-month-label { flex: 1; }
+    .archive-month-count { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .archive-month-arrow { color: var(--muted); transition: transform 0.22s; flex-shrink: 0; }
+    .archive-month-btn.open .archive-month-arrow { transform: rotate(180deg); }
+
+    .archive-month-days {
+      display: none; flex-wrap: wrap; gap: 8px;
+      padding: 12px 16px 14px;
+      background: var(--card-bg);
+      border: 1px solid rgba(0,245,255,0.2); border-top: none;
+      border-radius: 0 0 10px 10px;
+    }
+    .archive-month-days.open { display: flex; }
+
     .archive-item {
-      padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--card-bg); color: var(--muted); text-decoration: none;
-      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; font-size: 13px; transition: all 0.2s;
+      padding: 5px 14px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--muted); text-decoration: none;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.2s;
     }
     .archive-item:hover  { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
     .archive-today       { border-color: rgba(0,245,255,0.3); color: var(--cyan); background: rgba(0,245,255,0.06); }
@@ -669,7 +686,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/24
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/24 18:19 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 16:41 CST</span>
         </div>
       </div>
     </div>
@@ -677,28 +694,40 @@
 
   <!-- Archive nav -->
   
-  <div class="archive-nav">
-    <span class="archive-nav-label">📅 历史归档</span>
-    <div class="archive-nav-items"><a href="./2026-02-24.html" class="archive-item archive-today">2026-02-24 <span class="today-tag">今日</span></a>
-<a href="./2026-02-23.html" class="archive-item ">2026-02-23</a>
-<a href="./2026-02-22.html" class="archive-item ">2026-02-22</a></div>
+  <div class="archive-section">
+    <div class="section-header" style="margin-bottom:12px">
+      <span class="section-title">历史归档</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="archive-months">
+    <div class="archive-month">
+      <button class="archive-month-btn open" onclick="toggleArchiveMonth(this)">
+        <span class="archive-month-label">📅 2026年02月</span>
+        <span class="archive-month-count">4 期</span>
+        <svg class="archive-month-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="archive-month-days open">
+        <a href="./2026-02-25.html" class="archive-item ">2026-02-25</a><a href="./2026-02-24.html" class="archive-item archive-today">2026-02-24 <span class="today-tag">今天</span></a><a href="./2026-02-23.html" class="archive-item ">2026-02-23</a><a href="./2026-02-22.html" class="archive-item ">2026-02-22</a>
+      </div>
+    </div>
+    </div>
   </div>
 
   <!-- Stats -->
   <div class="stats-bar">
-    <div class="stat-card"><div class="stat-value" data-target="13">0</div><div class="stat-label">今日新闻</div></div>
-    <div class="stat-card"><div class="stat-value" data-target="13">0</div><div class="stat-label">信息来源</div></div>
+    <div class="stat-card"><div class="stat-value" data-target="12">0</div><div class="stat-label">今日新闻</div></div>
+    <div class="stat-card"><div class="stat-value" data-target="6">0</div><div class="stat-label">信息来源</div></div>
   </div>
 
   <!-- Category filter bar -->
   <div class="filter-bar" id="filterBar">
-    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">13</span></button>
-    <button class="filter-tag" data-cat="model" onclick="setFilter('model')">🧠 模型<span class="filter-count">2</span></button>
-    <button class="filter-tag" data-cat="product" onclick="setFilter('product')">📦 产品<span class="filter-count">6</span></button>
+    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">12</span></button>
+    <button class="filter-tag" data-cat="model" onclick="setFilter('model')">🧠 模型<span class="filter-count">3</span></button>
+    <button class="filter-tag" data-cat="product" onclick="setFilter('product')">📦 产品<span class="filter-count">2</span></button>
     <button class="filter-tag" data-cat="funding" onclick="setFilter('funding')">💰 融资<span class="filter-count">2</span></button>
-    <button class="filter-tag" data-cat="finance" onclick="setFilter('finance')">📊 财务<span class="filter-count">1</span></button>
-    <button class="filter-tag" data-cat="research" onclick="setFilter('research')">🔬 研究<span class="filter-count">1</span></button>
-    <button class="filter-tag" data-cat="policy" onclick="setFilter('policy')">📜 政策<span class="filter-count">2</span></button>
+    <button class="filter-tag" data-cat="finance" onclick="setFilter('finance')">📊 财务<span class="filter-count">2</span></button>
+    <button class="filter-tag" data-cat="policy" onclick="setFilter('policy')">📜 政策<span class="filter-count">1</span></button>
+    <button class="filter-tag" data-cat="event" onclick="setFilter('event')">🎪 事件<span class="filter-count">2</span></button>
   </div>
 
   <!-- News sections -->
@@ -719,45 +748,27 @@
         <div class="card-top">
           <div class="card-cats"><span class="badge badge-policy">📜 政策</span></div>
         </div>
-        <div class="card-title">路透独家：DeepSeek违禁使用Nvidia Blackwell芯片训练最新模型</div>
-        <div class="card-tags"><span class="tag-pill">#DeepSeek</span><span class="tag-pill">#Nvidia</span><span class="tag-pill">#出口管制</span><span class="tag-pill">#中国AI</span><span class="tag-pill">#芯片禁令</span></div>
-        <div class="card-summary">美国特朗普政府官员披露，DeepSeek最新模型使用了被禁止出口至中国的Nvidia Blackwell芯片训练，或违反美国出口管制法规。</div>
+        <div class="card-title">赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈</div>
+        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#五角大楼</span><span class="tag-pill">#AI安全</span><span class="tag-pill">#赫格塞斯</span><span class="tag-pill">#Claude</span></div>
+        <div class="card-summary">美国防长赫格塞斯威胁取消Anthropic 2亿美元合同并将其列入黑名单，因其拒绝放宽Claude用于AI武器和监控的安全限制。</div>
         <div class="card-footer">
-          <span class="card-source">reuters.com</span>
+          <span class="card-source">npr.org</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>
 
-    <div class="news-card" data-idx="1" data-cats="policy"
+    <div class="news-card" data-idx="1" data-cats="finance"
          onclick="openDetail(1)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(1)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-policy">📜 政策</span></div>
+          <div class="card-cats"><span class="badge badge-finance">📊 财务</span></div>
         </div>
-        <div class="card-title">Anthropic指控DeepSeek等三家中国AI公司大规模蒸馏Claude模型</div>
-        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#DeepSeek</span><span class="tag-pill">#MiniMax</span><span class="tag-pill">#Moonshot</span><span class="tag-pill">#模型蒸馏</span><span class="tag-pill">#中国AI</span></div>
-        <div class="card-summary">Anthropic披露DeepSeek、MiniMax、Moonshot通过2.4万个虚假账户与Claude进行超1600万次交互，非法蒸馏其AI能力。</div>
-        <div class="card-footer">
-          <span class="card-source">theverge.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="2" data-cats="product"
-         onclick="openDetail(2)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(2)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-product">📦 产品</span></div>
-        </div>
-        <div class="card-title">IBM股价暴跌13%！Anthropic宣称Claude Code可自动化COBOL现代化</div>
-        <div class="card-tags"><span class="tag-pill">#IBM</span><span class="tag-pill">#Anthropic</span><span class="tag-pill">#Claude Code</span><span class="tag-pill">#COBOL</span><span class="tag-pill">#企业软件</span></div>
-        <div class="card-summary">Anthropic发文称Claude Code可大幅降低COBOL遗留代码现代化成本，引发市场担忧IBM大型机业务前景，IBM股价单日暴跌13%。</div>
+        <div class="card-title">英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸</div>
+        <div class="card-tags"><span class="tag-pill">#英伟达</span><span class="tag-pill">#财报</span><span class="tag-pill">#AI芯片</span><span class="tag-pill">#华尔街</span><span class="tag-pill">#数据中心</span></div>
+        <div class="card-summary">英伟达将于美股收盘后发布Q4财报，今年以来唯一正收益的万亿市值科技股，市场期待验证AI基础设施投资是否仍然强劲。</div>
         <div class="card-footer">
           <span class="card-source">cnbc.com</span>
           <span class="card-cta">查看详情 →</span>
@@ -774,73 +785,73 @@
       </div>
       <div class="news-grid">
         
-    <div class="news-card" data-idx="3" data-cats="product"
-         onclick="openDetail(3)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(3)">
+    <div class="news-card" data-idx="2" data-cats="product"
+         onclick="openDetail(2)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(2)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
           <div class="card-cats"><span class="badge badge-product">📦 产品</span></div>
         </div>
-        <div class="card-title">OpenAI Frontier进军企业市场，千亿美元SaaS末日恐慌横扫科技股</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#SaaS</span><span class="tag-pill">#企业AI</span><span class="tag-pill">#Agent</span><span class="tag-pill">#麦肯锡</span></div>
-        <div class="card-summary">OpenAI推出企业级AI平台Frontier，与麦肯锡等顶级咨询公司合作，引发市场对传统SaaS商业模式终结的恐慌，科技股集体重挫。</div>
+        <div class="card-title">Anthropic发布10款企业插件：从投行到HR，连续冲击传统软件市场</div>
+        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#Claude</span><span class="tag-pill">#企业插件</span><span class="tag-pill">#SaaS</span><span class="tag-pill">#投资银行</span></div>
+        <div class="card-summary">Anthropic发布10款企业AI插件，涵盖投资银行、财富管理、HR等领域，与LSEG、FactSet、Slack、DocuSign合作，合作伙伴股价当日大涨4-6%。</div>
         <div class="card-footer">
-          <span class="card-source">markets.financialcontent.com</span>
+          <span class="card-source">reuters.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>
 
-    <div class="news-card" data-idx="4" data-cats="model"
-         onclick="openDetail(4)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(4)">
+    <div class="news-card" data-idx="3" data-cats="model"
+         onclick="openDetail(3)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(3)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
           <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
         </div>
-        <div class="card-title">Gemini 3.1 Pro深度评测：ARC-AGI-2得分77.1%，推理能力翻倍</div>
-        <div class="card-tags"><span class="tag-pill">#Google</span><span class="tag-pill">#Gemini</span><span class="tag-pill">#ARC-AGI</span><span class="tag-pill">#推理模型</span><span class="tag-pill">#长上下文</span></div>
-        <div class="card-summary">Google DeepMind发布Gemini 3.1 Pro，ARC-AGI-2基准测试得分77.1%，是前代两倍以上，100万token上下文窗口保持领先。</div>
+        <div class="card-title">智谱AI发布GLM-5：744B参数MoE模型，国产昇腾芯片训练，MIT开源</div>
+        <div class="card-tags"><span class="tag-pill">#智谱AI</span><span class="tag-pill">#GLM-5</span><span class="tag-pill">#MoE架构</span><span class="tag-pill">#华为昇腾</span><span class="tag-pill">#开源大模型</span></div>
+        <div class="card-summary">智谱AI发布GLM-5大模型，744B参数MoE架构（激活44B），200K上下文，SWE-bench Verified达77.8%，全程在华为昇腾芯片训练，MIT协议开源。</div>
         <div class="card-footer">
-          <span class="card-source">analyticsvidhya.com</span>
+          <span class="card-source">llm-stats.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>
 
-    <div class="news-card" data-idx="5" data-cats="research"
-         onclick="openDetail(5)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(5)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-research">🔬 研究</span></div>
-        </div>
-        <div class="card-title">MIT研究：30款主流AI智能体失控，普遍缺乏安全披露和停止机制</div>
-        <div class="card-tags"><span class="tag-pill">#MIT</span><span class="tag-pill">#AI安全</span><span class="tag-pill">#Agent</span><span class="tag-pill">#透明度</span><span class="tag-pill">#监管</span></div>
-        <div class="card-summary">MIT最新大规模调查发现，30款主流AI智能体系统存在严重安全透明度缺失，部分系统甚至没有文档化的停止选项。</div>
-        <div class="card-footer">
-          <span class="card-source">zdnet.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="6" data-cats="funding"
-         onclick="openDetail(6)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(6)">
+    <div class="news-card" data-idx="4" data-cats="funding"
+         onclick="openDetail(4)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(4)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
           <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
         </div>
-        <div class="card-title">Anthropic完成300亿美元G轮融资，估值3800亿刷新AI历史记录</div>
-        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#G轮</span><span class="tag-pill">#估值</span><span class="tag-pill">#企业AI</span><span class="tag-pill">#Claude</span></div>
-        <div class="card-summary">Anthropic完成史上最大规模AI融资，G轮筹得300亿美元，估值达3800亿美元，财富500强中8家头部企业已采用Claude。</div>
+        <div class="card-title">Wayve估值升至86亿美元：Uber、英伟达、奔驰等联合押注泛化式自动驾驶AI</div>
+        <div class="card-tags"><span class="tag-pill">#Wayve</span><span class="tag-pill">#自动驾驶</span><span class="tag-pill">#机器人出租车</span><span class="tag-pill">#英伟达</span><span class="tag-pill">#Uber</span></div>
+        <div class="card-summary">英国自动驾驶AI初创公司Wayve完成15亿美元融资，估值达86亿美元，投资方包括Uber、微软、英伟达、奔驰、日产等，计划今年在伦敦启动机器人出租车商业试运营。</div>
         <div class="card-footer">
-          <span class="card-source">crowdfundinsider.com</span>
+          <span class="card-source">startupnews.fyi</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="5" data-cats="finance"
+         onclick="openDetail(5)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(5)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-finance">📊 财务</span></div>
+        </div>
+        <div class="card-title">Meta与AMD签署6GW算力合作大单，拿到10%股权认购权</div>
+        <div class="card-tags"><span class="tag-pill">#Meta</span><span class="tag-pill">#AMD</span><span class="tag-pill">#AI芯片</span><span class="tag-pill">#数据中心</span><span class="tag-pill">#苏姿丰</span></div>
+        <div class="card-summary">Meta与AMD签多年期协议，计划部署6GW AMD GPU用于AI数据中心，同时获得1.6亿股AMD认股权证，AMD股价单日大涨7%。</div>
+        <div class="card-footer">
+          <span class="card-source">cnbc.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
@@ -855,17 +866,17 @@
       </div>
       <div class="news-grid">
         
-    <div class="news-card" data-idx="7" data-cats="finance"
-         onclick="openDetail(7)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(7)">
+    <div class="news-card" data-idx="6" data-cats="funding"
+         onclick="openDetail(6)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(6)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-finance">📊 财务</span></div>
+          <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
         </div>
-        <div class="card-title">AI投资者忠诚度消亡：OpenAI的VC们同时重仓押注Anthropic</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#Anthropic</span><span class="tag-pill">#红杉资本</span><span class="tag-pill">#风险投资</span><span class="tag-pill">#AI投资</span></div>
-        <div class="card-summary">随着OpenAI和Anthropic同期完成巨额融资，至少12家OpenAI直接投资人也同时参与Anthropic的300亿G轮，VC忠诚时代终结。</div>
+        <div class="card-title">Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据</div>
+        <div class="card-tags"><span class="tag-pill">#Nimble</span><span class="tag-pill">#AI智能体</span><span class="tag-pill">#数据基础设施</span><span class="tag-pill">#B轮融资</span><span class="tag-pill">#Norwest</span></div>
+        <div class="card-summary">AI数据基础设施初创公司Nimble获4700万美元B轮融资，其AI智能体平台可搜索、验证网络数据并结构化输出，深度集成Databricks和Snowflake。</div>
         <div class="card-footer">
           <span class="card-source">techcrunch.com</span>
           <span class="card-cta">查看详情 →</span>
@@ -873,55 +884,73 @@
       </div>
     </div>
 
-    <div class="news-card" data-idx="8" data-cats="product"
+    <div class="news-card" data-idx="7" data-cats="event"
+         onclick="openDetail(7)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(7)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-event">🎪 事件</span></div>
+        </div>
+        <div class="card-title">OpenAI COO直言：AI尚未真正渗透企业业务流程</div>
+        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#企业AI</span><span class="tag-pill">#Frontier平台</span><span class="tag-pill">#莱特卡普</span><span class="tag-pill">#AI落地</span></div>
+        <div class="card-summary">OpenAI COO莱特卡普在印度AI峰会坦言，强大的AI系统仍停留在个人使用层面，深度嵌入企业复杂流程仍面临巨大挑战，这正是推出Frontier平台的动因。</div>
+        <div class="card-footer">
+          <span class="card-source">techcrunch.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="8" data-cats="model"
          onclick="openDetail(8)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(8)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-product">📦 产品</span></div>
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
         </div>
-        <div class="card-title">ChatGPT正式引入广告，OpenAI商业模式迎历史性转变</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#ChatGPT</span><span class="tag-pill">#广告</span><span class="tag-pill">#商业化</span><span class="tag-pill">#用户隐私</span></div>
-        <div class="card-summary">OpenAI开始在ChatGPT中测试广告投放，采用对话内容感知的情境式广告，广告定价约为Meta的3倍，引发用户隐私争议。</div>
+        <div class="card-title">Oura发布首款自研大模型，专门服务女性健康全周期</div>
+        <div class="card-tags"><span class="tag-pill">#Oura</span><span class="tag-pill">#女性健康</span><span class="tag-pill">#垂直大模型</span><span class="tag-pill">#医疗AI</span><span class="tag-pill">#智能穿戴</span></div>
+        <div class="card-summary">智能戒指厂商Oura推出专注女性健康的首款自研AI模型，整合生物特征数据，覆盖月经到绝经全周期，已通过内部临床医生审查。</div>
         <div class="card-footer">
-          <span class="card-source">windowsnews.ai</span>
+          <span class="card-source">techcrunch.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>
 
-    <div class="news-card" data-idx="9" data-cats="product"
+    <div class="news-card" data-idx="9" data-cats="model"
          onclick="openDetail(9)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(9)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-product">📦 产品</span></div>
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
         </div>
-        <div class="card-title">OpenAI x Jony Ive AI硬件设备延迟，预计2027年才能交付用户</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#Jony Ive</span><span class="tag-pill">#AI硬件</span><span class="tag-pill">#设计</span><span class="tag-pill">#Sam Altman</span></div>
-        <div class="card-summary">法庭文件显示，OpenAI与苹果前设计总监Jony Ive合作开发的AI硬件设备，预计最早2027年底才能向用户交付，比此前预期推迟。</div>
+        <div class="card-title">西班牙AI独角兽Multiverse开源HyperNova 60B：量子压缩技术让大模型「瘦身」一半</div>
+        <div class="card-tags"><span class="tag-pill">#Multiverse Computing</span><span class="tag-pill">#HyperNova</span><span class="tag-pill">#模型压缩</span><span class="tag-pill">#开源</span><span class="tag-pill">#欧洲AI</span></div>
+        <div class="card-summary">Multiverse Computing将HyperNova 60B 2602版免费发布至Hugging Face，以量子启发压缩技术将120B模型压至32GB，性能接近原模型且增强工具调用能力。</div>
         <div class="card-footer">
-          <span class="card-source">news.quantosei.com</span>
+          <span class="card-source">techcrunch.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>
 
-    <div class="news-card" data-idx="10" data-cats="model"
+    <div class="news-card" data-idx="10" data-cats="event"
          onclick="openDetail(10)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(10)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
+          <div class="card-cats"><span class="badge badge-event">🎪 事件</span></div>
         </div>
-        <div class="card-title">智谱GLM-5公开技术细节：7440亿参数，瞄准Agentic Engineering范式</div>
-        <div class="card-tags"><span class="tag-pill">#智谱AI</span><span class="tag-pill">#GLM-5</span><span class="tag-pill">#国产大模型</span><span class="tag-pill">#国产芯片</span><span class="tag-pill">#Agent</span><span class="tag-pill">#open-source</span></div>
-        <div class="card-summary">智谱AI发布GLM-5技术报告，模型参数达7440亿，采用DSA稀疏注意力机制，全面支持七大国产芯片平台，盲测中表现媲美Claude Sonnet。</div>
+        <div class="card-title">Uber工程师造了个「AI版老板」用来练兵，90%的工程师已在用AI</div>
+        <div class="card-tags"><span class="tag-pill">#Uber</span><span class="tag-pill">#AI工作流</span><span class="tag-pill">#企业AI转型</span><span class="tag-pill">#工程师文化</span><span class="tag-pill">#生产力</span></div>
+        <div class="card-summary">Uber CEO透露员工创建了AI版自己用于准备会议，约90%工程师在日常工作中使用AI，30%是重度用户，正在重构公司技术架构。</div>
         <div class="card-footer">
-          <span class="card-source">finance.sina.com.cn</span>
+          <span class="card-source">techcrunch.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
@@ -936,37 +965,19 @@
       </div>
       <div class="news-grid">
         
-    <div class="news-card" data-idx="11" data-cats="funding product"
+    <div class="news-card" data-idx="11" data-cats="product"
          onclick="openDetail(11)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(11)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-funding">💰 融资</span><span class="badge badge-product">📦 产品</span></div>
-        </div>
-        <div class="card-title">Giant获800万美元种子轮，AI互动故事平台让儿童从内容消费者变创作者</div>
-        <div class="card-tags"><span class="tag-pill">#Giant</span><span class="tag-pill">#儿童教育</span><span class="tag-pill">#AI故事</span><span class="tag-pill">#种子轮</span><span class="tag-pill">#教育科技</span></div>
-        <div class="card-summary">AI儿童故事初创公司Giant完成800万美元种子融资，平台让孩子成为故事主角并与有记忆的AI角色互动，已积累逾百万分钟对话。</div>
-        <div class="card-footer">
-          <span class="card-source">techstartups.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="12" data-cats="product"
-         onclick="openDetail(12)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(12)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
           <div class="card-cats"><span class="badge badge-product">📦 产品</span></div>
         </div>
-        <div class="card-title">Virtuals Protocol推出Eastworld Labs，加速人形机器人从数字走向物理世界</div>
-        <div class="card-tags"><span class="tag-pill">#Virtuals Protocol</span><span class="tag-pill">#人形机器人</span><span class="tag-pill">#具身智能</span><span class="tag-pill">#Web3</span><span class="tag-pill">#Agent</span></div>
-        <div class="card-summary">Virtuals Protocol旗下Virtuals Robotics启动Eastworld Labs加速器，融合人形机器人、AI智能体与链上融资，构建首个人机混合社会。</div>
+        <div class="card-title">New Relic推出无代码AI智能体平台，专攻可观测性垂直场景</div>
+        <div class="card-tags"><span class="tag-pill">#New Relic</span><span class="tag-pill">#AI智能体平台</span><span class="tag-pill">#可观测性</span><span class="tag-pill">#MCP</span><span class="tag-pill">#企业IT</span></div>
+        <div class="card-summary">New Relic发布Agentic Platform，企业可无代码部署可观测性AI智能体，支持MCP协议和预构建智能体，与Salesforce Agentforce、OpenAI Frontier同台竞争。</div>
         <div class="card-footer">
-          <span class="card-source">hipther.com</span>
+          <span class="card-source">techcrunch.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
@@ -975,7 +986,7 @@
     </div>
 
   <footer>
-    <div class="footer-text"><span class="footer-tick">✓</span> 14 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
+    <div class="footer-text"><span class="footer-tick">✓</span> 6 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
     <div class="footer-brand">powered by <span>小豹包🍞</span></div>
   </footer>
 </div>
@@ -1020,7 +1031,7 @@
   </div>
 </div>
 
-<script>window.ARTICLES_DATA = [{"title":"路透独家：DeepSeek违禁使用Nvidia Blackwell芯片训练最新模型","summary":"美国特朗普政府官员披露，DeepSeek最新模型使用了被禁止出口至中国的Nvidia Blackwell芯片训练，或违反美国出口管制法规。","full_content":"路透社周一发布独家报道，援引一名特朗普政府高级官员的话称，中国AI初创公司DeepSeek即将发布的最新AI模型，是在Nvidia最先进的Blackwell芯片上完成训练的——而Blackwell出口至中国目前受到美国出口管制的明确禁止。\n\n该官员表示，美国政府已掌握相关情报，认为这批Blackwell芯片很可能集中部署在DeepSeek位于内蒙古自治区的数据中心。更令华盛顿担忧的是，DeepSeek可能会在模型发布前主动抹除技术指纹，以掩盖其使用美国芯片的事实。\n\n这一事件将在华盛顿引发新一轮政策论战。白宫AI顾问David Sacks与Nvidia CEO黄仁勋均认为，对华出口限制反而会刺激华为等中国企业加速自主研发，并不利于美国长远利益；然而强硬派则坚持认为，一旦先进AI芯片流入中国，极有可能被转用于军事、情报或大规模监控系统，从而从根本上威胁美国的科技霸主地位。\n\n目前，Nvidia拒绝就此事置评，美国商务部及DeepSeek均未回应媒体询问。中国驻美大使馆则发表声明，批评美方将技术贸易问题政治化，并反对滥用出口管制工具。\n\n这一事件与Anthropic同日发布的声明遥相呼应——Anthropic指控DeepSeek等三家中国AI公司通过非法蒸馏手段窃取其Claude模型的能力。双重指控的叠加，使美中AI竞争的博弈烈度骤然升级，也让国会山上原本就分歧明显的芯片出口政策讨论更加复杂。","url":"https://www.reuters.com/world/china/chinas-deepseek-trained-ai-model-nvidias-best-chip-despite-us-ban-official-says-2026-02-24/","best_url":"https://www.reuters.com/world/china/chinas-deepseek-trained-ai-model-nvidias-best-chip-despite-us-ban-official-says-2026-02-24/","categories":["policy"],"tags":["DeepSeek","Nvidia","出口管制","中国AI","芯片禁令"],"context":"","heat":5},{"title":"Anthropic指控DeepSeek等三家中国AI公司大规模蒸馏Claude模型","summary":"Anthropic披露DeepSeek、MiniMax、Moonshot通过2.4万个虚假账户与Claude进行超1600万次交互，非法蒸馏其AI能力。","full_content":"Anthropic周一公开了一项重磅指控：DeepSeek、MiniMax和Moonshot三家中国AI公司，通过创建约2.4万个虚假账户，与Claude进行了超过1600万次人工交互，以蒸馏的方式非法汲取Claude的核心能力，这严重违反了Anthropic的服务条款及地区访问限制。\n\n所谓蒸馏，是一种让小模型向大模型学习的合法训练技术，但Anthropic强调，当其被用于非授权目的时，便成为一种能力窃取行为——让竞争者以极低的成本和时间快速获取本需数年研发才能积累的先进能力。\n\n根据Anthropic的披露，DeepSeek尤为激进，针对Claude的推理能力进行了超过15万次定向交互，甚至利用Claude生成涉及政治敏感议题的审查友好替代答案。OpenAI此前也向众议院对华特别委员会发函，同样指控DeepSeek搭便车复制美国前沿AI能力。\n\nAnthropic表示，非法蒸馏的模型不太可能携带原模型的安全护栏，这意味着外国AI实验室可以将未受约束的强大AI能力直接注入军事、情报和监控系统。在Anthropic发出这一警告的同时，特朗普政府官员也向路透社披露，DeepSeek的最新模型疑似使用被禁止出口的Nvidia Blackwell芯片训练。两起事件形成强烈共振，进一步加剧了美中AI竞争的紧张态势。","url":"https://www.theverge.com/ai-artificial-intelligence/883243/anthropic-claude-deepseek-china-ai-distillation","best_url":"https://www.theverge.com/ai-artificial-intelligence/883243/anthropic-claude-deepseek-china-ai-distillation","categories":["policy"],"tags":["Anthropic","DeepSeek","MiniMax","Moonshot","模型蒸馏","中国AI"],"context":"","heat":5},{"title":"IBM股价暴跌13%！Anthropic宣称Claude Code可自动化COBOL现代化","summary":"Anthropic发文称Claude Code可大幅降低COBOL遗留代码现代化成本，引发市场担忧IBM大型机业务前景，IBM股价单日暴跌13%。","full_content":"IBM周一成为AI浪潮下最新的受害者：公司股价单日暴跌13.2%，收于每股223.35美元，市值蒸发数百亿美元。导火索是Anthropic当天发布的一篇博客文章，其中声称旗下编程助手Claude Code已能够自动化完成COBOL遗留代码现代化工作中最复杂的部分。\n\nCOBOL（通用商业导向语言）诞生于1950年代末，至今仍是银行、政府、航空公司等关键基础设施的核心——据Anthropic统计，美国约95%的ATM交易仍在运行COBOL代码。然而随着掌握COBOL的工程师日渐老去，这一领域的人才缺口越来越大，迁移改造既昂贵又风险极高。\n\nAnthropic表示，Claude Code能够在数小时内跨越数万行代码、梳理依赖关系、生成文档并识别迁移风险。这直接威胁到IBM以Watson Code Assistant为核心的大型机现代化业务，以及大量依赖COBOL迁移项目的咨询服务收入。\n\n不过，The Register指出，IBM早在2023年便推出了类似的AI辅助COBOL转换产品，Anthropic此举并非技术革命，更多是市场情绪在AI恐慌周期中的集中释放。投资者对AI替代传统IT的担忧已让埃森哲、Cognizant等咨询公司股价持续承压，IBM的暴跌是这轮SaaS末日恐慌的又一个缩影。","url":"https://www.cnbc.com/2026/02/23/ibm-is-the-latest-ai-casualty-shares-are-tanking-on-anthropic-cobol-threat.html","best_url":"https://www.theregister.com/2026/02/23/ibm_share_dive_anthropic_cobol/","categories":["product"],"tags":["IBM","Anthropic","Claude Code","COBOL","企业软件"],"context":"","heat":5},{"title":"OpenAI Frontier进军企业市场，千亿美元SaaS末日恐慌横扫科技股","summary":"OpenAI推出企业级AI平台Frontier，与麦肯锡等顶级咨询公司合作，引发市场对传统SaaS商业模式终结的恐慌，科技股集体重挫。","full_content":"2026年2月，企业软件市场正在经历自2022年加息潮以来最剧烈的震荡。一场被市场戏称为SaaSpocalypse（SaaS末日）的抛售潮，正在抹去近万亿美元的科技股市值。导火索是OpenAI在今年2月初发布的企业级AI平台——OpenAI Frontier。\n\nFrontier并非一个简单的AI助手，而是一个全栈式自主智能体编排层，能够跨越多个企业软件界面、管理数据库、执行复杂的多步骤业务逻辑——无需人工干预。尤其是其核心产品Operator，定位为能够独立完成后台业务流程的AI同事，让市场感到：OpenAI不再满足于做软件中的工具，它要成为取代软件本身的平台。\n\n2月23日，OpenAI宣布Frontier Alliances计划，与麦肯锡、波士顿咨询（BCG）、埃森哲等全球顶级咨询公司深度合作，打造直达企业客户的渠道，绕过传统SaaS中间层。这一举动被市场解读为对传统按席位订阅定价模式的正面挑战。\n\n分析人士指出，这轮恐慌折射出企业软件行业深层的结构性焦虑：当AI能够自主完成工作流程，原本依赖人用软件逻辑构建的SaaS商业模式将面临根本性重构。Salesforce、ServiceNow、Workday等传统软件巨头股价均大幅回调，而OpenAI、Anthropic等AI原生企业则被视为新秩序的受益者。","url":"https://markets.financialcontent.com/stocks/article/marketminute-2026-2-23-the-saaspocalypse-of-2026-why-openais-enterprise-push-is-sending-software-stocks-into-a-tailspin","best_url":"https://markets.financialcontent.com/stocks/article/marketminute-2026-2-23-the-saaspocalypse-of-2026-why-openais-enterprise-push-is-sending-software-stocks-into-a-tailspin","categories":["product"],"tags":["OpenAI","SaaS","企业AI","Agent","麦肯锡"],"context":"","heat":4},{"title":"Gemini 3.1 Pro深度评测：ARC-AGI-2得分77.1%，推理能力翻倍","summary":"Google DeepMind发布Gemini 3.1 Pro，ARC-AGI-2基准测试得分77.1%，是前代两倍以上，100万token上下文窗口保持领先。","full_content":"Google DeepMind于2月19日正式发布Gemini 3.1 Pro，距上一代Gemini 3 Pro仅3个月，但技术飞跃令人印象深刻。Analytics Vidhya团队对其进行了全面的实测评估。\n\n最引人注目的是推理能力的跨越式提升：在衡量真实逻辑推理能力的ARC-AGI-2基准测试中，Gemini 3.1 Pro取得77.1%的得分，是Gemini 3 Pro的两倍有余。在顶级科学知识基准GPQA Diamond中，该模型同样以94.3%的高分领先竞争对手。\n\n在上下文窗口方面，Gemini 3.1 Pro维持了行业领先的100万token上下文容量，相当于可一次性处理超过1500页文本或完整代码库。对于需要分析大型代码仓库或超长文档的开发者来说，这一优势依然显著。\n\n针对智能体应用场景，Gemini 3.1 Pro专门提供了优化API端点，专为高精度工具调用和bash脚本执行而设计，显著提升了自主工作流中的可靠性。实测中，该模型在多步骤逻辑推理、代码生成与重构、以及超长文本综合分析三项任务上均表现优异。\n\n值得关注的是，Gemini 3.1 Pro的定价与前代持平，Google将此次升级定义为原有Pro订阅用户的免费升级。在竞争日趋激烈的大模型市场，Google此举也向OpenAI和Anthropic施加了新的压力。","url":"https://www.analyticsvidhya.com/blog/2026/02/gemini-3-1-pro-a-hands-on-test-of-googles-newest-ai/","best_url":"https://www.analyticsvidhya.com/blog/2026/02/gemini-3-1-pro-a-hands-on-test-of-googles-newest-ai/","categories":["model"],"tags":["Google","Gemini","ARC-AGI","推理模型","长上下文"],"context":"","heat":4},{"title":"MIT研究：30款主流AI智能体失控，普遍缺乏安全披露和停止机制","summary":"MIT最新大规模调查发现，30款主流AI智能体系统存在严重安全透明度缺失，部分系统甚至没有文档化的停止选项。","full_content":"麻省理工学院（MIT）联合多家机构的研究人员，近期发布了一项覆盖30款主流AI智能体（AI Agent）系统的大规模安全调查报告，结论令人警觉：当前AI智能体领域呈现出严重的高速扩张、低度透明态势，堪称安全隐患重重。\n\n报告最核心的发现是：开发者的信息披露严重不足，使得外界几乎无法全面评估这些系统可能产生的风险。研究人员指出，在智能体系统的生态性和安全相关特征披露方面，发现了持续性的重大缺失。\n\n具体而言，阿里巴巴的MobileAgent、HubSpot的Breeze、IBM的watsonx，以及德国自动化软件公司n8n所创建的自动化工具，均缺乏已记录的停止选项——即在自主执行过程中，外部用户没有经过文档说明的方式来中断任务。这在高风险场景中极为危险。\n\n报告的发布背景颇为微妙——OpenAI日前宣布收购Peter Steinberg，此人正是开源智能体框架OpenClaw的创始人，而OpenClaw此前已因严重安全漏洞引发广泛关注。研究人员呼吁AI开发者切实承担责任，建立标准化的智能体行为披露规范，包括：向网站robots.txt标识自身为自动化程序、生成内容水印，以及提供可靠的任务中止机制。随着AI智能体快速走向主流，这份报告为整个行业敲响了重要的安全警钟。","url":"https://www.zdnet.com/article/ai-agents-are-fast-loose-and-out-of-control-mit-study-find/","best_url":"https://www.zdnet.com/article/ai-agents-are-fast-loose-and-out-of-control-mit-study-find/","categories":["research"],"tags":["MIT","AI安全","Agent","透明度","监管"],"context":"","heat":4},{"title":"Anthropic完成300亿美元G轮融资，估值3800亿刷新AI历史记录","summary":"Anthropic完成史上最大规模AI融资，G轮筹得300亿美元，估值达3800亿美元，财富500强中8家头部企业已采用Claude。","full_content":"Anthropic本月宣布完成300亿美元G轮融资，投后估值升至3800亿美元，较5个月前的1830亿美元翻了一倍有余。这使Anthropic在市值上超越波音和Netflix，与可口可乐旗鼓相当，成为有史以来估值最高的私营AI公司之一。\n\n参与此轮融资的包括红杉资本（Sequoia）、Founders Fund、Iconiq、Insight Partners等知名风投，以及贝莱德（BlackRock）旗下附属基金——尽管贝莱德高管同时坐在OpenAI的董事会席位上，令这笔双押投资格外引人注目。\n\n从财务数据来看，Anthropic的增长速度令人咋舌：年化营收已达140亿美元，连续三年实现10倍增长，主要来源是高价值企业客户。全球财富10强中已有8家选用Claude模型，仅AI辅助编程工具一项便创造了超过25亿美元年经常性收入。\n\n与之对比，OpenAI估值约5000亿美元，年化营收约200亿美元，但面临更高的预期亏损，且收入结构偏向消费端。两家公司的估值倍数对比（Anthropic约27倍营收 vs OpenAI约42倍）显示，市场对企业级、无广告、安全优先的Anthropic模式给予了溢价认可。这笔创纪录的融资标志着企业级AI市场进入全面爆发阶段，也进一步确立了Anthropic作为OpenAI最强力竞争者的地位。","url":"https://www.crowdfundinsider.com/2026/02/263389-anthropics-380-billion-valuation-marks-a-turning-point-for-enterprise-ai/","best_url":"https://www.crowdfundinsider.com/2026/02/263389-anthropics-380-billion-valuation-marks-a-turning-point-for-enterprise-ai/","categories":["funding"],"tags":["Anthropic","G轮","估值","企业AI","Claude"],"context":"","heat":4},{"title":"AI投资者忠诚度消亡：OpenAI的VC们同时重仓押注Anthropic","summary":"随着OpenAI和Anthropic同期完成巨额融资，至少12家OpenAI直接投资人也同时参与Anthropic的300亿G轮，VC忠诚时代终结。","full_content":"TechCrunch最新报道揭示了AI投资领域的一个耐人寻味现象：在OpenAI即将完成1000亿美元新一轮融资、Anthropic刚刚关闭300亿G轮的当下，至少12家OpenAI的直接股东同时出现在Anthropic的投资人名单中，包括红杉资本、Founders Fund、Iconiq和Insight Partners。\n\n传统上，风险投资（VC）讲究阵营忠诚——你投了一家初创公司，就不能同时重仓其最直接的竞争对手，因为这会产生利益冲突，稀释你为被投公司提供的战略支持价值。但在AI超级竞争时代，这一原则正在被金融回报的逻辑快速瓦解。\n\n其中最值得关注的案例是贝莱德：贝莱德高管Adebayo Ogunlesi身为OpenAI董事会成员，而贝莱德旗下附属基金却同时参与了Anthropic的融资。在资管巨头看来，无论OpenAI还是Anthropic，都是AI赛道的资产配置，董事关联并不妨碍基金投资的商业逻辑。\n\n微软和英伟达也在两面下注之列。这并不令人意外——两家公司都深知，在技术路线尚未确定的AI竞争中，独押一注风险极高。\n\nTechCrunch指出，当AI基础模型之争演变为少数巨头之间的规模战，资本市场对赢家通吃的笃定正在催生宁可错投、不可漏投的心态。AI的投资逻辑，正在从早期VC的选马下注向金融市场的指数配置悄然演变。","url":"https://techcrunch.com/2026/02/23/with-ai-investor-loyalty-is-almost-dead-at-least-a-dozen-openai-vcs-now-also-back-anthropic/","best_url":"https://techcrunch.com/2026/02/23/with-ai-investor-loyalty-is-almost-dead-at-least-a-dozen-openai-vcs-now-also-back-anthropic/","categories":["finance"],"tags":["OpenAI","Anthropic","红杉资本","风险投资","AI投资"],"context":"","heat":3},{"title":"ChatGPT正式引入广告，OpenAI商业模式迎历史性转变","summary":"OpenAI开始在ChatGPT中测试广告投放，采用对话内容感知的情境式广告，广告定价约为Meta的3倍，引发用户隐私争议。","full_content":"OpenAI近期宣布开始在ChatGPT中测试广告功能，这是公司成立以来首次在其旗舰消费产品中引入广告，标志着对话式AI的商业化模式走向了历史性的新阶段。\n\n与传统数字广告不同，ChatGPT的广告系统采用情境感知模式：系统会理解用户当前对话的主题，推送与讨论内容相关的广告，而非依赖跨网站追踪或设备指纹识别构建用户画像。这一设计旨在降低对用户隐私的侵扰，同时保持广告的相关性。\n\n在定价上，OpenAI的广告报价约为每千次展示60美元，是Meta同类产品的约三倍。这一溢价反映了ChatGPT用户群体的高度活跃性和问题驱动型使用习惯——用户在向ChatGPT提问时往往处于明确的决策或探索状态，广告转化潜力高于泛娱乐平台。\n\n对于OpenAI来说，引入广告有其现实逻辑：维持8亿月活用户运转的算力成本极为高昂，仅靠20美元每月的订阅难以覆盖。广告收入若能规模化，将大幅改善OpenAI的收支结构。\n\n然而，此举也引发了用户群体的广泛担忧：一旦商业广告利益介入，ChatGPT还能保持中立信息源的定位吗？批评者警告，广告逻辑可能悄然影响AI的回答倾向，令其从有用的助手演变为商业化的推荐引擎。这场关于AI商业化边界的讨论，才刚刚开始。","url":"https://windowsnews.ai/article/openais-chatgpt-ads-funding-ai-access-vs-user-trust-concerns.402965","best_url":"https://windowsnews.ai/article/openais-chatgpt-ads-funding-ai-access-vs-user-trust-concerns.402965","categories":["product"],"tags":["OpenAI","ChatGPT","广告","商业化","用户隐私"],"context":"","heat":3},{"title":"OpenAI x Jony Ive AI硬件设备延迟，预计2027年才能交付用户","summary":"法庭文件显示，OpenAI与苹果前设计总监Jony Ive合作开发的AI硬件设备，预计最早2027年底才能向用户交付，比此前预期推迟。","full_content":"根据最新曝光的法庭文件，OpenAI与传奇设计师Jony Ive合作的AI硬件项目，不会在2026年底前向用户发货，最早要到2027年初才能实现首批交付。这一时间线比此前市场普遍预期的2026年下半年明显推后。\n\nOpenAI CEO Sam Altman与Ive的合作由来已久——OpenAI以65亿美元收购了Ive创立的硬件初创公司io，由此正式启动这一项目，并获得了Laurene Powell Jobs旗下Emerson Collective的重要支持。\n\n两人的产品愿景颇具野心：他们将这款设备定位为第三件设备，是继智能手机和笔记本电脑之后的全新人机交互终端。Altman将当前的数字体验比作走在时代广场——嘈杂、碎片、令人疲惫，而他们的目标是创造一种坐在湖边最美小屋里的平静感——技术存在但不强迫注意力。\n\n设备的具体形态仍高度保密。已知的设计方向是：比笔记本电脑更便携，比智能手机更少依赖屏幕，Ive甚至曾在内部讨论中表示，希望做出让人想咬一口的质感设计——这是他对极致工艺的一贯追求。\n\n对于一家正在冲击万亿美元IPO的公司而言，一款划时代的AI硬件产品无疑是重要的战略资产。但延期消息也提醒外界：即便是世界上最被看好的设计师与最炙手可热的AI公司的合作，也必须面对硬件研发周期漫长的现实。","url":"https://news.quantosei.com/2026/02/23/jony-ive-openai-device-revealed/","best_url":"https://news.quantosei.com/2026/02/23/jony-ive-openai-device-revealed/","categories":["product"],"tags":["OpenAI","Jony Ive","AI硬件","设计","Sam Altman"],"context":"","heat":3},{"title":"智谱GLM-5公开技术细节：7440亿参数，瞄准Agentic Engineering范式","summary":"智谱AI发布GLM-5技术报告，模型参数达7440亿，采用DSA稀疏注意力机制，全面支持七大国产芯片平台，盲测中表现媲美Claude Sonnet。","full_content":"2月22日，智谱AI正式发布GLM-5的详尽技术报告，全面解读这款全球大模型第一股候选公司旗舰模型的技术路径。\n\nGLM-5的参数规模达到惊人的7440亿，训练数据量达28.5万亿Token。在架构上，该模型引入了DSA稀疏注意力机制（DeepSeek Sparse Attention），处理长文本时不再对每个词投入均等注意力，而是智能聚焦关键信息，大幅降低计算成本的同时保持了超长上下文理解能力。\n\n从技术导向来看，GLM-5的设计理念是从氛围编程跨越至智能体工程（Agentic Engineering）——不再只是辅助人类的工具，而是能够自主规划、执行、迭代的虚拟工程师。为此，智谱构建了名为slime的异步强化学习基础设施，将生成任务轨迹和模型参数更新解耦并行化，显著提升训练效率。\n\n在国产化生态方面，GLM-5从发布之初便全面兼容七大主流国产芯片平台：华为昇腾、摩尔线程、海光、寒武纪、昆仑芯、沐曦与燧原，被视为国产AI模型与国产算力协同发展的标志性成果。\n\n在OpenRouter平台的匿名盲测中，GLM-5以代号Pony Alpha参测，引发社区轰动：25%的用户误认为是Anthropic的Claude Sonnet，20%猜是Grok新版本。这一结果不仅给智谱团队极大鼓舞，也有力回应了外界对中国本土大模型水准的质疑。","url":"https://finance.sina.com.cn/roll/2026-02-23/doc-inhnusxh2811093.shtml","best_url":"https://finance.sina.com.cn/roll/2026-02-23/doc-inhnusxh2811093.shtml","categories":["model"],"tags":["智谱AI","GLM-5","国产大模型","国产芯片","Agent","open-source"],"context":"智谱AI（Zhipu AI）成立于2019年，由清华大学知识工程实验室孵化，是国内头部大模型创业公司之一。GLM（General Language Model）是其核心模型系列，采用与GPT不同的自回归填空预训练范式，由清华KEG实验室提出。GLM-5是该系列第五代旗舰，7440亿参数，引入DSA稀疏注意力机制（借鉴DeepSeek架构），处理长文本时智能聚焦关键信息，大幅降低计算成本。最具战略价值的是其国产化生态：从发布之初便全面兼容华为昇腾、摩尔线程、海光、寒武纪、昆仑芯等七大国产芯片，是\"去英伟达化\"路线上走得最彻底的国产大模型。","heat":3},{"title":"Giant获800万美元种子轮，AI互动故事平台让儿童从内容消费者变创作者","summary":"AI儿童故事初创公司Giant完成800万美元种子融资，平台让孩子成为故事主角并与有记忆的AI角色互动，已积累逾百万分钟对话。","full_content":"AI儿童故事初创公司Giant宣布完成800万美元种子轮融资，由Matrix、Decasonic和Griffin Gaming Partners领投，另有Perceptive Ventures、Flex Capital、Arbitrum Gaming Ventures、Unpopular Ventures和LightShed Ventures跟投。\n\nGiant的产品理念植根于对当前内容生态的深刻反思：互联网的注意力经济训练了一代被动消费者，而Giant希望让孩子们成为创造者。在Giant平台上，孩子可以成为故事的主角，与具有长期记忆的AI角色展开互动对话，并共同构建不断演化的故事世界。每个孩子还能以动画形象出现在个性化的剧集中。\n\n这种深度互动创造了令人惊喜的参与度数据：自2025年5月上线以来，平台已积累超过100万分钟的用户对话，并生成了超过20万集个性化剧集，显示出强劲的用户粘性。\n\nCEO John Kobs表示：互联网是为注意力优化的，而孩子需要的是想象力。讲故事塑造孩子的成长，我们把孩子从消费者变成创造者，打造我们自己孩子值得拥有的产品。\n\nMatrix的普通合伙人Dana Stalder表示，自己从2013年便开始投资Kobs，Giant是他长期愿景最大胆的表达。\n\n在AI教育应用赛道竞争日趋激烈的背景下，Giant的沉浸式叙事切入角度颇具差异化。新一轮融资将用于扩大团队规模、丰富内容库以及开发更多个性化互动体验。","url":"https://techstartups.com/2026/02/23/giant-raises-8-million-to-build-storytelling-platform-for-kids/","best_url":"https://techstartups.com/2026/02/23/giant-raises-8-million-to-build-storytelling-platform-for-kids/","categories":["funding","product"],"tags":["Giant","儿童教育","AI故事","种子轮","教育科技"],"context":"Giant 是一家2025年创立的AI儿童内容初创公司，核心产品是沉浸式AI互动故事平台。与Netflix、YouTube等内容平台让孩子被动观看不同，Giant让孩子成为故事主角，与拥有长期记忆的AI角色双向对话，共同构建持续演化的故事世界。这一模式属于生成式AI在儿童教育娱乐领域的新品类——沉浸叙事+AI陪伴，与Duolingo的游戏化学习、Khan Academy AI导师属于不同赛道，核心主张是\"用主动创造代替被动消费\"。","heat":2},{"title":"Virtuals Protocol推出Eastworld Labs，加速人形机器人从数字走向物理世界","summary":"Virtuals Protocol旗下Virtuals Robotics启动Eastworld Labs加速器，融合人形机器人、AI智能体与链上融资，构建首个人机混合社会。","full_content":"Virtuals Protocol旗下具身AI部门Virtuals Robotics今日宣布推出Eastworld Labs——一个将人形机器人、AI智能体与链上融资深度融合的新型加速器，目标是加速人形机器人在现实世界中的规模化商业部署，并朝着人机混合社会的愿景迈进一大步。\n\nVirtuals Protocol目前已运营全球规模最大的AI智能体经济平台，管理超过18000个AI代理。Eastworld Labs将把这套数字智能体生态延伸至物理世界，通过人形机器人与低延迟远程操作技术，在G7经济体中捕获劳动力套利机会——即利用AI机器人在高工资地区执行可远程操控的物理任务，大幅降低运营成本。\n\n与传统创业孵化器不同，Eastworld Labs为创始人提供一套完整的全栈环境：人形机器人舰队直接使用权、工业级训练数据集、自主AI智能体协作，以及基于链上机制的项目融资通道。这一设计旨在打破当前人形机器人商业化的两大核心瓶颈——数据匮乏与资金壁垒。\n\nVirtuals Protocol联合创始人Jansen Teng表示：AI驱动的人形机器人当前被数据和资本两个根本性瓶颈束缚，因此无法产生足够的经济价值。Eastworld Labs就是来解决这个问题的。\n\n随着具身智能赛道在2026年持续升温，Eastworld Labs的推出被视为Web3与物理AI融合趋势的重要信号。","url":"https://hipther.com/artificial-intelligence/2026/02/23/107402/virtuals-protocol-launches-eastworld-labs-to-accelerate-real-world-deployment-of-humanoid-robots/","best_url":"https://hipther.com/artificial-intelligence/2026/02/23/107402/virtuals-protocol-launches-eastworld-labs-to-accelerate-real-world-deployment-of-humanoid-robots/","categories":["product"],"tags":["Virtuals Protocol","人形机器人","具身智能","Web3","Agent"],"context":"Virtuals Protocol 是2024年在Web3圈兴起的AI智能体经济平台，总部新加坡。其核心理念是将AI智能体\"代币化\"——每个AI角色都可作为独立经济实体存在，拥有链上身份、收益分配和治理权，目前管理超1.8万个AI代理。Virtuals Robotics是其具身智能部门，试图将这套体系延伸到物理机器人：用链上融资解决人形机器人商业化的资本壁垒，用远程操控AI机器人在欧美高工资地区执行物理任务实现「劳动力套利」。这是Web3与具身AI融合的前沿探索，模式存在技术与监管的双重不确定性。","heat":2}];</script>
+<script>window.ARTICLES_DATA = [{"title":"赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈","summary":"美国防长赫格塞斯威胁取消Anthropic 2亿美元合同并将其列入黑名单，因其拒绝放宽Claude用于AI武器和监控的安全限制。","full_content":"美国国防部长彼得·赫格塞斯周二与Anthropic CEO达里奥·阿莫代伊举行正面交锋，威胁将Anthropic列入军方黑名单，并取消该公司价值2亿美元的国防部合同。核心矛盾在于Anthropic拒绝放宽其AI安全护栏。\n\n赫格塞斯要求允许美军将Claude用于所有\"合法\"目的，包括AI制导武器和大规模监控项目。但阿莫代伊坚持表示，利用AI进行国内大规模监控及AI控制武器是公司不会逾越的伦理红线，并直接在会面中重申了这一立场。\n\n据知情人士透露，若Anthropic拒绝妥协，赫格塞斯计划援引《国防生产法》，强制要求Anthropic向联邦政府开放其AI工具的使用权，并剥夺其未来与军方合作的资格。目前Claude是美国军方用于高度机密任务的唯一AI模型，拥有经国防部特批的使用权限。\n\nAxios报道称，赫格塞斯给Anthropic设定了本周五为最后期限。五角大楼官员同时表示，无论谈判结果如何，都将继续使用Anthropic的工具——这一表态透露出强烈的依赖关系，也给谈判增添了更多复杂性。\n\n这场争端将AI安全伦理与国家安全需求之间的张力推到了台前：当私营AI公司的价值观与政府的强制性需求发生冲突时，企业的底线在哪里？这正成为AI治理领域的核心议题。","url":"https://www.npr.org/2026/02/24/nx-s1-5725327/pentagon-anthropic-hegseth-safety","best_url":"https://www.axios.com/2026/02/24/anthropic-pentagon-claude-hegseth-dario","categories":["policy"],"tags":["Anthropic","五角大楼","AI安全","赫格塞斯","Claude"],"context":"","heat":5,"audio_url":"audio/2026-02-24-0.mp3"},{"title":"英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸","summary":"英伟达将于美股收盘后发布Q4财报，今年以来唯一正收益的万亿市值科技股，市场期待验证AI基础设施投资是否仍然强劲。","full_content":"英伟达将于2026年2月25日美股收盘后发布2026财年第四季度财报，这是近期AI科技股最受关注的事件之一。\n\n今年以来科技股整体承压，纳斯达克下跌逾2.5%，微软、亚马逊、特斯拉均录得两位数跌幅。英伟达成为八大万亿美元市值科技公司中唯一实现正收益的，股价累计上涨约2.7%，彰显市场对AI基础设施核心受益者的高度信心。\n\nWedbush证券分析师在财报前预览报告中指出，各大云厂商2026年资本支出预期已超出市场此前预期，服务器与AI基础设施占据支出大头，AI投资增速预计将略超整体资本支出趋势。FactSet追踪的分析师中逾90%给出英伟达买入评级，Wedbush目标价230美元，较当前价位高出约20%。\n\n投资者最关注两大问题：一是英伟达数据中心业务营收能否再创新高；二是针对来自DeepSeek等中国公司的低成本高效模型竞争，英伟达管理层将如何回应关于AI芯片需求持续性的质疑。\n\n此次财报的结果将直接决定投资者对AI基础设施大规模投入的信心走向，被视为当前AI市场情绪的最重要晴雨表。","url":"https://www.cnbc.com/2026/02/24/nvidia-earnings-collide-with-wall-street-skepticism-over-ai-spending.html","best_url":"https://www.cnbc.com/2026/02/24/nvidia-earnings-collide-with-wall-street-skepticism-over-ai-spending.html","categories":["finance"],"tags":["英伟达","财报","AI芯片","华尔街","数据中心"],"context":"","heat":5,"audio_url":"audio/2026-02-24-1.mp3"},{"title":"Anthropic发布10款企业插件：从投行到HR，连续冲击传统软件市场","summary":"Anthropic发布10款企业AI插件，涵盖投资银行、财富管理、HR等领域，与LSEG、FactSet、Slack、DocuSign合作，合作伙伴股价当日大涨4-6%。","full_content":"AI实验室Anthropic周二发布10款全新企业级插件，涵盖投资银行（交易审查）、财富管理（投资组合分析）、人力资源（新员工培训材料）、私募股权、工程设计等多个关键业务领域，与LSEG、FactSet、Salesforce旗下Slack、DocuSign等合作伙伴共同开发。\n\n此次发布被市场视为Anthropic抢占企业级AI基础设施地位的重要举措。就在数周前，Anthropic发布COBOL遗留系统现代化工具（导致IBM股价暴跌），随后又推出法律插件，引发传统软件股大幅下挫。此番新插件消息发布后，合作伙伴股价快速拉升：Salesforce涨4%、FactSet涨5%、DocuSign涨近6%，显示市场将其解读为赋能而非替代。\n\n汤森路透和RBC财富管理被点名为使用Anthropic智能体的客户。Anthropic还表示，Claude将连接谷歌日历和Gmail等常用商业工具。\n\n这一轮插件攻势清晰呈现了Anthropic的战略意图：不再满足于\"AI对话工具\"定位，而是要成为企业核心业务流程的基础设施供应商，正面挑战Salesforce、ServiceNow等传统企业软件市场。","url":"https://www.reuters.com/business/finance/anthropic-touts-new-ai-tools-weeks-after-legal-plug-in-spurred-market-rout-2026-02-24/","best_url":"https://www.reuters.com/business/finance/anthropic-touts-new-ai-tools-weeks-after-legal-plug-in-spurred-market-rout-2026-02-24/","categories":["product"],"tags":["Anthropic","Claude","企业插件","SaaS","投资银行"],"context":"","heat":4,"audio_url":"audio/2026-02-24-7.mp3"},{"title":"智谱AI发布GLM-5：744B参数MoE模型，国产昇腾芯片训练，MIT开源","summary":"智谱AI发布GLM-5大模型，744B参数MoE架构（激活44B），200K上下文，SWE-bench Verified达77.8%，全程在华为昇腾芯片训练，MIT协议开源。","full_content":"中国AI公司智谱AI正式发布新一代基础大模型GLM-5，这是一款参数规模高达744B的混合专家（MoE）架构模型，每次推理激活参数约44B，在保持高性能的同时大幅降低推理成本。\n\nGLM-5多项技术指标亮眼：支持200K超长上下文窗口，适合复杂长文档处理和多轮对话场景；在代码能力权威评测SWE-bench Verified上取得77.8%的成绩，与Claude 3.7 Sonnet、GPT-4o等国际顶尖模型处于同一量级，表明中国本土大模型在代码智能体能力上已跻身全球前列；并以MIT开源协议发布，允许商业使用和二次开发。\n\n尤为值得关注的是，GLM-5完全在华为昇腾（Ascend）芯片上训练完成。这一事实具有重要战略意义：在英伟达GPU出口管制持续收紧的背景下，GLM-5证明了国产AI芯片已具备支撑千亿级别超大规模模型训练的能力，是中国AI生态「去英伟达化」的重要里程碑。\n\n智谱AI凭借GLM系列在代码、推理、多模态等方向持续积累，GLM-5的发布进一步巩固了其在中国大模型赛道的头部地位，也向外界展示了算力自主可控背景下中国AI研究的真实水位。","url":"https://llm-stats.com/ai-news","best_url":"https://llm-stats.com/ai-news","categories":["model"],"tags":["智谱AI","GLM-5","MoE架构","华为昇腾","开源大模型"],"context":"GLM-5的技术亮点之一是**全程在华为昇腾（Ascend）芯片上训练完成**，而非依赖英伟达GPU。这一事实具有重要战略意义：在美国对华AI芯片出口管制持续收紧的背景下，GLM-5证明了国产AI芯片已具备支撑千亿级超大规模模型训练的能力，是中国AI生态「去英伟达化」进程中的重要里程碑。","heat":4,"audio_url":"audio/2026-02-24-8.mp3"},{"title":"Wayve估值升至86亿美元：Uber、英伟达、奔驰等联合押注泛化式自动驾驶AI","summary":"英国自动驾驶AI初创公司Wayve完成15亿美元融资，估值达86亿美元，投资方包括Uber、微软、英伟达、奔驰、日产等，计划今年在伦敦启动机器人出租车商业试运营。","full_content":"英国自动驾驶AI初创公司Wayve宣布新一轮融资后估值升至86亿美元，本轮融资总额约15亿美元。投资方阵容汇聚产业链上下游巨头：科技侧有Uber、微软和英伟达，汽车制造商侧有梅赛德斯-奔驰、日产和Stellantis（Jeep母公司）。\n\nWayve的核心技术路线是「泛化式自动驾驶AI」——其构建的AI模型能够跨越不同硬件平台和道路环境进行泛化，而非为特定车型或特定城市单独定制。CEO Alex Kendall认为，这一架构决定了Wayve拥有最大的可寻址市场——理论上，任何汽车制造商都可以接入其技术，无需从头开发。\n\n商业化方面，Wayve与Uber计划今年在伦敦启动机器人出租车商业试运营，这将是Wayve技术真正规模化落地的关键验证节点。\n\n本轮融资的战略意义在于，Wayve不仅获得了充裕的资金，更锁定了多家汽车制造商和科技平台作为战略合作伙伴，大幅降低了未来商业落地的摩擦成本。在Waymo、特斯拉主导自动驾驶市场的格局下，Wayve的「泛化+赋能」路线正在赢得越来越多产业资本的认可。","url":"https://startupnews.fyi/2026/02/25/ai-self-driving-startup-wayve-worth-8-6-billion-after-fresh-funding/","best_url":"https://techcrunch.com/2026/02/24/self-driving-tech-startup-wayve-raises-1-2b-from-nvidia-uber-and-three-automakers/","categories":["funding"],"tags":["Wayve","自动驾驶","机器人出租车","英伟达","Uber"],"context":"Wayve是一家总部位于伦敦的自动驾驶AI初创公司，成立于2017年，由剑桥大学机器人学博士Alex Kendall创立。\n\n与Waymo（为每个城市单独定制地图和系统）不同，Wayve的核心技术路线是「泛化式自动驾驶AI」：训练一个能够跨越不同车型、不同城市、不同硬件平台泛化的通用模型，理论上任何汽车制造商都可以接入。这一路线更接近特斯拉的纯视觉端到端方法，但Wayve专注于B2B赋能而非自建车队。投资方横跨科技（Uber、微软、英伟达）和汽车制造商（奔驰、日产、Stellantis），显示其技术路线获得了产业链上下游的广泛认可。","heat":4,"audio_url":"audio/2026-02-24-10.mp3"},{"title":"Meta与AMD签署6GW算力合作大单，拿到10%股权认购权","summary":"Meta与AMD签多年期协议，计划部署6GW AMD GPU用于AI数据中心，同时获得1.6亿股AMD认股权证，AMD股价单日大涨7%。","full_content":"Meta周二宣布与AMD签署多年期巨额芯片合作协议，计划在AI数据中心累计部署高达6吉瓦（GW）的AMD GPU算力，同时引入AI优化CPU方案。AMD将于今年下半年开始交付搭载MI450 GPU的Helios机架服务器首批产品。\n\n协议中一个亮眼安排：Meta将获得一份基于业绩表现的认股权证，可获取AMD约1.6亿股（约占总股本10%），首批在Meta完成1GW GPU部署时开始归属，后续分批与采购里程碑及AMD股价指标挂钩。消息发布后AMD股价单日大涨7%。\n\n时间节点值得关注——就在一周前，Meta刚刚承诺大规模采购英伟达GPU。此番与AMD的合作表明，Meta在AI芯片供应链上采取双轨并行策略：既深度绑定英伟达以确保算力供应，也大力扶持AMD以防止单一供应商依赖，并借助竞争压低采购成本。\n\nAMD CEO苏姿丰将这笔交易定性为公司历史上\"最具变革性的协议之一\"，预计将帮助AMD在AI训练和推理芯片市场从英伟达手中争夺更大份额。AMD此前已与OpenAI签署了结构相似的协议，双巨头背书正在确立AMD作为AI芯片领域可信赖「第二选择」的市场地位。","url":"https://www.cnbc.com/2026/02/24/meta-to-use-6gw-of-amd-gpus-days-after-expanded-nvidia-ai-chip-deal.html","best_url":"https://www.cnbc.com/2026/02/24/meta-to-use-6gw-of-amd-gpus-days-after-expanded-nvidia-ai-chip-deal.html","categories":["finance"],"tags":["Meta","AMD","AI芯片","数据中心","苏姿丰"],"context":"","heat":4,"audio_url":"audio/2026-02-24-11.mp3"},{"title":"Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据","summary":"AI数据基础设施初创公司Nimble获4700万美元B轮融资，其AI智能体平台可搜索、验证网络数据并结构化输出，深度集成Databricks和Snowflake。","full_content":"AI智能体数据基础设施初创公司Nimble完成4700万美元B轮融资，由Norwest领投。这家总部位于纽约的公司构建了一套以AI智能体为核心的实时网络数据采集和结构化平台，专为企业级AI应用设计。\n\nNimble与传统网络爬虫工具的核心差异在于「结构化优先」理念：平台部署AI智能体搜索网络、核验来源真实性，并将结果整理成可像数据库一样查询的结构化表格，而非返回难以大规模利用的纯文本。这对企业级应用至关重要——幻觉问题、指令误解和不可靠数据来源一直是LLM和AI智能体在企业落地的主要障碍。\n\nNimble深度集成了Databricks和Snowflake等主流企业数据仓库，允许AI智能体以企业自有数据为上下文，动态定制搜索方式和返回格式。平台还可「记住」合规约束，例如用哪些数据源、以何种方式处理数据。\n\nCEO Uri Knorovich表示，典型使用场景包括竞争情报分析、定价研究、KYC流程、品牌监控和金融分析。本轮融资将用于扩大团队规模和加速产品研发，以满足企业将AI智能体与实时外部数据打通的强劲需求。","url":"https://techcrunch.com/2026/02/24/nimble-way-raises-47m-to-give-ai-agents-better-cleaner-data/","best_url":"https://techcrunch.com/2026/02/24/nimble-way-raises-47m-to-give-ai-agents-better-cleaner-data/","categories":["funding"],"tags":["Nimble","AI智能体","数据基础设施","B轮融资","Norwest"],"context":"Nimble是一家总部位于纽约的AI数据基础设施初创公司，专为AI智能体提供「干净、可信」的实时网络数据。\n\n与传统爬虫工具不同，Nimble的核心差异是「结构化优先」：平台部署AI智能体搜索并核验网络数据，将结果整理成可像数据库一样查询的结构化表格，而非返回难以利用的纯文本。平台深度集成Databricks和Snowflake，支持企业以自有数据为上下文动态定制搜索。典型场景包括竞争情报、KYC、品牌监控和金融分析。","heat":3,"audio_url":"audio/2026-02-24-2.mp3"},{"title":"OpenAI COO直言：AI尚未真正渗透企业业务流程","summary":"OpenAI COO莱特卡普在印度AI峰会坦言，强大的AI系统仍停留在个人使用层面，深度嵌入企业复杂流程仍面临巨大挑战，这正是推出Frontier平台的动因。","full_content":"OpenAI首席运营官布拉德·莱特卡普在印度AI影响力峰会间隙发表了一番颇为坦率的观点：\"我们尚未真正看到AI深度渗透企业业务流程。\"\n\n这一表态来自亲历OpenAI在2025年底年化收入突破200亿美元的高管，背景尤为耐人寻味。莱特卡普指出，当前AI的强大能力主要停留在个人使用层面——人人可用ChatGPT，但将AI真正嵌入企业复杂的组织架构、跨团队协同流程和多系统整合，依然是巨大挑战。\n\n这也是OpenAI本月推出OpenAI Frontier企业智能体管理平台的核心动因——该平台旨在帮助企业构建和管理AI智能体，打通个人应用与企业流程之间的壁垒。莱特卡普表示，需求持续旺盛，公司甚至常常面临\"管理需求过多\"的问题。\n\n尽管坊间\"SaaS已死\"、\"AI将接管企业一切\"的论调不绝于耳，莱特卡普的表态为这股热情泼了一盆冷水，但同时暗示了巨大的市场空间正待开拓。值得注意的是，OpenAI自身仍是Slack的重度用户，这进一步说明即使是AI头部公司，也尚未完全以AI工具替代传统企业软件。","url":"https://techcrunch.com/2026/02/24/openai-coo-says-we-have-not-yet-really-seen-ai-penetrate-enterprise-business-processes/","best_url":"https://techcrunch.com/2026/02/24/openai-coo-says-we-have-not-yet-really-seen-ai-penetrate-enterprise-business-processes/","categories":["event"],"tags":["OpenAI","企业AI","Frontier平台","莱特卡普","AI落地"],"context":"","heat":3,"audio_url":"audio/2026-02-24-3.mp3"},{"title":"Oura发布首款自研大模型，专门服务女性健康全周期","summary":"智能戒指厂商Oura推出专注女性健康的首款自研AI模型，整合生物特征数据，覆盖月经到绝经全周期，已通过内部临床医生审查。","full_content":"智能戒指厂商Oura周二宣布推出旗下首款自研大模型，专门聚焦女性健康领域，驱动其AI聊天助手Oura Advisor提供个性化洞察。该模型目前在Oura Labs（应用内实验性功能中心）以选择加入形式向用户开放。\n\n新模型覆盖女性完整的生殖健康周期，从青春期月经初潮到绝经期均可提供循证建议。Oura表示，模型建立在经公司内部执业医师和女性健康专家审查的医学标准与研究文献基础上，同时整合用户戒指采集的生物特征信号（心率、体温、睡眠）和长期健康趋势，以生成个性化指导。\n\n首席医疗官里基·布卢姆菲尔德表示，这是\"负责任部署AI服务健康领域\"的范例——女性健康议题过于复杂且长期被忽视，依赖通用AI系统无法满足真实需求。\n\n此举有着清晰的商业逻辑：Oura首席商务官去年曾透露，女性用户已成为增速最快的用户群体，而随着越来越多人转向AI寻求健康建议，医疗健康垂直大模型正迎来新的市场机遇。Oura此次开辟了一条差异化路径——用自研专用模型代替接入通用LLM，以临床可信度建立竞争壁垒。","url":"https://techcrunch.com/2026/02/24/oura-launches-a-proprietary-ai-model-focused-on-womens-health/","best_url":"https://techcrunch.com/2026/02/24/oura-launches-a-proprietary-ai-model-focused-on-womens-health/","categories":["model"],"tags":["Oura","女性健康","垂直大模型","医疗AI","智能穿戴"],"context":"Oura是一家芬兰智能戒指公司，通过指环形态的可穿戴设备持续采集心率、体温、睡眠等生物特征数据。公司成立于2013年，目前在美国健康可穿戴市场占据显著份额，近年已成为苹果Watch在健康追踪赛道的重要竞争者。\n\n此次推出女性健康垂直大模型，是Oura从「数据采集硬件」向「AI健康顾问」转型的关键一步。其差异化路径在于用自研专用模型替代接入通用LLM，以临床可信度（医师审查）建立竞争壁垒。女性用户已成为其增速最快的客群。","heat":3,"audio_url":"audio/2026-02-24-4.mp3"},{"title":"西班牙AI独角兽Multiverse开源HyperNova 60B：量子压缩技术让大模型「瘦身」一半","summary":"Multiverse Computing将HyperNova 60B 2602版免费发布至Hugging Face，以量子启发压缩技术将120B模型压至32GB，性能接近原模型且增强工具调用能力。","full_content":"西班牙AI创业公司Multiverse Computing周二在Hugging Face免费发布HyperNova 60B 2602版压缩模型，并宣布2026年将持续开源更多压缩模型以支持更广泛的应用场景。\n\nHyperNova 60B的技术核心是CompactifAI——一种量子计算启发的压缩技术。以OpenAI的gpt-oss-120b为基底，将模型体积压缩约50%至32GB，同时在性能和准确性上接近原模型，实现了大幅降低内存占用和推理延迟的目标。最新2602版本专门强化了工具调用和智能体编程能力，针对推理成本较高的智能体场景进行了专项优化。\n\nMultiverse声称，HyperNova 60B在多项基准测试上超越了Mistral Large 3。公司目前的战略定位是\"以更低计算成本，提供接近前沿的能力\"，企业客户包括Iberdrola、博世和加拿大银行。\n\n值得关注的是，彭博社近日报道称Multiverse正在筹备5亿欧元新一轮融资，显示其商业化进展受到资本市场高度认可。随着开源和压缩模型赛道升温，\"小模型大能力\"正成为企业AI降本的主流路径之一，Multiverse的模式为欧洲AI产业提供了一条有别于大算力军备竞赛的差异化打法。","url":"https://techcrunch.com/2026/02/24/spanish-soonicorn-multiverse-computing-releases-free-compressed-ai-model/","best_url":"https://techcrunch.com/2026/02/24/spanish-soonicorn-multiverse-computing-releases-free-compressed-ai-model/","categories":["model"],"tags":["Multiverse Computing","HyperNova","模型压缩","开源","欧洲AI"],"context":"Multiverse Computing是一家总部位于西班牙圣塞巴斯蒂安的AI初创公司，成立于2019年，核心技术是将量子计算原理应用于AI模型优化（量子启发式压缩），专注于将大模型「瘦身」以降低推理成本。\n\nCompactifAI是其核心压缩技术：通过张量网络分解（量子计算中的核心数学工具），在保留模型大部分性能的前提下大幅压缩模型体积。企业客户包括Iberdrola、博世和加拿大银行。公司正筹备5亿欧元新融资，是欧洲AI赛道少数走「效率路线」而非「算力军备竞赛」路线的代表性公司。","heat":3,"audio_url":"audio/2026-02-24-5.mp3"},{"title":"Uber工程师造了个「AI版老板」用来练兵，90%的工程师已在用AI","summary":"Uber CEO透露员工创建了AI版自己用于准备会议，约90%工程师在日常工作中使用AI，30%是重度用户，正在重构公司技术架构。","full_content":"Uber CEO达拉·霍斯劳沙希在接受播客《CEO日记》采访时，分享了一个揭示AI深度融入企业文化的细节：部分员工团队自发构建了一个名为\"Dara AI\"的聊天机器人——AI版达拉，专门用来在向真正的CEO汇报前预先\"排练\"方案。\n\n\"他们把演示做给Dara AI看，作为正式见我之前的准备，\"霍斯劳沙希说，\"因为当某个方案真正到达我这里时，往往已经经过了多轮精心打磨。\"\n\n这一细节折射出AI工具正以自下而上的方式重塑企业工作流。据霍斯劳沙希介绍，Uber约90%的软件工程师已在日常工作中使用AI，其中约30%是\"重度用户\"，正在彻底重构公司的技术架构。他将工程师比喻为两类角色：一类是\"制砖者\"——制造构成系统的基本单元；另一类是\"架构师\"——思考整个系统应该是什么样子。\n\n\"这真的在以我从未见过的方式改变他们的工作效率，\"他说。在霍斯劳沙希的视野中，Uber的本质不是出行公司，而是一个由工程师驱动的超大型代码库。AI正在让这个代码库以前所未有的速度进化。","url":"https://techcrunch.com/2026/02/24/uber-engineers-built-ai-version-of-boss-dara-khosrowshahi/","best_url":"https://techcrunch.com/2026/02/24/uber-engineers-built-ai-version-of-boss-dara-khosrowshahi/","categories":["event"],"tags":["Uber","AI工作流","企业AI转型","工程师文化","生产力"],"context":"","heat":3,"audio_url":"audio/2026-02-24-6.mp3"},{"title":"New Relic推出无代码AI智能体平台，专攻可观测性垂直场景","summary":"New Relic发布Agentic Platform，企业可无代码部署可观测性AI智能体，支持MCP协议和预构建智能体，与Salesforce Agentforce、OpenAI Frontier同台竞争。","full_content":"数据可观测性公司New Relic周二推出New Relic Agentic Platform，一款专为企业级可观测性场景设计的无代码AI智能体管理平台。\n\n该平台允许企业部署预构建的可观测性AI智能体，实时监控系统运行状态，在故障或异常影响业务前主动发现和处置。平台支持模型上下文协议（MCP），可连接外部数据源并与现有New Relic工具深度集成，同时提供预构建智能体库，企业无需编写代码即可快速上线。\n\n新任首席产品官Brian Emerson强调，New Relic并不寻求成为\"万能的AI智能体管理中台\"，而是专注于可观测性这一核心场景，在企业最关心的运维和监控问题上发挥AI最大价值，同时保持与更广泛生态系统的互操作性。\n\n在AI智能体平台赛道，Salesforce于2024年底率先推出Agentforce，OpenAI今年初推出Frontier企业平台，Gartner将此类平台定义为\"必要的企业AI基础设施\"。New Relic选择聚焦垂直场景切入，代表了一种「专而精」的差异化战略，也预示着可观测性、安全、合规等IT运营细分市场的AI智能体化浪潮正在加速到来。","url":"https://techcrunch.com/2026/02/24/new-relic-launches-new-ai-agent-platform-and-opentelemetry-tools/","best_url":"https://techcrunch.com/2026/02/24/new-relic-launches-new-ai-agent-platform-and-opentelemetry-tools/","categories":["product"],"tags":["New Relic","AI智能体平台","可观测性","MCP","企业IT"],"context":"New Relic是一家成立于2008年的老牌IT可观测性（Observability）公司，传统业务是帮助企业监控应用程序性能、错误日志和基础设施状态（APM）。公司于2023年被私募收购退市。\n\n此次推出Agentic Platform，是New Relic将AI智能体技术植入其核心可观测性场景的战略转型——从「被动监控报告」升级为「主动AI智能体预防故障」。其策略是不做通用智能体平台，而是深耕IT运维这一垂直场景，以行业Know-how构建差异化壁垒。","heat":2,"audio_url":"audio/2026-02-24-9.mp3"}];</script>
 <script>
 (function () {
   'use strict';
@@ -1045,9 +1056,15 @@
 
   // ── Theme ─────────────────────────────────────────────────────
   const html = document.documentElement;
-  const savedTheme = localStorage.getItem('ai-daily-theme') || 'dark';
+  const savedTheme = localStorage.getItem('ai-daily-theme') || 'light';
   html.dataset.theme = savedTheme;
   themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+  // ── Archive accordion ────────────────────────────────────────
+  window.toggleArchiveMonth = function (btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  };
 
   window.toggleTheme = function () {
     const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -1298,53 +1315,111 @@
   };
 
   // ── TTS ───────────────────────────────────────────────────────
+  // 优先使用预生成的 edge-tts MP3，失败时降级到 Web Speech API
   const synth = window.speechSynthesis;
-  let ttsUtterance = null;
   let ttsState = 0; // 0=idle 1=playing 2=paused
+  let ttsUtterance = null;  // Web Speech mode
+  let ttsAudio     = null;  // HTML5 Audio mode
+  let ttsMode      = 'none'; // 'audio' | 'speech'
 
   const SVG_SPEAKER = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
-  const SVG_PAUSE  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
+  const SVG_PAUSE   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
 
   function updateTtsBtn() {
     btnTts.classList.toggle('playing', ttsState === 1);
     btnTts.classList.toggle('paused',  ttsState === 2);
-    btnTts.title    = ttsState === 1 ? '暂停朗读' : ttsState === 2 ? '继续朗读' : '朗读正文';
+    const label = ttsState === 1 ? '暂停朗读' : ttsState === 2 ? '继续朗读' : '朗读正文';
+    btnTts.title = label;
     btnTts.innerHTML = ttsState === 2 ? SVG_PAUSE : SVG_SPEAKER;
+    // 区分音源：MP3 显示蓝点，Web Speech 不显示
+    btnTts.dataset.src = ttsMode;
   }
 
   function ttsStop() {
+    if (ttsAudio) { ttsAudio.pause(); ttsAudio.currentTime = 0; ttsAudio = null; }
     if (synth) synth.cancel();
-    ttsUtterance = null; ttsState = 0; updateTtsBtn();
+    ttsUtterance = null; ttsMode = 'none'; ttsState = 0; updateTtsBtn();
   }
 
+  // ── MP3 模式 ──────────────────────────────────────────────────
+  function playAudio(url) {
+    ttsAudio = new Audio(url);
+    ttsMode = 'audio';
+    ttsAudio.onplay    = () => { ttsState = 1; updateTtsBtn(); };
+    ttsAudio.onpause   = () => { if (ttsAudio && !ttsAudio.ended) { ttsState = 2; updateTtsBtn(); } };
+    ttsAudio.onended   = () => { ttsState = 0; ttsAudio = null; updateTtsBtn(); };
+    ttsAudio.onerror   = () => {
+      console.warn('MP3 加载失败，降级到 Web Speech');
+      ttsAudio = null; ttsMode = 'none';
+      startWebSpeech(); // 自动降级
+    };
+    ttsAudio.play().catch(() => {
+      ttsAudio = null; ttsMode = 'none'; startWebSpeech();
+    });
+  }
+
+  // ── Web Speech 降级模式 ───────────────────────────────────────
   function pickVoice() {
     if (!synth) return null;
     const voices = synth.getVoices();
-    const preferred = ['Tingting','Meijia','Yu-shu','Microsoft Huihui','Microsoft Yaoyao'];
-    for (const name of preferred) { const v = voices.find(v => v.name.includes(name)); if (v) return v; }
-    return voices.find(v => v.lang === 'zh-CN') || voices.find(v => v.lang === 'zh-TW') || voices.find(v => v.lang.startsWith('zh')) || null;
+    const preferred = [
+      'Microsoft Xiaoxiao', 'Microsoft Xiaohan', 'Microsoft Yunxi',  // Edge 神经语音
+      'Tingting', 'Meijia', 'Yu-shu',                                  // macOS Siri
+      'Microsoft Huihui', 'Microsoft Yaoyao',                           // 旧 Windows
+    ];
+    for (const name of preferred) {
+      const v = voices.find(v => v.name.includes(name));
+      if (v) return v;
+    }
+    return voices.find(v => v.lang === 'zh-CN') ||
+           voices.find(v => v.lang === 'zh-TW') ||
+           voices.find(v => v.lang.startsWith('zh')) || null;
   }
 
-  window.toggleTts = function () {
-    if (!synth) { alert('浏览器不支持语音朗读'); return; }
-    if (ttsState === 1) { synth.pause(); ttsState = 2; updateTtsBtn(); return; }
-    if (ttsState === 2) { synth.resume(); ttsState = 1; updateTtsBtn(); return; }
-    synth.cancel();
+  function startWebSpeech() {
+    if (!synth) return;
     const a = articles[currentIdx];
     if (!a) return;
     const tmp = document.createElement('div');
     tmp.innerHTML = (a.full_content && a.full_content.trim()) ? a.full_content : a.summary;
-    const text = (a.title + '。' + (tmp.textContent || '')).replace(/\s+/g,' ').trim();
+    const text = (a.title + '。' + (tmp.textContent || '')).replace(/\s+/g, ' ').trim();
     ttsUtterance = new SpeechSynthesisUtterance(text);
     ttsUtterance.lang = 'zh-CN'; ttsUtterance.rate = 0.92; ttsUtterance.pitch = 0.82;
     const setVoice = () => { const v = pickVoice(); if (v) ttsUtterance.voice = v; };
     setVoice();
     if (!synth.getVoices().length) synth.addEventListener('voiceschanged', setVoice, { once: true });
+    ttsMode = 'speech';
     ttsUtterance.onstart  = () => { ttsState = 1; updateTtsBtn(); };
     ttsUtterance.onpause  = () => { ttsState = 2; updateTtsBtn(); };
     ttsUtterance.onresume = () => { ttsState = 1; updateTtsBtn(); };
-    ttsUtterance.onend = ttsUtterance.onerror = () => { ttsState = 0; updateTtsBtn(); };
+    ttsUtterance.onend = ttsUtterance.onerror = () => { ttsState = 0; ttsMode = 'none'; updateTtsBtn(); };
     synth.speak(ttsUtterance);
+  }
+
+  // ── 主入口 ────────────────────────────────────────────────────
+  window.toggleTts = function () {
+    // 暂停/继续
+    if (ttsState === 1) {
+      if (ttsMode === 'audio' && ttsAudio) { ttsAudio.pause(); return; }
+      if (ttsMode === 'speech' && synth)  { synth.pause(); ttsState = 2; updateTtsBtn(); return; }
+    }
+    if (ttsState === 2) {
+      if (ttsMode === 'audio' && ttsAudio) { ttsAudio.play(); return; }
+      if (ttsMode === 'speech' && synth)  { synth.resume(); ttsState = 1; updateTtsBtn(); return; }
+    }
+
+    // 开始播放
+    ttsStop();
+    const a = articles[currentIdx];
+    if (!a) return;
+
+    if (a.audio_url) {
+      // 有预生成 MP3 → 直接播放
+      playAudio(a.audio_url);
+    } else {
+      // 无 MP3 → Web Speech 降级
+      startWebSpeech();
+    }
   };
 
 })();

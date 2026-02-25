@@ -669,7 +669,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/25
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 15:08 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 15:28 CST</span>
         </div>
       </div>
     </div>
@@ -1281,53 +1281,111 @@
   };
 
   // ── TTS ───────────────────────────────────────────────────────
+  // 优先使用预生成的 edge-tts MP3，失败时降级到 Web Speech API
   const synth = window.speechSynthesis;
-  let ttsUtterance = null;
   let ttsState = 0; // 0=idle 1=playing 2=paused
+  let ttsUtterance = null;  // Web Speech mode
+  let ttsAudio     = null;  // HTML5 Audio mode
+  let ttsMode      = 'none'; // 'audio' | 'speech'
 
   const SVG_SPEAKER = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
-  const SVG_PAUSE  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
+  const SVG_PAUSE   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
 
   function updateTtsBtn() {
     btnTts.classList.toggle('playing', ttsState === 1);
     btnTts.classList.toggle('paused',  ttsState === 2);
-    btnTts.title    = ttsState === 1 ? '暂停朗读' : ttsState === 2 ? '继续朗读' : '朗读正文';
+    const label = ttsState === 1 ? '暂停朗读' : ttsState === 2 ? '继续朗读' : '朗读正文';
+    btnTts.title = label;
     btnTts.innerHTML = ttsState === 2 ? SVG_PAUSE : SVG_SPEAKER;
+    // 区分音源：MP3 显示蓝点，Web Speech 不显示
+    btnTts.dataset.src = ttsMode;
   }
 
   function ttsStop() {
+    if (ttsAudio) { ttsAudio.pause(); ttsAudio.currentTime = 0; ttsAudio = null; }
     if (synth) synth.cancel();
-    ttsUtterance = null; ttsState = 0; updateTtsBtn();
+    ttsUtterance = null; ttsMode = 'none'; ttsState = 0; updateTtsBtn();
   }
 
+  // ── MP3 模式 ──────────────────────────────────────────────────
+  function playAudio(url) {
+    ttsAudio = new Audio(url);
+    ttsMode = 'audio';
+    ttsAudio.onplay    = () => { ttsState = 1; updateTtsBtn(); };
+    ttsAudio.onpause   = () => { if (ttsAudio && !ttsAudio.ended) { ttsState = 2; updateTtsBtn(); } };
+    ttsAudio.onended   = () => { ttsState = 0; ttsAudio = null; updateTtsBtn(); };
+    ttsAudio.onerror   = () => {
+      console.warn('MP3 加载失败，降级到 Web Speech');
+      ttsAudio = null; ttsMode = 'none';
+      startWebSpeech(); // 自动降级
+    };
+    ttsAudio.play().catch(() => {
+      ttsAudio = null; ttsMode = 'none'; startWebSpeech();
+    });
+  }
+
+  // ── Web Speech 降级模式 ───────────────────────────────────────
   function pickVoice() {
     if (!synth) return null;
     const voices = synth.getVoices();
-    const preferred = ['Tingting','Meijia','Yu-shu','Microsoft Huihui','Microsoft Yaoyao'];
-    for (const name of preferred) { const v = voices.find(v => v.name.includes(name)); if (v) return v; }
-    return voices.find(v => v.lang === 'zh-CN') || voices.find(v => v.lang === 'zh-TW') || voices.find(v => v.lang.startsWith('zh')) || null;
+    const preferred = [
+      'Microsoft Xiaoxiao', 'Microsoft Xiaohan', 'Microsoft Yunxi',  // Edge 神经语音
+      'Tingting', 'Meijia', 'Yu-shu',                                  // macOS Siri
+      'Microsoft Huihui', 'Microsoft Yaoyao',                           // 旧 Windows
+    ];
+    for (const name of preferred) {
+      const v = voices.find(v => v.name.includes(name));
+      if (v) return v;
+    }
+    return voices.find(v => v.lang === 'zh-CN') ||
+           voices.find(v => v.lang === 'zh-TW') ||
+           voices.find(v => v.lang.startsWith('zh')) || null;
   }
 
-  window.toggleTts = function () {
-    if (!synth) { alert('浏览器不支持语音朗读'); return; }
-    if (ttsState === 1) { synth.pause(); ttsState = 2; updateTtsBtn(); return; }
-    if (ttsState === 2) { synth.resume(); ttsState = 1; updateTtsBtn(); return; }
-    synth.cancel();
+  function startWebSpeech() {
+    if (!synth) return;
     const a = articles[currentIdx];
     if (!a) return;
     const tmp = document.createElement('div');
     tmp.innerHTML = (a.full_content && a.full_content.trim()) ? a.full_content : a.summary;
-    const text = (a.title + '。' + (tmp.textContent || '')).replace(/\s+/g,' ').trim();
+    const text = (a.title + '。' + (tmp.textContent || '')).replace(/\s+/g, ' ').trim();
     ttsUtterance = new SpeechSynthesisUtterance(text);
     ttsUtterance.lang = 'zh-CN'; ttsUtterance.rate = 0.92; ttsUtterance.pitch = 0.82;
     const setVoice = () => { const v = pickVoice(); if (v) ttsUtterance.voice = v; };
     setVoice();
     if (!synth.getVoices().length) synth.addEventListener('voiceschanged', setVoice, { once: true });
+    ttsMode = 'speech';
     ttsUtterance.onstart  = () => { ttsState = 1; updateTtsBtn(); };
     ttsUtterance.onpause  = () => { ttsState = 2; updateTtsBtn(); };
     ttsUtterance.onresume = () => { ttsState = 1; updateTtsBtn(); };
-    ttsUtterance.onend = ttsUtterance.onerror = () => { ttsState = 0; updateTtsBtn(); };
+    ttsUtterance.onend = ttsUtterance.onerror = () => { ttsState = 0; ttsMode = 'none'; updateTtsBtn(); };
     synth.speak(ttsUtterance);
+  }
+
+  // ── 主入口 ────────────────────────────────────────────────────
+  window.toggleTts = function () {
+    // 暂停/继续
+    if (ttsState === 1) {
+      if (ttsMode === 'audio' && ttsAudio) { ttsAudio.pause(); return; }
+      if (ttsMode === 'speech' && synth)  { synth.pause(); ttsState = 2; updateTtsBtn(); return; }
+    }
+    if (ttsState === 2) {
+      if (ttsMode === 'audio' && ttsAudio) { ttsAudio.play(); return; }
+      if (ttsMode === 'speech' && synth)  { synth.resume(); ttsState = 1; updateTtsBtn(); return; }
+    }
+
+    // 开始播放
+    ttsStop();
+    const a = articles[currentIdx];
+    if (!a) return;
+
+    if (a.audio_url) {
+      // 有预生成 MP3 → 直接播放
+      playAudio(a.audio_url);
+    } else {
+      // 无 MP3 → Web Speech 降级
+      startWebSpeech();
+    }
   };
 
 })();

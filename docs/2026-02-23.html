@@ -431,30 +431,30 @@
     /* Wrapper */
     .archive-pill-wrap { display: inline-block; }
 
-    /* Row: date tag + expand button */
-    .archive-date-row { display: inline-flex; align-items: center; gap: 5px; }
-
-    /* The date label — clickable link to that page */
-    .archive-date-tag {
+    /* Date toggle button — shows only the date when collapsed */
+    .archive-date-toggle {
+      display: inline-flex; align-items: center;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 5px 13px;
       font-family: 'JetBrains Mono', monospace; font-size: 13px;
-      color: var(--cyan); background: rgba(0,245,255,0.07);
-      border: 1px solid rgba(0,245,255,0.28); border-radius: 8px;
-      padding: 5px 13px; text-decoration: none; transition: background 0.15s;
+      color: var(--text); cursor: pointer; transition: all 0.18s;
       white-space: nowrap;
     }
-    .archive-date-tag:hover { background: rgba(0,245,255,0.15); }
-
-    /* Expand/collapse button — chevron only */
-    .archive-expand-btn {
-      display: flex; align-items: center; justify-content: center;
-      background: var(--card-bg); border: 1px solid var(--border);
-      color: var(--muted); border-radius: 7px; width: 28px; height: 28px;
-      cursor: pointer; transition: all 0.18s; flex-shrink: 0; padding: 0;
+    .archive-date-toggle:hover { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
+    .archive-date-toggle.open  {
+      border-color: rgba(0,245,255,0.3); color: var(--cyan);
+      background: rgba(0,245,255,0.06);
     }
-    .archive-expand-btn:hover  { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
-    .archive-expand-btn.open   { border-color: rgba(0,245,255,0.3); color: var(--cyan); background: rgba(0,245,255,0.06); }
-    .archive-pill-chevron { transition: transform 0.22s; display: block; }
-    .archive-expand-btn.open .archive-pill-chevron { transform: rotate(180deg); }
+    /* Chevron: hidden (width=0) when closed, slides in when open */
+    .archive-pill-chevron {
+      display: block; overflow: hidden;
+      width: 0; opacity: 0; margin-left: 0;
+      transition: width 0.18s, opacity 0.18s, margin 0.18s, transform 0.22s;
+      flex-shrink: 0;
+    }
+    .archive-date-toggle.open .archive-pill-chevron {
+      width: 12px; opacity: 1; margin-left: 6px; transform: rotate(180deg);
+    }
 
     /* Calendar panel (expanded view) */
     .archive-cal-panel { margin-top: 8px; display: none; }
@@ -728,7 +728,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/23
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:05 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:10 CST</span>
         </div>
       </div>
     </div>
@@ -1508,13 +1508,13 @@
 
   const chevSvg = `<svg class="archive-pill-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 
-  // ── Render archive section: date tag + expand btn + calendar ─
+  // ── Render archive section: single date-toggle button + calendar ─
+  // Collapsed: shows ONLY the date. Expanded: date + ▲ appears.
   section.innerHTML = `
     <div class="archive-pill-wrap">
-      <div class="archive-date-row">
-        <a href="./${pageDate}.html" class="archive-date-tag">${pageDate}</a>
-        <button class="archive-expand-btn" id="archiveCalToggleBtn" onclick="toggleArchiveCal()" title="选择日期">${chevSvg}</button>
-      </div>
+      <button class="archive-date-toggle" id="archiveCalToggleBtn" onclick="toggleArchiveCal()">
+        <span>${pageDate}</span>${chevSvg}
+      </button>
       <div class="archive-cal-panel" id="archiveCalPanel" style="display:none">
         <div id="archiveCalWidget"></div>
       </div>

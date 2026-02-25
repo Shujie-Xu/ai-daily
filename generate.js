@@ -416,6 +416,25 @@ if (require.main === module) {
     );
     const ok = audioPaths.filter(Boolean).length;
     console.log(`  ✅ 音频生成完成：${ok}/${data.articles.length} 篇`);
+  } else {
+    // --no-tts：优先从 data/YYYY-MM-DD.json 继承，再从 docs/audio/ 目录回退
+    const existingPath = path.join(OUTPUT_DIR, 'data', `${fileDate}.json`);
+    if (fs.existsSync(existingPath)) {
+      const existing = JSON.parse(fs.readFileSync(existingPath, 'utf8'));
+      const urlMap = new Map(existing.articles.map((a, i) => [i, a.audio_url]));
+      data.articles = data.articles.map((a, i) => ({
+        ...a, audio_url: a.audio_url || urlMap.get(i) || null
+      }));
+    }
+    // 如果 JSON 里仍然没有，尝试从 audio/ 目录按命名规则找
+    const audioDir = path.join(OUTPUT_DIR, 'audio');
+    data.articles = data.articles.map((a, i) => {
+      if (a.audio_url) return a;
+      const mp3 = path.join(audioDir, `${fileDate}-${i}.mp3`);
+      return fs.existsSync(mp3) ? { ...a, audio_url: `audio/${fileDate}-${i}.mp3` } : a;
+    });
+    const preserved = data.articles.filter(a => a.audio_url).length;
+    if (preserved > 0) console.log(`  🔇 --no-tts：保留已有音频 ${preserved} 篇`);
   }
 
   const result = generate(data);

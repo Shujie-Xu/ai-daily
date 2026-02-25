@@ -445,15 +445,15 @@
       border-color: rgba(0,245,255,0.3); color: var(--cyan);
       background: rgba(0,245,255,0.06);
     }
-    /* Chevron: hidden (width=0) when closed, slides in when open */
+    /* Chevron: always visible, rotates when open */
     .archive-pill-chevron {
-      display: block; overflow: hidden;
-      width: 0; opacity: 0; margin-left: 0;
-      transition: width 0.18s, opacity 0.18s, margin 0.18s, transform 0.22s;
+      display: block; width: 12px; opacity: 0.55; margin-left: 6px;
+      transition: transform 0.22s, opacity 0.18s;
       flex-shrink: 0;
     }
+    .archive-date-toggle:hover .archive-pill-chevron { opacity: 1; }
     .archive-date-toggle.open .archive-pill-chevron {
-      width: 12px; opacity: 1; margin-left: 6px; transform: rotate(180deg);
+      opacity: 1; transform: rotate(180deg);
     }
 
     /* Calendar panel (expanded view) */
@@ -1336,8 +1336,9 @@ async function loadDateData(date) {
   // Collapsed: shows ONLY the date. Expanded: date + ▲ appears.
   section.innerHTML = `
     <div class="archive-pill-wrap">
+      <div style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">📅 历史归档</div>
       <button class="archive-date-toggle" id="archiveCalToggleBtn" onclick="toggleArchiveCal()">
-        <span>${pageDate}</span>${chevSvg}
+        <span id="archiveCurrentDate">${pageDate}</span>${chevSvg}
       </button>
       <div class="archive-cal-panel" id="archiveCalPanel" style="display:none">
         <div id="archiveCalWidget"></div>

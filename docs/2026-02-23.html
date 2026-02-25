@@ -428,8 +428,8 @@
     /* ── Archive Date Pill ──────────────────────────────────── */
     .archive-cal-section { margin-bottom: 24px; }
 
-    /* Wrapper */
-    .archive-pill-wrap { display: inline-block; }
+    /* Wrapper — block so calendar panel gets full column width */
+    .archive-pill-wrap { display: block; }
 
     /* Date toggle button — shows only the date when collapsed */
     .archive-date-toggle {
@@ -457,11 +457,11 @@
     }
 
     /* Calendar panel (expanded view) */
-    .archive-cal-panel { margin-top: 8px; display: none; }
+    .archive-cal-panel { margin-top: 10px; display: none; }
     .cal-card {
       background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 16px; padding: 16px 20px 18px;
-      max-width: 340px;
+      border-radius: 16px; padding: 20px 24px 22px;
+      max-width: 360px;
     }
     [data-theme="light"] .cal-card { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
     .cal-header {
@@ -484,10 +484,10 @@
       font-size: 11px; color: var(--muted); font-weight: 500;
       text-align: center; padding: 3px 0;
     }
-    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
     .cal-day {
       aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      border-radius: 8px; font-size: 13px; cursor: default; user-select: none;
+      border-radius: 8px; font-size: 14px; cursor: default; user-select: none;
     }
     .cal-today {
       background: linear-gradient(135deg, var(--cyan), var(--purple));
@@ -728,7 +728,7 @@
         <div class="date-badge">
           <div class="pulse"></div>
           2026/02/23
-          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:13 CST</span>
+          <span style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 21:26 CST</span>
         </div>
       </div>
     </div>

@@ -728,7 +728,7 @@
         <div class="date-badge" id="display-date-badge">
           <div class="pulse"></div>
           <span id="display-date">2026/02/25</span>
-          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 22:17 CST</span>
+          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/02/25 22:26 CST</span>
         </div>
       </div>
     </div>
@@ -1119,36 +1119,49 @@ function clientRenderFilterBar(articles) {
 
 // ── 动态加载历史日期 ──────────────────────────────────────────────
 async function loadDateData(date) {
+  const secContainer = document.getElementById('sections-container');
+
+  // ① 视觉反馈：淡出当前内容
+  if (secContainer) secContainer.style.opacity = '0.3';
+
   try {
     const resp = await fetch(`data/${date}.json`);
     if (!resp.ok) throw new Error('not found');
     const newsData = await resp.json();
 
-    // 更新文章数据（供 openDetail 使用）
+    // ② 更新文章数据（供 openDetail 使用）
     const { html: secHtml, sortedArticles } = clientRenderSections(newsData.articles);
     window.ARTICLES_DATA = sortedArticles;
 
-    // 更新 DOM
-    document.getElementById('sections-container').innerHTML = secHtml;
+    // ③ 更新 DOM
+    if (secContainer) { secContainer.innerHTML = secHtml; secContainer.style.opacity = '1'; }
     document.getElementById('filter-bar-container').innerHTML = clientRenderFilterBar(newsData.articles);
     document.getElementById('display-date').textContent = newsData.date || date;
     document.getElementById('display-edit-time').textContent = `edit: ${newsData.editTime || ''}`;
     const st = document.getElementById('stat-total');
     const ss = document.getElementById('stat-sources');
-    if (st) { st.dataset.target = newsData.total || newsData.articles.length; st.textContent = newsData.total || newsData.articles.length; }
-    if (ss) { ss.dataset.target = newsData.sources || '?'; ss.textContent = newsData.sources || '?'; }
+    const total = newsData.total || newsData.articles.length;
+    const sources = newsData.sources || '?';
+    if (st) { st.dataset.target = total; st.textContent = total; }
+    if (ss) { ss.dataset.target = sources; ss.textContent = sources; }
 
-    // 重置筛选器状态
+    // ④ 重置筛选器状态
     if (typeof currentFilter !== 'undefined') currentFilter = 'all';
 
-    // 滚动回顶部
+    // ⑤ 同步日历蓝框 + 按钮文字
+    if (typeof window.calendarSetDate === 'function') window.calendarSetDate(date);
+
+    // ⑥ 关闭归档日历面板
+    const calPanel = document.getElementById('archiveCalPanel');
+    const calBtn   = document.getElementById('archiveCalToggleBtn');
+    if (calPanel) calPanel.style.display = 'none';
+    if (calBtn)   calBtn.classList.remove('open');
+
+    // ⑦ 滚动回顶部
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // 关闭归档面板（如果打开）
-    const panel = document.getElementById('archivePanel');
-    if (panel) panel.style.display = 'none';
-
   } catch(e) {
+    if (secContainer) secContainer.style.opacity = '1';
     console.warn('Failed to load date data:', date, e);
     alert(`找不到 ${date} 的数据存档`);
   }
@@ -1561,13 +1574,24 @@ async function loadDateData(date) {
   const section = document.getElementById('archiveSection');
   if (!section) return;
 
-  // Current date: use latest from manifest (ISO format YYYY-MM-DD)
-  const pageDate   = allDates[0] || today;
-
-  // Today's date (Asia/Shanghai)
+  // Today's date (Asia/Shanghai) — must be declared before pageDate
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());
 
+  // Current displayed date — mutable so it updates when user switches dates
+  let pageDate = allDates[0] || today;
+
   const chevSvg = `<svg class="archive-pill-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+  // 暴露给 loadDateData 使用：切换日期后同步更新日历高亮 + 按钮文字
+  window.calendarSetDate = function(date) {
+    pageDate = date;
+    const parts = date.split('-').map(Number);
+    vy = parts[0];
+    vm = parts[1] - 1;
+    const btn = document.getElementById('archiveCalToggleBtn');
+    if (btn) btn.querySelector('span').textContent = date;
+    renderCal();   // 重绘日历，新日期变蓝框
+  };
 
   // ── Render archive section: single date-toggle button + calendar ─
   // Collapsed: shows ONLY the date. Expanded: date + ▲ appears.

@@ -924,7 +924,10 @@ async function loadDateData(date) {
   const themeBtn = document.getElementById('themeBtn');
   const backToTop= document.getElementById('backToTop');
 
-  const articles = window.ARTICLES_DATA || [];
+  // 用 Proxy 动态读取，切换日期后 openDetail 能正确使用新数据
+  const articles = new Proxy([], {
+    get(_, p) { return (window.ARTICLES_DATA || [])[p]; }
+  });
   let currentIdx = 0;
   let isOpen = false;
 

@@ -16,7 +16,7 @@ if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 if (!fs.existsSync(AUDIO_DIR))  fs.mkdirSync(AUDIO_DIR, { recursive: true });
 
 // ── TTS: 为文章生成音频 ──────────────────────────────────────
-function generateAudio(articles, date) {
+function generateAudio(articles, date, forceTts = false) {
   const { spawnSync } = require('child_process');
   const results = [];
 
@@ -25,11 +25,13 @@ function generateAudio(articles, date) {
     const filename = `${date}-${i}.mp3`;
     const outPath  = path.join(AUDIO_DIR, filename);
 
-    // 已存在就跳过
-    if (fs.existsSync(outPath)) {
+    // 已存在就跳过（除非传入 forceTts=true）
+    if (!forceTts && fs.existsSync(outPath)) {
       results.push(`audio/${filename}`);
       continue;
     }
+    // force 时先删旧文件
+    if (forceTts && fs.existsSync(outPath)) fs.unlinkSync(outPath);
 
     // 拼接朗读文本：标题 + 正文（去除 HTML 标签）
     const rawContent = (a.full_content || a.summary || '').replace(/<[^>]+>/g, '');
@@ -380,12 +382,13 @@ function generate(newsData) {
   return { latestFile, date: fileDate };
 }
 
-// CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD] [--no-tts]
+// CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD] [--no-tts] [--force-tts]
 if (require.main === module) {
   const { execSync } = require('child_process');
   const inputFile = process.argv[2] || path.join(__dirname, 'latest-news.json');
   const shouldPush  = process.argv.includes('--push');
   const skipTts     = process.argv.includes('--no-tts');
+  const forceTts    = process.argv.includes('--force-tts');
 
   // Optional --date override
   const dateArgIdx = process.argv.indexOf('--date');
@@ -409,7 +412,7 @@ if (require.main === module) {
   // ── 生成 TTS 音频 ──
   if (!skipTts) {
     console.log(`🎙️  生成音频（${data.articles.length} 篇）...`);
-    const audioPaths = generateAudio(data.articles, fileDate);
+    const audioPaths = generateAudio(data.articles, fileDate, forceTts);
     // 把 audio_url 注入到文章数据里供模板使用
     data.articles = data.articles.map((a, i) =>
       audioPaths[i] ? { ...a, audio_url: audioPaths[i] } : a

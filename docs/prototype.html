@@ -275,10 +275,10 @@ main{
   position:relative;border-radius:24px;
   overflow:hidden;cursor:pointer;
   width:100%;
-  /* glass */
+  /* glass — fallback (Firefox/Safari); SVG filter injected by JS for Chrome/Edge */
   background:rgba(255,255,255,.035);
-  backdrop-filter:blur(40px) saturate(1.4);
-  -webkit-backdrop-filter:blur(40px) saturate(1.4);
+  backdrop-filter:blur(36px) saturate(1.5);
+  -webkit-backdrop-filter:blur(36px) saturate(1.5);
   border:1px solid rgba(255,255,255,.07);
   /* depth shadow */
   box-shadow:
@@ -890,6 +890,142 @@ document.querySelectorAll('.card-wrap').forEach(wrap=>{
   const floatDelay=parseInt(wrap.dataset.delay||0)*-0.002;
   card.style.animationDelay=`${floatDelay}s`;
 });
+
+/* ── LIQUID GLASS — SVG feDisplacementMap (GlassSurface) ── */
+(function(){
+  // Check support: backdrop-filter: url() only works in Chrome/Edge
+  const supportsUrlFilter = (() => {
+    if(typeof CSS === 'undefined') return false;
+    const d = document.createElement('div');
+    d.style.backdropFilter = 'url(#x)';
+    return d.style.backdropFilter !== '';
+  })();
+
+  // SVG filter container
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svgDefs = document.createElementNS(svgNS,'svg');
+  svgDefs.setAttribute('style','position:absolute;width:0;height:0;pointer-events:none');
+  svgDefs.setAttribute('aria-hidden','true');
+  document.body.appendChild(svgDefs);
+
+  function makeDisplacementMap(w, h, br=22) {
+    const edge = Math.min(w,h) * 0.035;
+    return 'data:image/svg+xml,' + encodeURIComponent(
+      `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rg" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#0000"/>
+            <stop offset="100%" stop-color="red"/>
+          </linearGradient>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0000"/>
+            <stop offset="100%" stop-color="blue"/>
+          </linearGradient>
+        </defs>
+        <rect width="${w}" height="${h}" fill="black"/>
+        <rect width="${w}" height="${h}" rx="${br}" fill="url(#rg)"/>
+        <rect width="${w}" height="${h}" rx="${br}" fill="url(#bg)" style="mix-blend-mode:difference"/>
+        <rect x="${edge}" y="${edge}" width="${w-edge*2}" height="${h-edge*2}" rx="${br}" fill="hsl(0 0% 50%/.93)" style="filter:blur(11px)"/>
+      </svg>`
+    );
+  }
+
+  function buildFilter(id, w, h) {
+    // Remove existing
+    const old = document.getElementById(id);
+    if(old) old.parentNode.removeChild(old);
+
+    const defs = document.createElementNS(svgNS,'defs');
+    const filter = document.createElementNS(svgNS,'filter');
+    filter.setAttribute('id', id);
+    filter.setAttribute('colorInterpolationFilters','sRGB');
+    filter.setAttribute('x','0%');filter.setAttribute('y','0%');
+    filter.setAttribute('width','100%');filter.setAttribute('height','100%');
+
+    const mapHref = makeDisplacementMap(w, h);
+
+    const feImg = document.createElementNS(svgNS,'feImage');
+    feImg.setAttribute('id', id+'-img');
+    feImg.setAttribute('href', mapHref);
+    feImg.setAttribute('x','0');feImg.setAttribute('y','0');
+    feImg.setAttribute('width','100%');feImg.setAttribute('height','100%');
+    feImg.setAttribute('preserveAspectRatio','none');
+    feImg.setAttribute('result','map');
+
+    // R channel: scale -180
+    const dmR = document.createElementNS(svgNS,'feDisplacementMap');
+    dmR.setAttribute('in','SourceGraphic');dmR.setAttribute('in2','map');
+    dmR.setAttribute('scale','-180');
+    dmR.setAttribute('xChannelSelector','R');dmR.setAttribute('yChannelSelector','G');
+    dmR.setAttribute('result','dispR');
+    const cmR = document.createElementNS(svgNS,'feColorMatrix');
+    cmR.setAttribute('in','dispR');cmR.setAttribute('type','matrix');
+    cmR.setAttribute('values','1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0');
+    cmR.setAttribute('result','red');
+
+    // G channel: scale -170
+    const dmG = document.createElementNS(svgNS,'feDisplacementMap');
+    dmG.setAttribute('in','SourceGraphic');dmG.setAttribute('in2','map');
+    dmG.setAttribute('scale','-170');
+    dmG.setAttribute('xChannelSelector','R');dmG.setAttribute('yChannelSelector','G');
+    dmG.setAttribute('result','dispG');
+    const cmG = document.createElementNS(svgNS,'feColorMatrix');
+    cmG.setAttribute('in','dispG');cmG.setAttribute('type','matrix');
+    cmG.setAttribute('values','0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0');
+    cmG.setAttribute('result','green');
+
+    // B channel: scale -160
+    const dmB = document.createElementNS(svgNS,'feDisplacementMap');
+    dmB.setAttribute('in','SourceGraphic');dmB.setAttribute('in2','map');
+    dmB.setAttribute('scale','-160');
+    dmB.setAttribute('xChannelSelector','R');dmB.setAttribute('yChannelSelector','G');
+    dmB.setAttribute('result','dispB');
+    const cmB = document.createElementNS(svgNS,'feColorMatrix');
+    cmB.setAttribute('in','dispB');cmB.setAttribute('type','matrix');
+    cmB.setAttribute('values','0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0');
+    cmB.setAttribute('result','blue');
+
+    // Composite R+G+B via screen blend
+    const blendRG = document.createElementNS(svgNS,'feBlend');
+    blendRG.setAttribute('in','red');blendRG.setAttribute('in2','green');
+    blendRG.setAttribute('mode','screen');blendRG.setAttribute('result','rg');
+
+    const blendRGB = document.createElementNS(svgNS,'feBlend');
+    blendRGB.setAttribute('in','rg');blendRGB.setAttribute('in2','blue');
+    blendRGB.setAttribute('mode','screen');blendRGB.setAttribute('result','output');
+
+    const gauss = document.createElementNS(svgNS,'feGaussianBlur');
+    gauss.setAttribute('in','output');gauss.setAttribute('stdDeviation','0.7');
+
+    [feImg,dmR,cmR,dmG,cmG,dmB,cmB,blendRG,blendRGB,gauss].forEach(n=>filter.appendChild(n));
+    defs.appendChild(filter);
+    svgDefs.appendChild(defs);
+  }
+
+  let cardIdx = 0;
+  document.querySelectorAll('.card').forEach(card=>{
+    const fid = 'glass-f-' + (cardIdx++);
+    card.dataset.filterId = fid;
+
+    function applyFilter() {
+      const r = card.getBoundingClientRect();
+      const w = Math.round(r.width) || 400;
+      const h = Math.round(r.height) || 300;
+      buildFilter(fid, w, h);
+      if(supportsUrlFilter) {
+        card.style.backdropFilter = `url(#${fid}) saturate(1.5)`;
+        card.style.webkitBackdropFilter = `url(#${fid}) saturate(1.5)`;
+      }
+    }
+
+    // Delay first build until card is visible and has dimensions
+    setTimeout(applyFilter, 800);
+
+    // Rebuild on resize
+    const ro = new ResizeObserver(()=>setTimeout(applyFilter,0));
+    ro.observe(card);
+  });
+})();
 
 /* ── FILTER CHIPS ──────────────────────────────────────── */
 document.querySelectorAll('.fbar .fc').forEach(c=>{

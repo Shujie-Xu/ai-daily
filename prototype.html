@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Daily · Glass 3D v0.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Figtree:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════ RESET ═══════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* ═══════ SCENE ════════════════════════════════════════════════ */
+body{
+  min-height:100vh;
+  background:#06080f;
+  color:rgba(255,255,255,.88);
+  font-family:'Figtree','PingFang SC','Noto Sans SC',sans-serif;
+  overflow-x:hidden;
+}
+
+/* ─── Keyframes ─── */
+@keyframes cardFloat{
+  0%,100%{transform:translateY(0px)}
+  50%    {transform:translateY(-10px)}
+}
+@keyframes auroraShift{
+  0%  {transform:translate(0,0) rotate(0deg) scale(1)}
+  50% {transform:translate(3%,-3%) rotate(1deg) scale(1.04)}
+  100%{transform:translate(-2%,2%) rotate(-.5deg) scale(.98)}
+}
+@keyframes particleDrift{
+  0%,100%{transform:translate(0,0)}
+  25%    {transform:translate(15px,-20px)}
+  50%    {transform:translate(-10px,-35px)}
+  75%    {transform:translate(20px,-15px)}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+@keyframes pulseGreen{
+  0%,100%{opacity:1;box-shadow:0 0 8px #34d39966}
+  50%    {opacity:.5;box-shadow:0 0 4px #34d39933}
+}
+
+/* ═══════ SCENE LAYERS ════════════════════════════════════════ */
+#scene{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+
+/* Aurora */
+#aurora{
+  position:absolute;width:140%;height:80%;top:-20%;left:-20%;
+  background:
+    radial-gradient(ellipse at 28% 48%,rgba(96,165,250,.08) 0%,transparent 52%),
+    radial-gradient(ellipse at 72% 28%,rgba(192,132,252,.07) 0%,transparent 48%),
+    radial-gradient(ellipse at 50% 82%,rgba(52,211,153,.05) 0%,transparent 50%),
+    radial-gradient(ellipse at 15% 80%,rgba(251,146,60,.04) 0%,transparent 40%);
+  animation:auroraShift 22s ease-in-out infinite alternate;
+}
+
+/* Grid */
+#grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+  background-size:80px 80px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 42%,#000,transparent);
+  mask-image:radial-gradient(ellipse 70% 55% at 50% 42%,#000,transparent);
+}
+
+/* Noise */
+#noise{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.035;
+}
+
+/* ═══════ FLOATING NAV ════════════════════════════════════════ */
+nav{
+  position:fixed;top:22px;left:50%;transform:translateX(-50%);
+  z-index:200;
+  display:flex;align-items:center;gap:4px;
+  padding:7px 9px;border-radius:50px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(32px) saturate(1.5);
+  -webkit-backdrop-filter:blur(32px) saturate(1.5);
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:0 8px 32px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.06) inset;
+  font-size:13px;font-weight:500;
+  white-space:nowrap;
+}
+.nav-brand{
+  padding:7px 18px;border-radius:40px;
+  background:rgba(255,255,255,.09);
+  color:#f0f2ff;font-weight:700;
+  font-family:'Bricolage Grotesque',sans-serif;
+  letter-spacing:-.02em;font-size:14px;
+}
+.nav-item{
+  padding:7px 16px;border-radius:40px;
+  color:rgba(255,255,255,.38);cursor:pointer;
+  transition:color .2s,background .2s;
+}
+.nav-item:hover,.nav-item.on{color:rgba(255,255,255,.82);background:rgba(255,255,255,.06)}
+.nav-cta{
+  padding:7px 18px;border-radius:40px;
+  background:rgba(255,255,255,.90);
+  color:#0a0d18;font-weight:650;font-size:12.5px;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,255,255,.15)}
+
+/* ═══════ LAYOUT ════════════════════════════════════════════ */
+main{
+  position:relative;z-index:1;
+  max-width:1280px;margin:0 auto;
+  padding:0 24px 80px;
+}
+
+/* ═══════ HERO ══════════════════════════════════════════════ */
+.hero{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  padding-top:clamp(100px,16vh,160px);
+  padding-bottom:56px;
+}
+
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px 6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:12px;font-weight:500;
+  color:rgba(255,255,255,.5);
+  letter-spacing:.025em;
+  margin-bottom:28px;
+}
+.badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#34d399;
+  animation:pulseGreen 2.2s ease-in-out infinite;
+}
+
+.hero-title{
+  margin:0 0 18px;
+  font-size:clamp(44px,6vw,76px);
+  font-weight:780;
+  font-family:'Bricolage Grotesque',sans-serif;
+  letter-spacing:-.04em;line-height:1.06;
+  max-width:740px;
+}
+/* word-reveal child spans injected by JS */
+.hero-title span.word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(18px);
+  filter:blur(6px);
+  transition:opacity .6s cubic-bezier(.25,.46,.45,.94),
+             transform .6s cubic-bezier(.25,.46,.45,.94),
+             filter .6s cubic-bezier(.25,.46,.45,.94);
+}
+.hero-title span.word.vis{opacity:1;transform:translateY(0);filter:blur(0)}
+.hero-title .gr{
+  background:linear-gradient(130deg,#60a5fa,#a78bfa 45%,#f472b6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.hero-sub{
+  max-width:520px;
+  font-size:clamp(15px,1.6vw,17px);
+  color:rgba(255,255,255,.32);
+  line-height:1.72;font-weight:400;
+  margin-bottom:36px;
+  opacity:0;animation:fadeUp .8s ease .5s forwards;
+}
+.hero-meta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 18px;border-radius:10px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;
+  color:rgba(255,255,255,.25);
+  opacity:0;animation:fadeUp .8s ease .65s forwards;
+}
+.hero-meta .hl{color:#60a5fa}
+
+/* ═══════ STATS ═════════════════════════════════════════════ */
+.stats{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin:36px 0 40px;
+  opacity:0;animation:fadeUp .8s ease .75s forwards;
+}
+.stat{
+  padding:16px 24px;border-radius:16px;min-width:110px;text-align:center;
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.07);
+  position:relative;overflow:hidden;
+  transition:all .25s;cursor:default;
+}
+.stat::before{
+  content:'';position:absolute;top:0;left:15%;right:15%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+}
+.stat:hover{background:rgba(255,255,255,.055);transform:translateY(-3px)}
+.stat-val{
+  font-size:28px;font-weight:800;letter-spacing:-1.5px;line-height:1;
+  margin-bottom:5px;
+  font-family:'Bricolage Grotesque',sans-serif;
+}
+.stat-lbl{font-size:10.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.c1{color:#60a5fa}.c2{color:#a78bfa}.c3{color:#f472b6}.c4{color:#34d399}
+
+/* ═══════ FILTER BAR ════════════════════════════════════════ */
+.fbar{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  padding:11px 16px;margin-bottom:28px;
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.06);border-radius:14px;
+}
+.flab{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-right:6px}
+.fc{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 13px;border-radius:999px;font-size:12px;font-weight:500;
+  color:rgba(255,255,255,.3);background:none;border:1px solid transparent;
+  cursor:pointer;transition:all .15s;
+}
+.fc:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
+.fc.on{color:rgba(255,255,255,.9);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+.fcd{width:5px;height:5px;border-radius:50%}
+
+/* ═══════ SECTION HEADER ════════════════════════════════════ */
+.sh{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.sh-icon{font-size:16px}
+.sh-title{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.sh-count{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.2)}
+
+/* ═══════ BENTO GRID ════════════════════════════════════════ */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:14px;margin-bottom:28px;
+}
+.s4{grid-column:span 4}
+.s6{grid-column:span 6}
+.s8{grid-column:span 8}
+.s12{grid-column:span 12}
+@media(max-width:1024px){
+  .s4,.s6{grid-column:span 6}
+  .s8,.s12{grid-column:span 12}
+}
+@media(max-width:640px){
+  .s4,.s6,.s8,.s12{grid-column:span 12}
+}
+
+/* ═══════ 3D CARD WRAP ══════════════════════════════════════ */
+.card-wrap{
+  perspective:1000px;perspective-origin:50% 50%;
+  /* entry state */
+  opacity:0;transform:translateY(40px);
+  transition:opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1);
+}
+.card-wrap.entered{opacity:1;transform:translateY(0)}
+
+/* ═══════ GLASS CARD ════════════════════════════════════════ */
+.card{
+  position:relative;border-radius:24px;
+  overflow:hidden;cursor:pointer;
+  width:100%;
+  /* glass — fallback (Firefox/Safari); SVG filter injected by JS for Chrome/Edge */
+  background:rgba(255,255,255,.035);
+  backdrop-filter:blur(36px) saturate(1.5);
+  -webkit-backdrop-filter:blur(36px) saturate(1.5);
+  border:1px solid rgba(255,255,255,.07);
+  /* depth shadow */
+  box-shadow:
+    0 20px 50px -15px rgba(0,0,0,.4),
+    0 0 0 1px rgba(255,255,255,.05),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  /* idle float — stagger set inline */
+  animation:cardFloat 7s ease-in-out infinite;
+  transform-style:preserve-3d;
+  /* tilt — updated by JS */
+  transition:
+    transform .6s cubic-bezier(.16,1,.3,1),
+    box-shadow .4s ease;
+  will-change:transform;
+}
+.card.hovering{
+  transition:
+    transform .08s ease-out,
+    box-shadow .4s ease;
+}
+
+/* Specular top edge */
+.card .spec{
+  position:absolute;top:0;left:8%;right:8%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  transition:background .4s;pointer-events:none;z-index:5;
+}
+.card:hover .spec{background:linear-gradient(90deg,transparent,rgba(255,255,255,.40),transparent)}
+
+/* Spotlight radial follow */
+.card .spot{
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;
+  opacity:0;transition:opacity .4s;
+  /* set via JS */
+  background:radial-gradient(600px circle at 50% 50%, rgba(255,255,255,.06), transparent 50%);
+}
+.card:hover .spot{opacity:1}
+
+/* Conic border glow (mask punch-out technique) */
+.card .conic{
+  position:absolute;inset:-1px;border-radius:25px;pointer-events:none;z-index:3;
+  opacity:0;transition:opacity .4s;
+  /* updated by JS: conic-gradient */
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  padding:1px;
+}
+.card:hover .conic{opacity:.65}
+
+/* Card content */
+.card-inner{padding:36px 30px 28px;position:relative;z-index:2}
+
+.card-icon{
+  width:52px;height:52px;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:22px;
+  /* accent set inline */
+  transform:translateZ(20px);
+  transition:box-shadow .4s;
+}
+
+.card-title{
+  margin:0 0 8px;
+  font-size:19px;font-weight:700;
+  font-family:'Bricolage Grotesque',sans-serif;
+  color:#eef0f8;letter-spacing:-.025em;line-height:1.3;
+}
+.card-desc{
+  margin:0 0 22px;
+  font-size:13.5px;line-height:1.72;
+  color:rgba(255,255,255,.38);font-weight:400;
+}
+
+/* Metrics row */
+.metrics{
+  display:flex;gap:20px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.met-val{
+  font-size:20px;font-weight:700;
+  font-family:'Bricolage Grotesque',monospace;
+  letter-spacing:-.03em;line-height:1;
+  /* color set inline */
+}
+.met-lbl{
+  font-size:10px;color:rgba(255,255,255,.28);
+  margin-top:4px;text-transform:uppercase;letter-spacing:.08em;font-weight:500;
+}
+
+/* Arrow badge top-right */
+.arr{
+  position:absolute;top:32px;right:28px;
+  width:30px;height:30px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  color:rgba(255,255,255,.22);font-size:13px;
+  transition:all .3s;
+  z-index:6;
+}
+.card:hover .arr{
+  transform:translate(2px,-2px);
+}
+
+/* ── Context badge ── */
+.ctx-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:999px;
+  font-size:10px;font-weight:600;letter-spacing:.2px;
+  color:#a78bfa;background:rgba(167,139,250,.1);
+  border:1px solid rgba(167,139,250,.18);
+  margin-bottom:10px;
+}
+
+/* ── Category tags ── */
+.cats{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.cat{
+  padding:3px 9px;border-radius:999px;
+  font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;
+}
+.cat-model  {background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid rgba(96,165,250,.22)}
+.cat-product{background:rgba(167,139,250,.12);color:#a78bfa;border:1px solid rgba(167,139,250,.22)}
+.cat-funding{background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.22)}
+.cat-finance{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.22)}
+.cat-research{background:rgba(244,114,182,.12);color:#f472b6;border:1px solid rgba(244,114,182,.22)}
+.cat-policy {background:rgba(244,63,94,.12);color:#f43f5e;border:1px solid rgba(244,63,94,.22)}
+.cat-event  {background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1)}
+.heat{flex-shrink:0;font-size:12px;opacity:.65;letter-spacing:-2px}
+
+/* ── Featured layout ── */
+.card.featured{overflow:visible}
+.card.featured .card-inner{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:0;padding:0;overflow:hidden;border-radius:24px;
+}
+.feat-l{padding:32px 28px}
+.feat-r{
+  padding:24px 22px;
+  display:flex;flex-direction:column;gap:10px;
+  background:rgba(255,255,255,.025);
+  border-left:1px solid rgba(255,255,255,.06);
+}
+.feat-label{
+  font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  color:#fbbf24;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.feat-label::after{content:'';flex:1;height:1px;background:rgba(251,191,36,.18)}
+.feat-stat{
+  padding:14px;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
+}
+.feat-num{
+  font-size:24px;font-weight:800;letter-spacing:-1px;line-height:1;margin-bottom:4px;
+  font-family:'Bricolage Grotesque',sans-serif;
+  background:linear-gradient(135deg,#fbbf24,#f43f5e);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.feat-desc{font-size:10.5px;color:rgba(255,255,255,.28)}
+.feat-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent)}
+@media(max-width:640px){
+  .card.featured .card-inner{grid-template-columns:1fr}
+  .feat-r{border-left:none;border-top:1px solid rgba(255,255,255,.06)}
+}
+
+/* ═══════ MODAL SHEET ═══════════════════════════════════════ */
+.overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0 16px;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.overlay.open{opacity:1;pointer-events:all}
+.sheet{
+  width:100%;max-width:700px;max-height:88vh;
+  display:flex;flex-direction:column;
+  background:rgba(8,8,20,.88);
+  backdrop-filter:blur(60px) saturate(1.8);
+  -webkit-backdrop-filter:blur(60px) saturate(1.8);
+  border:1px solid rgba(255,255,255,.1);border-bottom:none;
+  border-radius:24px 24px 0 0;overflow:hidden;
+  transform:translateY(48px);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 -1px 0 rgba(255,255,255,.12) inset,0 -40px 80px rgba(0,0,0,.5);
+}
+.overlay.open .sheet{transform:translateY(0)}
+.sh-handle{width:44px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);margin:14px auto 0;flex-shrink:0}
+.sh-bar{height:2px;flex-shrink:0;margin-top:12px;box-shadow:0 0 10px var(--bc,#60a5fa);
+        background:var(--bc,linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6));width:var(--prog,50%)}
+.sh-head{padding:16px 24px 14px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.sh-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.sh-title{font-size:19px;font-weight:700;letter-spacing:-.4px;line-height:1.4;font-family:'Bricolage Grotesque',sans-serif}
+.sh-body{flex:1;overflow-y:auto;padding:20px 24px}
+.sh-body::-webkit-scrollbar{width:3px}
+.sh-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+.sh-sum{font-size:14px;color:#60a5fa;font-weight:500;line-height:1.65;
+        padding:14px;border-radius:13px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.14);margin-bottom:18px}
+.sh-content{font-size:14px;color:rgba(255,255,255,.52);line-height:1.9;white-space:pre-wrap}
+.sh-content p{margin-bottom:14px}
+.sh-ctx{margin-top:18px;padding:14px;border-radius:13px;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.16);display:none}
+.sh-ctx-label{font-size:10px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:#a78bfa;margin-bottom:8px}
+.sh-ctx-text{font-size:13px;color:rgba(255,255,255,.45);line-height:1.75}
+.sh-foot{padding:14px 24px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:8px;flex-shrink:0;background:rgba(0,0,0,.2)}
+.sa{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:11px;
+    font-size:12.5px;font-weight:600;border:none;cursor:pointer;transition:all .18s;text-decoration:none}
+.sa-p{background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(167,139,250,.2));
+      color:#60a5fa;border:1px solid rgba(96,165,250,.25)}
+.sa-p:hover{background:linear-gradient(135deg,rgba(96,165,250,.3),rgba(167,139,250,.3));box-shadow:0 0 20px rgba(96,165,250,.2)}
+.sa-g{background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.08)}
+.sa-g:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.09)}
+.sh-nav{margin-left:auto;display:flex;gap:5px}
+.narr{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);cursor:pointer;
+      color:rgba(255,255,255,.4);font-size:15px;transition:all .15s}
+.narr:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.close-x{position:absolute;top:14px;right:16px;width:28px;height:28px;border-radius:8px;
+         background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+         display:flex;align-items:center;justify-content:center;cursor:pointer;
+         color:rgba(255,255,255,.4);font-size:13px;transition:all .15s}
+.close-x:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+
+/* ═══════ FOOTER ════════════════════════════════════════════ */
+footer{border-top:1px solid rgba(255,255,255,.06);padding:22px 0;text-align:center;
+       font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.2);
+       position:relative;z-index:1}
+footer .hl{color:#60a5fa}
+
+/* ═══════ PARTICLES ═════════════════════════════════════════ */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;background:rgba(255,255,255,.75)}
+</style>
+</head>
+<body>
+
+<!-- SCENE -->
+<div id="scene">
+  <div id="aurora"></div>
+  <div id="grid"></div>
+  <div id="noise"></div>
+</div>
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">🤖 AI Daily</div>
+  <div class="nav-item on">今日</div>
+  <div class="nav-item">归档</div>
+  <div class="nav-item">关于</div>
+  <div class="nav-cta">🔊 朗读</div>
+</nav>
+
+<main>
+<!-- HERO -->
+<div class="hero">
+  <div class="badge"><div class="badge-dot"></div>Live Feed · 今日 AI 动态</div>
+  <h1 class="hero-title" id="heroTitle">今日 <span class="gr">AI</span> 最新进展</h1>
+  <p class="hero-sub">精选全球 AI 最新动态，模型 · 产品 · 融资 · 研究 · 政策，每日 14:00 更新</p>
+  <div class="hero-meta">
+    <span class="hl">▶</span>
+    <span>date = 2026-03-01</span>
+    <span>│</span>
+    <span>updated 14:02 CST</span>
+    <span>│</span>
+    <span>16 articles</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-val c1">16</div><div class="stat-lbl">篇报道</div></div>
+  <div class="stat"><div class="stat-val c2">7</div><div class="stat-lbl">个维度</div></div>
+  <div class="stat"><div class="stat-val c3">12</div><div class="stat-lbl">搜索来源</div></div>
+  <div class="stat"><div class="stat-val c4">5🔥</div><div class="stat-lbl">今日顶热</div></div>
+</div>
+
+<!-- FILTER -->
+<div class="fbar">
+  <span class="flab">筛选</span>
+  <button class="fc on">全部</button>
+  <button class="fc"><span class="fcd" style="background:#60a5fa"></span>模型</button>
+  <button class="fc"><span class="fcd" style="background:#a78bfa"></span>产品</button>
+  <button class="fc"><span class="fcd" style="background:#34d399"></span>融资</button>
+  <button class="fc"><span class="fcd" style="background:#fbbf24"></span>财务</button>
+  <button class="fc"><span class="fcd" style="background:#f472b6"></span>研究</button>
+  <button class="fc"><span class="fcd" style="background:#f43f5e"></span>政策</button>
+</div>
+
+<!-- SECTION 🔥🔥🔥🔥🔥 -->
+<div class="sh"><span class="sh-icon">🔥</span><span class="sh-title">今日顶热</span><span class="sh-count">3 篇</span></div>
+
+<div class="bento">
+
+  <!-- FEATURED w8 -->
+  <div class="card-wrap s8" data-delay="0">
+    <div class="card featured" data-accent="#fbbf24" data-accent2="#f472b6" data-heat="5" data-idx="0"
+         data-title="GPT-5 正式发布：推理、视觉全面超越 Claude 3.7"
+         data-summary="OpenAI 发布 GPT-5，在 MMLU、GPQA 等多项权威基准测试中全面超越 Claude 3.7 Sonnet，推理能力提升 40%，多模态视觉理解达到新高度。"
+         data-content="OpenAI 于今日正式发布 GPT-5，这是其迄今为止最强大的语言模型。&#10;&#10;在多项权威基准测试中，GPT-5 表现亮眼：MMLU 得分达到 92.3%，较 GPT-4o 提升约 8 个百分点；GPQA（研究生水平科学问答）达到 78.1%，超越 Claude 3.7 Sonnet 的 74.2%。&#10;&#10;视觉理解方面，GPT-5 引入了全新的 Vision Pro 模块，支持对复杂图表、技术图纸的深度分析。&#10;&#10;API 定价：输入 $15/M token，输出 $60/M，较 GPT-4o 提升约 3 倍。"
+         data-cats='["model"]' data-tags='["openai","gpt-5","benchmark"]'>
+      <div class="spec"></div>
+      <div class="spot"></div>
+      <div class="conic"></div>
+      <div class="arr">↗</div>
+      <div class="card-inner">
+        <div class="feat-l">
+          <div class="feat-label">⚡ 今日头条</div>
+          <div class="cats"><span class="cat cat-model">模型</span></div>
+          <div class="card-title" style="font-size:22px;margin-bottom:12px">GPT-5 正式发布：推理、视觉全面超越 Claude 3.7</div>
+          <div class="card-desc" style="-webkit-line-clamp:4;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden">OpenAI 发布 GPT-5，在 MMLU、GPQA 等多项权威基准测试中全面超越 Claude 3.7 Sonnet，推理能力提升 40%，视觉理解达到新高度。API 定价约为 GPT-4o 的 3 倍。</div>
+          <div class="metrics">
+            <div><div class="met-val" style="color:#fbbf24">92.3%</div><div class="met-lbl">MMLU</div></div>
+            <div><div class="met-val" style="color:#fbbf24">+40%</div><div class="met-lbl">推理提升</div></div>
+            <div><div class="met-val" style="color:#fbbf24">$15/M</div><div class="met-lbl">Input Token</div></div>
+          </div>
+        </div>
+        <div class="feat-r">
+          <div class="feat-stat"><div class="feat-num">92.3%</div><div class="feat-desc">MMLU · 超前代 8pp</div></div>
+          <div class="feat-div"></div>
+          <div class="feat-stat"><div class="feat-num">+40%</div><div class="feat-desc">推理能力提升幅度</div></div>
+          <div class="feat-div"></div>
+          <div class="feat-stat"><div class="feat-num">$15/M</div><div class="feat-desc">输入 Token 定价</div></div>
+          <div class="feat-div"></div>
+          <div class="feat-stat"><div class="feat-num">86%</div><div class="feat-desc">AIME 2025 数学评测</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teamily s4 -->
+  <div class="card-wrap s4" data-delay="150">
+    <div class="card" data-accent="#34d399" data-accent2="#22d3ee" data-heat="5" data-idx="1"
+         data-title="Teamily AI 完成 2000 万美元 A 轮，Human-AI 社交获热捧"
+         data-summary="AI Agent 以平等成员身份加入群聊并拥有持久记忆，增强版 2 月 14 日上线，订阅 19.9 美元/月。"
+         data-content="Teamily AI 今日宣布完成 2000 万美元 A 轮融资，AI Agent 以平等成员身份加入群聊并拥有持久记忆能力。&#10;&#10;产品核心：每个 AI Agent 拥有独立「记忆档案」，可记录与不同用户的互动历史，实现真正的个性化交流。AI 不再是被动响应的工具，而是可以主动发起话题、分享信息的群聊参与者。&#10;&#10;2 月 14 日发布增强版，新增情感感知功能。订阅价格 19.9 美元/月。"
+         data-context="Teamily AI 是 Human-AI 社交网络赛道的代表性创业公司，区别于传统 AI 助手的核心在于：AI 不再是一对一的私人工具，而是可以融入人类群体社交的平等参与者，拥有跨对话的持久记忆。"
+         data-cats='["funding"]' data-tags='["teamily","social-ai"]'>
+      <div class="spec"></div><div class="spot"></div><div class="conic"></div>
+      <div class="arr">↗</div>
+      <div class="card-inner" style="padding:32px 28px 26px">
+        <div class="card-icon" style="background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(52,211,153,.08));border:1px solid rgba(52,211,153,.2)">💬</div>
+        <div class="ctx-pill">🏷 初创背景</div>
+        <div class="cats"><span class="cat cat-funding">融资</span><span class="heat">🔥🔥🔥🔥🔥</span></div>
+        <div class="card-title">Teamily AI 完成 2000 万美元 A 轮</div>
+        <div class="card-desc">Human-AI 社交网络，AI Agent 以平等成员加入群聊，持久记忆跨对话。订阅 $19.9/月。</div>
+        <div class="metrics">
+          <div><div class="met-val" style="color:#34d399">$20M</div><div class="met-lbl">融资额</div></div>
+          <div><div class="met-val" style="color:#34d399">$19.9</div><div class="met-lbl">/月订阅</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Qwen3 s4 -->
+  <div class="card-wrap s4" data-delay="300">
+    <div class="card" data-accent="#60a5fa" data-accent2="#818cf8" data-heat="5" data-idx="2"
+         data-title="阿里 Qwen3 发布，开源 MoE 性能首超 GPT-4o"
+         data-summary="Qwen3-235B-A22B 激活参数仅 22B，LiveCodeBench 代码和 MATH-500 数学评测首超 GPT-4o，Apache 2.0 开源可商用。"
+         data-content="阿里巴巴今日发布 Qwen3 系列，旗舰 MoE 版本 Qwen3-235B-A22B 拥有 2350 亿总参数，每次推理仅激活约 220 亿参数。&#10;&#10;性能亮点：&#10;· LiveCodeBench 代码生成超越 GPT-4o 约 4pp&#10;· MATH-500 数学评测达到 92.1%&#10;· 中文、日文等亚洲语言理解尤为突出&#10;&#10;全系列以 Apache 2.0 开源许可发布，可商用，已上传 Hugging Face。"
+         data-cats='["model"]' data-tags='["alibaba","qwen","open-source","moe"]'>
+      <div class="spec"></div><div class="spot"></div><div class="conic"></div>
+      <div class="arr">↗</div>
+      <div class="card-inner" style="padding:32px 28px 26px">
+        <div class="card-icon" style="background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(96,165,250,.08));border:1px solid rgba(96,165,250,.2)">🧠</div>
+        <div class="cats"><span class="cat cat-model">模型</span><span class="cat" style="background:rgba(96,165,250,.1);color:#60a5fa;border:1px solid rgba(96,165,250,.2)">开源</span><span class="heat">🔥🔥🔥🔥🔥</span></div>
+        <div class="card-title">阿里 Qwen3 发布，开源 MoE 首超 GPT-4o</div>
+        <div class="card-desc">235B 参数仅激活 22B，代码 / 数学多项评测超 GPT-4o，Apache 2.0 商用友好。</div>
+        <div class="metrics">
+          <div><div class="met-val" style="color:#60a5fa">92.1%</div><div class="met-lbl">MATH-500</div></div>
+          <div><div class="met-val" style="color:#60a5fa">22B</div><div class="met-lbl">激活参数</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Elys s4 -->
+  <div class="card-wrap s4" data-delay="120">
+    <div class="card" data-accent="#a78bfa" data-accent2="#f472b6" data-heat="4" data-idx="3"
+         data-title="Elys 完成 3000 万美元 A 轮，阿里蚂蚁领投 AI 社交新星"
+         data-summary="深圳初创 Natural Selection 旗下 AI 社交网络，上下文记忆 + AI 推荐引擎，创始人 Tristan 此前做过 AI 伴侣产品 EVE。"
+         data-content="深圳初创公司 Natural Selection 今日宣布旗下 AI 社交网络产品 Elys 完成 3000 万美元 Series A，阿里巴巴与蚂蚁集团联合领投。&#10;&#10;产品路线：跨会话的上下文记忆系统 + 基于行为图谱的 AI 推荐引擎。此前曾推出 AI 伴侣产品 EVE 积累用户基础。&#10;&#10;创始人 Tristan 表示，目标是让 AI 成为用户社交生活的自然延伸，而非独立工具。"
+         data-context="Elys 与 Teamily AI 有一定重叠，但 Elys 更强调「记忆+推荐」个性化能力，Teamily 更聚焦群聊参与体验。创始人 Tristan 有连续创业背景。"
+         data-cats='["funding"]' data-tags='["elys","alibaba","shenzhen"]'>
+      <div class="spec"></div><div class="spot"></div><div class="conic"></div>
+      <div class="arr">↗</div>
+      <div class="card-inner" style="padding:32px 28px 26px">
+        <div class="card-icon" style="background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(167,139,250,.08));border:1px solid rgba(167,139,250,.2)">🌐</div>
+        <div class="ctx-pill">🏷 初创背景</div>
+        <div class="cats"><span class="cat cat-funding">融资</span><span class="heat">🔥🔥🔥🔥</span></div>
+        <div class="card-title">Elys 完成 3000 万美元 A 轮</div>
+        <div class="card-desc">阿里 + 蚂蚁领投，上下文记忆 + AI 推荐，深圳初创，创始人 Tristan。</div>
+        <div class="metrics">
+          <div><div class="met-val" style="color:#a78bfa">$30M</div><div class="met-lbl">融资额</div></div>
+          <div><div class="met-val" style="color:#a78bfa">A 轮</div><div class="met-lbl">阶段</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Claude s4 -->
+  <div class="card-wrap s4" data-delay="240">
+    <div class="card" data-accent="#60a5fa" data-accent2="#34d399" data-heat="4" data-idx="4"
+         data-title="Anthropic Claude 3.7 Extended Thinking 发布"
+         data-summary="支持最高 100K 思考 token，AIME 2025 从 68.4% 跃升至 80.2%，用户可查看部分推理过程。"
+         data-content="Anthropic 今日宣布 Claude 3.7 Sonnet 正式支持 Extended Thinking 模式，最高 100K 思考 token，并可查看部分推理过程。&#10;&#10;评测结果：&#10;· AIME 2025: 68.4% → 80.2%&#10;· SWE-bench Verified（代码修复）: 62.1%&#10;· 编码场景响应时间增加约 15 秒"
+         data-cats='["model"]' data-tags='["anthropic","claude","reasoning"]'>
+      <div class="spec"></div><div class="spot"></div><div class="conic"></div>
+      <div class="arr">↗</div>
+      <div class="card-inner" style="padding:32px 28px 26px">
+        <div class="card-icon" style="background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(96,165,250,.08));border:1px solid rgba(96,165,250,.2)">💡</div>
+        <div class="cats"><span class="cat cat-model">模型</span><span class="heat">🔥🔥🔥🔥</span></div>
+        <div class="card-title">Claude 3.7 Extended Thinking</div>
+        <div class="card-desc">最高 100K 思考 token，AIME 从 68% 跃升 80%，可查看推理过程。</div>
+        <div class="metrics">
+          <div><div class="met-val" style="color:#60a5fa">80.2%</div><div class="met-lbl">AIME 2025</div></div>
+          <div><div class="met-val" style="color:#60a5fa">100K</div><div class="met-lbl">思考 Token</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AlphaFold s4 -->
+  <div class="card-wrap s4" data-delay="360">
+    <div class="card" data-accent="#f472b6" data-accent2="#a78bfa" data-heat="4" data-idx="5"
+         data-title="DeepMind 发布 AlphaFold 3 开放版，支持小分子设计"
+         data-summary="新增蛋白质-配体、RNA 结构预测，批量 API 免费开放给全球科研机构，药物发现周期有望从年缩至月。"
+         data-content="Google DeepMind 宣布 AlphaFold 3 开放研究版本正式对全球科研机构免费开放。&#10;&#10;新增能力：&#10;· 蛋白质-配体（小分子）复合物结构预测&#10;· RNA 三维结构预测&#10;· 抗体-抗原结合模式预测&#10;&#10;批量预测 API 可一次性提交数千个序列，药物发现流程可从数年缩短至数月。"
+         data-cats='["research"]' data-tags='["deepmind","alphafold","biotech"]'>
+      <div class="spec"></div><div class="spot"></div><div class="conic"></div>
+      <div class="arr">↗</div>
+      <div class="card-inner" style="padding:32px 28px 26px">
+        <div class="card-icon" style="background:linear-gradient(135deg,rgba(244,114,182,.2),rgba(244,114,182,.08));border:1px solid rgba(244,114,182,.2)">🧬</div>
+        <div class="cats"><span class="cat cat-research">研究</span><span class="heat">🔥🔥🔥🔥</span></div>
+        <div class="card-title">AlphaFold 3 开放版，支持小分子设计</div>
+        <div class="card-desc">蛋白质-配体、RNA 结构预测，批量 API 免费开放，药物发现从年缩至月。</div>
+        <div class="metrics">
+          <div><div class="met-val" style="color:#f472b6">免费</div><div class="met-lbl">科研开放</div></div>
+          <div><div class="met-val" style="color:#f472b6">3x</div><div class="met-lbl">覆盖结构类型</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /bento -->
+</main>
+
+<!-- SHEET MODAL -->
+<div class="overlay" id="overlay" onclick="closeIf(event)">
+  <div class="sheet" id="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-bar" id="sbar"></div>
+    <div class="close-x" onclick="closeSheet()">✕</div>
+    <div class="sh-head">
+      <div class="sh-cats" id="scats"></div>
+      <div class="sh-title" id="stitle"></div>
+    </div>
+    <div class="sh-body">
+      <div class="sh-sum" id="ssum"></div>
+      <div class="sh-content" id="scontent"></div>
+      <div class="sh-ctx" id="sctx">
+        <div class="sh-ctx-label">📌 背景</div>
+        <div class="sh-ctx-text" id="sctxt"></div>
+      </div>
+    </div>
+    <div class="sh-foot">
+      <a class="sa sa-p" id="slink" href="#" target="_blank">↗ 阅读原文</a>
+      <button class="sa sa-g" onclick="closeSheet()">关闭</button>
+      <div class="sh-nav">
+        <div class="narr" onclick="nav(-1)">←</div>
+        <div class="narr" onclick="nav(1)">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="hl">▶</span> ai-daily · glass 3d v0.3
+  <span style="margin:0 8px;opacity:.3">·</span>
+  2026.03.01 · prototype · 样板页面不影响主站
+</footer>
+
+<script>
+/* ── PARTICLES ─────────────────────────────────────────── */
+(function(){
+  const wrap=document.getElementById('particles');
+  for(let i=0;i<38;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const sz=Math.random()*2.5+.5;
+    p.style.cssText=`
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${sz}px;height:${sz}px;
+      opacity:${Math.random()*.28+.04};
+      animation:particleDrift ${Math.random()*30+20}s ease-in-out infinite;
+      animation-delay:${Math.random()*-30}s;
+    `;
+    wrap.appendChild(p);
+  }
+})();
+
+/* ── WORD REVEAL ───────────────────────────────────────── */
+(function(){
+  const el=document.getElementById('heroTitle');
+  // rebuild preserving .gr span
+  const html=el.innerHTML;
+  const temp=document.createElement('div');
+  temp.innerHTML=html;
+  const newHtml=Array.from(temp.childNodes).map(n=>{
+    if(n.nodeType===3){
+      return n.textContent.split(' ').filter(w=>w).map(w=>`<span class="word">${w}</span>`).join(' ');
+    } else {
+      // .gr span — wrap its words
+      const inner=n.textContent.split(' ').filter(w=>w).map(w=>`<span class="word" style="background:linear-gradient(130deg,#60a5fa,#a78bfa 45%,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${w}</span>`).join(' ');
+      return `<span>${inner}</span>`;
+    }
+  }).join(' ');
+  el.innerHTML=newHtml;
+  const words=el.querySelectorAll('.word');
+  words.forEach((w,i)=>{
+    setTimeout(()=>w.classList.add('vis'),200+i*70);
+  });
+})();
+
+/* ── STAGGER ENTRY ─────────────────────────────────────── */
+document.querySelectorAll('.card-wrap[data-delay]').forEach(wrap=>{
+  const delay=parseInt(wrap.dataset.delay||0);
+  setTimeout(()=>wrap.classList.add('entered'),400+delay);
+});
+
+/* ── 3D TILT + SPOTLIGHT + CONIC BORDER ────────────────── */
+document.querySelectorAll('.card-wrap').forEach(wrap=>{
+  const card=wrap.querySelector('.card');
+  if(!card)return;
+
+  const accentColor=card.dataset.accent||'rgba(255,255,255,0.3)';
+  const accentAlt=card.dataset.accent2||accentColor;
+  const spot=card.querySelector('.spot');
+  const conic=card.querySelector('.conic');
+  const arrEl=card.querySelector('.arr');
+  const iconEl=card.querySelector('.card-icon');
+
+  let mx=0.5,my=0.5,hovering=false;
+
+  function updateTransform(){
+    const rx=(my-0.5)*-18;
+    const ry=(mx-0.5)*18;
+    if(hovering){
+      card.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px) scale(1.02)`;
+      card.style.boxShadow=`
+        0 40px 80px -20px rgba(0,0,0,.5),
+        0 0 0 1px rgba(255,255,255,.08),
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 0 60px -10px ${accentColor}28
+      `;
+      if(arrEl){arrEl.style.background=`${accentColor}18`;arrEl.style.borderColor=`${accentColor}32`;arrEl.style.color=accentColor;arrEl.style.transform='translate(2px,-2px)'}
+      if(iconEl){iconEl.style.boxShadow=`0 0 28px ${accentColor}22`}
+    } else {
+      card.style.transform='perspective(1000px) rotateX(0) rotateY(0) translateZ(0) scale(1)';
+      card.style.boxShadow='0 20px 50px -15px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.05),inset 0 1px 0 rgba(255,255,255,.08)';
+      if(arrEl){arrEl.style.background='rgba(255,255,255,.04)';arrEl.style.borderColor='rgba(255,255,255,.06)';arrEl.style.color='rgba(255,255,255,.22)';arrEl.style.transform=''}
+      if(iconEl){iconEl.style.boxShadow='none'}
+    }
+  }
+
+  wrap.addEventListener('mousemove',e=>{
+    const r=wrap.getBoundingClientRect();
+    mx=(e.clientX-r.left)/r.width;
+    my=(e.clientY-r.top)/r.height;
+
+    // Spotlight
+    if(spot){spot.style.background=`radial-gradient(600px circle at ${mx*100}% ${my*100}%,${accentColor}18,transparent 50%)`}
+
+    // Conic border glow
+    if(conic){
+      const deg=mx*360;
+      conic.style.background=`conic-gradient(from ${deg}deg at ${mx*100}% ${my*100}%,${accentColor}70,transparent 25%,${accentAlt}50,transparent 50%)`;
+    }
+
+    if(hovering){
+      card.classList.add('hovering');
+      updateTransform();
+    }
+  });
+
+  wrap.addEventListener('mouseenter',()=>{
+    hovering=true;
+    card.classList.add('hovering');
+    // pause float
+    card.style.animationPlayState='paused';
+    updateTransform();
+  });
+
+  wrap.addEventListener('mouseleave',()=>{
+    hovering=false;mx=0.5;my=0.5;
+    card.classList.remove('hovering');
+    card.style.animationPlayState='running';
+    if(spot)spot.style.background='';
+    updateTransform();
+  });
+
+  // Click opens modal
+  card.addEventListener('click',()=>openSheet(card));
+
+  // Float animation — staggered delay
+  const floatDelay=parseInt(wrap.dataset.delay||0)*-0.002;
+  card.style.animationDelay=`${floatDelay}s`;
+});
+
+/* ── LIQUID GLASS — SVG feDisplacementMap (GlassSurface) ── */
+(function(){
+  // Check support: backdrop-filter: url() only works in Chrome/Edge
+  const supportsUrlFilter = (() => {
+    if(typeof CSS === 'undefined') return false;
+    const d = document.createElement('div');
+    d.style.backdropFilter = 'url(#x)';
+    return d.style.backdropFilter !== '';
+  })();
+
+  // SVG filter container
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svgDefs = document.createElementNS(svgNS,'svg');
+  svgDefs.setAttribute('style','position:absolute;width:0;height:0;pointer-events:none');
+  svgDefs.setAttribute('aria-hidden','true');
+  document.body.appendChild(svgDefs);
+
+  function makeDisplacementMap(w, h, br=22) {
+    const edge = Math.min(w,h) * 0.035;
+    return 'data:image/svg+xml,' + encodeURIComponent(
+      `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rg" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#0000"/>
+            <stop offset="100%" stop-color="red"/>
+          </linearGradient>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0000"/>
+            <stop offset="100%" stop-color="blue"/>
+          </linearGradient>
+        </defs>
+        <rect width="${w}" height="${h}" fill="black"/>
+        <rect width="${w}" height="${h}" rx="${br}" fill="url(#rg)"/>
+        <rect width="${w}" height="${h}" rx="${br}" fill="url(#bg)" style="mix-blend-mode:difference"/>
+        <rect x="${edge}" y="${edge}" width="${w-edge*2}" height="${h-edge*2}" rx="${br}" fill="hsl(0 0% 50%/.93)" style="filter:blur(11px)"/>
+      </svg>`
+    );
+  }
+
+  function buildFilter(id, w, h) {
+    // Remove existing
+    const old = document.getElementById(id);
+    if(old) old.parentNode.removeChild(old);
+
+    const defs = document.createElementNS(svgNS,'defs');
+    const filter = document.createElementNS(svgNS,'filter');
+    filter.setAttribute('id', id);
+    filter.setAttribute('colorInterpolationFilters','sRGB');
+    filter.setAttribute('x','0%');filter.setAttribute('y','0%');
+    filter.setAttribute('width','100%');filter.setAttribute('height','100%');
+
+    const mapHref = makeDisplacementMap(w, h);
+
+    const feImg = document.createElementNS(svgNS,'feImage');
+    feImg.setAttribute('id', id+'-img');
+    feImg.setAttribute('href', mapHref);
+    feImg.setAttribute('x','0');feImg.setAttribute('y','0');
+    feImg.setAttribute('width','100%');feImg.setAttribute('height','100%');
+    feImg.setAttribute('preserveAspectRatio','none');
+    feImg.setAttribute('result','map');
+
+    // R channel: scale -180
+    const dmR = document.createElementNS(svgNS,'feDisplacementMap');
+    dmR.setAttribute('in','SourceGraphic');dmR.setAttribute('in2','map');
+    dmR.setAttribute('scale','-180');
+    dmR.setAttribute('xChannelSelector','R');dmR.setAttribute('yChannelSelector','G');
+    dmR.setAttribute('result','dispR');
+    const cmR = document.createElementNS(svgNS,'feColorMatrix');
+    cmR.setAttribute('in','dispR');cmR.setAttribute('type','matrix');
+    cmR.setAttribute('values','1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0');
+    cmR.setAttribute('result','red');
+
+    // G channel: scale -170
+    const dmG = document.createElementNS(svgNS,'feDisplacementMap');
+    dmG.setAttribute('in','SourceGraphic');dmG.setAttribute('in2','map');
+    dmG.setAttribute('scale','-170');
+    dmG.setAttribute('xChannelSelector','R');dmG.setAttribute('yChannelSelector','G');
+    dmG.setAttribute('result','dispG');
+    const cmG = document.createElementNS(svgNS,'feColorMatrix');
+    cmG.setAttribute('in','dispG');cmG.setAttribute('type','matrix');
+    cmG.setAttribute('values','0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0');
+    cmG.setAttribute('result','green');
+
+    // B channel: scale -160
+    const dmB = document.createElementNS(svgNS,'feDisplacementMap');
+    dmB.setAttribute('in','SourceGraphic');dmB.setAttribute('in2','map');
+    dmB.setAttribute('scale','-160');
+    dmB.setAttribute('xChannelSelector','R');dmB.setAttribute('yChannelSelector','G');
+    dmB.setAttribute('result','dispB');
+    const cmB = document.createElementNS(svgNS,'feColorMatrix');
+    cmB.setAttribute('in','dispB');cmB.setAttribute('type','matrix');
+    cmB.setAttribute('values','0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0');
+    cmB.setAttribute('result','blue');
+
+    // Composite R+G+B via screen blend
+    const blendRG = document.createElementNS(svgNS,'feBlend');
+    blendRG.setAttribute('in','red');blendRG.setAttribute('in2','green');
+    blendRG.setAttribute('mode','screen');blendRG.setAttribute('result','rg');
+
+    const blendRGB = document.createElementNS(svgNS,'feBlend');
+    blendRGB.setAttribute('in','rg');blendRGB.setAttribute('in2','blue');
+    blendRGB.setAttribute('mode','screen');blendRGB.setAttribute('result','output');
+
+    const gauss = document.createElementNS(svgNS,'feGaussianBlur');
+    gauss.setAttribute('in','output');gauss.setAttribute('stdDeviation','0.7');
+
+    [feImg,dmR,cmR,dmG,cmG,dmB,cmB,blendRG,blendRGB,gauss].forEach(n=>filter.appendChild(n));
+    defs.appendChild(filter);
+    svgDefs.appendChild(defs);
+  }
+
+  let cardIdx = 0;
+  document.querySelectorAll('.card').forEach(card=>{
+    const fid = 'glass-f-' + (cardIdx++);
+    card.dataset.filterId = fid;
+
+    function applyFilter() {
+      const r = card.getBoundingClientRect();
+      const w = Math.round(r.width) || 400;
+      const h = Math.round(r.height) || 300;
+      buildFilter(fid, w, h);
+      if(supportsUrlFilter) {
+        card.style.backdropFilter = `url(#${fid}) saturate(1.5)`;
+        card.style.webkitBackdropFilter = `url(#${fid}) saturate(1.5)`;
+      }
+    }
+
+    // Delay first build until card is visible and has dimensions
+    setTimeout(applyFilter, 800);
+
+    // Rebuild on resize
+    const ro = new ResizeObserver(()=>setTimeout(applyFilter,0));
+    ro.observe(card);
+  });
+})();
+
+/* ── FILTER CHIPS ──────────────────────────────────────── */
+document.querySelectorAll('.fbar .fc').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.fbar .fc').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+  });
+});
+
+/* ── MODAL ─────────────────────────────────────────────── */
+const cards=Array.from(document.querySelectorAll('.card[data-idx]'));
+let cur=0;
+
+const catMap={
+  model:   {l:'模型',c:'cat-model'},
+  product: {l:'产品',c:'cat-product'},
+  funding: {l:'融资',c:'cat-funding'},
+  finance: {l:'财务',c:'cat-finance'},
+  research:{l:'研究',c:'cat-research'},
+  policy:  {l:'政策',c:'cat-policy'},
+  event:   {l:'事件',c:'cat-event'},
+};
+
+function renderSheet(el){
+  const cats=JSON.parse(el.dataset.cats||'[]');
+  document.getElementById('scats').innerHTML=cats.map(c=>{
+    const m=catMap[c]||{l:c,c:'cat-event'};
+    return `<span class="cat ${m.c}">${m.l}</span>`;
+  }).join('');
+  document.getElementById('stitle').textContent=el.dataset.title||'';
+  document.getElementById('ssum').textContent=el.dataset.summary||'';
+  const raw=(el.dataset.content||'').replace(/&#10;/g,'\n');
+  document.getElementById('scontent').innerHTML=raw.split('\n\n').map(p=>`<p>${p}</p>`).join('');
+  const ctx=el.dataset.context||'';
+  const ctxEl=document.getElementById('sctx');
+  ctxEl.style.display=ctx?'block':'none';
+  document.getElementById('sctxt').textContent=ctx;
+  const heat=parseInt(el.dataset.heat||3);
+  document.getElementById('sbar').style.setProperty('--prog',(heat*20)+'%');
+}
+
+function openSheet(el){
+  cur=parseInt(el.dataset.idx);
+  renderSheet(el);
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeIf(e){if(e.target===document.getElementById('overlay'))closeSheet()}
+function nav(d){
+  cur=(cur+d+cards.length)%cards.length;
+  renderSheet(cards[cur]);
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeSheet();
+  if(e.key==='ArrowRight')nav(1);
+  if(e.key==='ArrowLeft')nav(-1);
+});
+</script>
+</body>
+</html>

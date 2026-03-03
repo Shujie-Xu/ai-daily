@@ -1,222 +1,160 @@
 {
-  "date": "2026-03-02",
+  "date": "2026-03-03",
   "searchCount": 12,
   "dimensions": "模型/产品/融资/财务/研究/政策/事件",
-  "sourceCount": 20,
+  "sourceCount": 24,
   "articles": [
     {
-      "title": "OpenAI完成史上最大私募融资1100亿美元 估值达8400亿",
-      "summary": "Amazon投500亿、Nvidia投300亿、SoftBank投300亿，OpenAI融后估值高达8400亿美元，创科技史上最大私募纪录。",
-      "url": "https://startupnews.fyi/2026/03/01/openai-raises-110-billion-in-largest-ever-private-tech-funding-round-nvidia-throws-in-30-billion-ai-startup-now-valued-at-730-billion/",
-      "best_url": "https://www.techspot.com/news/111510-openai-lands-record-110-billion-investment-backed-nvidia.html",
-      "full_content": "2026年2月27日，OpenAI宣布完成史上规模最大的私募融资，总额高达1100亿美元，融后估值达到8400亿美元（含本轮融资前估值7300亿），一举成为人类历史上最高估值的未上市科技公司。\n\n本轮融资由三大巨头领投：亚马逊出资500亿美元（其中150亿即时到位，另350亿按里程碑分批注入），英伟达投入300亿美元，软银追加300亿美元。三家投资方同时押注一家AI公司，在科技史上属于前所未有的奇观。\n\n伴随资金而来的是重要基础设施协议：OpenAI与英伟达就下一代Vera Rubin GPU架构达成重量级算力承诺；与亚马逊AWS的合作也大幅扩大，将OpenAI的工作负载深度整合进AWS云基础设施。分析人士指出，这笔融资不仅是资金层面的胜利，更是算力版图的战略重组。\n\n本轮完成后，OpenAI正式开启冲刺IPO的最终阶段，市场预期其有望在2026年下半年完成上市。CEO萨姆·奥尔特曼表示，此次融资将推动AI普惠化进程，让全球更多用户和企业用得起顶尖AI能力。",
+      "title": "Anthropic被五角大楼列为供应链风险，美国政府机构转向OpenAI",
+      "summary": "美国防部与Anthropic谈判破裂，将其列为供应链风险；OpenAI迅速达成分类环境部署协议，国务院等机构开始切换至OpenAI。",
+      "url": "https://www.nytimes.com/2026/03/01/technology/anthropic-defense-dept-openai-talks.html",
+      "best_url": "https://techcrunch.com/2026/03/01/openai-shares-more-details-about-its-agreement-with-the-pentagon/",
+      "full_content": "美国国防部与Anthropic之间长达数周的谈判于2026年3月1日宣告破裂，事件导火索是双方在AI使用边界上的根本性分歧。Anthropic坚持要求在2亿美元国防合同中明确写入禁止条款：不得将Claude用于大规模国内监控或全自主武器系统。国防部长Pete Hegseth认为这一要求不可接受，随即宣布将Anthropic列为供应链风险，并要求各联邦机构在六个月过渡期内停止使用Anthropic产品。\n\n谈判破裂的消息公开当天，OpenAI迅速填补真空。CEO山姆·奥特曼承认这笔协议\"在舆论上确实显得仓促，不太好看\"，但仍宣布OpenAI已与国防部（在该政府内部被重命名为\"战争部\"）达成协议，允许其模型部署在机密环境中。OpenAI随后发布博客，声称设置了三条红线：不用于大规模国内监控、不直接控制自主武器系统、不用于高风险自动决策。\n\n然而批评者和竞争对手迅速指出，OpenAI的限制条款主要依赖现有法律框架，而非合同层面的强制约束，这与Anthropic追求的硬性合同保护存在根本差异。《The Verge》分析认为，OpenAI在监控问题上选择以现行第四修正案和相关情报法律作为护栏，而非主动写入更严格的合同条款。\n\n国务院随即发出内部备忘录，宣布将\"StateChat\"系统切换至OpenAI的GPT-4.1模型。此事件深刻揭示了硅谷AI公司在承接政府军事合同时，安全伦理原则与商业利益之间难以调和的内在张力，也预示着AI军事化将成为2026年行业最具争议的议题之一。",
       "categories": [
-        "finance",
-        "funding"
-      ],
-      "tags": [
-        "OpenAI",
-        "融资",
-        "Nvidia",
-        "Amazon",
-        "SoftBank"
-      ],
-      "context": "",
-      "heat": 5
-    },
-    {
-      "title": "Block裁员4000人称因AI替代 股价反涨25%引AI洗白争议",
-      "summary": "Jack Dorsey旗下Block宣布裁员近半（约4000人），公开声称AI已能承担大量工作，股价随即大涨25%，引发真裁员还是AI噱头的激烈争论。",
-      "url": "https://www.bloomberg.com/news/articles/2026-03-01/jack-dorsey-s-4-000-job-cuts-at-block-arouse-suspicions-of-ai-washing",
-      "best_url": "https://www.bloomberg.com/news/articles/2026-03-01/jack-dorsey-s-4-000-job-cuts-at-block-arouse-suspicions-of-ai-washing",
-      "full_content": "2026年2月末，金融科技巨头Block（旗下拥有Square、Cash App）宣布裁员约4000人，员工总数从超过10000人骤降至6000人以下，裁员比例接近40%，是Block有史以来最大规模的人员削减。\n\nCEO Jack Dorsey在全员信中罕见地将裁员原因直接归咎于AI：公司打造和使用的各种智能工具，正在催生全新工作模式，使大量岗位失去存在价值。Dorsey表示，与其分批裁员消耗士气，不如一次性彻底完成转型，长痛不如短痛。\n\n值得关注的是，Block的业务基本面并未恶化——2025年营收达62.5亿美元，Cash App月活用户增至5900万，公司还将2026年毛利预期上调至122亿美元。裁员完全出于效率重构而非业绩压力。消息发布后，Block股价盘后飙涨逾25%，Dorsey个人身价单日增加约20亿美元，引发公众对AI洗白的强烈质疑。\n\n此次裁员在硅谷引发激烈争议：一方认为这是AI时代企业转型的必然；另一方批评这是将普通成本削减包装成AI叙事的营销手法，即所谓的AI Washing。Bloomberg以此为题直接发问，叩击AI裁员的真实边界。",
-      "categories": [
-        "event",
-        "finance"
-      ],
-      "tags": [
-        "Block",
-        "裁员",
-        "AI就业",
-        "Jack Dorsey",
-        "AI washing"
-      ],
-      "context": "Block Inc. 是Jack Dorsey联合创立的金融科技公司（旗下有Square、Cash App），2026年2月底宣布将员工总数从约10,000人削减至6,000人以下，成为迄今为止最大规模的AI驱动裁员事件之一，在硅谷引发广泛争议。",
-      "heat": 5
-    },
-    {
-      "title": "Citrini报告《智能置换螺旋》病毒传播 道指单日跌1.66%",
-      "summary": "美国独立研究机构Citrini Research发布警示报告，预言AI大规模替代就业将引发系统性经济危机，该文在社交媒体爆火，导致多家科技股集体抛售。",
-      "url": "https://www.theguardian.com/technology/2026/feb/24/feedback-loop-no-brake-how-ai-doomsday-report-rattled-markets",
-      "best_url": "https://www.businessinsider.com/jack-dorsey-block-ai-job-cuts-impact-2026-3",
-      "full_content": "2月22日，美国独立研究机构Citrini Research发布了一份题为《2028年全球智能危机》的报告，以未来回顾性视角描述了一个由AI驱动的就业崩溃场景：AI大规模提升企业利润，随后裁员浪潮蔓延，消费者基础被掏空，最终演变成系统性金融危机。\n\n报告在推特和Reddit上迅速引发病毒式传播，并与现实中的Block裁员事件形成强烈共鸣。在市场层面，报告发布后欧美科技股出现短暂集中抛售，道琼斯指数单日下跌约1.66%，部分分析师将此次波动与Citrini效应直接挂钩。\n\n知名AI CEO Matt Shumer评论称，Block裁员事件是AI驱动裁员的首批重大案例之一，但绝非最后一个。Citrini的核心论点——AI应用初期带来效率红利，但随着劳动力大规模被替代，经济系统将面临内需萎缩的根本性挑战——正获得越来越多经济学家的关注。\n\n这场由一篇研究报告引发的市场震动，反映出2026年AI焦虑已从学术圈蔓延至资本市场，成为不可忽视的宏观变量。",
-      "categories": [
-        "event",
-        "finance"
-      ],
-      "tags": [
-        "AI就业",
-        "市场恐慌",
-        "Citrini",
-        "经济风险",
-        "舆论"
-      ],
-      "context": "Citrini Research是美国一家独立市场研究机构，其发布的《2028年全球智能危机》报告以未来回顾视角描述了AI大规模置换就业导致消费基础崩溃的反乌托邦场景，在推特/X和Reddit上引发病毒式传播，成为触发近期市场波动的重要因素之一。",
-      "heat": 4
-    },
-    {
-      "title": "DeepSeek V4将发布 对美国芯片商保密优先给华为接入",
-      "summary": "据报道DeepSeek即将推出V4版本（万亿参数MoE，支持100万token上下文），已向华为等国内供应商提供早期接入，有意绕开英伟达等美系芯片。",
-      "url": "https://startupnews.fyi/2026/03/02/deepseek-withholds-latest-ai-model-from-us-chipmakers-including-nvidia/",
-      "best_url": "https://startupnews.fyi/2026/03/02/deepseek-withholds-latest-ai-model-from-us-chipmakers-including-nvidia/",
-      "full_content": "据知情人士透露，中国AI实验室DeepSeek即将推出旗舰模型V4，但与行业惯例截然不同：DeepSeek并未向英伟达等美国芯片制造商提供早期接入权限用于性能优化，而是优先向华为技术等国内供应商开放V4接入。\n\nDeepSeek V4预计是一个万亿参数级MoE架构模型，活跃参数约320亿，支持100万token超长上下文窗口，并原生支持多模态输入。该模型针对华为昇腾芯片进行了专项优化，被外界视为在美国芯片出口管制压力下中国AI生态系统本土化的标志性举措。\n\n截至3月1日，DeepSeek V4仍未正式发布，此前多个预期窗口（春节、2月中旬、2月下旬）均已过去。泄露的基准测试数据显示，V4在代码生成任务上可与国际顶尖闭源模型媲美，且推理成本可能比Kimi K2.5低75%。\n\n此次DeepSeek绕开美国芯片商的举动，被分析人士解读为中美AI技术脱钩进一步加深的信号，也标志着中国AI供应链自主化进程的重要节点。",
-      "categories": [
-        "model",
-        "policy"
-      ],
-      "tags": [
-        "DeepSeek",
-        "V4",
-        "华为",
-        "芯片",
-        "中美AI竞争"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "Meta与Google签订数十亿美元多年TPU芯片协议",
-      "summary": "据The Information报道，Meta与Google达成多年协议，将使用Google Tensor处理器（TPU）开发高级AI模型，双方在算力供应上展开深度合作。",
-      "url": "https://www.thenews.com.pk/latest/1394258-meta-strikes-multi-billion-dollar-ai-chip-deal-with-google-will-the-new-collaboration-pay-off",
-      "best_url": "https://www.thenews.com.pk/latest/1394258-meta-strikes-multi-billion-dollar-ai-chip-deal-with-google-will-the-new-collaboration-pay-off",
-      "full_content": "据The Information最新报道，Meta与Google签订了一项数十亿美元规模的多年芯片协议，Meta将使用Google的张量处理单元（TPU）来开发下一代AI大模型。这是科技行业近年来最具战略意义的算力合作之一。\n\n按照协议，Meta可通过多年期合同获取Google TPU的计算资源，用于训练和推理其AI模型。这一合作对双方均有重要意义：Meta得以在英伟达GPU供应紧张的背景下多元化算力来源；Google则借此确立TPU在云计算市场的竞争地位，同时加深与Meta在AI基础设施上的绑定。\n\n与此同时，AMD也宣布与Meta达成一项约600亿美元的五年期AI算力采购协议，涵盖6吉瓦GPU算力供应，配合此前与OpenAI签订的另一份6吉瓦协议，AMD在AI芯片市场的累计订单规模已达12吉瓦。消息公布后，AMD股价单日上涨8.8%，被市场视为打入英伟达主导市场的重要突破。\n\n这一系列算力布局表明，AI基础设施供应链正在快速多元化，英伟达一家独大的格局正面临来自Google TPU和AMD的双重挑战。",
-      "categories": [
-        "finance",
-        "product"
-      ],
-      "tags": [
-        "Meta",
-        "Google",
-        "TPU",
-        "AI芯片",
-        "算力"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "AMD获Meta约600亿美元五年芯片大单 股价涨8.8%",
-      "summary": "AMD宣布与Meta达成约600亿美元五年期AI芯片供货协议，消息公布后AMD股价单日涨8.8%，在英伟达一家独大的AI芯片市场打入重要楔子。",
-      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/amd-secures-landmark-ai-deal-with-meta-bolstering-long-term-growth/68623169",
-      "best_url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/amd-secures-landmark-ai-deal-with-meta-bolstering-long-term-growth/68623169",
-      "full_content": "AMD宣布与Meta达成一项五年期AI计算基础设施协议，规模约600亿美元，涵盖6吉瓦的GPU算力供应。这是AMD继2025年10月与OpenAI签订另一份6吉瓦协议后，五个月内拿下的第二笔重量级AI算力大单，累计订单总量已达12吉瓦。\n\n消息公布后，AMD股价单日大涨8.8%，市场将其解读为AMD在AI芯片市场的结构性突破。长期以来英伟达几乎垄断高性能AI训练芯片市场，AMD接连斩获OpenAI和Meta两大顶级AI公司的长期订单，标志着AI芯片竞争格局正迎来历史性转变。\n\n从产业逻辑看，大型科技公司同时采购AMD芯片，背后驱动力之一是英伟达H100系列产能持续紧张、交货周期长，企业需要多元化算力供应商来降低供应链风险。AMD的MI300X系列在性价比上具有一定优势，并已获得多家顶级AI实验室验证。\n\n分析师预计，随着AI算力需求持续超出市场预期，AMD将凭借这些大单进入规模效应正循环，进一步强化在HPC和AI训练市场的竞争地位。",
-      "categories": [
-        "finance"
-      ],
-      "tags": [
-        "AMD",
-        "Meta",
-        "AI芯片",
-        "股价",
-        "算力采购"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "英伟达秘密研发专属AI推理芯片 将专供OpenAI使用",
-      "summary": "报道称英伟达正在研发一款全新AI推理芯片，与现有GPU架构不同，专为AI模型响应用户查询优化，据悉或将最快下月亮相，专供OpenAI使用。",
-      "url": "https://siliconangle.com/2026/03/01/report-nvidia-working-top-secret-ai-inference-chip-debut-next-month/",
-      "best_url": "https://siliconangle.com/2026/03/01/report-nvidia-working-top-secret-ai-inference-chip-debut-next-month/",
-      "full_content": "据《华尔街日报》最新报道，英伟达正在秘密研发一款全新的AI推理专用处理器，有望最早于本月在年度开发者大会GTC（圣何塞）上正式亮相，并将优先供应给OpenAI使用。\n\n这款芯片与英伟达现有GPU产品线在架构上存在显著差异：它专为AI推理计算优化，即处理用户向AI模型提交查询时的响应计算，而非模型训练阶段的大规模并行运算。英伟达在开发中整合了其收购的芯片初创公司Groq的核心技术，后者以极致推理速度著称。\n\nAI推理芯片的战略意义正在快速上升。随着ChatGPT等AI应用日活用户突破数亿，推理成本已成为AI服务商最大的运营支出之一。专用推理芯片将帮助OpenAI等公司大幅降低单次对话成本，同时让英伟达在推理市场建立新的护城河，对抗来自AWS Trainium、Google TPU以及专业推理芯片创业公司的竞争。\n\n本次GTC大会被视为英伟达重新定义AI算力产品版图的重要时间节点，市场预期其将正式开启从训练芯片霸主向推理全链路供应商的战略转型。",
-      "categories": [
-        "product",
-        "finance"
-      ],
-      "tags": [
-        "Nvidia",
-        "AI推理",
-        "芯片",
-        "OpenAI",
-        "硬件"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "MiniMax M2.5发布 对标Claude Opus 4.6价格仅1/10",
-      "summary": "国内AI独角兽MiniMax推出M2.5模型，在代码和Agent能力上达到SOTA，定价仅为可比模型的1/10至1/20，对标Anthropic Claude Opus 4.6。",
-      "url": "https://www.minimax.io/news/minimax-m25",
-      "best_url": "https://www.minimax.io/news/minimax-m25",
-      "full_content": "中国AI独角兽MiniMax于3月初正式发布旗舰文本模型M2.5，在代码生成、智能Agent、搜索和办公任务等多项核心基准上达到业界最优水平：SWE-Bench Verified得分80.2%，Multi-SWE-bench得分51.3%，BrowseComp网页浏览理解得分76.3%，综合表现对标甚至超越Anthropic Claude Opus 4.6。\n\nM2.5最大的差异化竞争优势在于价格：提供100 TPS和50 TPS两个版本，输出定价仅为同级别可比模型的1/10至1/20。MiniMax表示，M2.5经过数十万个复杂真实环境的强化学习训练，在分解复杂任务、工具调用和多轮智能体任务执行上具有出色的速度与精准度。\n\nM2.5的发布是2026年3月中国大模型密集发布潮的代表性事件，同期腾讯、阿里、百度、字节跳动亦相继推出多款新模型。在全球AI模型竞争格局中，中国玩家正从追赶者转向价格破坏者，以极致性价比推动AI能力平民化，迫使国际顶尖闭源模型厂商重新审视定价策略。\n\n目前M2.5已对外开放API调用，全球开发者均可接入测试。",
-      "categories": [
-        "model"
-      ],
-      "tags": [
-        "MiniMax",
-        "M2.5",
-        "大模型",
-        "国产AI",
-        "Agent"
-      ],
-      "context": "MiniMax是中国AI独角兽公司，2023年成立，专注于多模态大模型研发，旗下产品覆盖文本、视频、音频等多模态能力。M2.5是其最新旗舰文本模型，主打Agent场景和代码能力，以极低价格与国际顶尖闭源模型竞争，是国产大模型出海的重要代表之一。",
-      "heat": 4
-    },
-    {
-      "title": "字节跳动Seedance 2.0视频生成模型走红 降低专业制作门槛",
-      "summary": "字节跳动发布视频生成模型Seedance 2.0，支持文本、图像、音频和视频多模态输入，面向专业影视、电商广告场景，在中外社交媒体引发广泛关注。",
-      "url": "https://finance.sina.com.cn/stock/t/2026-03-01/doc-inhpnscn9004809.shtml",
-      "best_url": "https://finance.sina.com.cn/stock/t/2026-03-01/doc-inhpnscn9004809.shtml",
-      "full_content": "字节跳动发布新一代视频生成模型Seedance 2.0，主攻专业影视、电商和广告制作场景。该模型支持文本、图像、音频和视频的多模态输入，能够端到端生成高质量视频内容，大幅降低专业影视制作门槛和成本。\n\nSeedance 2.0在国内外社交媒体引发广泛关注：在微博、抖音等平台，用户分享的生成视频案例迅速获得数千万次浏览；在推特、YouTube等海外平台，美国业内人士密切跟踪测评，部分人士认为其视频生成质量可能成为AI视频内容创作的转折点。\n\n与Sora、Runway等国际主流AI视频工具相比，Seedance 2.0在中文语境理解和亚洲视觉风格生成上表现更为自然，并针对短视频和广告行业的快速迭代需求进行了专项优化。这标志着字节跳动在AIGC领域的布局已从文本生成全面延伸至专业级视频制作。\n\n新华社报道指出，Seedance 2.0是2月全球AI技术密集落地趋势的重要组成部分，中国AI企业在视频生成赛道的竞争力正在快速提升，引发国际社会广泛关注。",
-      "categories": [
-        "model",
-        "product"
-      ],
-      "tags": [
-        "字节跳动",
-        "Seedance",
-        "视频生成",
-        "多模态",
-        "AIGC"
-      ],
-      "context": "",
-      "heat": 3
-    },
-    {
-      "title": "四大科技巨头2026年AI基建投入达6550亿美元 同比增60%",
-      "summary": "Alphabet、Amazon、Meta、微软预计2026年合计投入6550亿美元用于AI相关基础设施，较2025年的4100亿美元大幅增长60%，AI军备竞赛持续升温。",
-      "url": "https://www.fool.com/investing/2026/03/01/big-tech-companies-spend-billion-ai-invest/",
-      "best_url": "https://www.fool.com/investing/2026/03/01/big-tech-companies-spend-billion-ai-invest/",
-      "full_content": "根据桥水投资（Bridgewater Associates）2月发布的分析报告，全球四大科技巨头——Alphabet（谷歌母公司）、亚马逊、Meta和微软——预计2026年合计在AI相关基础设施上投入约6550亿美元，相比2025年的4100亿美元增长约60%，创下科技行业单年资本支出的历史纪录。\n\n这一庞大的资本支出主要流向三个方向：大规模GPU算力集群建设、全球数据中心选址与扩容、以及AI电网配套基础设施（包括独立发电和储能设施）。分析师指出，如此体量的投资意味着AI基础设施已不再只是科技公司的竞争工具，而是正在成为与电力、交通并列的国家级战略基础设施。\n\n从具体动向看，亚马逊AWS加速深化与OpenAI的合作并扩大自研推理芯片Trainium部署规模；微软持续加码Azure AI服务；Meta在自建数据中心的同时通过采购Google TPU和AMD芯片分散供应链风险；Alphabet也大幅扩展Google Cloud的AI推理产能。\n\n这场算力军备竞赛的另一个效应是：AI电力需求激增，推动各国政府加速核能和可再生能源发电项目审批，能源转型与AI发展正形成前所未有的联动效应。",
-      "categories": [
-        "finance"
-      ],
-      "tags": [
-        "AI基建",
-        "资本支出",
-        "科技巨头",
-        "数据中心",
-        "算力"
-      ],
-      "context": "",
-      "heat": 3
-    },
-    {
-      "title": "硅谷超41万岗位面临AI冲击 新报告指2026年为就业分水岭",
-      "summary": "Joint Venture Silicon Valley最新《硅谷指数》报告显示，硅谷约41万个岗位涉及AI可执行任务，2026年被认为是AI冲击就业的关键转折年。",
-      "url": "https://www.siliconvalley.com/2026/03/01/more-than-400000-jobs-silicon-valley-exposed-ai-silicon-valley-index/",
-      "best_url": "https://www.siliconvalley.com/2026/03/01/more-than-400000-jobs-silicon-valley-exposed-ai-silicon-valley-index/",
-      "full_content": "联合创业硅谷（Joint Venture Silicon Valley）发布最新版《硅谷指数》报告，揭示了一个令硅谷科技从业者不安的数据：硅谷地区约41万个工作岗位涵盖了AI可以完成的核心任务，占该地区就业人口的相当比例。报告将2026年定性为AI冲击就业市场的关键转折年。\n\n报告并未简单地将这41万岗位等同于将被取代的工作，而是区分了三种情形：AI全面替代（少数岗位）、AI辅助人工（多数岗位）、AI创造新岗位（仍处早期）。研究者认为，短期内最大的风险不是就业总量骤降，而是技能错配和收入分化——掌握AI工具的工人与无法适应者之间的薪资差距将快速拉大。\n\n这份报告与同期的Citrini Research报告、Block裁员事件形成强烈呼应，共同构成了2026年初AI就业焦虑的背景底色。值得注意的是，硅谷本身是AI技术的核心生产地，其从业者面临的结构性风险折射出全球知识型劳动力市场的普遍处境。\n\n报告建议政策制定者加速建立AI职业再培训机制，并呼吁科技公司承担更多社会责任以应对这一转型冲击。",
-      "categories": [
-        "research",
+        "policy",
         "event"
       ],
       "tags": [
-        "AI就业",
-        "硅谷",
-        "报告",
-        "劳动力市场",
-        "未来工作"
+        "Anthropic",
+        "OpenAI",
+        "五角大楼",
+        "AI安全",
+        "军事AI"
+      ],
+      "context": "",
+      "heat": 5
+    },
+    {
+      "title": "英伟达豪掷40亿美元押注光子芯片，投资Lumentum和Coherent各20亿",
+      "summary": "英伟达宣布向光子技术公司Lumentum和Coherent各投资20亿美元，合计40亿，用于共同研发下一代硅光子网络，支撑吉瓦级AI工厂建设。",
+      "url": "https://www.cnbc.com/2026/03/02/nvidia-investment-coherent-lumentum.html",
+      "best_url": "https://www.cnbc.com/2026/03/02/nvidia-investment-coherent-lumentum.html",
+      "full_content": "3月2日，英伟达宣布向两家光子技术公司——Lumentum和Coherent——分别投资20亿美元，合计40亿美元战略投资。这两笔交易均包含多年期战略合作协议和数十亿美元采购承诺，以及未来产能预留权益。\n\n光子技术（Photonics）是利用光子而非电子传输数据的技术路线，具备更高带宽、更低延迟和更低功耗的潜力。随着AI数据中心规模进入\"吉瓦级\"（gigawatt-scale），传统铜缆互联已逐渐成为瓶颈，硅光子网络被业界视为下一代AI基础设施的核心组件。\n\nLumentum是美国领先的光学和光子技术公司，专注于为AI云计算和下一代通信提供光子系统；Coherent同样总部位于美国，主攻高性能光学应用。两家公司在英伟达投资消息公布后股价分别大涨8%和13%。\n\n英伟达CEO黄仁勋表示：\"与Lumentum合作，英伟达正在推进全球最先进的硅光子技术，以构建下一代吉瓦级AI工厂。\"这一布局表明英伟达正从GPU芯片制造商向AI基础设施生态整合者进化，通过战略投资锁定关键供应链。\n\n这40亿美元的光子技术投注，是英伟达近期一系列垂直整合动作的缩影——从芯片到网络互联，再到数据中心整体解决方案，英伟达正系统性地强化其在AI算力生态中的护城河。",
+      "categories": [
+        "finance"
+      ],
+      "tags": [
+        "英伟达",
+        "光子芯片",
+        "Lumentum",
+        "Coherent",
+        "AI基础设施"
+      ],
+      "context": "",
+      "heat": 4
+    },
+    {
+      "title": "MiniMax发布Hailuo 2.3视频模型及全模态Media Agent",
+      "summary": "MiniMax今日发布视频模型Hailuo 2.3，在肢体动作、风格化和微表情方面显著提升，同时将Hailuo Video Agent升级为支持全模态创作的Media Agent，全球同步上线。",
+      "url": "https://www.minimaxi.com/news/minimax-hailuo-23",
+      "best_url": "https://www.minimaxi.com/news/minimax-hailuo-23",
+      "full_content": "3月3日，MiniMax正式发布视频生成模型Hailuo 2.3，并同步推出全模态创作平台Media Agent。Hailuo 2.3基于Hailuo 02迭代升级，在三个关键维度取得突破：一是更复杂的人物肢体动作呈现，运动更流畅自然，精确度和可控性均有提升；二是风格化能力增强，对动漫、插画、水墨、游戏CG等特殊画风支持效果显著改善；三是物体运动指令响应更出色。\n\n在镜头语言层面，Hailuo 2.3在大动态运镜下实现了近乎实拍的光线和色调控制，这对于商业广告和影视制作场景具有重要价值。MiniMax表示，该模型在提升性能的同时保持Hailuo 02的既有定价，并提供生成速度更快的Hailuo 2.3 Fast版本，批量创作成本最高可降低50%。\n\n与此同时，MiniMax将此前的Hailuo Video Agent升级为Media Agent，核心升级是支持\"全模态全能创作\"——用户输入创作需求，系统自动调度文本、图像、视频、音频等多模态模型，一键生成成片。专业用户也可在画布中分步创作，自由上传和融合多种媒体素材。Media Agent已在全球同步上线。\n\nMiniMax于2026年2月发布的M2.5文本模型刚刚登顶全球调用量榜首，此次视频模型和创作平台的组合更新，进一步巩固了其作为全栈AI创作基础设施提供商的战略定位。",
+      "categories": [
+        "model",
+        "product"
+      ],
+      "tags": [
+        "MiniMax",
+        "Hailuo",
+        "AI视频",
+        "多模态",
+        "Media Agent"
+      ],
+      "context": "",
+      "heat": 4
+    },
+    {
+      "title": "中国AI大模型2月Token调用量首次超越美国，四款模型霸占全球前五",
+      "summary": "OpenRouter数据显示，2月中国模型周调用量以4.12万亿Token首超美国2.94万亿，三周内增长127%；MiniMax M2.5、Kimi K2.5、GLM-5、DeepSeek V3.2占据全球前五中的四席。",
+      "url": "https://36kr.com/p/3700980530851712",
+      "best_url": "https://36kr.com/p/3700980530851712",
+      "full_content": "全球最大AI模型API聚合平台OpenRouter的数据显示，2026年2月，中国AI模型在全球调用量上实现了历史性超越。2月9日至15日当周，中国模型以4.12万亿Token的周调用量，首次超越美国模型的2.94万亿Token；到2月16日至22日当周，中国模型调用量进一步冲高至5.16万亿Token，三周内增长127%，而同期美国模型调用量反跌至2.7万亿Token。\n\n这一超越的背后是中国AI厂商的集群式崛起，而非单一爆款。在2月16至22日周榜前五名中，四席被中国模型占据：MiniMax M2.5、月之暗面Kimi K2.5、智谱GLM-5，以及DeepSeek V3.2。其中MiniMax M2.5于2月13日上线，不足一周便登顶调用量榜首，单周贡献增量达1.44万亿Token。Kimi K2.5凭借支持100个Agent并行工作的多模态架构，调用量连续跳涨，月之暗面相关负责人透露，K2.5发布后不到一月的累计收入已超过2025年全年总收入。\n\n值得注意的是，OpenRouter平台用户中美国开发者占47%，中国开发者仅6%，这意味着中国模型的高调用量主要来自海外开发者的主动选择，真实反映了全球市场对中国AI能力的认可。\n\n过去一年，OpenRouter平台前十大模型的总调用量从1.24万亿Token增长至13.95万亿Token，增幅超过10倍，印证了AI应用正以指数级速度落地，而中国厂商正在凭借快速迭代和成本优势在这场全球竞争中抢占先机。",
+      "categories": [
+        "event"
+      ],
+      "tags": [
+        "中国AI",
+        "MiniMax",
+        "Kimi",
+        "DeepSeek",
+        "全球AI竞争"
+      ],
+      "context": "",
+      "heat": 4
+    },
+    {
+      "title": "亚马逊-OpenAI 500亿美元协议SEC文件披露：条件触发与秘密条款",
+      "summary": "GeekWire分析SEC文件揭示亚马逊-OpenAI 500亿美元合作细节：初始投资150亿，额外350亿有附加条件；若联合合作协议终止，350亿承诺随之失效；OpenAI承诺消耗2吉瓦AWS Trainium算力。",
+      "url": "https://www.geekwire.com/2026/filings-how-amazons-50b-openai-deal-actually-works-and-what-theyre-keeping-secret/",
+      "best_url": "https://www.geekwire.com/2026/filings-how-amazons-50b-openai-deal-actually-works-and-what-theyre-keeping-secret/",
+      "full_content": "亚马逊与OpenAI于近期宣布高达500亿美元的战略合作，引发广泛关注。随着相关SEC监管文件公开，GeekWire对协议细节进行了深度拆解，呈现出比新闻发布会更复杂的真实结构。\n\n根据文件，亚马逊的500亿美元投资分两部分：初始150亿美元投资已基本确定，但额外的350亿美元附有特定条件，最关键的是：如果亚马逊与OpenAI签订的联合合作协议（JCA）终止，这350亿美元承诺将自动失效。这意味着这笔巨额投资与双方云服务合作协议深度绑定，并非纯财务投资。\n\n在云服务层面，OpenAI承诺消耗2吉瓦的AWS Trainium芯片算力，吉瓦是衡量计算规模的代理指标，彰显了这笔交易中云算力承购的战略意义。协议还包括OpenAI将为亚马逊的客户facing应用（包括Alexa等）开发定制模型，补充亚马逊自有的Nova模型家族。\n\nSEC文件还揭示了若干保密条款，涉及定价机制、具体触发条件等细节仍未公开。OpenAI此轮融资合计达1100亿美元（包括SoftBank和Nvidia各贡献300亿），估值在包含新资金后达到8400亿美元。这笔创纪录的融资确立了OpenAI作为全球最大科技独角兽的地位，并将其IPO预期推向更高估值区间。",
+      "categories": [
+        "finance"
+      ],
+      "tags": [
+        "OpenAI",
+        "亚马逊",
+        "AWS",
+        "融资",
+        "估值"
+      ],
+      "context": "",
+      "heat": 4
+    },
+    {
+      "title": "SMACK Technologies获3200万美元融资，打造首个国家安全前沿AI实验室",
+      "summary": "SMACK Technologies宣布完成3200万美元种子轮+A轮融资，由Geodesic Capital和Costanoa Ventures等领投，目标成为首个专注国家安全的前沿AI实验室，向美国战争部提供\"决策主导权\"技术。",
+      "url": "https://www.finsmes.com/2026/03/smack-technologies-raises-32m-in-funding.html",
+      "best_url": "https://www.finsmes.com/2026/03/smack-technologies-raises-32m-in-funding.html",
+      "full_content": "总部位于加州埃尔塞贡多的SMACK Technologies于2026年3月2日宣布完成3200万美元融资，资金由种子轮和A轮两笔合并构成，投资方包括Geodesic Capital、Costanoa Ventures、Point72 Ventures、Anomaly Fund和Fortitude Ventures等。\n\n公司由两位前海军陆战队特种作战司令部（MARSOC）成员Andrew Markoff和Clint Alanis联合创立于2024年，两人合计拥有逾二十年的军事服务经验。SMACK的核心使命是将前沿AI技术直接应用于国家安全领域，其产品概念被描述为\"决策主导权\"（Decision Dominance）系统——帮助军事决策者在高压、复杂的战场认知环境下更快速、更准确地处理信息、做出判断。\n\n公司自称是\"首个专为国家安全服务的前沿AI实验室\"，此定位颇具野心。此次融资正值Anthropic被国防部列为供应链风险之际，显示出专门面向政府/国防市场的AI公司在当前政治环境下具有独特的融资吸引力。\n\nSMACK的出现代表了一类新兴的防务科技公司——不仅仅是将通用AI工具销售给政府，而是从立项之初就以军事需求为核心设计AI系统，意图填补通用AI公司因伦理红线而留出的市场空间。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "SMACK Technologies",
+        "国防AI",
+        "军事AI",
+        "融资",
+        "初创公司"
+      ],
+      "context": "SMACK Technologies是2024年由两名前美国海军陆战队特种部队成员创立的AI防务初创公司，专注为美国国防部及盟友提供AI驱动的战场决策系统。公司定位为专门面向机密和国家安全环境的前沿AI实验室，与通用AI公司的政府销售团队形成差异化竞争。",
+      "heat": 3
+    },
+    {
+      "title": "Rowspace完成5000万美元融资，Sequoia领投AI私募决策平台",
+      "summary": "AI投资决策平台Rowspace完成5000万美元种子轮+A轮联合融资，由Sequoia Capital和Emergence Capital共同领投，帮助私募股权等投资机构用AI梳理自有复杂历史数据。",
+      "url": "https://fortune.com/2026/03/02/alfred-lin-sequoia-saas-ai-citrini-research-vertical-software-rowspace/",
+      "best_url": "https://fortune.com/2026/03/02/alfred-lin-sequoia-saas-ai-citrini-research-vertical-software-rowspace/",
+      "full_content": "AI金融决策平台Rowspace于2026年3月2日宣布完成5000万美元融资，由Sequoia Capital和Emergence Capital联合领投，Stripe等知名企业参与其中。此轮融资由种子轮和A轮合并构成，被视为金融垂直AI领域的重要押注信号。\n\nRowspace的核心产品是一套专为投资运营机构设计的AI系统，帮助私募股权、对冲基金等机构梳理多年积累的复杂非结构化数据——包括投资备忘录、交易记录、尽职调查报告等——并以此驱动更智能的投资决策。Sequoia合伙人Alfred Lin亲自参与领投并公开表态，表达了对金融AI垂直赛道长期价值的信心，同时反驳了市场上关于AI将导致\"SaaS末日\"的悲观论调。\n\nRowspace的出现代表了一类新兴的\"AI原生垂直SaaS\"公司——不是将AI功能加在现有软件上，而是以AI为核心重新设计专业领域的工作流。对于私募行业而言，能够有效处理十年以上历史投资数据的AI工具，其潜在价值远超通用大模型。\n\n此次融资发生在\"SaaS末日\"舆论最为喧嚣之时，Sequoia和Emergence Capital的联合背书无疑是一次反向信号——顶级VC仍然相信，有护城河、有数据飞轮、深度嵌入行业工作流的AI应用公司，在AI时代同样具有长期商业价值。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "Rowspace",
+        "金融AI",
+        "Sequoia",
+        "私募股权",
+        "AI SaaS"
+      ],
+      "context": "Rowspace是一家面向投资运营机构（私募股权、对冲基金等）的AI决策平台，核心功能是用AI对机构自有的多年历史投资数据进行智能分析和检索，提升投资团队的信息处理效率和决策质量。",
+      "heat": 3
+    },
+    {
+      "title": "Anthropic上线ChatGPT记忆导入功能，向用户示好加剧竞争格局",
+      "summary": "Anthropic于3月1日宣布Claude可导入ChatGPT用户记忆数据，降低用户迁移门槛；此举被解读为在OpenAI拿下五角大楼合同背景下，Anthropic争取普通用户的重要策略动作。",
+      "url": "https://madhyamamonline.com/technology/anthropic-now-lets-users-import-ai-memory-from-chatgpt-to-claude-1499543",
+      "best_url": "https://www.axios.com/communicators-pro/2026/03/02/anthropic-openai-pentagon-ai-pr",
+      "full_content": "Anthropic于2026年3月1日通过官方Claude Threads账号宣布，用户现可将ChatGPT中存储的AI记忆数据直接导入Claude，功能即时生效。这是Anthropic在激烈竞争格局中的一次主动出击，也是其降低用户迁移成本的战略举措。\n\nAI记忆功能允许聊天机器人记住用户偏好、历史信息和个性化设置，形成更连贯的对话体验。长期使用ChatGPT的用户往往因为\"记忆迁移成本\"而形成路径依赖，此次Anthropic打通这一壁垒，意图直接吸引对ChatGPT有所不满的用户群体。\n\n这一功能发布的时机颇具深意。就在同一周，Anthropic与国防部的合同谈判以失败告终，被列为供应链风险，OpenAI则迅速拿下了这一大单。面对政府市场的重挫，Anthropic转向在消费者市场发力——通过降低迁移门槛、主打\"更有原则的AI公司\"的品牌形象（此前Anthropic曾在超级碗期间投放广告，暗讽OpenAI向ChatGPT引入广告），争取更广泛的普通用户基础。\n\nAxios分析认为，此时Anthropic与OpenAI之间的公关博弈已全面升级：一方在政府合同市场大获全胜，另一方则在品牌调性和用户体验层面强化差异化叙事。这场双巨头之间的战略分化，将深刻影响未来AI行业的竞争格局。",
+      "categories": [
+        "product",
+        "event"
+      ],
+      "tags": [
+        "Anthropic",
+        "Claude",
+        "ChatGPT",
+        "AI记忆",
+        "竞争格局"
       ],
       "context": "",
       "heat": 3

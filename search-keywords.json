@@ -64,6 +64,23 @@
       ]
     },
     {
+      "id": "tier1_sources",
+      "label": "Tier-1 来源直搜（news-sources.json 中 tier=1 的媒体）",
+      "note": "直接从权威来源站点搜索，比通用关键词更精准。新增来源请同步修改 news-sources.json。",
+      "queries": [
+        "site:venturebeat.com AI",
+        "site:technologyreview.com artificial intelligence",
+        "site:therundown.ai",
+        "site:tldr.tech AI",
+        "site:bensbites.co",
+        "site:qbitai.com",
+        "site:jiqizhixin.com",
+        "site:latepost.com AI OR 人工智能",
+        "site:news.crunchbase.com AI raises",
+        "site:paperswithcode.com"
+      ]
+    },
+    {
       "id": "custom",
       "label": "自定义关注（小妈妈随时添加）",
       "note": "在这里加新的搜索词，下次日报就会覆盖。格式和上方一样，每条 query 是一个字符串。",

@@ -1,0 +1,103 @@
+{
+  "updated": "2026-03-04",
+  "note": "AI 新闻来源库。tier 1=最权威/最快，tier 2=重要补充，tier 3=参考。cron 搜索时优先使用 tier 1 来源的 site: 搜索。",
+
+  "sources": [
+
+    {
+      "group": "🔵 官方博客（一手信息，最快）",
+      "items": [
+        { "name": "OpenAI Blog",         "url": "https://openai.com/blog",                "site": "openai.com",           "tier": 1 },
+        { "name": "Anthropic News",       "url": "https://anthropic.com/news",             "site": "anthropic.com",        "tier": 1 },
+        { "name": "Google DeepMind Blog", "url": "https://deepmind.google/blog",           "site": "deepmind.google",      "tier": 1 },
+        { "name": "Google AI Blog",       "url": "https://blog.google/technology/ai",      "site": "blog.google",          "tier": 1 },
+        { "name": "Meta AI Blog",         "url": "https://ai.meta.com/blog",               "site": "ai.meta.com",          "tier": 1 },
+        { "name": "Microsoft AI Blog",    "url": "https://blogs.microsoft.com/ai",         "site": "blogs.microsoft.com",  "tier": 1 },
+        { "name": "Hugging Face Blog",    "url": "https://huggingface.co/blog",            "site": "huggingface.co",       "tier": 1 },
+        { "name": "Mistral Blog",         "url": "https://mistral.ai/news",                "site": "mistral.ai",           "tier": 1 },
+        { "name": "xAI / Grok",          "url": "https://x.ai/news",                      "site": "x.ai",                 "tier": 1 }
+      ]
+    },
+
+    {
+      "group": "🟡 AI 专业媒体（高质量、快）",
+      "items": [
+        { "name": "The Information AI",  "url": "https://www.theinformation.com",          "site": "theinformation.com",   "tier": 1, "note": "付费，但摘要可抓" },
+        { "name": "VentureBeat AI",      "url": "https://venturebeat.com/ai",              "site": "venturebeat.com",      "tier": 1 },
+        { "name": "MIT Technology Review AI", "url": "https://www.technologyreview.com/topic/artificial-intelligence", "site": "technologyreview.com", "tier": 1 },
+        { "name": "Wired AI",            "url": "https://www.wired.com/tag/artificial-intelligence", "site": "wired.com", "tier": 2 },
+        { "name": "TechCrunch AI",       "url": "https://techcrunch.com/category/artificial-intelligence", "site": "techcrunch.com", "tier": 1 },
+        { "name": "The Verge AI",        "url": "https://www.theverge.com/ai-artificial-intelligence", "site": "theverge.com", "tier": 2 },
+        { "name": "Ars Technica AI",     "url": "https://arstechnica.com/ai",              "site": "arstechnica.com",      "tier": 2 }
+      ]
+    },
+
+    {
+      "group": "📧 Newsletter（策划质量高，稍慢1-6h）",
+      "items": [
+        { "name": "The Rundown AI",      "url": "https://www.therundown.ai",               "site": "therundown.ai",        "tier": 1, "note": "每日AI摘要，覆盖广" },
+        { "name": "TLDR AI",             "url": "https://tldr.tech/ai",                    "site": "tldr.tech",            "tier": 1, "note": "简洁，开发者向" },
+        { "name": "Ben's Bites",         "url": "https://bensbites.co",                    "site": "bensbites.co",         "tier": 1, "note": "VC/产品视角" },
+        { "name": "The Batch (Andrew Ng)","url": "https://www.deeplearning.ai/the-batch",  "site": "deeplearning.ai",      "tier": 1 },
+        { "name": "Import AI (Jack Clark)","url": "https://importai.substack.com",         "site": "importai.substack.com","tier": 2, "note": "研究向，每周" },
+        { "name": "AI Breakfast",        "url": "https://aibreakfast.beehiiv.com",         "site": "aibreakfast.beehiiv.com","tier": 2 },
+        { "name": "Superhuman AI",       "url": "https://www.superhuman.ai",               "site": "superhuman.ai",        "tier": 2 }
+      ]
+    },
+
+    {
+      "group": "🟢 中文媒体（国内动态最快）",
+      "items": [
+        { "name": "量子位",              "url": "https://www.qbitai.com",                  "site": "qbitai.com",           "tier": 1 },
+        { "name": "机器之心",            "url": "https://www.jiqizhixin.com",              "site": "jiqizhixin.com",       "tier": 1 },
+        { "name": "晚点LatePost",        "url": "https://www.latepost.com",               "site": "latepost.com",         "tier": 1, "note": "深度报道，独家多" },
+        { "name": "36Kr AI频道",         "url": "https://36kr.com/information/technology", "site": "36kr.com",             "tier": 1 },
+        { "name": "极客公园",            "url": "https://www.geekpark.net",               "site": "geekpark.net",         "tier": 2 },
+        { "name": "虎嗅科技",            "url": "https://www.huxiu.com/channel/6.html",   "site": "huxiu.com",            "tier": 2 }
+      ]
+    },
+
+    {
+      "group": "💰 融资/VC/一级市场",
+      "items": [
+        { "name": "Crunchbase News",     "url": "https://news.crunchbase.com",             "site": "news.crunchbase.com",  "tier": 1 },
+        { "name": "a16z Blog",           "url": "https://a16z.com/ai",                     "site": "a16z.com",             "tier": 1, "note": "VC视角，投资逻辑" },
+        { "name": "Sequoia Blog",        "url": "https://www.sequoiacap.com/articles",     "site": "sequoiacap.com",       "tier": 2 },
+        { "name": "Y Combinator",        "url": "https://www.ycombinator.com/blog",        "site": "ycombinator.com",      "tier": 2 },
+        { "name": "Product Hunt AI",     "url": "https://www.producthunt.com/topics/artificial-intelligence", "site": "producthunt.com", "tier": 2, "note": "新产品发现" },
+        { "name": "IT桔子",              "url": "https://www.itjuzi.com",                  "site": "itjuzi.com",           "tier": 2, "note": "国内融资追踪" }
+      ]
+    },
+
+    {
+      "group": "🔬 研究 / 学术",
+      "items": [
+        { "name": "Papers With Code",    "url": "https://paperswithcode.com",              "site": "paperswithcode.com",   "tier": 1, "note": "最新SOTA论文" },
+        { "name": "ArXiv CS.AI",         "url": "https://arxiv.org/list/cs.AI/recent",    "site": "arxiv.org",            "tier": 1 },
+        { "name": "Semantic Scholar",    "url": "https://www.semanticscholar.org",         "site": "semanticscholar.org",  "tier": 2 }
+      ]
+    },
+
+    {
+      "group": "🐦 社区 / 实时讨论",
+      "items": [
+        { "name": "Hacker News",         "url": "https://news.ycombinator.com",            "site": "news.ycombinator.com", "tier": 1, "note": "开发者第一反应" },
+        { "name": "Reddit r/MachineLearning", "url": "https://www.reddit.com/r/MachineLearning", "site": "reddit.com",   "tier": 2 },
+        { "name": "Reddit r/singularity","url": "https://www.reddit.com/r/singularity",   "site": "reddit.com",           "tier": 2 },
+        { "name": "GitHub Trending",     "url": "https://github.com/trending",             "site": "github.com",           "tier": 2, "note": "开源项目动态" }
+      ]
+    }
+
+  ],
+
+  "tier1_sites": [
+    "openai.com", "anthropic.com", "deepmind.google", "blog.google",
+    "ai.meta.com", "blogs.microsoft.com", "huggingface.co", "mistral.ai",
+    "theinformation.com", "venturebeat.com", "technologyreview.com", "techcrunch.com",
+    "therundown.ai", "tldr.tech", "bensbites.co", "deeplearning.ai",
+    "qbitai.com", "jiqizhixin.com", "latepost.com", "36kr.com",
+    "news.crunchbase.com", "a16z.com",
+    "paperswithcode.com", "arxiv.org",
+    "news.ycombinator.com"
+  ]
+}

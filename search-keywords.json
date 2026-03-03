@@ -1,0 +1,73 @@
+{
+  "updated": "2026-03-04",
+  "note": "修改此文件即可调整每日新闻搜索范围，下次 cron 自动生效。所有搜索均自动加 freshness:pd（过去24小时）。",
+  "dimensions": [
+    {
+      "id": "newsletter",
+      "label": "Newsletter / 周报聚合",
+      "queries": [
+        "\"last week in AI\" OR \"AI weekly roundup\" latest",
+        "site:substack.com AI news latest"
+      ]
+    },
+    {
+      "id": "community",
+      "label": "社区热度 / 病毒传播",
+      "queries": [
+        "\"viral AI tool\" OR \"AI trending\" site:reddit.com OR site:news.ycombinator.com",
+        "\"GitHub trending AI\" OR \"AI open source\" trending"
+      ]
+    },
+    {
+      "id": "model",
+      "label": "模型发布 / 产品更新",
+      "queries": [
+        "\"AI model release\" OR \"LLM launch\" OR \"foundation model\"",
+        "\"大模型\" OR \"AI产品发布\" OR \"AI新功能\"",
+        "OpenAI OR Anthropic OR Google OR Meta AI announcement"
+      ]
+    },
+    {
+      "id": "funding",
+      "label": "融资 / 财务 / 股票",
+      "queries": [
+        "AI startup \"seed\" OR \"series A\" OR \"series B\" OR \"series C\" funding",
+        "\"AI acquisition\" OR \"AI IPO\" OR \"AI股票\" OR \"AI市值\"",
+        "\"AI 融资\" OR \"人工智能投资\" site:36kr.com OR site:latepost.com",
+        "AI stock earnings OR results \"beats\" OR \"misses\""
+      ]
+    },
+    {
+      "id": "research",
+      "label": "研究突破 / 学术",
+      "queries": [
+        "\"AI breakthrough\" OR \"AI paper\" latest",
+        "\"state of the art\" machine learning"
+      ]
+    },
+    {
+      "id": "policy",
+      "label": "监管 / 政策",
+      "queries": [
+        "\"AI regulation\" OR \"AI policy\" OR \"AI law\" latest",
+        "\"AI 监管\" OR \"人工智能法案\""
+      ]
+    },
+    {
+      "id": "vc",
+      "label": "一级市场 / VC 圈",
+      "queries": [
+        "site:crunchbase.com AI raises OR funding 2026",
+        "site:techcrunch.com AI startup raises 2026",
+        "\"AI startup\" announces \"raises\" OR \"closes\" funding",
+        "晚点LatePost OR 36kr OR IT桔子 AI 融资 初创"
+      ]
+    },
+    {
+      "id": "custom",
+      "label": "自定义关注（小妈妈随时添加）",
+      "note": "在这里加新的搜索词，下次日报就会覆盖。格式和上方一样，每条 query 是一个字符串。",
+      "queries": []
+    }
+  ]
+}

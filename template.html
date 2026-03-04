@@ -399,7 +399,12 @@ footer{
       <h2 class="m-title" id="mTitle"></h2>
     </div>
     <div class="m-progress"><div class="m-progress-inner" id="mProgressBar"></div></div>
-    <div class="m-body" id="mBody"></div>
+    <div style="position:relative;flex:1;display:flex;flex-direction:column;min-height:0">
+      <!-- invisible edge tap zones -->
+      <div id="tapL" onclick="navModal(-1)" style="position:absolute;left:0;top:0;bottom:0;width:28px;z-index:10;cursor:pointer"></div>
+      <div id="tapR" onclick="navModal(1)"  style="position:absolute;right:0;top:0;bottom:0;width:28px;z-index:10;cursor:pointer"></div>
+      <div class="m-body" id="mBody"></div>
+    </div>
     <div class="m-foot">
       <div style="display:flex;align-items:center;gap:6px">
         <div class="src-dot"></div>
@@ -783,9 +788,14 @@ function renderModal(){
   };
 
   // nav
-  document.getElementById('btnMPrev').disabled = modalIdx<=0;
-  document.getElementById('btnMNext').disabled = modalIdx>=filteredCache.length-1;
+  const hasPrev = modalIdx>0, hasNext = modalIdx<filteredCache.length-1;
+  document.getElementById('btnMPrev').disabled = !hasPrev;
+  document.getElementById('btnMNext').disabled = !hasNext;
   document.getElementById('mNavCnt').textContent = `${modalIdx+1} / ${filteredCache.length}`;
+  // edge tap zones: only active when there's something to navigate to
+  const tL=document.getElementById('tapL'), tR=document.getElementById('tapR');
+  if(tL) tL.style.display = hasPrev ? 'block' : 'none';
+  if(tR) tR.style.display = hasNext ? 'block' : 'none';
 
   // read link
   document.getElementById('btnRead').href = item.best_url||item.url||'#';

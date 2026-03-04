@@ -170,7 +170,8 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 /* ── Featured ── */
 .featured{padding:32px 0 28px;border-bottom:1px solid var(--border);cursor:pointer}
 .featured:hover .feat-title{opacity:.75}
-.feat-cats{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.feat-cats{display:flex;align-items:center;gap:6px;margin-top:14px}
+.card-dot{width:2px;height:2px;border-radius:50%;background:var(--t5);flex-shrink:0}
 .feat-title{
   font-size:clamp(20px,2.8vw,26px);font-weight:500;
   line-height:1.35;letter-spacing:-.02em;transition:opacity .15s;
@@ -189,7 +190,7 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 }
 .n-item:hover{background:var(--hov);border-radius:8px}
 .n-body{flex:1;min-width:0}
-.n-cats{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.n-cats{display:flex;align-items:center;gap:6px}
 .n-title{font-size:14.5px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--t1)}
 .n-summary{font-size:13px;line-height:1.55;color:var(--t3);margin-top:2px}
 .n-src{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4);white-space:nowrap;padding-top:18px;flex-shrink:0}
@@ -664,13 +665,12 @@ function renderContent(){
   let html = '';
 
   if(featured){
-    const cats = (featured.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('');
+    const cats = (featured.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('<span class="card-dot"></span>');
     html += `
       <article class="featured a2" onclick="openModal(${featIdx})">
-        <div class="feat-cats">${cats}</div>
         <h2 class="feat-title">${esc(featured.title)}</h2>
         <p class="feat-summary">${esc(featured.summary)}</p>
-
+        <div class="feat-cats">${cats}</div>
       </article>
     `;
   }
@@ -678,15 +678,14 @@ function renderContent(){
   html += '<div class="news-list">';
   rest.forEach((item)=>{
     const originalIdx = filtered.indexOf(item);
-    const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('');
+    const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('<span class="card-dot"></span>');
     html += `
       <button class="n-item" onclick="openModal(${originalIdx})">
         <div class="n-body">
-          <div class="n-cats">${cats}</div>
           <div class="n-title">${esc(item.title)}</div>
           <div class="n-summary">${esc(item.summary)}</div>
+          <div class="n-cats" style="margin-top:6px;margin-bottom:0">${cats}</div>
         </div>
-        <div class="n-src">${esc(src(item))}</div>
       </button>
     `;
   });

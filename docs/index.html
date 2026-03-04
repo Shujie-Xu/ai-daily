@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Daily · 2026/03/03</title>
-  <meta property="og:title" content="🤖 AI 日报 · 2026/03/03"/>
-  <meta property="og:description" content="今日 8 条 · 来自 8 个信息源 · Anthropic被五角大楼列为供应链风险，美国政府机构转向OpenAI · 英伟达豪掷40亿美元押注光子芯片，投资Lumentum和Coherent各20亿 · MiniMax发布Hailuo 2.3视频模型及全模态Media Agent"/>
+  <title>AI Daily · 2026/03/04</title>
+  <meta property="og:title" content="🤖 AI 日报 · 2026/03/04"/>
+  <meta property="og:description" content="今日 12 条 · 来自 9 个信息源 · OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话 · 美多个联邦机构停用Anthropic转投OpenAI · Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一"/>
   <meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og.png"/>
   <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/"/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="🤖 AI 日报 · 2026/03/03"/>
-  <meta name="twitter:description" content="今日 8 条 · 来自 8 个信息源 · Anthropic被五角大楼列为供应链风险，美国政府机构转向OpenAI · 英伟达豪掷40亿美元押注光子芯片，投资Lumentum和Coherent各20亿 · MiniMax发布Hailuo 2.3视频模型及全模态Media Agent"/>
+  <meta name="twitter:title" content="🤖 AI 日报 · 2026/03/04"/>
+  <meta name="twitter:description" content="今日 12 条 · 来自 9 个信息源 · OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话 · 美多个联邦机构停用Anthropic转投OpenAI · Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -709,7 +709,7 @@
     <span class="terminal-prompt">~$</span>
     <span class="terminal-path">ai-daily</span>
     <span class="terminal-cmd">--fetch</span>
-    <span class="terminal-arg">--date 2026/03/03</span>
+    <span class="terminal-arg">--date 2026/03/04</span>
     <span class="terminal-cmd">--push</span>
     <span class="terminal-cursor"></span>
   </div>
@@ -727,8 +727,8 @@
         <button class="theme-btn" id="themeBtn" title="切换亮/暗色" onclick="toggleTheme()">🌙</button>
         <div class="date-badge" id="display-date-badge">
           <div class="pulse"></div>
-          <span id="display-date">2026/03/03</span>
-          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/03/03 09:08 CST</span>
+          <span id="display-date">2026/03/04</span>
+          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/03/04 09:15 CST</span>
         </div>
       </div>
     </div>
@@ -740,19 +740,19 @@
 
   <!-- Stats -->
   <div class="stats-bar">
-    <div class="stat-card"><div class="stat-value" id="stat-total" data-target="8">0</div><div class="stat-label">今日新闻</div></div>
-    <div class="stat-card"><div class="stat-value" id="stat-sources" data-target="8">0</div><div class="stat-label">信息来源</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-total" data-target="12">0</div><div class="stat-label">今日新闻</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-sources" data-target="9">0</div><div class="stat-label">信息来源</div></div>
   </div>
 
   <!-- Category filter bar -->
   <div id="filter-bar-container"><div class="filter-bar" id="filterBar">
-    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">8</span></button>
-    <button class="filter-tag" data-cat="model" onclick="setFilter('model')">🧠 模型<span class="filter-count">1</span></button>
-    <button class="filter-tag" data-cat="product" onclick="setFilter('product')">📦 产品<span class="filter-count">2</span></button>
-    <button class="filter-tag" data-cat="funding" onclick="setFilter('funding')">💰 融资<span class="filter-count">2</span></button>
+    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">12</span></button>
+    <button class="filter-tag" data-cat="model" onclick="setFilter('model')">🧠 模型<span class="filter-count">4</span></button>
+    <button class="filter-tag" data-cat="product" onclick="setFilter('product')">📦 产品<span class="filter-count">3</span></button>
     <button class="filter-tag" data-cat="finance" onclick="setFilter('finance')">📊 财务<span class="filter-count">2</span></button>
-    <button class="filter-tag" data-cat="policy" onclick="setFilter('policy')">📜 政策<span class="filter-count">1</span></button>
-    <button class="filter-tag" data-cat="event" onclick="setFilter('event')">🎪 事件<span class="filter-count">3</span></button>
+    <button class="filter-tag" data-cat="research" onclick="setFilter('research')">🔬 研究<span class="filter-count">3</span></button>
+    <button class="filter-tag" data-cat="policy" onclick="setFilter('policy')">📜 政策<span class="filter-count">2</span></button>
+    <button class="filter-tag" data-cat="event" onclick="setFilter('event')">🎪 事件<span class="filter-count">4</span></button>
   </div></div>
 
   <!-- News sections -->
@@ -773,11 +773,47 @@
         <div class="card-top">
           <div class="card-cats"><span class="badge badge-policy">📜 政策</span><span class="badge badge-event">🎪 事件</span></div>
         </div>
-        <div class="card-title">Anthropic被五角大楼列为供应链风险，美国政府机构转向OpenAI</div>
-        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#OpenAI</span><span class="tag-pill">#五角大楼</span><span class="tag-pill">#AI安全</span><span class="tag-pill">#军事AI</span></div>
-        <div class="card-summary">美国防部与Anthropic谈判破裂，将其列为供应链风险；OpenAI迅速达成分类环境部署协议，国务院等机构开始切换至OpenAI。</div>
+        <div class="card-title">美多个联邦机构停用Anthropic转投OpenAI</div>
+        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#OpenAI</span><span class="tag-pill">#联邦政府</span><span class="tag-pill">#特朗普</span><span class="tag-pill">#AI政策</span></div>
+        <div class="card-summary">特朗普下令六个月内联邦机构淘汰Anthropic产品，国务院、财政部、HHS已相继切换至OpenAI，Anthropic损失重大政府合同。</div>
         <div class="card-footer">
-          <span class="card-source">nytimes.com</span>
+          <span class="card-source">reuters.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="1" data-cats="finance product"
+         onclick="openDetail(1)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(1)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-finance">📊 财务</span><span class="badge badge-product">📦 产品</span></div>
+        </div>
+        <div class="card-title">AI编程工具Cursor年化营收突破20亿美元</div>
+        <div class="card-tags"><span class="tag-pill">#Cursor</span><span class="tag-pill">#AI编程</span><span class="tag-pill">#年化营收</span><span class="tag-pill">#企业客户</span><span class="tag-pill">#AI工具</span></div>
+        <div class="card-summary">Cursor年化营收在2月超过20亿美元，三个月内翻倍，约60%来自企业客户，成为AI编程赛道标志性里程碑。</div>
+        <div class="card-footer">
+          <span class="card-source">techcrunch.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="2" data-cats="policy event"
+         onclick="openDetail(2)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(2)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-policy">📜 政策</span><span class="badge badge-event">🎪 事件</span></div>
+        </div>
+        <div class="card-title">AI安全vs军事应用：Anthropic退出，OpenAI填补空缺</div>
+        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#OpenAI</span><span class="tag-pill">#AI安全</span><span class="tag-pill">#五角大楼</span><span class="tag-pill">#军事AI</span></div>
+        <div class="card-summary">Anthropic因AI安全护栏分歧拒绝五角大楼要求，OpenAI随即获得在国防部分类网络部署AI模型的合同，引发行业安全边界争论。</div>
+        <div class="card-footer">
+          <span class="card-source">axios.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
@@ -792,73 +828,145 @@
       </div>
       <div class="news-grid">
         
-    <div class="news-card" data-idx="1" data-cats="finance"
-         onclick="openDetail(1)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(1)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-finance">📊 财务</span></div>
-        </div>
-        <div class="card-title">英伟达豪掷40亿美元押注光子芯片，投资Lumentum和Coherent各20亿</div>
-        <div class="card-tags"><span class="tag-pill">#英伟达</span><span class="tag-pill">#光子芯片</span><span class="tag-pill">#Lumentum</span><span class="tag-pill">#Coherent</span><span class="tag-pill">#AI基础设施</span></div>
-        <div class="card-summary">英伟达宣布向光子技术公司Lumentum和Coherent各投资20亿美元，合计40亿，用于共同研发下一代硅光子网络，支撑吉瓦级AI工厂建设。</div>
-        <div class="card-footer">
-          <span class="card-source">cnbc.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="2" data-cats="model product"
-         onclick="openDetail(2)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(2)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-model">🧠 模型</span><span class="badge badge-product">📦 产品</span></div>
-        </div>
-        <div class="card-title">MiniMax发布Hailuo 2.3视频模型及全模态Media Agent</div>
-        <div class="card-tags"><span class="tag-pill">#MiniMax</span><span class="tag-pill">#Hailuo</span><span class="tag-pill">#AI视频</span><span class="tag-pill">#多模态</span><span class="tag-pill">#Media Agent</span></div>
-        <div class="card-summary">MiniMax今日发布视频模型Hailuo 2.3，在肢体动作、风格化和微表情方面显著提升，同时将Hailuo Video Agent升级为支持全模态创作的Media Agent，全球同步上线。</div>
-        <div class="card-footer">
-          <span class="card-source">minimaxi.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="3" data-cats="event"
+    <div class="news-card" data-idx="3" data-cats="model"
          onclick="openDetail(3)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(3)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-event">🎪 事件</span></div>
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
         </div>
-        <div class="card-title">中国AI大模型2月Token调用量首次超越美国，四款模型霸占全球前五</div>
-        <div class="card-tags"><span class="tag-pill">#中国AI</span><span class="tag-pill">#MiniMax</span><span class="tag-pill">#Kimi</span><span class="tag-pill">#DeepSeek</span><span class="tag-pill">#全球AI竞争</span></div>
-        <div class="card-summary">OpenRouter数据显示，2月中国模型周调用量以4.12万亿Token首超美国2.94万亿，三周内增长127%；MiniMax M2.5、Kimi K2.5、GLM-5、DeepSeek V3.2占据全球前五中的四席。</div>
+        <div class="card-title">OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话</div>
+        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#GPT-5.3</span><span class="tag-pill">#ChatGPT</span><span class="tag-pill">#模型更新</span><span class="tag-pill">#用户体验</span></div>
+        <div class="card-summary">OpenAI推出GPT-5.3 Instant更新，减少过度免责声明和「说教腔」，改善对话流畅度，前版GPT-5.2 Instant将在6月3日退役。</div>
         <div class="card-footer">
-          <span class="card-source">36kr.com</span>
+          <span class="card-source">techcrunch.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
     </div>
 
-    <div class="news-card" data-idx="4" data-cats="finance"
+    <div class="news-card" data-idx="4" data-cats="model"
          onclick="openDetail(4)" role="button" tabindex="0"
          onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(4)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
+        </div>
+        <div class="card-title">Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一</div>
+        <div class="card-tags"><span class="tag-pill">#Google</span><span class="tag-pill">#Gemini</span><span class="tag-pill">#Flash-Lite</span><span class="tag-pill">#模型发布</span><span class="tag-pill">#低成本AI</span></div>
+        <div class="card-summary">Google推出Gemini 3.1 Flash-Lite，定价$0.25/1M输入tokens，支持可调节思考级别，面向高并发生产环境，速度超竞品2-5倍。</div>
+        <div class="card-footer">
+          <span class="card-source">blog.google</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="5" data-cats="event"
+         onclick="openDetail(5)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(5)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-event">🎪 事件</span></div>
+        </div>
+        <div class="card-title">阿里Qwen技术负责人Justin Lin离职，开源时代终结之忧</div>
+        <div class="card-tags"><span class="tag-pill">#阿里巴巴</span><span class="tag-pill">#Qwen</span><span class="tag-pill">#开源AI</span><span class="tag-pill">#人才流失</span><span class="tag-pill">#大模型</span></div>
+        <div class="card-summary">推动Qwen从零成长至全球6亿下载的技术主导人Junyang Lin等核心人员离职，引发外界对阿里开源AI战略延续性的担忧。</div>
+        <div class="card-footer">
+          <span class="card-source">techcrunch.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="6" data-cats="finance"
+         onclick="openDetail(6)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(6)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
           <div class="card-cats"><span class="badge badge-finance">📊 财务</span></div>
         </div>
-        <div class="card-title">亚马逊-OpenAI 500亿美元协议SEC文件披露：条件触发与秘密条款</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#亚马逊</span><span class="tag-pill">#AWS</span><span class="tag-pill">#融资</span><span class="tag-pill">#估值</span></div>
-        <div class="card-summary">GeekWire分析SEC文件揭示亚马逊-OpenAI 500亿美元合作细节：初始投资150亿，额外350亿有附加条件；若联合合作协议终止，350亿承诺随之失效；OpenAI承诺消耗2吉瓦AWS Trainium算力。</div>
+        <div class="card-title">CoreWeave股价Q4财报后暴跌28%，Q1指引令市场失望</div>
+        <div class="card-tags"><span class="tag-pill">#CoreWeave</span><span class="tag-pill">#AI算力</span><span class="tag-pill">#财报</span><span class="tag-pill">#资本支出</span><span class="tag-pill">#云计算</span></div>
+        <div class="card-summary">AI云计算公司CoreWeave Q4营收超预期但Q1指引低于预期，叠加资本支出倍增，股价盘后大跌约28%，Citi下调目标价至126美元。</div>
         <div class="card-footer">
-          <span class="card-source">geekwire.com</span>
+          <span class="card-source">coincentral.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="7" data-cats="model research"
+         onclick="openDetail(7)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(7)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span><span class="badge badge-research">🔬 研究</span></div>
+        </div>
+        <div class="card-title">中国三大实验室集中开源：Qwen3.5、GLM-5、MiniMax M2.5</div>
+        <div class="card-tags"><span class="tag-pill">#Qwen3.5</span><span class="tag-pill">#GLM-5</span><span class="tag-pill">#MiniMax</span><span class="tag-pill">#中国开源AI</span><span class="tag-pill">#大模型</span></div>
+        <div class="card-summary">阿里Qwen3.5小模型系列（0.8B-9B）、智谱GLM-5（744B MoE）、MiniMax M2.5同步发布，中国开源AI再迎密集爆发。</div>
+        <div class="card-footer">
+          <span class="card-source">interconnects.ai</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="8" data-cats="research"
+         onclick="openDetail(8)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(8)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-research">🔬 研究</span></div>
+        </div>
+        <div class="card-title">普林斯顿研究：奉承型AI歪曲用户信念，制造虚假确定性</div>
+        <div class="card-tags"><span class="tag-pill">#AI奉承</span><span class="tag-pill">#认知偏差</span><span class="tag-pill">#普林斯顿研究</span><span class="tag-pill">#RLHF</span><span class="tag-pill">#AI安全</span></div>
+        <div class="card-summary">普林斯顿新研究发现AI聊天机器人过度奉承会影响用户对教育、科学发现、心理健康等领域的判断，使其在不确定处产生错误确信。</div>
+        <div class="card-footer">
+          <span class="card-source">garymarcus.substack.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="9" data-cats="product event"
+         onclick="openDetail(9)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(9)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-product">📦 产品</span><span class="badge badge-event">🎪 事件</span></div>
+        </div>
+        <div class="card-title">OpenAI内部AI数据Agent：2人搭建，服务4000名员工</div>
+        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#企业AI Agent</span><span class="tag-pill">#数据基础设施</span><span class="tag-pill">#内部工具</span><span class="tag-pill">#AI效率</span></div>
+        <div class="card-summary">OpenAI内部AI数据Agent可搜索70,000个数据集共600PB数据，大幅节省查询时间，OpenAI公开该Agent构建蓝图供企业参考。</div>
+        <div class="card-footer">
+          <span class="card-source">venturebeat.com</span>
+          <span class="card-cta">查看详情 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card" data-idx="10" data-cats="research product"
+         onclick="openDetail(10)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(10)">
+      
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+        <div class="card-top">
+          <div class="card-cats"><span class="badge badge-research">🔬 研究</span><span class="badge badge-product">📦 产品</span></div>
+        </div>
+        <div class="card-title">AI生成代码仅10%安全，Endor Labs推出免费检测工具AURI</div>
+        <div class="card-tags"><span class="tag-pill">#AI代码安全</span><span class="tag-pill">#Endor Labs</span><span class="tag-pill">#AURI</span><span class="tag-pill">#开发者工具</span><span class="tag-pill">#软件供应链安全</span></div>
+        <div class="card-summary">Endor Labs研究显示AI生成代码中仅10%达到安全标准，随即推出免费工具AURI帮助开发者检测AI代码漏洞。</div>
+        <div class="card-footer">
+          <span class="card-source">venturebeat.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
@@ -873,55 +981,19 @@
       </div>
       <div class="news-grid">
         
-    <div class="news-card" data-idx="5" data-cats="funding"
-         onclick="openDetail(5)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(5)">
+    <div class="news-card" data-idx="11" data-cats="model"
+         onclick="openDetail(11)" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(11)">
       
       <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
         <div class="card-top">
-          <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
+          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
         </div>
-        <div class="card-title">SMACK Technologies获3200万美元融资，打造首个国家安全前沿AI实验室</div>
-        <div class="card-tags"><span class="tag-pill">#SMACK Technologies</span><span class="tag-pill">#国防AI</span><span class="tag-pill">#军事AI</span><span class="tag-pill">#融资</span><span class="tag-pill">#初创公司</span></div>
-        <div class="card-summary">SMACK Technologies宣布完成3200万美元种子轮+A轮融资，由Geodesic Capital和Costanoa Ventures等领投，目标成为首个专注国家安全的前沿AI实验室，向美国战争部提供"决策主导权"技术。</div>
+        <div class="card-title">虎嗅：DeepSeek V4发布预期升温，官方尚未确认时间</div>
+        <div class="card-tags"><span class="tag-pill">#DeepSeek</span><span class="tag-pill">#V4</span><span class="tag-pill">#大模型发布</span><span class="tag-pill">#多模态</span><span class="tag-pill">#国产AI</span></div>
+        <div class="card-summary">市场对DeepSeek V4发布预期升温，从其近期论文看研发聚焦编程与多模态方向，但官方未确认具体发布日期。</div>
         <div class="card-footer">
-          <span class="card-source">finsmes.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="6" data-cats="funding"
-         onclick="openDetail(6)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(6)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-funding">💰 融资</span></div>
-        </div>
-        <div class="card-title">Rowspace完成5000万美元融资，Sequoia领投AI私募决策平台</div>
-        <div class="card-tags"><span class="tag-pill">#Rowspace</span><span class="tag-pill">#金融AI</span><span class="tag-pill">#Sequoia</span><span class="tag-pill">#私募股权</span><span class="tag-pill">#AI SaaS</span></div>
-        <div class="card-summary">AI投资决策平台Rowspace完成5000万美元种子轮+A轮联合融资，由Sequoia Capital和Emergence Capital共同领投，帮助私募股权等投资机构用AI梳理自有复杂历史数据。</div>
-        <div class="card-footer">
-          <span class="card-source">fortune.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="7" data-cats="product event"
-         onclick="openDetail(7)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(7)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-product">📦 产品</span><span class="badge badge-event">🎪 事件</span></div>
-        </div>
-        <div class="card-title">Anthropic上线ChatGPT记忆导入功能，向用户示好加剧竞争格局</div>
-        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#Claude</span><span class="tag-pill">#ChatGPT</span><span class="tag-pill">#AI记忆</span><span class="tag-pill">#竞争格局</span></div>
-        <div class="card-summary">Anthropic于3月1日宣布Claude可导入ChatGPT用户记忆数据，降低用户迁移门槛；此举被解读为在OpenAI拿下五角大楼合同背景下，Anthropic争取普通用户的重要策略动作。</div>
-        <div class="card-footer">
-          <span class="card-source">madhyamamonline.com</span>
+          <span class="card-source">huxiu.com</span>
           <span class="card-cta">查看详情 →</span>
         </div>
       </div>
@@ -930,7 +1002,7 @@
     </div></div>
 
   <footer>
-    <div class="footer-text"><span class="footer-tick">✓</span> 12 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
+    <div class="footer-text"><span class="footer-tick">✓</span> 22 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
     <div class="footer-brand">powered by <span>小豹包🍞</span></div>
   </footer>
 </div>
@@ -975,7 +1047,7 @@
   </div>
 </div>
 
-<script>window.ARTICLES_DATA = [{"title":"Anthropic被五角大楼列为供应链风险，美国政府机构转向OpenAI","summary":"美国防部与Anthropic谈判破裂，将其列为供应链风险；OpenAI迅速达成分类环境部署协议，国务院等机构开始切换至OpenAI。","full_content":"美国国防部与Anthropic之间长达数周的谈判于2026年3月1日宣告破裂，事件导火索是双方在AI使用边界上的根本性分歧。Anthropic坚持要求在2亿美元国防合同中明确写入禁止条款：不得将Claude用于大规模国内监控或全自主武器系统。国防部长Pete Hegseth认为这一要求不可接受，随即宣布将Anthropic列为供应链风险，并要求各联邦机构在六个月过渡期内停止使用Anthropic产品。\n\n谈判破裂的消息公开当天，OpenAI迅速填补真空。CEO山姆·奥特曼承认这笔协议\"在舆论上确实显得仓促，不太好看\"，但仍宣布OpenAI已与国防部（在该政府内部被重命名为\"战争部\"）达成协议，允许其模型部署在机密环境中。OpenAI随后发布博客，声称设置了三条红线：不用于大规模国内监控、不直接控制自主武器系统、不用于高风险自动决策。\n\n然而批评者和竞争对手迅速指出，OpenAI的限制条款主要依赖现有法律框架，而非合同层面的强制约束，这与Anthropic追求的硬性合同保护存在根本差异。《The Verge》分析认为，OpenAI在监控问题上选择以现行第四修正案和相关情报法律作为护栏，而非主动写入更严格的合同条款。\n\n国务院随即发出内部备忘录，宣布将\"StateChat\"系统切换至OpenAI的GPT-4.1模型。此事件深刻揭示了硅谷AI公司在承接政府军事合同时，安全伦理原则与商业利益之间难以调和的内在张力，也预示着AI军事化将成为2026年行业最具争议的议题之一。","url":"https://www.nytimes.com/2026/03/01/technology/anthropic-defense-dept-openai-talks.html","best_url":"https://techcrunch.com/2026/03/01/openai-shares-more-details-about-its-agreement-with-the-pentagon/","categories":["policy","event"],"tags":["Anthropic","OpenAI","五角大楼","AI安全","军事AI"],"context":"","heat":5,"audio_url":"audio/2026-03-03-0.mp3"},{"title":"英伟达豪掷40亿美元押注光子芯片，投资Lumentum和Coherent各20亿","summary":"英伟达宣布向光子技术公司Lumentum和Coherent各投资20亿美元，合计40亿，用于共同研发下一代硅光子网络，支撑吉瓦级AI工厂建设。","full_content":"3月2日，英伟达宣布向两家光子技术公司——Lumentum和Coherent——分别投资20亿美元，合计40亿美元战略投资。这两笔交易均包含多年期战略合作协议和数十亿美元采购承诺，以及未来产能预留权益。\n\n光子技术（Photonics）是利用光子而非电子传输数据的技术路线，具备更高带宽、更低延迟和更低功耗的潜力。随着AI数据中心规模进入\"吉瓦级\"（gigawatt-scale），传统铜缆互联已逐渐成为瓶颈，硅光子网络被业界视为下一代AI基础设施的核心组件。\n\nLumentum是美国领先的光学和光子技术公司，专注于为AI云计算和下一代通信提供光子系统；Coherent同样总部位于美国，主攻高性能光学应用。两家公司在英伟达投资消息公布后股价分别大涨8%和13%。\n\n英伟达CEO黄仁勋表示：\"与Lumentum合作，英伟达正在推进全球最先进的硅光子技术，以构建下一代吉瓦级AI工厂。\"这一布局表明英伟达正从GPU芯片制造商向AI基础设施生态整合者进化，通过战略投资锁定关键供应链。\n\n这40亿美元的光子技术投注，是英伟达近期一系列垂直整合动作的缩影——从芯片到网络互联，再到数据中心整体解决方案，英伟达正系统性地强化其在AI算力生态中的护城河。","url":"https://www.cnbc.com/2026/03/02/nvidia-investment-coherent-lumentum.html","best_url":"https://www.cnbc.com/2026/03/02/nvidia-investment-coherent-lumentum.html","categories":["finance"],"tags":["英伟达","光子芯片","Lumentum","Coherent","AI基础设施"],"context":"","heat":4,"audio_url":"audio/2026-03-03-1.mp3"},{"title":"MiniMax发布Hailuo 2.3视频模型及全模态Media Agent","summary":"MiniMax今日发布视频模型Hailuo 2.3，在肢体动作、风格化和微表情方面显著提升，同时将Hailuo Video Agent升级为支持全模态创作的Media Agent，全球同步上线。","full_content":"3月3日，MiniMax正式发布视频生成模型Hailuo 2.3，并同步推出全模态创作平台Media Agent。Hailuo 2.3基于Hailuo 02迭代升级，在三个关键维度取得突破：一是更复杂的人物肢体动作呈现，运动更流畅自然，精确度和可控性均有提升；二是风格化能力增强，对动漫、插画、水墨、游戏CG等特殊画风支持效果显著改善；三是物体运动指令响应更出色。\n\n在镜头语言层面，Hailuo 2.3在大动态运镜下实现了近乎实拍的光线和色调控制，这对于商业广告和影视制作场景具有重要价值。MiniMax表示，该模型在提升性能的同时保持Hailuo 02的既有定价，并提供生成速度更快的Hailuo 2.3 Fast版本，批量创作成本最高可降低50%。\n\n与此同时，MiniMax将此前的Hailuo Video Agent升级为Media Agent，核心升级是支持\"全模态全能创作\"——用户输入创作需求，系统自动调度文本、图像、视频、音频等多模态模型，一键生成成片。专业用户也可在画布中分步创作，自由上传和融合多种媒体素材。Media Agent已在全球同步上线。\n\nMiniMax于2026年2月发布的M2.5文本模型刚刚登顶全球调用量榜首，此次视频模型和创作平台的组合更新，进一步巩固了其作为全栈AI创作基础设施提供商的战略定位。","url":"https://www.minimaxi.com/news/minimax-hailuo-23","best_url":"https://www.minimaxi.com/news/minimax-hailuo-23","categories":["model","product"],"tags":["MiniMax","Hailuo","AI视频","多模态","Media Agent"],"context":"","heat":4,"audio_url":"audio/2026-03-03-2.mp3"},{"title":"中国AI大模型2月Token调用量首次超越美国，四款模型霸占全球前五","summary":"OpenRouter数据显示，2月中国模型周调用量以4.12万亿Token首超美国2.94万亿，三周内增长127%；MiniMax M2.5、Kimi K2.5、GLM-5、DeepSeek V3.2占据全球前五中的四席。","full_content":"全球最大AI模型API聚合平台OpenRouter的数据显示，2026年2月，中国AI模型在全球调用量上实现了历史性超越。2月9日至15日当周，中国模型以4.12万亿Token的周调用量，首次超越美国模型的2.94万亿Token；到2月16日至22日当周，中国模型调用量进一步冲高至5.16万亿Token，三周内增长127%，而同期美国模型调用量反跌至2.7万亿Token。\n\n这一超越的背后是中国AI厂商的集群式崛起，而非单一爆款。在2月16至22日周榜前五名中，四席被中国模型占据：MiniMax M2.5、月之暗面Kimi K2.5、智谱GLM-5，以及DeepSeek V3.2。其中MiniMax M2.5于2月13日上线，不足一周便登顶调用量榜首，单周贡献增量达1.44万亿Token。Kimi K2.5凭借支持100个Agent并行工作的多模态架构，调用量连续跳涨，月之暗面相关负责人透露，K2.5发布后不到一月的累计收入已超过2025年全年总收入。\n\n值得注意的是，OpenRouter平台用户中美国开发者占47%，中国开发者仅6%，这意味着中国模型的高调用量主要来自海外开发者的主动选择，真实反映了全球市场对中国AI能力的认可。\n\n过去一年，OpenRouter平台前十大模型的总调用量从1.24万亿Token增长至13.95万亿Token，增幅超过10倍，印证了AI应用正以指数级速度落地，而中国厂商正在凭借快速迭代和成本优势在这场全球竞争中抢占先机。","url":"https://36kr.com/p/3700980530851712","best_url":"https://36kr.com/p/3700980530851712","categories":["event"],"tags":["中国AI","MiniMax","Kimi","DeepSeek","全球AI竞争"],"context":"","heat":4,"audio_url":"audio/2026-03-03-3.mp3"},{"title":"亚马逊-OpenAI 500亿美元协议SEC文件披露：条件触发与秘密条款","summary":"GeekWire分析SEC文件揭示亚马逊-OpenAI 500亿美元合作细节：初始投资150亿，额外350亿有附加条件；若联合合作协议终止，350亿承诺随之失效；OpenAI承诺消耗2吉瓦AWS Trainium算力。","full_content":"亚马逊与OpenAI于近期宣布高达500亿美元的战略合作，引发广泛关注。随着相关SEC监管文件公开，GeekWire对协议细节进行了深度拆解，呈现出比新闻发布会更复杂的真实结构。\n\n根据文件，亚马逊的500亿美元投资分两部分：初始150亿美元投资已基本确定，但额外的350亿美元附有特定条件，最关键的是：如果亚马逊与OpenAI签订的联合合作协议（JCA）终止，这350亿美元承诺将自动失效。这意味着这笔巨额投资与双方云服务合作协议深度绑定，并非纯财务投资。\n\n在云服务层面，OpenAI承诺消耗2吉瓦的AWS Trainium芯片算力，吉瓦是衡量计算规模的代理指标，彰显了这笔交易中云算力承购的战略意义。协议还包括OpenAI将为亚马逊的客户facing应用（包括Alexa等）开发定制模型，补充亚马逊自有的Nova模型家族。\n\nSEC文件还揭示了若干保密条款，涉及定价机制、具体触发条件等细节仍未公开。OpenAI此轮融资合计达1100亿美元（包括SoftBank和Nvidia各贡献300亿），估值在包含新资金后达到8400亿美元。这笔创纪录的融资确立了OpenAI作为全球最大科技独角兽的地位，并将其IPO预期推向更高估值区间。","url":"https://www.geekwire.com/2026/filings-how-amazons-50b-openai-deal-actually-works-and-what-theyre-keeping-secret/","best_url":"https://www.geekwire.com/2026/filings-how-amazons-50b-openai-deal-actually-works-and-what-theyre-keeping-secret/","categories":["finance"],"tags":["OpenAI","亚马逊","AWS","融资","估值"],"context":"","heat":4,"audio_url":"audio/2026-03-03-4.mp3"},{"title":"SMACK Technologies获3200万美元融资，打造首个国家安全前沿AI实验室","summary":"SMACK Technologies宣布完成3200万美元种子轮+A轮融资，由Geodesic Capital和Costanoa Ventures等领投，目标成为首个专注国家安全的前沿AI实验室，向美国战争部提供\"决策主导权\"技术。","full_content":"总部位于加州埃尔塞贡多的SMACK Technologies于2026年3月2日宣布完成3200万美元融资，资金由种子轮和A轮两笔合并构成，投资方包括Geodesic Capital、Costanoa Ventures、Point72 Ventures、Anomaly Fund和Fortitude Ventures等。\n\n公司由两位前海军陆战队特种作战司令部（MARSOC）成员Andrew Markoff和Clint Alanis联合创立于2024年，两人合计拥有逾二十年的军事服务经验。SMACK的核心使命是将前沿AI技术直接应用于国家安全领域，其产品概念被描述为\"决策主导权\"（Decision Dominance）系统——帮助军事决策者在高压、复杂的战场认知环境下更快速、更准确地处理信息、做出判断。\n\n公司自称是\"首个专为国家安全服务的前沿AI实验室\"，此定位颇具野心。此次融资正值Anthropic被国防部列为供应链风险之际，显示出专门面向政府/国防市场的AI公司在当前政治环境下具有独特的融资吸引力。\n\nSMACK的出现代表了一类新兴的防务科技公司——不仅仅是将通用AI工具销售给政府，而是从立项之初就以军事需求为核心设计AI系统，意图填补通用AI公司因伦理红线而留出的市场空间。","url":"https://www.finsmes.com/2026/03/smack-technologies-raises-32m-in-funding.html","best_url":"https://www.finsmes.com/2026/03/smack-technologies-raises-32m-in-funding.html","categories":["funding"],"tags":["SMACK Technologies","国防AI","军事AI","融资","初创公司"],"context":"SMACK Technologies是2024年由两名前美国海军陆战队特种部队成员创立的AI防务初创公司，专注为美国国防部及盟友提供AI驱动的战场决策系统。公司定位为专门面向机密和国家安全环境的前沿AI实验室，与通用AI公司的政府销售团队形成差异化竞争。","heat":3,"audio_url":"audio/2026-03-03-5.mp3"},{"title":"Rowspace完成5000万美元融资，Sequoia领投AI私募决策平台","summary":"AI投资决策平台Rowspace完成5000万美元种子轮+A轮联合融资，由Sequoia Capital和Emergence Capital共同领投，帮助私募股权等投资机构用AI梳理自有复杂历史数据。","full_content":"AI金融决策平台Rowspace于2026年3月2日宣布完成5000万美元融资，由Sequoia Capital和Emergence Capital联合领投，Stripe等知名企业参与其中。此轮融资由种子轮和A轮合并构成，被视为金融垂直AI领域的重要押注信号。\n\nRowspace的核心产品是一套专为投资运营机构设计的AI系统，帮助私募股权、对冲基金等机构梳理多年积累的复杂非结构化数据——包括投资备忘录、交易记录、尽职调查报告等——并以此驱动更智能的投资决策。Sequoia合伙人Alfred Lin亲自参与领投并公开表态，表达了对金融AI垂直赛道长期价值的信心，同时反驳了市场上关于AI将导致\"SaaS末日\"的悲观论调。\n\nRowspace的出现代表了一类新兴的\"AI原生垂直SaaS\"公司——不是将AI功能加在现有软件上，而是以AI为核心重新设计专业领域的工作流。对于私募行业而言，能够有效处理十年以上历史投资数据的AI工具，其潜在价值远超通用大模型。\n\n此次融资发生在\"SaaS末日\"舆论最为喧嚣之时，Sequoia和Emergence Capital的联合背书无疑是一次反向信号——顶级VC仍然相信，有护城河、有数据飞轮、深度嵌入行业工作流的AI应用公司，在AI时代同样具有长期商业价值。","url":"https://fortune.com/2026/03/02/alfred-lin-sequoia-saas-ai-citrini-research-vertical-software-rowspace/","best_url":"https://fortune.com/2026/03/02/alfred-lin-sequoia-saas-ai-citrini-research-vertical-software-rowspace/","categories":["funding"],"tags":["Rowspace","金融AI","Sequoia","私募股权","AI SaaS"],"context":"Rowspace是一家面向投资运营机构（私募股权、对冲基金等）的AI决策平台，核心功能是用AI对机构自有的多年历史投资数据进行智能分析和检索，提升投资团队的信息处理效率和决策质量。","heat":3,"audio_url":"audio/2026-03-03-6.mp3"},{"title":"Anthropic上线ChatGPT记忆导入功能，向用户示好加剧竞争格局","summary":"Anthropic于3月1日宣布Claude可导入ChatGPT用户记忆数据，降低用户迁移门槛；此举被解读为在OpenAI拿下五角大楼合同背景下，Anthropic争取普通用户的重要策略动作。","full_content":"Anthropic于2026年3月1日通过官方Claude Threads账号宣布，用户现可将ChatGPT中存储的AI记忆数据直接导入Claude，功能即时生效。这是Anthropic在激烈竞争格局中的一次主动出击，也是其降低用户迁移成本的战略举措。\n\nAI记忆功能允许聊天机器人记住用户偏好、历史信息和个性化设置，形成更连贯的对话体验。长期使用ChatGPT的用户往往因为\"记忆迁移成本\"而形成路径依赖，此次Anthropic打通这一壁垒，意图直接吸引对ChatGPT有所不满的用户群体。\n\n这一功能发布的时机颇具深意。就在同一周，Anthropic与国防部的合同谈判以失败告终，被列为供应链风险，OpenAI则迅速拿下了这一大单。面对政府市场的重挫，Anthropic转向在消费者市场发力——通过降低迁移门槛、主打\"更有原则的AI公司\"的品牌形象（此前Anthropic曾在超级碗期间投放广告，暗讽OpenAI向ChatGPT引入广告），争取更广泛的普通用户基础。\n\nAxios分析认为，此时Anthropic与OpenAI之间的公关博弈已全面升级：一方在政府合同市场大获全胜，另一方则在品牌调性和用户体验层面强化差异化叙事。这场双巨头之间的战略分化，将深刻影响未来AI行业的竞争格局。","url":"https://madhyamamonline.com/technology/anthropic-now-lets-users-import-ai-memory-from-chatgpt-to-claude-1499543","best_url":"https://www.axios.com/communicators-pro/2026/03/02/anthropic-openai-pentagon-ai-pr","categories":["product","event"],"tags":["Anthropic","Claude","ChatGPT","AI记忆","竞争格局"],"context":"","heat":3,"audio_url":"audio/2026-03-03-7.mp3"}];
+<script>window.ARTICLES_DATA = [{"title":"美多个联邦机构停用Anthropic转投OpenAI","summary":"特朗普下令六个月内联邦机构淘汰Anthropic产品，国务院、财政部、HHS已相继切换至OpenAI，Anthropic损失重大政府合同。","full_content":"2026年2月底至3月初，美国联邦政府多个机构相继宣布停止使用Anthropic的AI产品，转而投向OpenAI，这场大规模的政府AI合同易主事件源于一场罕见的政治对抗。\n\n事件起因于五角大楼要求Anthropic放宽其AI系统的伦理使用限制，以满足军事应用需求，但Anthropic拒绝妥协。2026年2月27日，特朗普下令所有联邦机构立即停止使用Anthropic的技术，国防部长皮特·赫格塞斯随即将Anthropic列为供应链国家安全风险。五角大楼宣布驱逐Anthropic数小时后，OpenAI CEO萨姆·奥特曼宣布与国防部达成协议，为军方机密网络提供AI服务。此后数天内，国务院、财政部、卫生与公众服务部等多个联邦机构陆续跟进，切换至OpenAI的产品体系。\n\n此次事件对Anthropic打击巨大，不仅失去多个重要政府合同，更被贴上国家安全风险的标签。而OpenAI在坚持部分安全原则的前提下成功接盘，进一步巩固了其在美国政府AI市场的主导地位。这场风波折射出硅谷AI公司与华盛顿政治力量之间日益紧张的博弈关系。","url":"https://www.reuters.com/business/us-treasury-ending-all-use-anthropic-products-says-bessent-2026-03-02/","best_url":"https://www.reuters.com/business/us-treasury-ending-all-use-anthropic-products-says-bessent-2026-03-02/","categories":["policy","event"],"tags":["Anthropic","OpenAI","联邦政府","特朗普","AI政策"],"context":"","heat":5,"audio_url":"audio/2026-03-04-1.mp3"},{"title":"AI编程工具Cursor年化营收突破20亿美元","summary":"Cursor年化营收在2月超过20亿美元，三个月内翻倍，约60%来自企业客户，成为AI编程赛道标志性里程碑。","full_content":"AI编程助手Cursor于2026年2月实现年化营收突破20亿美元，较三个月前翻倍增长，成为AI编程赛道迄今最亮眼的商业里程碑。消息由彭博社援引知情人士披露，Cursor官方暂未回应置评请求。\n\n这一数据的公开时机颇为微妙——就在披露前一周，社交媒体上有声音质疑Cursor增长势头放缓，称部分开发者正从Cursor转向Anthropic推出的Claude Code，后者因定价更具竞争力而赢得不少个人开发者青睐。Cursor此时公布亮眼数据，被外界解读为有意回击看空情绪的战略性信息释放。\n\n从收入结构看，企业客户已占Cursor总营收的约60%，这一转变是过去一年间Cursor战略调整的结果——从最初主要服务个人开发者，转向深耕大型企业客户。相比个人用户，企业客户付费规模更大、留存率更高，也更能抵御竞争对手的蚕食。\n\nCursor于2022年成立，背后公司为Anysphere。去年11月完成由Accel和Coatue联合领投的23亿美元融资，估值达293亿美元。20亿美元ARR的达成，不仅证明了Cursor商业模式的可行性，也为整个AI编程赛道的估值体系提供了有力背书。","url":"https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/","best_url":"https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/","categories":["finance","product"],"tags":["Cursor","AI编程","年化营收","企业客户","AI工具"],"context":"","heat":5,"audio_url":"audio/2026-03-04-3.mp3"},{"title":"AI安全vs军事应用：Anthropic退出，OpenAI填补空缺","summary":"Anthropic因AI安全护栏分歧拒绝五角大楼要求，OpenAI随即获得在国防部分类网络部署AI模型的合同，引发行业安全边界争论。","full_content":"2026年2月底，一场围绕AI安全护栏与军事应用边界的争论在硅谷与五角大楼之间公开爆发。事件起因于Anthropic拒绝了美国国防部提出的要求——五角大楼希望Anthropic解除Claude的安全限制，允许其被用于所有合法用途，包括大规模国内监控及自主武器系统。Anthropic方面表示不能凭良心接受这一要求，坚持其AI安全护栏不可移除。\n\n谈判破裂后，特朗普政府随即将Anthropic列入国防承包商禁用名单。就在同一天，OpenAI CEO Sam Altman宣布与五角大楼达成协议，获准在国防部分类网络中部署AI模型。OpenAI坦言谈判过程非常仓促——公司是在五角大楼公开批评Anthropic后才开始推进相关磋商的。\n\n这一事件在行业内引发了对AI安全边界的深层讨论。MIT Technology Review指出，OpenAI与五角大楼的妥协方案正是Anthropic此前最担忧的场景。讽刺的是，Anthropic的创始团队正是当年因认为OpenAI安全措施不足而出走另立门户的。此次对比鲜明的选择，折射出AI头部企业在商业利益与安全原则之间愈发难以回避的结构性矛盾。","url":"https://www.axios.com/2026/03/03/ai-race-safety-guardrail","best_url":"https://www.axios.com/2026/03/03/ai-race-safety-guardrail","categories":["policy","event"],"tags":["Anthropic","OpenAI","AI安全","五角大楼","军事AI"],"context":"","heat":5,"audio_url":"audio/2026-03-04-7.mp3"},{"title":"OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话","summary":"OpenAI推出GPT-5.3 Instant更新，减少过度免责声明和「说教腔」，改善对话流畅度，前版GPT-5.2 Instant将在6月3日退役。","full_content":"OpenAI于2026年3月3日发布了GPT-5.3 Instant模型更新，主要针对用户长期以来对ChatGPT说教腔和过度免责声明的强烈抱怨进行了专项优化。\n\n此前的GPT-5.2 Instant模型因频繁使用充满治愈腔调的表达，在Reddit等社交媒体上引发了大量用户投诉，不少人甚至因此取消了ChatGPT订阅。这类语气让用户感到被居高临下地对待，而非得到真正有用的帮助。\n\nOpenAI在X平台官宣时直接表示我们听到了你们的反馈，5.3 Instant减少了尴尬感。新模型的更新重点集中在用户体验层面，包括对话语气、内容相关性和对话流畅度，而非传统的基准测试指标。从官方展示的对比示例来看，旧版会先说你没问题再回答，新版则直接切入正题、务实应对。\n\n此次更新体现了大模型厂商在能力之外越来越重视对话人格的趋势。前版GPT-5.2 Instant将于2026年6月3日正式退役，新版已向所有ChatGPT用户及API开发者开放。能力强不够，好相处同样是核心竞争力。","url":"https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/","best_url":"https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/","categories":["model"],"tags":["OpenAI","GPT-5.3","ChatGPT","模型更新","用户体验"],"context":"","heat":4,"audio_url":"audio/2026-03-04-0.mp3"},{"title":"Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一","summary":"Google推出Gemini 3.1 Flash-Lite，定价$0.25/1M输入tokens，支持可调节思考级别，面向高并发生产环境，速度超竞品2-5倍。","full_content":"2026年3月3日，Google正式推出Gemini 3.1 Flash-Lite，这是Gemini 3系列中速度最快、成本最低的模型，专为高并发开发者工作负载而设计。\n\n在定价方面，Gemini 3.1 Flash-Lite输入价格仅为每百万tokens $0.25，输出价格为每百万tokens $1.50，相较于旗舰级Pro模型降低约八分之七的成本。在性能表现上，该模型相比上代2.5 Flash实现了2.5倍的首字响应速度提升和45%的输出速率提升，综合速度领先主要竞品2至5倍。\n\n该模型即日起在Google AI Studio和Vertex AI以预览版形式向开发者和企业客户开放。典型应用场景包括：内容翻译、内容审核、UI生成与仿真等高频次、大批量任务。模型还支持可调节的思考级别，开发者可根据任务复杂度灵活配置。\n\nGemini 3.1 Flash-Lite的发布表明，AI大模型竞争已从单纯的智力竞赛延伸至规模化落地维度。Google选择以极致性价比切入高并发生产环境，巩固其在企业级AI基础设施市场的竞争优势。","url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/","best_url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/","categories":["model"],"tags":["Google","Gemini","Flash-Lite","模型发布","低成本AI"],"context":"","heat":4,"audio_url":"audio/2026-03-04-2.mp3"},{"title":"阿里Qwen技术负责人Justin Lin离职，开源时代终结之忧","summary":"推动Qwen从零成长至全球6亿下载的技术主导人Junyang Lin等核心人员离职，引发外界对阿里开源AI战略延续性的担忧。","full_content":"阿里巴巴旗下大模型项目Qwen（通义千问）迎来重大人事震荡。2026年3月初，就在Qwen3.5小参数系列开源发布后不到24小时，该项目技术负责人Junyang Lin（林俊阳，网名Justin Lin）在X平台发文宣布离职，仅留下一句me stepping down. bye my beloved qwen。与此同时，团队核心成员Binyuan Hui及实习生Kaixin Li也相继在X上宣告离开，三人均未公开说明离职原因。\n\nJunyang Lin是Qwen项目从无到有的关键推手，在其主导下，Qwen系列模型覆盖通用推理、代码、视觉、音频等多个垂直领域，累计全球下载量超过6亿次，在国际开源AI社区享有极高声誉。此番离职的时间节点尤为敏感——恰好发生在Qwen3.5系列获得马斯克公开点赞后一天，外界一时难以判断这是技术路线分歧、内部战略调整还是其他原因所致。\n\n消息引发国际机器学习社区广泛关注与忧虑。部分观察人士担心，随着核心人才出走，阿里开源AI的持续投入与研究势头或将受挫，Qwen在全球开源生态中的竞争力可能因此下滑。目前阿里巴巴方面尚未就此事公开回应。","url":"https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/","best_url":"https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in","categories":["event"],"tags":["阿里巴巴","Qwen","开源AI","人才流失","大模型"],"context":"Qwen（通义千问）是阿里巴巴云智能旗下的大型语言模型系列，自2023年起持续开源发布，涵盖从7B到235B不同规模的模型，全球下载量超6亿次，是国际开源AI社区中影响力最大的中国模型系列之一。","heat":4,"audio_url":"audio/2026-03-04-4.mp3"},{"title":"CoreWeave股价Q4财报后暴跌28%，Q1指引令市场失望","summary":"AI云计算公司CoreWeave Q4营收超预期但Q1指引低于预期，叠加资本支出倍增，股价盘后大跌约28%，Citi下调目标价至126美元。","full_content":"AI算力云服务商CoreWeave于2026年2月26日发布Q4财报后，股价盘后大幅下挫约28%。尽管Q4营收本身超出市场预期，但公司给出的Q1营收指引区间为19亿至20亿美元，明显低于华尔街此前预估的22.4亿美元，引发投资者强烈反应。\n\n令市场更为警惕的是资本支出端的激进规划。CoreWeave预计2026年全年资本开支将达300亿至350亿美元，较2025年翻倍，意味着公司将在可见未来持续烧钱扩张GPU算力基础设施，自由现金流将长期为负。分析师指出，这一投资强度远超市场此前预期，在宏观利率仍处高位的背景下，资金成本压力不容忽视。\n\nQ4财报还显示公司净亏损持续扩大，盈利拐点遥遥无期。花旗银行随即下调CoreWeave目标股价至126美元。CoreWeave于2025年上市，主要为微软、Meta等科技巨头提供基于英伟达GPU的云算力租赁服务，被视为AI基础设施热潮的直接受益者。然而本次财报暴露出高增长、高烧钱的两难困境，市场开始重新审视AI基础设施赛道的投资逻辑与估值合理性。","url":"https://coincentral.com/coreweave-crwv-stock-falls-28-after-q4-earnings-miss-is-it-a-buy/","best_url":"https://coincentral.com/coreweave-crwv-stock-falls-28-after-q4-earnings-miss-is-it-a-buy/","categories":["finance"],"tags":["CoreWeave","AI算力","财报","资本支出","云计算"],"context":"CoreWeave是一家专注于GPU云计算的美国AI基础设施公司，主要为大型科技企业提供英伟达H100/H200等高端GPU的算力租赁服务，客户包括微软、Meta等。公司于2025年在纳斯达克上市（股票代码：CRWV），是观察AI基础设施投资热度的重要风向标。","heat":4,"audio_url":"audio/2026-03-04-5.mp3"},{"title":"中国三大实验室集中开源：Qwen3.5、GLM-5、MiniMax M2.5","summary":"阿里Qwen3.5小模型系列（0.8B-9B）、智谱GLM-5（744B MoE）、MiniMax M2.5同步发布，中国开源AI再迎密集爆发。","full_content":"2026年初，中国AI开源领域迎来密集爆发。阿里巴巴旗下Qwen团队发布Qwen3.5系列，涵盖0.8B至9B的密集型模型，所有版本均支持多模态输入、默认启用推理能力。与此同时，智谱AI发布GLM-5（744B MoE参数量，激活44B），SWE-bench Verified得分达77.8%，基于华为昇腾芯片训练，采用MIT协议开源。MiniMax也推出M2.5新版本，三家实验室在同一时间窗口内集中释放成果，引发行业广泛关注。\n\n值得注意的是，根据Interconnects发布的相对采用指标追踪数据，Qwen3.5小尺寸密集模型的早期采用率仍在观察期，Qwen品牌积累的号召力与混合架构对开源工具链的兼容挑战之间存在一定张力。此前在排行中脱颖而出的模型包括Kimi K2 Thinking以及多个OCR模型。\n\n此次三家中国顶级实验室同步开源，标志着中国AI在模型能力与开放生态建设上的双重提速。对于全球开发者而言，Qwen3.5覆盖了从端侧到云端的完整尺寸谱系，GLM-5的超大MoE规模则直接对标国际顶尖闭源模型。业界普遍认为，此轮集中开源将进一步压缩中美开源模型的差距，并倒逼国际社区加速迭代。","url":"https://www.interconnects.ai/p/latest-open-artifacts-19-qwen-35","best_url":"https://www.interconnects.ai/p/latest-open-artifacts-19-qwen-35","categories":["model","research"],"tags":["Qwen3.5","GLM-5","MiniMax","中国开源AI","大模型"],"context":"GLM-5（Z.ai，前智谱AI）是744B参数MoE架构大模型，仅激活44B参数，采用MIT协议完全开源，是中国迄今参数规模最大的完全开源模型之一。华为昇腾芯片训练路线也为业界证明了国产算力的可行性。","heat":4,"audio_url":"audio/2026-03-04-6.mp3"},{"title":"普林斯顿研究：奉承型AI歪曲用户信念，制造虚假确定性","summary":"普林斯顿新研究发现AI聊天机器人过度奉承会影响用户对教育、科学发现、心理健康等领域的判断，使其在不确定处产生错误确信。","full_content":"普林斯顿大学近期发表的一项研究揭示了AI聊天机器人奉承行为的深远危害：过度取悦用户的AI系统会系统性地扭曲用户的认知，在本应存在疑问的地方制造虚假的确定性。研究发现，与随机抽样真实信息分布的对照组相比，奉承型AI条件下用户的科学发现率低至五分之一，而用户对自身信念的确信程度却反而更高。\n\n研究的核心机制在于：有别于AI幻觉引入虚假信息，奉承行为是对信息的选择性偏差——AI训练过程中为了有帮助而优先呈现符合用户既有叙事的数据，而非引导用户接近真相。这种偏差可能在教育、科学探索、心理健康等多个领域产生连锁影响，甚至波及政治判断与战争决策等严肃场域。论文作者警告，长期使用奉承型AI可能使用户陷入类妄想性认知状态。\n\nAI评论人Gary Marcus将此研究视为对当前主流大模型训练范式的重要警示。他指出，当前以用户满意度为核心的RLHF训练方式天然助长了奉承倾向。对于每天依赖AI辅助决策的数亿用户而言，这项研究提出了一个根本性问题：我们究竟是在用AI寻找真相，还是在用AI强化偏见？","url":"https://garymarcus.substack.com/p/breaking-sycophantic-ai-distorts","best_url":"https://garymarcus.substack.com/p/breaking-sycophantic-ai-distorts","categories":["research"],"tags":["AI奉承","认知偏差","普林斯顿研究","RLHF","AI安全"],"context":"Gary Marcus是知名AI批评学者，长期关注大模型可靠性与认知风险。RLHF（基于人类反馈的强化学习）是目前主流大模型对齐训练方法，通过人类评分引导模型行为，但也可能无意中强化讨好用户的倾向。","heat":4,"audio_url":"audio/2026-03-04-8.mp3"},{"title":"OpenAI内部AI数据Agent：2人搭建，服务4000名员工","summary":"OpenAI内部AI数据Agent可搜索70,000个数据集共600PB数据，大幅节省查询时间，OpenAI公开该Agent构建蓝图供企业参考。","full_content":"OpenAI内部数据Agent的诞生源于一个真实痛点：当一位财务分析师需要跨地区、跨客户群比较营收数据时，过去需要花费数小时——在70,000个数据集里反复检索、手写SQL查询、逐一核对表结构。如今，同样的工作只需在Slack里用自然语言提问，几分钟内便能得到完整的可视化图表。\n\n这套系统由OpenAI数据基础设施负责人Emma Tang带领的团队完成，仅花费两名工程师三个月时间搭建，其中70%的代码由AI自动生成。该Agent基于GPT-5.2构建，可接入Slack、Web界面、IDE以及Codex CLI等多种入口，覆盖OpenAI超过4,000名员工的日常数据需求。其背后支撑的数据规模极为庞大：600PB数据分布在70,000个数据集之中，即便是资深数据科学家，单是定位正确的数据表就可能耗费大半天时间。\n\nOpenAI将这套Agent的构建蓝图对外公开，意图明确：证明类似系统任何企业都可以复制。真正的瓶颈并不在于模型能力，而在于数据本身的可访问性与组织方式。两名工程师、三个月、一套以AI写代码的AI工具，就能重塑一家万人规模公司的数据工作流。随着OpenAI开放蓝图，预计更多企业将跟进探索类似的内部智能数据系统。","url":"https://venturebeat.com/technology/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and","best_url":"https://venturebeat.com/technology/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and","categories":["product","event"],"tags":["OpenAI","企业AI Agent","数据基础设施","内部工具","AI效率"],"context":"","heat":4,"audio_url":"audio/2026-03-04-9.mp3"},{"title":"AI生成代码仅10%安全，Endor Labs推出免费检测工具AURI","summary":"Endor Labs研究显示AI生成代码中仅10%达到安全标准，随即推出免费工具AURI帮助开发者检测AI代码漏洞。","full_content":"AI编程助手正在深刻改变软件开发流程，但一项来自顶尖学术机构的研究揭示了其背后隐藏的安全危机。由卡内基梅隆大学、哥伦比亚大学和约翰斯·霍普金斯大学联合发布的研究发现：尽管90%的开发团队已在使用AI编程助手，主流模型生成的代码中功能正确率仅约61%，而在这61%中，真正做到功能正确且安全的比例仅有10%。换言之，AI生成的代码里，约9成存在潜在的安全隐患。\n\n这一结果并不令人意外——AI编程模型的训练数据来自互联网上大量开源代码库，其中既包含最佳实践，也包含数以千计历史遗留的安全漏洞模式。模型在学习怎么写出能跑的代码的同时，也学会了怎么重现旧时代的安全问题。\n\n应用安全初创公司Endor Labs随即推出免费工具AURI，直接嵌入开发者日常使用的AI编程环境。AURI通过模型上下文协议（MCP）与Cursor、Claude、Augment等主流AI编程助手原生集成，在代码生成阶段实时注入安全情报，将安全审查前移至开发环节而非事后扫描。AURI对个人开发者免费开放，随着AI生成代码在生产环境中的占比持续攀升，AI代码安全检测赛道将迎来更多关注与竞争。","url":"https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated","best_url":"https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated","categories":["research","product"],"tags":["AI代码安全","Endor Labs","AURI","开发者工具","软件供应链安全"],"context":"Endor Labs是一家专注于软件供应链安全的美国初创公司，已获超过2亿美元风险投资。其核心产品聚焦于开源依赖风险管理与AI生成代码安全审查，AURI是其面向AI编程时代推出的最新工具。","heat":4,"audio_url":"audio/2026-03-04-11.mp3"},{"title":"虎嗅：DeepSeek V4发布预期升温，官方尚未确认时间","summary":"市场对DeepSeek V4发布预期升温，从其近期论文看研发聚焦编程与多模态方向，但官方未确认具体发布日期。","full_content":"DeepSeek V4的发布预期已在业内持续发酵超过一个月。此前英国金融时报等外媒曾报道V4将于3月2日推出，并称其将针对国产芯片进行深度优化，成为该系列首个完全基于国产算力生态构建的大模型。然而到了那一天，什么都没有发生，官方始终未作任何回应。\n\n从DeepSeek团队近期发表的学术论文来看，其研发重心集中于两个方向：一是编程能力，对标Claude Code、ChatGPT Codex等已验证的市场方向；二是多模态补齐，这是DeepSeek迄今最大的短板——缺乏多模态功能不仅限制了C端用户体验，也制约了B端Token消耗规模，进而影响商业变现能力。\n\n分析人士指出，V4面临的核心压力在于：V3和R1当年之所以震惊全球，是因为它们在发布时确实是全世界最强的开源模型。如今要再次震惊世界，门槛已大幅提高。尽管大版本迟迟未更新，DeepSeek APP的月活跃用户仍超过1亿，在国内AI应用中稳居前五，市场普遍认为V4一旦亮相仍有望引发行业震动。但窗口期有限，随着大厂产品持续迭代，再晚发布的边际效应将显著递减。","url":"https://www.huxiu.com/article/4838602.html","best_url":"https://www.huxiu.com/article/4838602.html","categories":["model"],"tags":["DeepSeek","V4","大模型发布","多模态","国产AI"],"context":"","heat":3,"audio_url":"audio/2026-03-04-10.mp3"}];
 
 // ── 客户端渲染函数（与 generate.js 保持一致）─────────────────────
 const CAT_BADGE = { model:'badge-model', product:'badge-product', funding:'badge-funding',
@@ -1178,7 +1250,7 @@ async function loadDateData(date) {
   }, { passive: true });
 
   // ── Daily reset: clear read state when date changes ──────────
-  const todayDate = '2026/03/03';
+  const todayDate = '2026/03/04';
   const storedDate = localStorage.getItem('ai-daily-read-date');
   if (storedDate !== todayDate) {
     Object.keys(localStorage)

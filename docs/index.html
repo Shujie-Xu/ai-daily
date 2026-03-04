@@ -301,8 +301,12 @@ footer{
   100%{transform:scale(0.9)}
 }
 .card-popping{
-  animation:cardTap .32s cubic-bezier(.2,.8,.3,1) forwards;
+  animation:cardTap .32s cubic-bezier(.2,.8,.3,1) forwards !important;
   pointer-events:none;
+}
+.card-popping,.card-popping:hover{
+  transition:none !important;
+  box-shadow:var(--neu-raised) !important;
 }
 @keyframes sheetExpand{
   0%  {transform:scale(0.7) translateY(14px);opacity:0}
@@ -440,7 +444,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 01:07 CST</span>
+    <span class="foot-l">26/03/05 01:12 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>

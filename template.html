@@ -77,12 +77,22 @@ header{
 .logo{display:flex;align-items:center;gap:10px}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--t1)}
 .logo-txt{font-size:13.5px;font-weight:600;letter-spacing:-.02em}
-.theme-btn{
-  width:30px;height:30px;border-radius:7px;
-  border:1px solid var(--border);background:transparent;color:var(--t4);
-  display:flex;align-items:center;justify-content:center;font-size:14px;
-  transition:all .12s;
+/* ── Theme toggle (sliding pill) ── */
+.theme-toggle{
+  width:52px;height:28px;border-radius:999px;
+  border:1px solid var(--border);background:var(--subtle);
+  position:relative;cursor:pointer;transition:background .3s,border-color .3s;
+  flex-shrink:0;
 }
+.theme-knob{
+  position:absolute;top:3px;left:3px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--t1);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s;
+}
+[data-theme="dark"] .theme-knob{transform:translateX(24px)}
+.theme-knob svg{width:10px;height:10px;stroke:var(--bg);fill:none;stroke-width:1.8;transition:opacity .2s}
 
 /* ── Main ── */
 main{max-width:880px;margin:0 auto;padding:0 24px}
@@ -241,6 +251,11 @@ footer{
 }
 .src-dot{width:4px;height:4px;border-radius:50%;background:var(--t1);flex-shrink:0}
 .src-name{font-size:12.5px;font-weight:500;color:var(--t2)}
+/* ── Modal reading progress bar ── */
+.m-progress{
+  height:2px;background:var(--border);margin:0 28px;border-radius:1px;flex-shrink:0;overflow:hidden;
+}
+.m-progress-inner{height:100%;width:0%;background:var(--t1);border-radius:1px;transition:width .1s linear}
 .m-body{flex:1;overflow-y:auto;padding:24px 28px 8px}
 .m-content{font-size:15px;line-height:1.9;color:var(--t2);letter-spacing:.005em}
 .m-content p{margin-bottom:16px}
@@ -250,10 +265,12 @@ footer{
 .m-ctx-txt{font-size:13.5px;line-height:1.7;color:var(--t3)}
 .m-tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px}
 .m-tag{
-  font-size:11px;color:var(--t4);padding:2px 8px;
-  border:1px solid var(--border);border-radius:999px;
-  font-family:'SF Mono','Menlo','Consolas',monospace;
+  font-size:11px;font-weight:500;color:var(--t4);
+  padding:3px 10px;border:1px solid var(--border);border-radius:999px;
+  font-family:'Sora',sans-serif;letter-spacing:.01em;
+  transition:color .12s,border-color .12s;
 }
+.m-tag:hover{color:var(--t2);border-color:var(--t4)}
 .m-foot{
   padding:16px 28px 20px;border-top:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
@@ -304,7 +321,14 @@ footer{
       <div class="logo-dot"></div>
       <span class="logo-txt">AI Daily</span>
     </div>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="切换主题">🌙</button>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换主题" aria-label="切换主题">
+      <div class="theme-knob" id="themeKnob">
+        <!-- sun (light mode) -->
+        <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+        <!-- moon (dark mode) -->
+        <svg id="iconMoon" viewBox="0 0 24 24" style="position:absolute;opacity:0"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </div>
+    </button>
   </div>
 </header>
 
@@ -373,6 +397,7 @@ footer{
         <span class="src-name" id="mSrc"></span>
       </div>
     </div>
+    <div class="m-progress"><div class="m-progress-inner" id="mProgressBar"></div></div>
     <div class="m-body" id="mBody"></div>
     <div class="m-foot">
       <div class="m-nav">
@@ -444,11 +469,17 @@ let archOpen = false;
 let touchX0 = null, touchT0 = null;
 
 // ── Theme ────────────────────────────────────────────────────────
+function applyThemeIcons(t){
+  const sun = document.getElementById('iconSun');
+  const moon = document.getElementById('iconMoon');
+  if(!sun||!moon) return;
+  if(t==='dark'){ sun.style.opacity='0'; moon.style.opacity='1'; }
+  else { sun.style.opacity='1'; moon.style.opacity='0'; }
+}
 (function initTheme(){
   const t = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', t);
-  const btn = document.getElementById('themeBtn');
-  if(btn) btn.textContent = t==='dark' ? '☀︎' : '🌙';
+  applyThemeIcons(t);
 })();
 
 window.toggleTheme = function(){
@@ -456,7 +487,7 @@ window.toggleTheme = function(){
   const next = cur==='dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
-  document.getElementById('themeBtn').textContent = next==='dark' ? '☀︎' : '🌙';
+  applyThemeIcons(next);
 };
 
 // ── Archive ──────────────────────────────────────────────────────
@@ -669,8 +700,17 @@ function renderModal(){
     body += `<div class="m-tags">${item.tags.map(t=>`<span class="m-tag">#${esc(t)}</span>`).join('')}</div>`;
   }
 
-  document.getElementById('mBody').innerHTML = body;
-  document.getElementById('mBody').scrollTop = 0;
+  const mBody = document.getElementById('mBody');
+  mBody.innerHTML = body;
+  mBody.scrollTop = 0;
+  // reset progress
+  document.getElementById('mProgressBar').style.width = '0%';
+  mBody.onscroll = function(){
+    const el = this;
+    const pct = el.scrollHeight <= el.clientHeight ? 100
+      : Math.min(100, Math.round(el.scrollTop / (el.scrollHeight - el.clientHeight) * 100));
+    document.getElementById('mProgressBar').style.width = pct + '%';
+  };
 
   // nav
   document.getElementById('btnMPrev').disabled = modalIdx<=0;
@@ -733,7 +773,14 @@ function ttsStop(){
 function pickVoice(){
   if(!synth) return null;
   const vv=synth.getVoices();
-  const pref=['Microsoft Xiaoxiao','Microsoft Xiaohan','Microsoft Yunxi','Tingting','Meijia','Yu-shu','Microsoft Huihui','Microsoft Yaoyao'];
+  // Prefer calm/neutral female voices; avoid expressive/cheerful ones
+  const pref=[
+    'Microsoft Xiaomo','Microsoft Xiaohan',   // calm neutral zh-CN
+    'Microsoft Yunxi',                          // neutral male fallback
+    'Tingting','Meijia',                        // macOS zh
+    'Microsoft Xiaoxiao',                       // slightly warmer but acceptable
+    'Yu-shu','Microsoft Huihui','Microsoft Yaoyao',
+  ];
   for(const n of pref){ const v=vv.find(v=>v.name.includes(n)); if(v) return v; }
   return vv.find(v=>v.lang==='zh-CN')||vv.find(v=>v.lang.startsWith('zh'))||null;
 }

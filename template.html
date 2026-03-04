@@ -294,24 +294,25 @@ footer{
 .slide-r{animation:slideInR .22s cubic-bezier(.16,1,.3,1) both}
 /* ── Spring UX ── */
 @keyframes cardPop{
-  0%{transform:scale(1) translateY(0)}
-  35%{transform:scale(1.05) translateY(-2px)}
-  65%{transform:scale(0.97) translateY(1px)}
-  100%{transform:scale(1) translateY(0)}
-}
-@keyframes sheetSpring{
-  0%{transform:translateY(32px) scale(0.93);opacity:0}
-  55%{transform:translateY(-5px) scale(1.018);opacity:1}
-  75%{transform:translateY(2px) scale(0.996)}
-  100%{transform:translateY(0) scale(1);opacity:1}
+  from{transform:scale(1)}
+  to{transform:scale(1)}
 }
 .card-popping{
-  animation:cardPop .32s cubic-bezier(.36,1.56,.64,1) both;
+  animation:cardSpring .28s cubic-bezier(.22,1.6,.36,1) both;
   pointer-events:none;
   z-index:2;position:relative;
 }
+@keyframes cardSpring{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+@keyframes sheetSpring{
+  from{transform:translateY(28px) scale(0.95);opacity:0}
+  to{transform:translateY(0) scale(1);opacity:1}
+}
 .m-sheet.spring{
-  animation:sheetSpring .42s cubic-bezier(.36,1.4,.64,1) both;
+  animation:sheetSpring .5s cubic-bezier(.22,1.4,.36,1) both;
 }
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{

@@ -179,6 +179,8 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
   box-shadow:var(--neu-raised);
   transition:box-shadow .18s,transform .18s;
   margin-bottom:10px;
+  display:block;
+  will-change:transform;
 }
 .featured:hover{box-shadow:var(--neu-hover);transform:translateY(-1px)}
 .featured:active{box-shadow:var(--neu-press);transform:translateY(0)}
@@ -295,11 +297,11 @@ footer{
 /* ── Spring UX (Apple-style simultaneous) ── */
 @keyframes cardTap{
   0%  {transform:scale(1)}
-  35% {transform:scale(0.93)}
+  30% {transform:scale(0.965)}
   100%{transform:scale(1)}
 }
 .card-popping{
-  animation:cardTap .38s cubic-bezier(.34,1.4,.64,1) both;
+  animation:cardTap .3s cubic-bezier(.25,1,.5,1) both;
   pointer-events:none;
 }
 @keyframes sheetExpand{
@@ -436,7 +438,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 00:50 CST</span>
+    <span class="foot-l">26/03/05 00:51 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>

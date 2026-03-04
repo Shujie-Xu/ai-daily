@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
 <title>AI Daily · {{DATE}}</title>
 <meta name="description" content="{{OG_DESC}}">
 <meta property="og:title" content="AI Daily · {{DATE}}">
@@ -72,6 +73,7 @@ header{
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
   background:var(--hdr-bg);
+  isolation:isolate;
 }
 .hdr{max-width:880px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:48px}
 .logo{display:flex;align-items:center;gap:10px}
@@ -119,27 +121,25 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .arch-chev{transition:transform .15s}
 .arch-chev.open{transform:rotate(180deg)}
 .arch-drop{
-  position:absolute;top:calc(100% + 6px);left:0;z-index:200;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:6px;min-width:200px;
-  box-shadow:var(--shadow);animation:archDrop .15s ease;
-  display:none;
+  position:fixed;z-index:9999;
+  border-radius:12px;width:252px;
+  box-shadow:0 8px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.1);
+  overflow:hidden;display:none;
 }
-.arch-drop.open{display:block}
-.arch-label{
-  padding:6px 10px 8px;font-size:11px;font-weight:600;color:var(--t4);
-  letter-spacing:.06em;text-transform:uppercase;
-}
-.arch-item{
-  display:flex;align-items:center;justify-content:space-between;
-  width:100%;padding:8px 10px;border-radius:6px;border:none;
-  background:transparent;color:var(--t3);
-  font-size:13px;font-family:'SF Mono','Menlo','Consolas',monospace;
-  font-weight:400;transition:background .1s;text-align:left;cursor:pointer;
-}
-.arch-item:hover{background:var(--subtle)}
-.arch-item.cur{background:var(--subtle);color:var(--t1);font-weight:600}
-.arch-today{font-size:9px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+/* ── Calendar ── */
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px}
+.cal-mon{font-size:13px;font-weight:600;color:var(--t1)}
+.cal-nav{background:none;border:none;cursor:pointer;font-size:17px;color:var(--t3);padding:2px 6px;border-radius:5px;line-height:1;transition:background .1s}
+.cal-nav:hover{background:var(--subtle)}
+.cal-nav:disabled{opacity:.22;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:0 10px 10px}
+.cal-dn{text-align:center;font-size:10px;font-weight:600;color:var(--t4);padding:3px 0 5px}
+.cal-d{text-align:center;font-size:12.5px;border-radius:6px;padding:6px 0;position:relative;line-height:1.2}
+.cal-has{cursor:pointer;color:var(--t1);font-weight:500}
+.cal-has:hover{background:var(--subtle)}
+.cal-no{color:var(--t5);cursor:default}
+.cal-sel{background:var(--t1)!important;color:var(--bg)!important;font-weight:700}
+.cal-dot{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--t4)}
 .hero-title{
   font-size:clamp(32px,4.5vw,44px);font-weight:300;
   letter-spacing:-.04em;line-height:1.08;
@@ -180,7 +180,7 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 
 /* ── News list ── */
 .news-list{}
-.n-item{
+.n-item{color:inherit;
   display:flex;gap:16px;padding:18px 12px;margin:0 -12px;
   border-bottom:1px solid var(--border);cursor:pointer;
   border-radius:0;background:transparent;
@@ -190,9 +190,10 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .n-item:hover{background:var(--hov);border-radius:8px}
 .n-body{flex:1;min-width:0}
 .n-cats{display:flex;align-items:center;gap:6px;margin-bottom:4px}
-.n-title{font-size:14.5px;font-weight:600;line-height:1.5;letter-spacing:-.01em}
+.n-title{font-size:14.5px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--t1)}
 .n-summary{font-size:13px;line-height:1.55;color:var(--t3);margin-top:2px}
 .n-src{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4);white-space:nowrap;padding-top:18px;flex-shrink:0}
+@media(max-width:600px){.n-src{display:none}}
 
 /* ── Footer ── */
 footer{
@@ -226,8 +227,7 @@ footer{
   transition:transform .25s cubic-bezier(.16,1,.3,1),opacity .2s ease;
 }
 .m-sheet.vis{transform:translateY(0);opacity:1}
-.m-handle-row{padding:12px 20px 0;display:flex;align-items:center;justify-content:center}
-.m-handle{width:36px;height:4px;border-radius:2px;background:var(--border)}
+.m-handle-row{display:none}
 .m-hdr{padding:20px 28px 0}
 .m-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .m-meta-l{display:flex;align-items:center;gap:8px}
@@ -242,20 +242,20 @@ footer{
 .m-title{
   font-family:'Instrument Serif',Georgia,'Noto Serif SC',serif;
   font-size:clamp(22px,3.5vw,30px);font-weight:400;
-  line-height:1.3;letter-spacing:-.01em;
-}
-.m-src-row{
-  margin-top:14px;padding-bottom:20px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:8px;
+  line-height:1.3;letter-spacing:-.01em;padding-bottom:20px;
 }
 .src-dot{width:4px;height:4px;border-radius:50%;background:var(--t1);flex-shrink:0}
-.src-name{font-size:12.5px;font-weight:500;color:var(--t2)}
-/* ── Modal reading progress bar ── */
+.src-name{font-size:12px;font-weight:500;color:var(--t3)}
+/* ── Modal slide animation ── */
+@keyframes slideInL{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes slideInR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+.slide-l{animation:slideInL .22s cubic-bezier(.16,1,.3,1) both}
+.slide-r{animation:slideInR .22s cubic-bezier(.16,1,.3,1) both}
+/* ── Progress bar fused into header bottom border ── */
 .m-progress{
-  height:2px;background:var(--border);margin:0 28px;border-radius:1px;flex-shrink:0;overflow:hidden;
+  height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
 }
-.m-progress-inner{height:100%;width:0%;background:var(--t1);border-radius:1px;transition:width .1s linear}
+.m-progress-inner{height:100%;width:0%;background:var(--t1);transition:width .1s linear}
 .m-body{flex:1;overflow-y:auto;padding:24px 28px 8px}
 .m-content{font-size:15px;line-height:1.9;color:var(--t2);letter-spacing:.005em}
 .m-content p{margin-bottom:16px}
@@ -272,8 +272,8 @@ footer{
 }
 .m-tag:hover{color:var(--t2);border-color:var(--t4)}
 .m-foot{
-  padding:16px 28px 20px;border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+  padding:14px 28px 20px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:flex-end;flex-shrink:0;
 }
 .m-nav{display:flex;align-items:center;gap:4px}
 .m-nav-btn{
@@ -345,10 +345,6 @@ footer{
           <span id="archLabel"></span>
           <svg class="arch-chev" id="archChev" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="arch-drop" id="archDrop">
-          <div class="arch-label">Archive</div>
-          <div id="archList"></div>
-        </div>
       </div>
       <button class="nav-btn" id="btnNext" onclick="navDate(1)" title="后一天">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
@@ -389,25 +385,25 @@ footer{
     <div class="m-hdr">
       <div class="m-meta">
         <div class="m-meta-l" id="mMeta"></div>
-        <button class="m-close" onclick="closeModal()">✕</button>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button class="m-nav-btn" id="btnMPrev" onclick="navModal(-1)" title="上一篇">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="m-nav-cnt" id="mNavCnt"></span>
+          <button class="m-nav-btn" id="btnMNext" onclick="navModal(1)" title="下一篇">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <button class="m-close" onclick="closeModal()">✕</button>
+        </div>
       </div>
       <h2 class="m-title" id="mTitle"></h2>
-      <div class="m-src-row">
-        <div class="src-dot"></div>
-        <span class="src-name" id="mSrc"></span>
-      </div>
     </div>
     <div class="m-progress"><div class="m-progress-inner" id="mProgressBar"></div></div>
     <div class="m-body" id="mBody"></div>
     <div class="m-foot">
-      <div class="m-nav">
-        <button class="m-nav-btn" id="btnMPrev" onclick="navModal(-1)" title="上一篇">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button class="m-nav-btn" id="btnMNext" onclick="navModal(1)" title="下一篇">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-        <span class="m-nav-cnt" id="mNavCnt"></span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="src-dot"></div>
+        <span class="src-name" id="mSrc"></span>
       </div>
       <div class="m-actions">
         <button class="btn-tts" id="btnTts" onclick="toggleTts()" title="朗读正文">
@@ -488,6 +484,9 @@ window.toggleTheme = function(){
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   applyThemeIcons(next);
+  // 同步更新日历弹窗背景
+  const drop = document.getElementById('archDrop');
+  if(drop){ drop.style.backgroundColor = next==='dark' ? '#111114' : '#ffffff'; drop.style.color = next==='dark' ? '#fafafa' : '#09090b'; }
 };
 
 // ── Archive ──────────────────────────────────────────────────────
@@ -507,42 +506,99 @@ function updateNavBtns(){
   if(n) n.disabled = idx <= 0;
 }
 
-function buildArchList(){
+let calYear=null, calMonth=null;
+
+function buildCalendar(){
   const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date());
   const list = document.getElementById('archList');
   if(!list) return;
-  list.innerHTML = allDates.map(d=>`
-    <button class="arch-item ${d===pageDate?'cur':''}" onclick="selectDate('${d}')">
-      <span>${fmtShort(d)}</span>
-      ${d===today?'<span class="arch-today">today</span>':''}
-    </button>
-  `).join('');
+
+  // init to pageDate's month on first open
+  if(calYear===null){
+    calYear  = parseInt(pageDate.slice(0,4));
+    calMonth = parseInt(pageDate.slice(5,7)) - 1;
+  }
+
+  const datesSet = new Set(allDates);
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const firstDay    = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const allYM  = [...new Set(allDates.map(d=>d.slice(0,7)))].sort();
+  const curYM  = `${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const canPrev = allYM.length && allYM[0] < curYM;
+  const canNext = allYM.length && allYM[allYM.length-1] > curYM;
+
+  const dayNames = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  let cells = dayNames.map(d=>`<div class="cal-dn">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) cells+=`<div class="cal-d"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const has=datesSet.has(ds), sel=ds===pageDate, tod=ds===today;
+    const cls=['cal-d',has?'cal-has':'cal-no',sel?'cal-sel':''].filter(Boolean).join(' ');
+    cells+=`<div class="${cls}" ${has?`onclick="selectDate('${ds}')"`:''}>
+      ${d}${tod&&!sel?'<span class="cal-dot"></span>':''}
+    </div>`;
+  }
+
+  list.innerHTML=`
+    <div class="cal-hdr">
+      <button class="cal-nav" onclick="calNav(-1)" ${!canPrev?'disabled':''}>‹</button>
+      <span class="cal-mon">${MONTHS[calMonth]} ${calYear}</span>
+      <button class="cal-nav" onclick="calNav(1)" ${!canNext?'disabled':''}>›</button>
+    </div>
+    <div class="cal-grid">${cells}</div>
+  `;
+}
+
+window.calNav = function(dir){
+  calMonth += dir;
+  if(calMonth<0){calMonth=11;calYear--;}
+  if(calMonth>11){calMonth=0;calYear++;}
+  buildCalendar();
+};
+
+function archDropBg(){
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  const drop = document.getElementById('archDrop');
+  drop.style.backgroundColor = dark ? '#111114' : '#ffffff';
+  drop.style.color = dark ? '#fafafa' : '#09090b';
+  drop.style.border = '1px solid ' + (dark ? '#27272a' : '#e4e4e7');
 }
 
 window.toggleArch = function(){
   archOpen = !archOpen;
-  document.getElementById('archDrop').classList.toggle('open', archOpen);
-  document.getElementById('archToggle').classList.toggle('open', archOpen);
+  const drop = document.getElementById('archDrop');
+  const btn  = document.getElementById('archToggle');
+  btn.classList.toggle('open', archOpen);
   document.getElementById('archChev').classList.toggle('open', archOpen);
-  if(archOpen) buildArchList();
+  if(archOpen){
+    const r = btn.getBoundingClientRect();
+    drop.style.top     = (r.bottom + 6) + 'px';
+    drop.style.left    = r.left + 'px';
+    drop.style.display = 'block';
+    archDropBg();
+    calYear=null; calMonth=null; buildCalendar();
+  } else {
+    drop.style.display = 'none';
+  }
 };
+
+function closeArch(){
+  archOpen=false;
+  document.getElementById('archDrop').style.display='none';
+  document.getElementById('archToggle').classList.remove('open');
+  document.getElementById('archChev').classList.remove('open');
+}
 
 document.addEventListener('mousedown', function(e){
   if(!archOpen) return;
   const wrap = document.querySelector('.arch-wrap');
-  if(wrap && !wrap.contains(e.target)){
-    archOpen=false;
-    document.getElementById('archDrop').classList.remove('open');
-    document.getElementById('archToggle').classList.remove('open');
-    document.getElementById('archChev').classList.remove('open');
-  }
+  const drop = document.getElementById('archDrop');
+  if(wrap && !wrap.contains(e.target) && !drop.contains(e.target)) closeArch();
 });
 
 window.selectDate = function(date){
-  archOpen=false;
-  document.getElementById('archDrop').classList.remove('open');
-  document.getElementById('archToggle').classList.remove('open');
-  document.getElementById('archChev').classList.remove('open');
+  closeArch();
   loadDateData(date);
 };
 
@@ -664,9 +720,10 @@ window.handleOvClick = function(e){
   if(e.target===e.currentTarget) closeModal();
 };
 
+let _slideDir = 0;
 window.navModal = function(dir){
   const ni = modalIdx+dir;
-  if(ni>=0 && ni<filteredCache.length){ modalIdx=ni; ttsStop(); renderModal(); }
+  if(ni>=0 && ni<filteredCache.length){ _slideDir=dir; modalIdx=ni; ttsStop(); renderModal(); }
 };
 
 function renderModal(){
@@ -701,6 +758,19 @@ function renderModal(){
   }
 
   const mBody = document.getElementById('mBody');
+  // slide animation
+  if(_slideDir!==0){
+    const cls = _slideDir>0 ? 'slide-l' : 'slide-r';
+    mBody.classList.remove('slide-l','slide-r');
+    void mBody.offsetWidth; // reflow
+    mBody.classList.add(cls);
+    // also animate title
+    const titleEl = document.getElementById('mTitle');
+    titleEl.classList.remove('slide-l','slide-r');
+    void titleEl.offsetWidth;
+    titleEl.classList.add(cls);
+    _slideDir=0;
+  }
   mBody.innerHTML = body;
   mBody.scrollTop = 0;
   // reset progress
@@ -728,7 +798,7 @@ function renderModal(){
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape'){
     if(modalOpen) closeModal();
-    else if(archOpen) toggleArch();
+    else if(archOpen) closeArch();
   }
   if(modalOpen){
     if(e.key==='ArrowLeft') navModal(-1);
@@ -746,7 +816,7 @@ document.getElementById('mSheet').addEventListener('touchend', function(e){
   touchX0=null;
   if(dt>400||Math.abs(dx)<50) return;
   if(window.getSelection&&window.getSelection().toString()) return;
-  if(dx>0) navModal(-1); else navModal(1);
+  navModal(dx>0 ? -1 : 1);
 },{passive:true});
 
 // ── TTS ──────────────────────────────────────────────────────────
@@ -865,5 +935,9 @@ if(hash && hash.startsWith('#article-')){
 
 })();
 </script>
+<!-- arch-drop 挂在 body 上，脱离 header 合成层 -->
+<div class="arch-drop" id="archDrop">
+  <div id="archList"></div>
+</div>
 </body>
 </html>

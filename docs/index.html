@@ -73,6 +73,7 @@ header{
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
   background:var(--hdr-bg);
+  isolation:isolate;
 }
 .hdr{max-width:880px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:48px}
 .logo{display:flex;align-items:center;gap:10px}
@@ -123,11 +124,11 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
   position:absolute;top:calc(100% + 6px);left:0;z-index:200;
   background:var(--card);border:1px solid var(--border);
   border-radius:12px;width:252px;
-  box-shadow:0 8px 32px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.08);
+  box-shadow:0 8px 32px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.1);
   animation:archDrop .15s ease;
   display:none;overflow:hidden;
-  backdrop-filter:none;-webkit-backdrop-filter:none;
-  isolation:isolate;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  opacity:1!important;
 }
 .arch-drop.open{display:block}
 /* ── Calendar ── */
@@ -376,7 +377,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:38 CST</span>
+    <span class="foot-l">26/03/04 19:39 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>

@@ -127,8 +127,9 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
   box-shadow:0 8px 32px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.1);
   animation:archDrop .15s ease;
   display:none;overflow:hidden;
-  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
-  opacity:1!important;
+  /* 强制不透明，防止 header backdrop-filter 渗透 */
+  position:absolute;
+  -webkit-transform:translateZ(0);transform:translateZ(0);
 }
 .arch-drop.open{display:block}
 /* ── Calendar ── */
@@ -377,7 +378,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:39 CST</span>
+    <span class="foot-l">26/03/04 19:40 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -564,10 +565,16 @@ window.calNav = function(dir){
 
 window.toggleArch = function(){
   archOpen = !archOpen;
-  document.getElementById('archDrop').classList.toggle('open', archOpen);
+  const drop = document.getElementById('archDrop');
+  drop.classList.toggle('open', archOpen);
   document.getElementById('archToggle').classList.toggle('open', archOpen);
   document.getElementById('archChev').classList.toggle('open', archOpen);
-  if(archOpen){ calYear=null; calMonth=null; buildCalendar(); }
+  if(archOpen){
+    // 强制实心背景，不受 header backdrop-filter 影响
+    const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+    drop.style.background = isDark ? '#111114' : '#ffffff';
+    calYear=null; calMonth=null; buildCalendar();
+  }
 };
 
 document.addEventListener('mousedown', function(e){

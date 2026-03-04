@@ -303,12 +303,14 @@ footer{
   pointer-events:none;
 }
 @keyframes sheetExpand{
-  from{transform:scale(0.86) translateY(20px);opacity:0}
+  from{transform:scale(0.72) translateY(12px);opacity:0}
   to  {transform:scale(1)    translateY(0);   opacity:1}
 }
 .m-sheet.spring{
-  animation:sheetExpand .48s cubic-bezier(.34,1.22,.64,1) both;
+  animation:sheetExpand .46s cubic-bezier(.25,1.18,.5,1) both;
+  will-change:transform,opacity;
 }
+.m-sheet{will-change:transform,opacity}
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
   height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
@@ -766,23 +768,28 @@ function renderContent(){
 
 // ── Modal ────────────────────────────────────────────────────────
 window.openModal = function(filteredIdx, triggerEl){
-  // 1. Card pops immediately
+  // Pre-render content immediately so DOM is ready before animation starts
+  filteredCache = getFiltered();
+  modalIdx = filteredIdx;
+  ttsStop();
+  renderModal();
+
+  // Card tap animation
   if(triggerEl){
     triggerEl.classList.add('card-popping');
     setTimeout(()=>triggerEl.classList.remove('card-popping'), 480);
   }
-  // 2. Modal expands in parallel — tiny lead delay for "launch-from" feel
-  const delay = triggerEl ? 75 : 0;
+
+  const ov = document.getElementById('mOv');
+  const sh = document.getElementById('mSheet');
+  ov.style.display = 'flex';
+  sh.classList.remove('spring');
+
+  // Force layout so DOM is fully painted before we kick off animation
+  void sh.offsetHeight;
+
+  const delay = triggerEl ? 60 : 0;
   setTimeout(()=>{
-    filteredCache = getFiltered();
-    modalIdx = filteredIdx;
-    ttsStop();
-    renderModal();
-    const ov = document.getElementById('mOv');
-    const sh = document.getElementById('mSheet');
-    ov.style.display = 'flex';
-    sh.classList.remove('spring');
-    void sh.offsetWidth;
     requestAnimationFrame(()=>{
       ov.classList.add('vis');
       sh.classList.add('vis');

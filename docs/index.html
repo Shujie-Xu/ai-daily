@@ -443,7 +443,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 05:12 CST</span>
+    <span class="foot-l">26/03/05 05:15 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -817,10 +817,10 @@ window.openModal = function(filteredIdx, triggerEl){
       const narrowSx = startSx * 0.92;  // width dips ~8%
       const midSy = startSy + (1 - startSy) * 0.35;  // height at ~35% progress
       const anim = sh.animate([
-        { transform: `scaleX(${startSx}) scaleY(${startSy})`, opacity: 0, filter: 'blur(6px)' },
-        { transform: `scaleX(${narrowSx}) scaleY(${startSy + (1-startSy)*0.12})`, opacity: 0.5, filter: 'blur(4px)', offset: 0.18 },
-        { transform: `scaleX(${narrowSx*1.02}) scaleY(${midSy})`, opacity: 0.8, filter: 'blur(1.5px)', offset: 0.40 },
-        { transform: 'scaleX(0.92) scaleY(0.88)', opacity: 0.95, filter: 'blur(0px)', offset: 0.60 },
+        { transform: `scaleX(${startSx}) scaleY(${startSy})`, opacity: 0, filter: 'blur(6px)', color: 'transparent' },
+        { transform: `scaleX(${narrowSx}) scaleY(${startSy + (1-startSy)*0.12})`, opacity: 0.5, filter: 'blur(4px)', color: 'transparent', offset: 0.18 },
+        { transform: `scaleX(${narrowSx*1.02}) scaleY(${midSy})`, opacity: 0.8, filter: 'blur(1.5px)', color: 'transparent', offset: 0.40 },
+        { transform: 'scaleX(0.92) scaleY(0.88)', opacity: 0.95, filter: 'blur(0px)', color: 'inherit', offset: 0.60 },
         { transform: 'scaleX(1.01) scaleY(1.012)', opacity: 1, filter: 'blur(0px)', offset: 0.82 },
         { transform: 'scaleX(0.998) scaleY(0.997)', opacity: 1, filter: 'blur(0px)', offset: 0.92 },
         { transform: 'scaleX(1) scaleY(1)', opacity: 1, filter: 'blur(0px)' }

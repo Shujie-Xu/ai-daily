@@ -292,27 +292,22 @@ footer{
 @keyframes slideInR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
 .slide-l{animation:slideInL .22s cubic-bezier(.16,1,.3,1) both}
 .slide-r{animation:slideInR .22s cubic-bezier(.16,1,.3,1) both}
-/* ── Spring UX ── */
-@keyframes cardPop{
-  from{transform:scale(1)}
-  to{transform:scale(1)}
-}
-.card-popping{
-  animation:cardSpring .28s cubic-bezier(.22,1.6,.36,1) both;
-  pointer-events:none;
-  z-index:2;position:relative;
-}
-@keyframes cardSpring{
-  0%{transform:scale(1)}
-  45%{transform:scale(1.04)}
+/* ── Spring UX (Apple-style simultaneous) ── */
+@keyframes cardTap{
+  0%  {transform:scale(1)}
+  40% {transform:scale(1.055)}
   100%{transform:scale(1)}
 }
-@keyframes sheetSpring{
-  from{transform:translateY(28px) scale(0.95);opacity:0}
-  to{transform:translateY(0) scale(1);opacity:1}
+.card-popping{
+  animation:cardTap .45s cubic-bezier(.34,1.28,.64,1) both;
+  pointer-events:none;
+}
+@keyframes sheetExpand{
+  from{transform:scale(0.86) translateY(20px);opacity:0}
+  to  {transform:scale(1)    translateY(0);   opacity:1}
 }
 .m-sheet.spring{
-  animation:sheetSpring .5s cubic-bezier(.22,1.4,.36,1) both;
+  animation:sheetExpand .48s cubic-bezier(.34,1.22,.64,1) both;
 }
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
@@ -439,7 +434,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 00:36 CST</span>
+    <span class="foot-l">26/03/05 00:38 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -771,9 +766,14 @@ function renderContent(){
 
 // ── Modal ────────────────────────────────────────────────────────
 window.openModal = function(filteredIdx, triggerEl){
-  // Card spring pop
-  const card = triggerEl || null;
-  const doOpen = () => {
+  // 1. Card pops immediately
+  if(triggerEl){
+    triggerEl.classList.add('card-popping');
+    setTimeout(()=>triggerEl.classList.remove('card-popping'), 480);
+  }
+  // 2. Modal expands in parallel — tiny lead delay for "launch-from" feel
+  const delay = triggerEl ? 75 : 0;
+  setTimeout(()=>{
     filteredCache = getFiltered();
     modalIdx = filteredIdx;
     ttsStop();
@@ -782,27 +782,17 @@ window.openModal = function(filteredIdx, triggerEl){
     const sh = document.getElementById('mSheet');
     ov.style.display = 'flex';
     sh.classList.remove('spring');
+    void sh.offsetWidth;
     requestAnimationFrame(()=>{
       ov.classList.add('vis');
       sh.classList.add('vis');
-      // Sheet spring entrance
-      void sh.offsetWidth; // reflow
       sh.classList.add('spring');
       sh.addEventListener('animationend', ()=>sh.classList.remove('spring'), {once:true});
     });
     modalOpen = true;
     document.body.style.overflow = 'hidden';
     history.replaceState(null,'','#article-'+filteredIdx);
-  };
-  if(card){
-    card.classList.add('card-popping');
-    card.addEventListener('animationend', ()=>{
-      card.classList.remove('card-popping');
-      doOpen();
-    }, {once:true});
-  } else {
-    doOpen();
-  }
+  }, delay);
 };
 
 window.closeModal = function(){

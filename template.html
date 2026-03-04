@@ -644,9 +644,7 @@ function renderModal(){
 
   // meta
   const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('');
-  const heatStr = item.heat ? '🔥'.repeat(Math.min(item.heat,5)) : '';
-  document.getElementById('mMeta').innerHTML = cats +
-    (heatStr ? `<span class="sep" style="margin:0 2px"></span><span class="m-time">${heatStr}</span>` : '');
+  document.getElementById('mMeta').innerHTML = cats;
 
   // title
   document.getElementById('mTitle').textContent = item.title||'';

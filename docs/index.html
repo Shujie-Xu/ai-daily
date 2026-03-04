@@ -121,15 +121,12 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .arch-chev{transition:transform .15s}
 .arch-chev.open{transform:rotate(180deg)}
 .arch-drop{
-  position:absolute;top:calc(100% + 6px);left:0;z-index:200;
+  position:fixed;z-index:9999;
   background:var(--card);border:1px solid var(--border);
   border-radius:12px;width:252px;
-  box-shadow:0 8px 32px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.1);
+  box-shadow:0 8px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.1);
   animation:archDrop .15s ease;
   display:none;overflow:hidden;
-  /* 强制不透明，防止 header backdrop-filter 渗透 */
-  position:absolute;
-  -webkit-transform:translateZ(0);transform:translateZ(0);
 }
 .arch-drop.open{display:block}
 /* ── Calendar ── */
@@ -350,10 +347,6 @@ footer{
           <span id="archLabel"></span>
           <svg class="arch-chev" id="archChev" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="arch-drop" id="archDrop">
-
-          <div id="archList"></div>
-        </div>
       </div>
       <button class="nav-btn" id="btnNext" onclick="navDate(1)" title="后一天">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
@@ -378,7 +371,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:40 CST</span>
+    <span class="foot-l">26/03/04 19:45 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -566,13 +559,15 @@ window.calNav = function(dir){
 window.toggleArch = function(){
   archOpen = !archOpen;
   const drop = document.getElementById('archDrop');
+  const btn  = document.getElementById('archToggle');
   drop.classList.toggle('open', archOpen);
-  document.getElementById('archToggle').classList.toggle('open', archOpen);
+  btn.classList.toggle('open', archOpen);
   document.getElementById('archChev').classList.toggle('open', archOpen);
   if(archOpen){
-    // 强制实心背景，不受 header backdrop-filter 影响
-    const isDark = document.documentElement.getAttribute('data-theme')==='dark';
-    drop.style.background = isDark ? '#111114' : '#ffffff';
+    // 定位到按钮正下方（fixed，脱离 header 合成层）
+    const r = btn.getBoundingClientRect();
+    drop.style.top  = (r.bottom + 6) + 'px';
+    drop.style.left = r.left + 'px';
     calYear=null; calMonth=null; buildCalendar();
   }
 };
@@ -915,5 +910,9 @@ if(hash && hash.startsWith('#article-')){
 
 })();
 </script>
+<!-- arch-drop 挂在 body 上，脱离 header 合成层 -->
+<div class="arch-drop" id="archDrop" style="position:fixed;display:none;z-index:9999;">
+  <div id="archList"></div>
+</div>
 </body>
 </html>

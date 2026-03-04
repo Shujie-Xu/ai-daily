@@ -371,7 +371,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:45 CST</span>
+    <span class="foot-l">26/03/04 19:46 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -486,6 +486,9 @@ window.toggleTheme = function(){
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   applyThemeIcons(next);
+  // 同步更新日历弹窗背景
+  const drop = document.getElementById('archDrop');
+  if(drop){ drop.style.backgroundColor = next==='dark' ? '#111114' : '#ffffff'; drop.style.color = next==='dark' ? '#fafafa' : '#09090b'; }
 };
 
 // ── Archive ──────────────────────────────────────────────────────
@@ -564,10 +567,13 @@ window.toggleArch = function(){
   btn.classList.toggle('open', archOpen);
   document.getElementById('archChev').classList.toggle('open', archOpen);
   if(archOpen){
-    // 定位到按钮正下方（fixed，脱离 header 合成层）
     const r = btn.getBoundingClientRect();
     drop.style.top  = (r.bottom + 6) + 'px';
     drop.style.left = r.left + 'px';
+    // 强制实心背景
+    const dark = document.documentElement.getAttribute('data-theme')==='dark';
+    drop.style.backgroundColor = dark ? '#111114' : '#ffffff';
+    drop.style.color = dark ? '#fafafa' : '#09090b';
     calYear=null; calMonth=null; buildCalendar();
   }
 };

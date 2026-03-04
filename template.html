@@ -701,12 +701,12 @@ window.openModal = function(filteredIdx){
   modalIdx = filteredIdx;
   ttsStop();
   renderModal();
-  // show
   const ov = document.getElementById('mOv');
   const sh = document.getElementById('mSheet');
   ov.style.display = 'flex';
   requestAnimationFrame(()=>{ ov.classList.add('vis'); sh.classList.add('vis'); });
   modalOpen = true;
+  document.body.style.overflow = 'hidden'; // lock background scroll
   history.replaceState(null,'','#article-'+filteredIdx);
 };
 
@@ -717,6 +717,7 @@ window.closeModal = function(){
   ov.classList.remove('vis'); sh.classList.remove('vis');
   setTimeout(()=>{ ov.style.display='none'; },220);
   modalOpen = false;
+  document.body.style.overflow = ''; // restore scroll
   history.replaceState(null,'',location.pathname);
 };
 
@@ -815,10 +816,19 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-document.getElementById('mSheet').addEventListener('touchstart', function(e){
+const mOvEl = document.getElementById('mOv');
+// Block browser swipe-back/forward when modal is open
+mOvEl.addEventListener('touchstart', function(e){
   touchX0 = e.touches[0].clientX; touchT0 = Date.now();
 },{passive:true});
-document.getElementById('mSheet').addEventListener('touchend', function(e){
+mOvEl.addEventListener('touchmove', function(e){
+  if(!modalOpen) return;
+  const dx = Math.abs(e.touches[0].clientX - (touchX0||0));
+  const dy = Math.abs(e.touches[0].clientY - (e.touches[0].clientY)); // always 0, just guard
+  // If horizontal movement dominates, block browser navigation gesture
+  if(dx > 8) e.preventDefault();
+},{passive:false});
+mOvEl.addEventListener('touchend', function(e){
   if(touchX0===null) return;
   const dx = e.changedTouches[0].clientX - touchX0;
   const dt = Date.now() - touchT0;

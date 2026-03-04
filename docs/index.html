@@ -370,7 +370,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 23:45 CST</span>
+    <span class="foot-l">26/03/04 23:50 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -734,8 +734,7 @@ function renderModal(){
   const item = filteredCache[modalIdx];
   if(!item) return;
 
-  // meta (tags removed; TTS button moved to top)
-  document.getElementById('mMeta').innerHTML = '';
+  // meta row (category tags removed; TTS moved to top bar)
 
   // title
   document.getElementById('mTitle').textContent = item.title||'';

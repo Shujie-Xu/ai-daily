@@ -734,8 +734,7 @@ function renderModal(){
   const item = filteredCache[modalIdx];
   if(!item) return;
 
-  // meta (tags removed; TTS button moved to top)
-  document.getElementById('mMeta').innerHTML = '';
+  // meta row (category tags removed; TTS moved to top bar)
 
   // title
   document.getElementById('mTitle').textContent = item.title||'';

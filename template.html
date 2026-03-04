@@ -318,6 +318,8 @@ footer{
   will-change:transform,opacity;
 }
 .m-sheet{will-change:transform,opacity}
+.m-sheet.text-fade *{color:transparent !important;transition:color .25s ease}
+.m-sheet.text-fade.text-show *{color:inherit !important}
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
   height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
@@ -811,18 +813,20 @@ window.openModal = function(filteredIdx, triggerEl){
     requestAnimationFrame(()=>{
       ov.classList.add('vis');
       sh.classList.add('vis');
+      sh.classList.add('text-fade');
+      setTimeout(()=>{ sh.classList.add('text-show'); }, 780 * 0.85);
 
       // Two dimensions: size + aspect ratio morph simultaneously
       // Width narrows slightly at first then expands; height always grows
       const narrowSx = startSx * 0.92;  // width dips ~8%
       const midSy = startSy + (1 - startSy) * 0.35;  // height at ~35% progress
       const anim = sh.animate([
-        { transform: `scaleX(${startSx}) scaleY(${startSy})`, opacity: 0, filter: 'blur(6px)', color: 'transparent' },
-        { transform: `scaleX(${narrowSx}) scaleY(${startSy + (1-startSy)*0.12})`, opacity: 0.5, filter: 'blur(4px)', color: 'transparent', offset: 0.18 },
-        { transform: `scaleX(${narrowSx*1.02}) scaleY(${midSy})`, opacity: 0.8, filter: 'blur(1.5px)', color: 'transparent', offset: 0.40 },
-        { transform: 'scaleX(0.92) scaleY(0.88)', opacity: 0.95, filter: 'blur(0px)', color: 'transparent', offset: 0.60 },
-        { transform: 'scaleX(1.01) scaleY(1.012)', opacity: 1, filter: 'blur(0px)', color: 'transparent', offset: 0.82 },
-        { transform: 'scaleX(0.998) scaleY(0.997)', opacity: 1, filter: 'blur(0px)', color: 'inherit', offset: 0.92 },
+        { transform: `scaleX(${startSx}) scaleY(${startSy})`, opacity: 0, filter: 'blur(6px)' },
+        { transform: `scaleX(${narrowSx}) scaleY(${startSy + (1-startSy)*0.12})`, opacity: 0.5, filter: 'blur(4px)', offset: 0.18 },
+        { transform: `scaleX(${narrowSx*1.02}) scaleY(${midSy})`, opacity: 0.8, filter: 'blur(1.5px)', offset: 0.40 },
+        { transform: 'scaleX(0.92) scaleY(0.88)', opacity: 0.95, filter: 'blur(0px)', offset: 0.60 },
+        { transform: 'scaleX(1.01) scaleY(1.012)', opacity: 1, filter: 'blur(0px)', offset: 0.82 },
+        { transform: 'scaleX(0.998) scaleY(0.997)', opacity: 1, filter: 'blur(0px)', offset: 0.92 },
         { transform: 'scaleX(1) scaleY(1)', opacity: 1, filter: 'blur(0px)' }
       ], {
         duration: 780,
@@ -832,6 +836,7 @@ window.openModal = function(filteredIdx, triggerEl){
       anim.onfinish = () => {
         anim.cancel();
         sh.style.transformOrigin = 'center center';
+        sh.classList.remove('text-fade','text-show');
       };
     });
     modalOpen = true;

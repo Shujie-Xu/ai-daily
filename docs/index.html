@@ -25,7 +25,7 @@ a{text-decoration:none}
   --pill:#09090b;--pill-txt:#ffffff;
   --accent:#09090b;--acc-txt:#ffffff;
   --hov:rgba(0,0,0,0.012);
-  --modal-ov:rgba(0,0,0,0.4);
+  --modal-ov:rgba(0,0,0,0.18);
   --shadow:0 32px 80px rgba(0,0,0,0.08);
   --hdr-bg:rgba(240,240,244,0.88);
   --ctx:rgba(0,0,0,0.06);
@@ -255,6 +255,16 @@ footer{
 }
 .m-sheet.vis{transform:translateY(0);opacity:1}
 [data-theme="dark"] .m-sheet{box-shadow:-3px -3px 7px rgba(255,255,255,0.04),4px 4px 10px rgba(0,0,0,0.65),0 20px 48px rgba(0,0,0,0.4)}
+.m-sheet .btn-tts,.m-sheet .m-nav-btn,.m-sheet .m-close,.m-sheet .btn-read{
+  --neu-raised:-3px -3px 6px rgba(255,255,255,0.85),3px 3px 6px rgba(174,174,192,0.38);
+  --neu-hover:-2px -2px 4px rgba(255,255,255,0.85),2px 2px 5px rgba(174,174,192,0.5);
+  --neu-press:inset -2px -2px 4px rgba(255,255,255,0.75),inset 2px 2px 4px rgba(174,174,192,0.3);
+}
+[data-theme="dark"] .m-sheet .btn-tts,[data-theme="dark"] .m-sheet .m-nav-btn,[data-theme="dark"] .m-sheet .m-close,[data-theme="dark"] .m-sheet .btn-read{
+  --neu-raised:-2px -2px 5px rgba(255,255,255,0.04),3px 3px 6px rgba(0,0,0,0.6);
+  --neu-hover:-1px -1px 4px rgba(255,255,255,0.05),2px 2px 5px rgba(0,0,0,0.65);
+  --neu-press:inset -1px -1px 3px rgba(255,255,255,0.03),inset 2px 2px 4px rgba(0,0,0,0.55);
+}
 .m-handle-row{display:none}
 .m-hdr{padding:20px 28px 16px}
 .m-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
@@ -407,7 +417,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 00:20 CST</span>
+    <span class="foot-l">26/03/05 00:24 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>

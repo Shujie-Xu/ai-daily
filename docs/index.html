@@ -122,25 +122,25 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .arch-drop{
   position:absolute;top:calc(100% + 6px);left:0;z-index:200;
   background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:6px;min-width:200px;
+  border-radius:12px;width:252px;
   box-shadow:var(--shadow);animation:archDrop .15s ease;
-  display:none;
+  display:none;overflow:hidden;
 }
 .arch-drop.open{display:block}
-.arch-label{
-  padding:6px 10px 8px;font-size:11px;font-weight:600;color:var(--t4);
-  letter-spacing:.06em;text-transform:uppercase;
-}
-.arch-item{
-  display:flex;align-items:center;justify-content:space-between;
-  width:100%;padding:8px 10px;border-radius:6px;border:none;
-  background:transparent;color:var(--t3);
-  font-size:13px;font-family:'SF Mono','Menlo','Consolas',monospace;
-  font-weight:400;transition:background .1s;text-align:left;cursor:pointer;
-}
-.arch-item:hover{background:var(--subtle)}
-.arch-item.cur{background:var(--subtle);color:var(--t1);font-weight:600}
-.arch-today{font-size:9px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+/* ── Calendar ── */
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px}
+.cal-mon{font-size:13px;font-weight:600;color:var(--t1)}
+.cal-nav{background:none;border:none;cursor:pointer;font-size:17px;color:var(--t3);padding:2px 6px;border-radius:5px;line-height:1;transition:background .1s}
+.cal-nav:hover{background:var(--subtle)}
+.cal-nav:disabled{opacity:.22;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:0 10px 10px}
+.cal-dn{text-align:center;font-size:10px;font-weight:600;color:var(--t4);padding:3px 0 5px}
+.cal-d{text-align:center;font-size:12.5px;border-radius:6px;padding:6px 0;position:relative;line-height:1.2}
+.cal-has{cursor:pointer;color:var(--t1);font-weight:500}
+.cal-has:hover{background:var(--subtle)}
+.cal-no{color:var(--t5);cursor:default}
+.cal-sel{background:var(--t1)!important;color:var(--bg)!important;font-weight:700}
+.cal-dot{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--t4)}
 .hero-title{
   font-size:clamp(32px,4.5vw,44px);font-weight:300;
   letter-spacing:-.04em;line-height:1.08;
@@ -375,7 +375,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:20 CST</span>
+    <span class="foot-l">26/03/04 19:26 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -509,24 +509,63 @@ function updateNavBtns(){
   if(n) n.disabled = idx <= 0;
 }
 
-function buildArchList(){
+let calYear=null, calMonth=null;
+
+function buildCalendar(){
   const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date());
   const list = document.getElementById('archList');
   if(!list) return;
-  list.innerHTML = allDates.map(d=>`
-    <button class="arch-item ${d===pageDate?'cur':''}" onclick="selectDate('${d}')">
-      <span>${fmtShort(d)}</span>
-      ${d===today?'<span class="arch-today">today</span>':''}
-    </button>
-  `).join('');
+
+  // init to pageDate's month on first open
+  if(calYear===null){
+    calYear  = parseInt(pageDate.slice(0,4));
+    calMonth = parseInt(pageDate.slice(5,7)) - 1;
+  }
+
+  const datesSet = new Set(allDates);
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const firstDay    = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const allYM  = [...new Set(allDates.map(d=>d.slice(0,7)))].sort();
+  const curYM  = `${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const canPrev = allYM.length && allYM[0] < curYM;
+  const canNext = allYM.length && allYM[allYM.length-1] > curYM;
+
+  const dayNames = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  let cells = dayNames.map(d=>`<div class="cal-dn">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) cells+=`<div class="cal-d"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const has=datesSet.has(ds), sel=ds===pageDate, tod=ds===today;
+    const cls=['cal-d',has?'cal-has':'cal-no',sel?'cal-sel':''].filter(Boolean).join(' ');
+    cells+=`<div class="${cls}" ${has?`onclick="selectDate('${ds}')"`:''}>
+      ${d}${tod&&!sel?'<span class="cal-dot"></span>':''}
+    </div>`;
+  }
+
+  list.innerHTML=`
+    <div class="cal-hdr">
+      <button class="cal-nav" onclick="calNav(-1)" ${!canPrev?'disabled':''}>‹</button>
+      <span class="cal-mon">${MONTHS[calMonth]} ${calYear}</span>
+      <button class="cal-nav" onclick="calNav(1)" ${!canNext?'disabled':''}>›</button>
+    </div>
+    <div class="cal-grid">${cells}</div>
+  `;
 }
+
+window.calNav = function(dir){
+  calMonth += dir;
+  if(calMonth<0){calMonth=11;calYear--;}
+  if(calMonth>11){calMonth=0;calYear++;}
+  buildCalendar();
+};
 
 window.toggleArch = function(){
   archOpen = !archOpen;
   document.getElementById('archDrop').classList.toggle('open', archOpen);
   document.getElementById('archToggle').classList.toggle('open', archOpen);
   document.getElementById('archChev').classList.toggle('open', archOpen);
-  if(archOpen) buildArchList();
+  if(archOpen){ calYear=null; calMonth=null; buildCalendar(); }
 };
 
 document.addEventListener('mousedown', function(e){

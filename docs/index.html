@@ -219,7 +219,6 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .n-title{font-size:14px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--t1)}
 .n-summary{font-size:12.5px;line-height:1.55;color:var(--t3);margin-top:2px;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.n-heat{margin-top:auto;padding-top:10px;font-size:11px;color:var(--t4)}
 .n-src{display:none}
 
 /* ── Footer ── */
@@ -396,7 +395,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 00:07 CST</span>
+    <span class="foot-l">26/03/05 00:11 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -716,7 +715,6 @@ function renderContent(){
           <div class="n-cats">${cats}</div>
           <div class="n-title">${esc(item.title)}</div>
           <div class="n-summary">${esc(item.summary)}</div>
-          <div class="n-heat">${'🔥'.repeat(item.heat||1)}</div>
         </div>
       </button>
     `;

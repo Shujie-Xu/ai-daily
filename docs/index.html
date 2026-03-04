@@ -292,6 +292,27 @@ footer{
 @keyframes slideInR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
 .slide-l{animation:slideInL .22s cubic-bezier(.16,1,.3,1) both}
 .slide-r{animation:slideInR .22s cubic-bezier(.16,1,.3,1) both}
+/* ── Spring UX ── */
+@keyframes cardPop{
+  0%{transform:scale(1) translateY(0)}
+  35%{transform:scale(1.05) translateY(-2px)}
+  65%{transform:scale(0.97) translateY(1px)}
+  100%{transform:scale(1) translateY(0)}
+}
+@keyframes sheetSpring{
+  0%{transform:translateY(32px) scale(0.93);opacity:0}
+  55%{transform:translateY(-5px) scale(1.018);opacity:1}
+  75%{transform:translateY(2px) scale(0.996)}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
+.card-popping{
+  animation:cardPop .32s cubic-bezier(.36,1.56,.64,1) both;
+  pointer-events:none;
+  z-index:2;position:relative;
+}
+.m-sheet.spring{
+  animation:sheetSpring .42s cubic-bezier(.36,1.4,.64,1) both;
+}
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
   height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
@@ -417,7 +438,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 00:27 CST</span>
+    <span class="foot-l">26/03/05 00:33 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -719,7 +740,7 @@ function renderContent(){
   if(featured){
     const cats = (featured.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('<span class="card-dot"></span>');
     html += `
-      <article class="featured a2" onclick="openModal(${featIdx})">
+      <article class="featured a2" onclick="openModal(${featIdx},this)">
         <h2 class="feat-title">${esc(featured.title)}</h2>
         <p class="feat-summary">${esc(featured.summary)}</p>
         <div class="feat-cats">${cats}</div>
@@ -732,7 +753,7 @@ function renderContent(){
     const originalIdx = filtered.indexOf(item);
     const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('<span class="card-dot"></span>');
     html += `
-      <button class="n-item" onclick="openModal(${originalIdx})">
+      <button class="n-item" onclick="openModal(${originalIdx},this)">
         <div class="n-body">
           <div class="n-cats">${cats}</div>
           <div class="n-title">${esc(item.title)}</div>
@@ -748,18 +769,39 @@ function renderContent(){
 }
 
 // ── Modal ────────────────────────────────────────────────────────
-window.openModal = function(filteredIdx){
-  filteredCache = getFiltered();
-  modalIdx = filteredIdx;
-  ttsStop();
-  renderModal();
-  const ov = document.getElementById('mOv');
-  const sh = document.getElementById('mSheet');
-  ov.style.display = 'flex';
-  requestAnimationFrame(()=>{ ov.classList.add('vis'); sh.classList.add('vis'); });
-  modalOpen = true;
-  document.body.style.overflow = 'hidden'; // lock background scroll
-  history.replaceState(null,'','#article-'+filteredIdx);
+window.openModal = function(filteredIdx, triggerEl){
+  // Card spring pop
+  const card = triggerEl || null;
+  const doOpen = () => {
+    filteredCache = getFiltered();
+    modalIdx = filteredIdx;
+    ttsStop();
+    renderModal();
+    const ov = document.getElementById('mOv');
+    const sh = document.getElementById('mSheet');
+    ov.style.display = 'flex';
+    sh.classList.remove('spring');
+    requestAnimationFrame(()=>{
+      ov.classList.add('vis');
+      sh.classList.add('vis');
+      // Sheet spring entrance
+      void sh.offsetWidth; // reflow
+      sh.classList.add('spring');
+      sh.addEventListener('animationend', ()=>sh.classList.remove('spring'), {once:true});
+    });
+    modalOpen = true;
+    document.body.style.overflow = 'hidden';
+    history.replaceState(null,'','#article-'+filteredIdx);
+  };
+  if(card){
+    card.classList.add('card-popping');
+    card.addEventListener('animationend', ()=>{
+      card.classList.remove('card-popping');
+      doOpen();
+    }, {once:true});
+  } else {
+    doOpen();
+  }
 };
 
 window.closeModal = function(){

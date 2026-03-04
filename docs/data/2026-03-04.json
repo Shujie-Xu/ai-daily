@@ -67,7 +67,7 @@
       ],
       "context": "",
       "heat": 5,
-      "audio_url": "audio/2026-03-04-2.mp3"
+      "audio_url": "audio/2026-03-04-7.mp3"
     },
     {
       "title": "OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话",
@@ -107,7 +107,7 @@
       ],
       "context": "",
       "heat": 4,
-      "audio_url": "audio/2026-03-04-4.mp3"
+      "audio_url": "audio/2026-03-04-2.mp3"
     },
     {
       "title": "阿里Qwen技术负责人Justin Lin离职，开源时代终结之忧",
@@ -127,7 +127,7 @@
       ],
       "context": "Qwen（通义千问）是阿里巴巴云智能旗下的大型语言模型系列，自2023年起持续开源发布，涵盖从7B到235B不同规模的模型，全球下载量超6亿次，是国际开源AI社区中影响力最大的中国模型系列之一。",
       "heat": 4,
-      "audio_url": "audio/2026-03-04-5.mp3"
+      "audio_url": "audio/2026-03-04-4.mp3"
     },
     {
       "title": "CoreWeave股价Q4财报后暴跌28%，Q1指引令市场失望",
@@ -147,7 +147,7 @@
       ],
       "context": "CoreWeave是一家专注于GPU云计算的美国AI基础设施公司，主要为大型科技企业提供英伟达H100/H200等高端GPU的算力租赁服务，客户包括微软、Meta等。公司于2025年在纳斯达克上市（股票代码：CRWV），是观察AI基础设施投资热度的重要风向标。",
       "heat": 4,
-      "audio_url": "audio/2026-03-04-6.mp3"
+      "audio_url": "audio/2026-03-04-5.mp3"
     },
     {
       "title": "中国三大实验室集中开源：Qwen3.5、GLM-5、MiniMax M2.5",
@@ -168,7 +168,7 @@
       ],
       "context": "GLM-5（Z.ai，前智谱AI）是744B参数MoE架构大模型，仅激活44B参数，采用MIT协议完全开源，是中国迄今参数规模最大的完全开源模型之一。华为昇腾芯片训练路线也为业界证明了国产算力的可行性。",
       "heat": 4,
-      "audio_url": "audio/2026-03-04-7.mp3"
+      "audio_url": "audio/2026-03-04-6.mp3"
     },
     {
       "title": "普林斯顿研究：奉承型AI歪曲用户信念，制造虚假确定性",

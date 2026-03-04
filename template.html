@@ -301,7 +301,7 @@ footer{
   100%{transform:scale(0.93)}
 }
 .card-popping{
-  animation:cardTap .32s cubic-bezier(.45,.1,.3,1) forwards !important;
+  animation:cardTap .45s cubic-bezier(.45,.1,.3,1) forwards !important;
   pointer-events:none;
 }
 .card-popping,.card-popping:hover{
@@ -783,7 +783,7 @@ window.openModal = function(filteredIdx, triggerEl){
   // Card tap animation
   if(triggerEl){
     triggerEl.classList.add('card-popping');
-    setTimeout(()=>triggerEl.classList.remove('card-popping'), 480);
+    setTimeout(()=>triggerEl.classList.remove('card-popping'), 672);
   }
 
   const ov = document.getElementById('mOv');
@@ -806,7 +806,7 @@ window.openModal = function(filteredIdx, triggerEl){
     sh.style.transformOrigin = 'center center';
   }
 
-  const delay = triggerEl ? 100 : 0;
+  const delay = triggerEl ? 140 : 0;
   setTimeout(()=>{
     requestAnimationFrame(()=>{
       ov.classList.add('vis');
@@ -819,7 +819,7 @@ window.openModal = function(filteredIdx, triggerEl){
         { transform: 'scaleX(0.997) scaleY(0.995) translateY(0.5px)', opacity: 1, filter: 'blur(0px)', offset: 0.78 },
         { transform: 'scaleX(1) scaleY(1) translateY(0)', opacity: 1, filter: 'blur(0px)' }
       ], {
-        duration: 520,
+        duration: 728,
         easing: 'cubic-bezier(.42,.1,.3,1)',
         fill: 'forwards'
       });

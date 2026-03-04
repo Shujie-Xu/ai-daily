@@ -385,21 +385,27 @@ footer{
     <div class="m-handle-row"><div class="m-handle"></div></div>
     <div class="m-hdr">
       <div class="m-meta">
-        <div style="display:flex;align-items:center;gap:4px">
-          <button class="btn-tts" id="btnTts" onclick="toggleTts()" title="朗读正文">
-            <svg id="ttsIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-              <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
-            </svg>
-          </button>
-          <button class="m-nav-btn" id="btnMPrev" onclick="navModal(-1)" title="上一篇">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <span class="m-nav-cnt" id="mNavCnt"></span>
-          <button class="m-nav-btn" id="btnMNext" onclick="navModal(1)" title="下一篇">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-          <button class="m-close" onclick="closeModal()">✕</button>
+        <div style="display:flex;align-items:center;position:relative;width:100%">
+          <div style="display:flex;align-items:center">
+            <button class="btn-tts" id="btnTts" onclick="toggleTts()" title="朗读正文">
+              <svg id="ttsIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
+              </svg>
+            </button>
+          </div>
+          <div style="position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:4px">
+            <button class="m-nav-btn" id="btnMPrev" onclick="navModal(-1)" title="上一篇">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <span class="m-nav-cnt" id="mNavCnt"></span>
+            <button class="m-nav-btn" id="btnMNext" onclick="navModal(1)" title="下一篇">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div style="margin-left:auto">
+            <button class="m-close" onclick="closeModal()">✕</button>
+          </div>
         </div>
       </div>
       <h2 class="m-title" id="mTitle"></h2>

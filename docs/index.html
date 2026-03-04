@@ -122,13 +122,10 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .arch-chev.open{transform:rotate(180deg)}
 .arch-drop{
   position:fixed;z-index:9999;
-  background:var(--card);border:1px solid var(--border);
   border-radius:12px;width:252px;
   box-shadow:0 8px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.1);
-  animation:archDrop .15s ease;
-  display:none;overflow:hidden;
+  overflow:hidden;display:none;
 }
-.arch-drop.open{display:block}
 /* ── Calendar ── */
 .cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px}
 .cal-mon{font-size:13px;font-weight:600;color:var(--t1)}
@@ -371,7 +368,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:46 CST</span>
+    <span class="foot-l">26/03/04 19:49 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -559,41 +556,48 @@ window.calNav = function(dir){
   buildCalendar();
 };
 
+function archDropBg(){
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  const drop = document.getElementById('archDrop');
+  drop.style.backgroundColor = dark ? '#111114' : '#ffffff';
+  drop.style.color = dark ? '#fafafa' : '#09090b';
+  drop.style.border = '1px solid ' + (dark ? '#27272a' : '#e4e4e7');
+}
+
 window.toggleArch = function(){
   archOpen = !archOpen;
   const drop = document.getElementById('archDrop');
   const btn  = document.getElementById('archToggle');
-  drop.classList.toggle('open', archOpen);
   btn.classList.toggle('open', archOpen);
   document.getElementById('archChev').classList.toggle('open', archOpen);
   if(archOpen){
     const r = btn.getBoundingClientRect();
-    drop.style.top  = (r.bottom + 6) + 'px';
-    drop.style.left = r.left + 'px';
-    // 强制实心背景
-    const dark = document.documentElement.getAttribute('data-theme')==='dark';
-    drop.style.backgroundColor = dark ? '#111114' : '#ffffff';
-    drop.style.color = dark ? '#fafafa' : '#09090b';
+    drop.style.top     = (r.bottom + 6) + 'px';
+    drop.style.left    = r.left + 'px';
+    drop.style.display = 'block';
+    archDropBg();
     calYear=null; calMonth=null; buildCalendar();
+  } else {
+    drop.style.display = 'none';
   }
 };
+
+function closeArch(){
+  archOpen=false;
+  document.getElementById('archDrop').style.display='none';
+  document.getElementById('archToggle').classList.remove('open');
+  document.getElementById('archChev').classList.remove('open');
+}
 
 document.addEventListener('mousedown', function(e){
   if(!archOpen) return;
   const wrap = document.querySelector('.arch-wrap');
-  if(wrap && !wrap.contains(e.target)){
-    archOpen=false;
-    document.getElementById('archDrop').classList.remove('open');
-    document.getElementById('archToggle').classList.remove('open');
-    document.getElementById('archChev').classList.remove('open');
-  }
+  const drop = document.getElementById('archDrop');
+  if(wrap && !wrap.contains(e.target) && !drop.contains(e.target)) closeArch();
 });
 
 window.selectDate = function(date){
-  archOpen=false;
-  document.getElementById('archDrop').classList.remove('open');
-  document.getElementById('archToggle').classList.remove('open');
-  document.getElementById('archChev').classList.remove('open');
+  closeArch();
   loadDateData(date);
 };
 
@@ -779,7 +783,7 @@ function renderModal(){
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape'){
     if(modalOpen) closeModal();
-    else if(archOpen) toggleArch();
+    else if(archOpen) closeArch();
   }
   if(modalOpen){
     if(e.key==='ArrowLeft') navModal(-1);
@@ -917,7 +921,7 @@ if(hash && hash.startsWith('#article-')){
 })();
 </script>
 <!-- arch-drop 挂在 body 上，脱离 header 合成层 -->
-<div class="arch-drop" id="archDrop" style="position:fixed;display:none;z-index:9999;">
+<div class="arch-drop" id="archDrop">
   <div id="archList"></div>
 </div>
 </body>

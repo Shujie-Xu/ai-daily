@@ -1,1662 +1,823 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="light">
+<html lang="zh-CN" data-theme="light">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Daily · 2026/03/04</title>
-  <meta property="og:title" content="🤖 AI 日报 · 2026/03/04"/>
-  <meta property="og:description" content="今日 12 条 · 来自 9 个信息源 · OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话 · 美多个联邦机构停用Anthropic转投OpenAI · Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一"/>
-  <meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og.png"/>
-  <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/"/>
-  <meta property="og:type" content="website"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="🤖 AI 日报 · 2026/03/04"/>
-  <meta name="twitter:description" content="今日 12 条 · 来自 9 个信息源 · OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话 · 美多个联邦机构停用Anthropic转投OpenAI · Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一"/>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
-
-    /* ── Dark theme (default) ───────────────────────────────── */
-    :root {
-      --bg:      #08080f;
-      --bg2:     #0d0d1a;
-      --card-bg: rgba(255,255,255,0.04);
-      --border:  rgba(255,255,255,0.08);
-      --cyan:    #00f5ff;
-      --purple:  #a855f7;
-      --pink:    #ec4899;
-      --green:   #22d3ee;
-      --yellow:  #fbbf24;
-      --text:    #e2e8f0;
-      --text2:   #c0ccdc;
-      --muted:   #64748b;
-      --modal-bg:#0f0f1e;
-      --shadow:  rgba(0,0,0,0.7);
-      --matrix:  #00ff41;
-    }
-
-    /* ── Light theme ────────────────────────────────────────── */
-    [data-theme="light"] {
-      --bg:      #f0f3fa;
-      --bg2:     #e8ecf5;
-      --card-bg: rgba(255,255,255,0.85);
-      --border:  rgba(0,0,0,0.09);
-      --cyan:    #0099aa;
-      --purple:  #7c3aed;
-      --pink:    #db2777;
-      --green:   #0891b2;
-      --yellow:  #d97706;
-      --text:    #1e293b;
-      --text2:   #334155;
-      --muted:   #64748b;
-      --modal-bg:#ffffff;
-      --shadow:  rgba(0,0,0,0.25);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', 'PingFang SC', 'Heiti SC', 'STHeiti', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-      font-size: 15px;
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    /* Ambient background (dark only) */
-    [data-theme="dark"] body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,245,255,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168,85,247,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(236,72,153,0.04) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Scan lines (dark only) */
-    [data-theme="dark"] body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px);
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    /* ── Terminal bar (dark only) ───────────────────────────── */
-    .terminal-bar {
-      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
-      font-size: 12px;
-      color: var(--matrix);
-      padding: 7px 0;
-      border-bottom: 1px solid rgba(0,255,65,0.12);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.85;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    [data-theme="light"] .terminal-bar {
-      color: #0a7a3a;
-      border-bottom-color: rgba(10,122,58,0.15);
-      opacity: 0.65;
-    }
-    [data-theme="light"] .terminal-prompt { color: rgba(10,122,58,0.45); }
-    [data-theme="light"] .terminal-path   { color: #0077aa; }
-    [data-theme="light"] .terminal-cmd    { color: #0a7a3a; }
-    [data-theme="light"] .terminal-arg    { color: #7c3aed; }
-    [data-theme="light"] .terminal-cursor { background: #0a7a3a; }
-
-    .terminal-prompt { color: rgba(0,255,65,0.5); }
-    .terminal-path   { color: rgba(0,245,255,0.7); }
-    .terminal-cmd    { color: var(--matrix); }
-    .terminal-arg    { color: rgba(168,85,247,0.8); }
-
-    .terminal-cursor {
-      display: inline-block;
-      width: 7px; height: 13px;
-      background: var(--matrix);
-      animation: blink 1.1s step-end infinite;
-      vertical-align: middle;
-      margin-left: 1px;
-      flex-shrink: 0;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* ── Glitch effect on logo text ─────────────────────────── */
-    @keyframes glitch {
-      0%   { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
-      20%  { clip-path: inset(92% 0 1% 0);  transform: translate(2px, 0); }
-      40%  { clip-path: inset(43% 0 15% 0); transform: translate(-1px, 0); }
-      60%  { clip-path: inset(25% 0 58% 0); transform: translate(0, 0); }
-      80%  { clip-path: inset(54% 0 7% 0);  transform: translate(2px, 0); }
-      100% { clip-path: inset(58% 0 43% 0); transform: translate(-1px, 0); }
-    }
-    .logo-text {
-      font-size: 20px; font-weight: 700;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
-      position: relative;
-    }
-    .logo-text::before,
-    .logo-text::after {
-      content: attr(data-text);
-      position: absolute; left: 0; top: 0;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      opacity: 0;
-    }
-    .logo-text:hover::before {
-      opacity: 0.7;
-      animation: glitch 0.4s steps(1) infinite;
-      color: var(--cyan);
-    }
-    .logo-text:hover::after {
-      opacity: 0.5;
-      animation: glitch 0.4s steps(1) 0.15s infinite reverse;
-      color: var(--purple);
-    }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-    /* ── Header ─────────────────────────────────────────────── */
-    header {
-      padding: 36px 0 28px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-
-    .logo-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 0 20px rgba(0,245,255,0.4), 0 0 50px rgba(0,245,255,0.12), inset 0 1px 0 rgba(255,255,255,0.2);
-      animation: logoPulse 3s ease-in-out infinite;
-    }
-    @keyframes logoPulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0,245,255,0.4), 0 0 50px rgba(0,245,255,0.12); }
-      50%       { box-shadow: 0 0 28px rgba(168,85,247,0.5), 0 0 60px rgba(168,85,247,0.15); }
-    }
-    [data-theme="light"] .logo-icon {
-      animation: logoPulseLight 3s ease-in-out infinite;
-      box-shadow: 0 2px 12px rgba(0,153,170,0.35);
-    }
-    @keyframes logoPulseLight {
-      0%, 100% { box-shadow: 0 2px 12px rgba(0,153,170,0.35); }
-      50%       { box-shadow: 0 2px 18px rgba(124,58,237,0.4); }
-    }
-
-    .logo-sub { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-
-    .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-
-    /* Theme toggle */
-    .theme-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      width: 36px; height: 36px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      transition: all 0.2s;
-    }
-    .theme-btn:hover { border-color: var(--cyan); color: var(--cyan); }
-
-    .date-badge {
-      background: var(--card-bg);
-      border: 1px solid rgba(0,245,255,0.2);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
-      font-size: 13px;
-      color: var(--cyan);
-      display: flex; align-items: center; gap: 8px;
-      white-space: nowrap;
-    }
-    [data-theme="dark"] .date-badge {
-      box-shadow: 0 0 12px rgba(0,245,255,0.08), inset 0 0 8px rgba(0,245,255,0.03);
-    }
-
-    .pulse {
-      width: 8px; height: 8px;
-      background: var(--cyan);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-      box-shadow: 0 0 0 0 rgba(0,245,255,0.4);
-      flex-shrink: 0;
-    }
-    @keyframes pulse {
-      0%   { box-shadow: 0 0 0 0 rgba(0,245,255,0.4); }
-      70%  { box-shadow: 0 0 0 8px rgba(0,245,255,0); }
-      100% { box-shadow: 0 0 0 0 rgba(0,245,255,0); }
-    }
-
-    /* ── Stats bar ──────────────────────────────────────────── */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-      margin: 24px 0;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      transition: all 0.2s;
-      position: relative;
-    }
-    .stat-card:hover { border-color: rgba(0,245,255,0.3); box-shadow: 0 0 16px rgba(0,245,255,0.06); }
-    .stat-card::before {
-      content: '> ';
-      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
-      font-size: 10px;
-      position: absolute;
-      top: 8px; left: 10px;
-    }
-    [data-theme="dark"]  .stat-card::before { color: rgba(0,255,65,0.35); }
-    [data-theme="light"] .stat-card::before { color: rgba(10,122,58,0.3); }
-
-    .stat-value {
-      font-size: 28px; font-weight: 700;
-      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-
-    .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    /* ── Category filter bar ────────────────────────────────── */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .filter-tag {
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      user-select: none;
-      display: inline-flex; align-items: center; gap: 5px;
-    }
-    .filter-tag:hover { opacity: 0.85; }
-    .filter-tag.active { opacity: 1; }
-    .filter-count {
-      font-size: 10px; font-weight: 400;
-      opacity: 0.65;
-      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace;
-    }
-    .filter-tag[data-cat="all"]         { color: var(--text); border-color: var(--border); }
-    .filter-tag[data-cat="all"].active  { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .filter-tag[data-cat="model"]       { color: var(--cyan); border-color: rgba(0,245,255,0.3); }
-    .filter-tag[data-cat="model"].active    { background: rgba(0,245,255,0.15); border-color: var(--cyan); }
-    .filter-tag[data-cat="product"]     { color: var(--purple); border-color: rgba(168,85,247,0.3); }
-    .filter-tag[data-cat="product"].active  { background: rgba(168,85,247,0.15); border-color: var(--purple); }
-    .filter-tag[data-cat="funding"]     { color: var(--yellow); border-color: rgba(251,191,36,0.3); }
-    .filter-tag[data-cat="funding"].active  { background: rgba(251,191,36,0.2); border-color: var(--yellow); }
-    .filter-tag[data-cat="finance"]     { color: #fb923c; border-color: rgba(251,146,60,0.3); }
-    .filter-tag[data-cat="finance"].active  { background: rgba(251,146,60,0.15); border-color: #fb923c; }
-    .filter-tag[data-cat="research"]    { color: var(--green); border-color: rgba(34,211,238,0.3); }
-    .filter-tag[data-cat="research"].active { background: rgba(34,211,238,0.12); border-color: var(--green); }
-    .filter-tag[data-cat="policy"]      { color: var(--pink); border-color: rgba(236,72,153,0.3); }
-    .filter-tag[data-cat="policy"].active   { background: rgba(236,72,153,0.12); border-color: var(--pink); }
-    .filter-tag[data-cat="event"]       { color: #a3e635; border-color: rgba(163,230,53,0.3); }
-    .filter-tag[data-cat="event"].active    { background: rgba(163,230,53,0.12); border-color: #a3e635; }
-
-    /* ── News grid ──────────────────────────────────────────── */
-    .news-section { margin-bottom: 48px; }
-
-    .section-header {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 16px;
-    }
-    .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-    .section-line  { flex: 1; height: 1px; background: var(--border); }
-    .heat-label    { font-size: 18px; }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 16px;
-    }
-
-    .news-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      cursor: pointer;
-    }
-    [data-theme="light"] .news-card { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    [data-theme="light"] .news-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.1), 0 0 16px rgba(0,153,170,0.12); }
-
-    .news-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
-      opacity: 0; transition: opacity 0.25s;
-    }
-    .news-card:hover { border-color: rgba(0,245,255,0.38); transform: translateY(-2px); box-shadow: 0 8px 32px var(--shadow), 0 0 24px rgba(0,245,255,0.08), 0 0 1px rgba(0,245,255,0.25); }
-    .news-card:hover::before { opacity: 1; }
-
-    /* Read state */
-    .news-card.read .card-title { opacity: 0.55; }
-    .news-card.read::after {
-      content: '✓'; position: absolute; top: 10px; right: 10px;
-      font-size: 10px; color: var(--muted); opacity: 0.5;
-    }
-
-    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .card-cats { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    .badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .badge-model      { background: rgba(0,245,255,0.12);   color: var(--cyan); }
-    .badge-product    { background: rgba(168,85,247,0.15);  color: var(--purple); }
-    .badge-funding    { background: rgba(251,191,36,0.15);  color: var(--yellow); }
-    .badge-finance    { background: rgba(251,146,60,0.15);  color: #fb923c; }
-    .badge-research   { background: rgba(34,211,238,0.12);  color: var(--green); }
-    .badge-policy     { background: rgba(236,72,153,0.15);  color: var(--pink); }
-    .badge-event      { background: rgba(163,230,53,0.12);  color: #a3e635; }
-
-    /* Tag pills (free-form, within card & detail) */
-    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
-    .tag-pill {
-      font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 999px;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      color: var(--muted); letter-spacing: 0.2px;
-    }
-    [data-theme="light"] .tag-pill { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
-
-    .heat-score { font-size: 14px; white-space: nowrap; }
-
-    .card-title   { font-size: 16px; font-weight: 600; line-height: 1.5; color: var(--text); }
-    .card-summary { font-size: 14px; color: var(--muted); line-height: 1.65; flex: 1; }
-
-    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-    .card-source { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-    .card-cta    { font-size: 12px; color: var(--cyan); opacity: 0.7; }
-
-    /* Featured card */
-    .news-card.featured {
-      grid-column: 1 / -1; flex-direction: row; gap: 24px;
-      background: linear-gradient(135deg, rgba(0,245,255,0.06), rgba(168,85,247,0.06));
-      border-color: rgba(0,245,255,0.15);
-    }
-    [data-theme="light"] .news-card.featured { background: linear-gradient(135deg, rgba(0,153,170,0.06), rgba(124,58,237,0.06)); }
-    .news-card.featured .card-title { font-size: 18px; }
-    .news-card.featured .featured-accent {
-      width: 4px; min-width: 4px; border-radius: 999px;
-      background: linear-gradient(to bottom, var(--cyan), var(--purple));
-    }
-
-    /* ── Archive Date Pill ──────────────────────────────────── */
-    .archive-cal-section { margin-bottom: 24px; }
-
-    /* Wrapper — block so calendar panel gets full column width */
-    .archive-pill-wrap { display: block; }
-
-    /* Date toggle button — shows only the date when collapsed */
-    .archive-date-toggle {
-      display: inline-flex; align-items: center;
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 8px; padding: 5px 13px;
-      font-family: 'JetBrains Mono', monospace; font-size: 13px;
-      color: var(--text); cursor: pointer; transition: all 0.18s;
-      white-space: nowrap;
-    }
-    .archive-date-toggle:hover { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
-    .archive-date-toggle.open  {
-      border-color: rgba(0,245,255,0.3); color: var(--cyan);
-      background: rgba(0,245,255,0.06);
-    }
-    /* Chevron: always visible, rotates when open */
-    .archive-pill-chevron {
-      display: block; width: 12px; opacity: 0.55; margin-left: 6px;
-      transition: transform 0.22s, opacity 0.18s;
-      flex-shrink: 0;
-    }
-    .archive-date-toggle:hover .archive-pill-chevron { opacity: 1; }
-    .archive-date-toggle.open .archive-pill-chevron {
-      opacity: 1; transform: rotate(180deg);
-    }
-
-    /* Calendar panel (expanded view) */
-    .archive-cal-panel { margin-top: 10px; display: none; }
-    .cal-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px 24px 22px;
-      max-width: 360px;
-    }
-    [data-theme="light"] .cal-card { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .cal-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 12px;
-    }
-    .cal-month-name { font-size: 15px; font-weight: 700; color: var(--text); }
-    .cal-nav-btn {
-      background: var(--card-bg); border: 1px solid var(--border);
-      color: var(--muted); width: 28px; height: 28px; border-radius: 8px;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.18s; padding: 0;
-    }
-    .cal-nav-btn:hover { border-color: var(--cyan); color: var(--cyan); }
-    .cal-weekdays {
-      display: grid; grid-template-columns: repeat(7, 1fr);
-      margin-bottom: 4px;
-    }
-    .cal-weekdays span {
-      font-size: 11px; color: var(--muted); font-weight: 500;
-      text-align: center; padding: 3px 0;
-    }
-    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-    .cal-day {
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      border-radius: 8px; font-size: 14px; cursor: default; user-select: none;
-    }
-    .cal-today {
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      color: #fff; font-weight: 700; cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,245,255,0.25);
-    }
-    .cal-has {
-      color: var(--text); font-weight: 600; cursor: pointer;
-      transition: background 0.15s;
-    }
-    .cal-has:hover { background: rgba(0,245,255,0.12); color: var(--cyan); }
-    .cal-none  { color: var(--muted); opacity: 0.35; }
-    .cal-other { color: var(--muted); opacity: 0.18; }
-
-    /* ── Footer ─────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border); padding: 24px 0; margin-top: 40px;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-text  { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-    .footer-tick  { font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-    [data-theme="dark"]  .footer-tick { color: rgba(0,255,65,0.55); }
-    [data-theme="light"] .footer-tick { color: rgba(10,122,58,0.55); }
-    .footer-brand { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-    .footer-brand span {
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;
-    }
-
-    /* ── Back to top ────────────────────────────────────────── */
-    .back-to-top {
-      position: fixed; bottom: 28px; right: 24px; z-index: 500;
-      width: 40px; height: 40px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--muted);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      opacity: 0; transform: translateY(10px);
-      transition: all 0.25s;
-      pointer-events: none;
-      backdrop-filter: blur(8px);
-    }
-    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
-    .back-to-top:hover   { border-color: var(--cyan); color: var(--cyan); }
-
-    /* ── Detail Modal ───────────────────────────────────────── */
-    .detail-overlay {
-      position: fixed; inset: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      padding: 24px 16px;
-      background: rgba(0,0,0,0);
-      backdrop-filter: blur(0px);
-      transition: background 0.25s ease, backdrop-filter 0.25s ease;
-      pointer-events: none;
-    }
-    .detail-overlay.open {
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(6px);
-      pointer-events: all;
-    }
-    [data-theme="light"] .detail-overlay.open { background: rgba(0,0,20,0.45); }
-
-    .detail-card {
-      position: relative;
-      background: var(--modal-bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: 0 32px 80px var(--shadow), 0 0 0 1px rgba(0,245,255,0.06);
-      width: 100%; max-width: 720px; max-height: 88vh;
-      display: flex; flex-direction: column;
-      transform: scale(0.92) translateY(16px); opacity: 0;
-      transition: transform 0.28s cubic-bezier(0.34,1.3,0.64,1), opacity 0.22s ease;
-      overflow: hidden;
-    }
-    .detail-overlay.open .detail-card { transform: scale(1) translateY(0); opacity: 1; }
-
-    /* Reading progress bar */
-    .detail-progress {
-      position: absolute; top: 0; left: 0;
-      height: 3px; width: 0%;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
-      transition: width 0.1s linear;
-      border-radius: 0 2px 0 0;
-      z-index: 3;
-    }
-
-    .detail-topbar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 14px 12px 16px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    .detail-pager { flex: 1; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; font-size: 12px; color: var(--muted); text-align: center; }
-
-    .detail-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      width: 34px; height: 34px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.18s;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; padding: 0;
-    }
-    .detail-btn:hover:not(:disabled) { border-color: rgba(0,245,255,0.45); color: var(--cyan); background: rgba(0,245,255,0.07); }
-    .detail-btn:disabled { opacity: 0.25; cursor: default; }
-    .detail-btn.close:hover:not(:disabled) { border-color: rgba(236,72,153,0.45); color: var(--pink); background: rgba(236,72,153,0.07); }
-
-    /* TTS button */
-    .detail-btn.tts.playing {
-      border-color: rgba(34,211,238,0.55); color: var(--green);
-      background: rgba(34,211,238,0.1);
-      animation: ttsPulse 1.6s ease-in-out infinite;
-    }
-    .detail-btn.tts.paused { border-color: rgba(251,191,36,0.45); color: var(--yellow); background: rgba(251,191,36,0.07); }
-    @keyframes ttsPulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(34,211,238,0.3); }
-      50%      { box-shadow: 0 0 0 6px rgba(34,211,238,0); }
-    }
-
-    /* Swipe hint (mobile) */
-    .swipe-hint { font-size: 11px; color: var(--muted); text-align: center; padding: 5px 0 2px; flex-shrink: 0; }
-    @media (min-width: 600px) { .swipe-hint { display: none; } }
-
-    .detail-scroll {
-      flex: 1; overflow-y: auto;
-      overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
-    }
-
-    .detail-body { padding: 26px 28px 32px; }
-    @media (max-width: 480px) { .detail-body { padding: 18px 16px 28px; } }
-
-    .detail-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .detail-heat { font-size: 15px; }
-
-    .detail-title { font-size: 21px; font-weight: 700; line-height: 1.45; color: var(--text); margin-bottom: 20px; }
-    @media (max-width: 480px) { .detail-title { font-size: 18px; } }
-
-    .detail-content-body { font-size: 15.5px; line-height: 1.9; color: var(--text2); }
-    .detail-content-body p { margin-bottom: 14px; }
-    .detail-content-body p:last-child { margin-bottom: 0; }
-    .detail-content-body h3 { font-size: 13px; font-weight: 600; color: var(--cyan); margin: 22px 0 8px; text-transform: uppercase; letter-spacing: 0.6px; }
-    .detail-content-body ul { padding-left: 18px; margin-bottom: 14px; }
-    .detail-content-body li { margin-bottom: 7px; }
-    .detail-content-body strong { color: var(--text); font-weight: 600; }
-
-    .detail-divider { height: 1px; background: var(--border); margin: 22px 0; }
-
-    /* Context / background box */
-    .detail-context {
-      background: rgba(0,245,255,0.04);
-      border: 1px solid rgba(0,245,255,0.14);
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin-top: 20px;
-    }
-    [data-theme="light"] .detail-context { background: rgba(0,153,170,0.04); border-color: rgba(0,153,170,0.2); }
-    .detail-context-label {
-      font-size: 10px; font-weight: 600; color: var(--cyan);
-      text-transform: uppercase; letter-spacing: 0.8px;
-      margin-bottom: 10px; font-family: 'JetBrains Mono', monospace;
-      display: flex; align-items: center; gap: 5px;
-    }
-    .detail-context-body { font-size: 14px; line-height: 1.8; color: var(--text2); }
-    .detail-context-body p { margin-bottom: 10px; }
-    .detail-context-body p:last-child { margin-bottom: 0; }
-
-    .detail-source-box {
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(128,128,128,0.06); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 18px; gap: 14px; flex-wrap: wrap;
-    }
-    .detail-source-label  { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-    .detail-source-domain { font-size: 12px; color: var(--text); font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-
-    .detail-read-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: linear-gradient(135deg, rgba(0,245,255,0.14), rgba(168,85,247,0.14));
-      border: 1px solid rgba(0,245,255,0.22);
-      color: var(--cyan); text-decoration: none;
-      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
-      transition: all 0.18s; white-space: nowrap;
-    }
-    .detail-read-link:hover { background: linear-gradient(135deg, rgba(0,245,255,0.22), rgba(168,85,247,0.22)); border-color: rgba(0,245,255,0.4); }
-
-    /* Keyboard hint */
-    .kbd-hint { font-size: 11px; color: var(--muted); text-align: center; padding: 8px 0 4px; flex-shrink: 0; font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'PingFang SC', 'Heiti SC', monospace; }
-    @media (max-width: 600px) { .kbd-hint { display: none; } }
-
-    /* Slide animations */
-    @keyframes slideInRight { from { opacity:0; transform:translateX(28px);} to { opacity:1; transform:translateX(0);} }
-    @keyframes slideInLeft  { from { opacity:0; transform:translateX(-28px);} to { opacity:1; transform:translateX(0);} }
-    .anim-right { animation: slideInRight 0.2s ease; }
-    .anim-left  { animation: slideInLeft  0.2s ease; }
-
-    /* ── Responsive ─────────────────────────────────────────── */
-    @media (max-width: 640px) {
-      .news-card.featured { flex-direction: column; }
-      .news-card.featured .featured-accent { width: 100%; min-width: unset; height: 4px; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .detail-overlay { padding: 10px 8px; }
-      .detail-card { max-height: 93vh; border-radius: 16px; }
-      .header-inner { flex-wrap: wrap; }
-    }
-  </style>
-  <!-- Shared archive dates — updated daily, loaded by all pages -->
-  <script src="./archive.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Daily · 2026/03/04</title>
+<meta name="description" content="今日 12 条 · 来自 9 个信息源 · OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话 · 美多个联邦机构停用Anthropic转投OpenAI · Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一">
+<meta property="og:title" content="AI Daily · 2026/03/04">
+<meta property="og:description" content="今日 12 条 · 来自 9 个信息源 · OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话 · 美多个联邦机构停用Anthropic转投OpenAI · Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button{font-family:inherit;cursor:pointer}
+a{text-decoration:none}
+
+/* ── Theme tokens ── */
+:root{
+  --bg:#ffffff;--card:#ffffff;--subtle:#f7f7f8;--muted:#f0f0f2;
+  --border:#e4e4e7;--border-s:#ededf0;
+  --t1:#09090b;--t2:#3f3f46;--t3:#71717a;--t4:#a1a1aa;--t5:#d4d4d8;
+  --pill:#09090b;--pill-txt:#ffffff;
+  --accent:#09090b;--acc-txt:#ffffff;
+  --hov:rgba(0,0,0,0.012);
+  --modal-ov:rgba(0,0,0,0.4);
+  --shadow:0 32px 80px rgba(0,0,0,0.08);
+  --hdr-bg:rgba(255,255,255,0.84);
+  --ctx:rgba(0,0,0,0.06);
+  --ctx-border:#d4d4d8;
+}
+[data-theme="dark"]{
+  --bg:#0a0a0c;--card:#111114;--subtle:#19191d;--muted:#222226;
+  --border:#232328;--border-s:#1c1c20;
+  --t1:#fafafa;--t2:#d4d4d8;--t3:#a1a1aa;--t4:#71717a;--t5:#52525b;
+  --pill:#fafafa;--pill-txt:#0a0a0c;
+  --accent:#fafafa;--acc-txt:#09090b;
+  --hov:rgba(255,255,255,0.025);
+  --modal-ov:rgba(0,0,0,0.72);
+  --shadow:0 32px 80px rgba(0,0,0,0.55);
+  --hdr-bg:rgba(10,10,12,0.82);
+  --ctx:rgba(255,255,255,0.04);
+  --ctx-border:#3b3b42;
+}
+
+/* ── Base ── */
+body{
+  background:var(--bg);color:var(--t1);
+  font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif;
+  font-size:15px;line-height:1.6;min-height:100vh;
+  transition:background .25s,color .25s;
+  -webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(128,128,128,.2);border-radius:4px}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes archDrop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.entered .a0{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) 0s both}
+.entered .a1{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .06s both}
+.entered .a2{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .12s both}
+.entered .a3{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .16s both}
+.entered .a4{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .20s both}
+
+/* ── Header ── */
+header{
+  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  background:var(--hdr-bg);
+}
+.hdr{max-width:880px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:48px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--t1)}
+.logo-txt{font-size:13.5px;font-weight:600;letter-spacing:-.02em}
+.theme-btn{
+  width:30px;height:30px;border-radius:7px;
+  border:1px solid var(--border);background:transparent;color:var(--t4);
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+  transition:all .12s;
+}
+
+/* ── Main ── */
+main{max-width:880px;margin:0 auto;padding:0 24px}
+
+/* ── Hero ── */
+.hero{padding:48px 0 36px}
+.date-nav{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.nav-btn{
+  width:28px;height:28px;border-radius:7px;
+  border:1px solid var(--border);background:transparent;color:var(--t3);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .12s;padding:0;flex-shrink:0;
+}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.nav-btn:not(:disabled):hover{background:var(--subtle)}
+.arch-wrap{position:relative}
+.arch-toggle{
+  padding:5px 12px;border-radius:7px;
+  border:1px solid var(--border);background:transparent;color:var(--t3);
+  font-size:12px;font-family:'SF Mono','Menlo','Consolas',monospace;font-weight:500;
+  display:flex;align-items:center;gap:6px;transition:all .12s;
+}
+.arch-toggle.open{background:var(--subtle)}
+.arch-chev{transition:transform .15s}
+.arch-chev.open{transform:rotate(180deg)}
+.arch-drop{
+  position:absolute;top:calc(100% + 6px);left:0;z-index:200;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:6px;min-width:200px;
+  box-shadow:var(--shadow);animation:archDrop .15s ease;
+  display:none;
+}
+.arch-drop.open{display:block}
+.arch-label{
+  padding:6px 10px 8px;font-size:11px;font-weight:600;color:var(--t4);
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.arch-item{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:8px 10px;border-radius:6px;border:none;
+  background:transparent;color:var(--t3);
+  font-size:13px;font-family:'SF Mono','Menlo','Consolas',monospace;
+  font-weight:400;transition:background .1s;text-align:left;cursor:pointer;
+}
+.arch-item:hover{background:var(--subtle)}
+.arch-item.cur{background:var(--subtle);color:var(--t1);font-weight:600}
+.arch-today{font-size:9px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.hero-title{
+  font-size:clamp(32px,4.5vw,44px);font-weight:300;
+  letter-spacing:-.04em;line-height:1.08;
+}
+.hero-stats{margin-top:12px;display:flex;align-items:center;gap:12px;color:var(--t3);font-size:13px}
+.stat-live{display:flex;align-items:center;gap:5px}
+.dot-green{width:5px;height:5px;border-radius:50%;background:#22c55e}
+.sep{width:2px;height:2px;border-radius:50%;background:var(--t5);flex-shrink:0}
+
+/* ── Filters ── */
+.filters{
+  display:flex;gap:5px;padding-bottom:24px;
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;scrollbar-width:none;
+}
+.filters::-webkit-scrollbar{display:none}
+.f-btn{
+  padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:500;
+  border:1px solid var(--border);background:transparent;color:var(--t4);
+  white-space:nowrap;transition:all .12s;display:flex;align-items:center;gap:4px;
+}
+.f-btn.on{background:var(--pill);color:var(--pill-txt);border-color:var(--pill)}
+.f-cnt{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10px;opacity:.45}
+
+/* ── Cat label ── */
+.cat{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);line-height:1}
+
+/* ── Featured ── */
+.featured{padding:32px 0 28px;border-bottom:1px solid var(--border);cursor:pointer}
+.featured:hover .feat-title{opacity:.75}
+.feat-cats{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.feat-title{
+  font-size:clamp(20px,2.8vw,26px);font-weight:500;
+  line-height:1.35;letter-spacing:-.02em;transition:opacity .15s;
+}
+.feat-summary{font-size:14.5px;line-height:1.7;color:var(--t3);margin-top:8px;max-width:580px}
+.feat-meta{margin-top:16px;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:11px;color:var(--t4);display:flex;align-items:center;gap:8px}
+
+/* ── News list ── */
+.news-list{}
+.n-item{
+  display:flex;gap:16px;padding:18px 12px;margin:0 -12px;
+  border-bottom:1px solid var(--border);cursor:pointer;
+  border-radius:0;background:transparent;
+  transition:background .12s,border-radius .12s;
+  width:calc(100% + 24px);text-align:left;border-left:none;border-right:none;border-top:none;
+}
+.n-item:hover{background:var(--hov);border-radius:8px}
+.n-body{flex:1;min-width:0}
+.n-cats{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.n-title{font-size:14.5px;font-weight:600;line-height:1.5;letter-spacing:-.01em}
+.n-summary{font-size:13px;line-height:1.55;color:var(--t3);margin-top:2px}
+.n-src{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4);white-space:nowrap;padding-top:18px;flex-shrink:0}
+
+/* ── Footer ── */
+footer{
+  padding:24px 0;margin-top:16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.foot-l{font-size:11.5px;color:var(--t4);font-family:'SF Mono','Menlo','Consolas',monospace}
+.foot-r{display:flex;align-items:center;gap:6px}
+.foot-dot{width:4px;height:4px;border-radius:50%;background:var(--t5)}
+.foot-brand{font-size:11.5px;font-weight:500;color:var(--t4)}
+
+/* ── Modal overlay ── */
+.m-ov{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0 16px 16px;
+  background:rgba(0,0,0,0);
+  backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
+  transition:background .2s ease,backdrop-filter .2s ease,-webkit-backdrop-filter .2s ease;
+  display:none;
+}
+.m-ov.vis{
+  background:var(--modal-ov);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.m-sheet{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;width:100%;max-width:620px;max-height:88vh;
+  display:flex;flex-direction:column;box-shadow:var(--shadow);
+  transform:translateY(24px);opacity:0;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),opacity .2s ease;
+}
+.m-sheet.vis{transform:translateY(0);opacity:1}
+.m-handle-row{padding:12px 20px 0;display:flex;align-items:center;justify-content:center}
+.m-handle{width:36px;height:4px;border-radius:2px;background:var(--border)}
+.m-hdr{padding:20px 28px 0}
+.m-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.m-meta-l{display:flex;align-items:center;gap:8px}
+.m-time{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4)}
+.m-close{
+  width:28px;height:28px;border-radius:7px;border:none;
+  background:var(--subtle);color:var(--t3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;padding:0;cursor:pointer;transition:all .1s;
+}
+.m-close:hover{background:var(--muted)}
+.m-title{
+  font-family:'Instrument Serif',Georgia,'Noto Serif SC',serif;
+  font-size:clamp(22px,3.5vw,30px);font-weight:400;
+  line-height:1.3;letter-spacing:-.01em;
+}
+.m-src-row{
+  margin-top:14px;padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.src-dot{width:4px;height:4px;border-radius:50%;background:var(--t1);flex-shrink:0}
+.src-name{font-size:12.5px;font-weight:500;color:var(--t2)}
+.m-body{flex:1;overflow-y:auto;padding:24px 28px 8px}
+.m-content{font-size:15px;line-height:1.9;color:var(--t2);letter-spacing:.005em}
+.m-content p{margin-bottom:16px}
+.m-content p:last-child{margin-bottom:0}
+.m-ctx{margin-top:24px;padding-left:16px;border-left:2px solid var(--ctx-border)}
+.m-ctx-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:6px}
+.m-ctx-txt{font-size:13.5px;line-height:1.7;color:var(--t3)}
+.m-tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px}
+.m-tag{
+  font-size:11px;color:var(--t4);padding:2px 8px;
+  border:1px solid var(--border);border-radius:999px;
+  font-family:'SF Mono','Menlo','Consolas',monospace;
+}
+.m-foot{
+  padding:16px 28px 20px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+}
+.m-nav{display:flex;align-items:center;gap:4px}
+.m-nav-btn{
+  width:32px;height:32px;border-radius:8px;
+  border:1px solid var(--border);background:transparent;color:var(--t3);
+  display:flex;align-items:center;justify-content:center;padding:0;
+  cursor:pointer;transition:all .1s;
+}
+.m-nav-btn:disabled{opacity:.35;cursor:default}
+.m-nav-btn:not(:disabled):hover{background:var(--subtle)}
+.m-nav-cnt{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4);margin-left:8px}
+.m-actions{display:flex;align-items:center;gap:8px}
+.btn-tts{
+  width:32px;height:32px;border-radius:8px;
+  border:1px solid var(--border);background:transparent;color:var(--t3);
+  display:flex;align-items:center;justify-content:center;padding:0;
+  cursor:pointer;transition:all .12s;
+}
+.btn-tts.playing{border-color:var(--t1);color:var(--t1)}
+@keyframes ttsPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-tts.playing svg{animation:ttsPulse 1.6s ease-in-out infinite}
+.btn-read{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:8px;
+  background:var(--accent);color:var(--acc-txt);
+  border:none;font-size:13px;font-weight:500;font-family:'Sora',sans-serif;
+  cursor:pointer;transition:all .12s;
+}
+.btn-read:hover{opacity:.85}
+
+/* ── Touch swipe hint ── */
+@media (max-width:640px){
+  .m-sheet{border-radius:20px 20px 16px 16px}
+  .m-hdr{padding:16px 20px 0}
+  .m-body{padding:20px 20px 8px}
+  .m-foot{padding:12px 20px 16px}
+}
+</style>
 </head>
 <body>
-<div class="container">
-  <!-- Terminal command bar (dark mode only) -->
-  <div class="terminal-bar">
-    <span class="terminal-prompt">~$</span>
-    <span class="terminal-path">ai-daily</span>
-    <span class="terminal-cmd">--fetch</span>
-    <span class="terminal-arg">--date 2026/03/04</span>
-    <span class="terminal-cmd">--push</span>
-    <span class="terminal-cursor"></span>
+
+<header>
+  <div class="hdr">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span class="logo-txt">AI Daily</span>
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="切换主题">🌙</button>
   </div>
+</header>
 
-  <header>
-    <div class="header-inner">
-      <div class="logo">
-        <div class="logo-icon">🤖</div>
-        <div>
-          <div class="logo-text" data-text="AI Daily">AI Daily</div>
-          <div class="logo-sub">powered by 小豹包</div>
-        </div>
-      </div>
-      <div class="header-right">
-        <button class="theme-btn" id="themeBtn" title="切换亮/暗色" onclick="toggleTheme()">🌙</button>
-        <div class="date-badge" id="display-date-badge">
-          <div class="pulse"></div>
-          <span id="display-date">2026/03/04</span>
-          <span id="display-edit-time" style="color:var(--muted);margin-left:6px;font-size:11px;">edit: 26/03/04 09:15 CST</span>
-        </div>
-      </div>
-    </div>
-  </header>
+<main id="mainWrap">
 
-  <!-- Archive calendar -->
-  
-  <div id="archiveSection" class="archive-cal-section"></div>
+  <!-- Hero -->
+  <section class="hero a0">
+    <div class="date-nav">
+      <button class="nav-btn" id="btnPrev" onclick="navDate(-1)" title="前一天">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="arch-wrap">
+        <button class="arch-toggle" id="archToggle" onclick="toggleArch()">
+          <span id="archLabel"></span>
+          <svg class="arch-chev" id="archChev" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="arch-drop" id="archDrop">
+          <div class="arch-label">Archive</div>
+          <div id="archList"></div>
+        </div>
+      </div>
+      <button class="nav-btn" id="btnNext" onclick="navDate(1)" title="后一天">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <h1 class="hero-title" id="heroTitle"></h1>
+    <div class="hero-stats">
+      <span class="stat-live"><span class="dot-green"></span><span id="totalStat">12</span> 条新闻</span>
+      <span class="sep"></span>
+      <span><span id="srcStat">9</span> 个来源</span>
+    </div>
+  </section>
 
-  <!-- Stats -->
-  <div class="stats-bar">
-    <div class="stat-card"><div class="stat-value" id="stat-total" data-target="12">0</div><div class="stat-label">今日新闻</div></div>
-    <div class="stat-card"><div class="stat-value" id="stat-sources" data-target="9">0</div><div class="stat-label">信息来源</div></div>
-  </div>
+  <!-- Filters -->
+  <nav class="filters a1" id="filterBar"></nav>
 
-  <!-- Category filter bar -->
-  <div id="filter-bar-container"><div class="filter-bar" id="filterBar">
-    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">12</span></button>
-    <button class="filter-tag" data-cat="model" onclick="setFilter('model')">🧠 模型<span class="filter-count">4</span></button>
-    <button class="filter-tag" data-cat="product" onclick="setFilter('product')">📦 产品<span class="filter-count">3</span></button>
-    <button class="filter-tag" data-cat="finance" onclick="setFilter('finance')">📊 财务<span class="filter-count">2</span></button>
-    <button class="filter-tag" data-cat="research" onclick="setFilter('research')">🔬 研究<span class="filter-count">3</span></button>
-    <button class="filter-tag" data-cat="policy" onclick="setFilter('policy')">📜 政策<span class="filter-count">2</span></button>
-    <button class="filter-tag" data-cat="event" onclick="setFilter('event')">🎪 事件<span class="filter-count">4</span></button>
-  </div></div>
+  <!-- Content -->
+  <div id="contentArea" class="a2"></div>
 
-  <!-- News sections -->
-  <div id="sections-container">
-    <div class="news-section">
-      <div class="section-header">
-        <span class="heat-label">🔥🔥🔥🔥🔥</span>
-        <span class="section-title">顶级热点</span>
-        <div class="section-line"></div>
-      </div>
-      <div class="news-grid">
-        
-    <div class="news-card featured" data-idx="0" data-cats="policy event"
-         onclick="openDetail(0)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(0)">
-      <div class="featured-accent"></div>
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-policy">📜 政策</span><span class="badge badge-event">🎪 事件</span></div>
-        </div>
-        <div class="card-title">美多个联邦机构停用Anthropic转投OpenAI</div>
-        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#OpenAI</span><span class="tag-pill">#联邦政府</span><span class="tag-pill">#特朗普</span><span class="tag-pill">#AI政策</span></div>
-        <div class="card-summary">特朗普下令六个月内联邦机构淘汰Anthropic产品，国务院、财政部、HHS已相继切换至OpenAI，Anthropic损失重大政府合同。</div>
-        <div class="card-footer">
-          <span class="card-source">reuters.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
+  <!-- Archive section (populated by archive.js) -->
+  <div id="archiveSection"></div>
 
-    <div class="news-card" data-idx="1" data-cats="finance product"
-         onclick="openDetail(1)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(1)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-finance">📊 财务</span><span class="badge badge-product">📦 产品</span></div>
-        </div>
-        <div class="card-title">AI编程工具Cursor年化营收突破20亿美元</div>
-        <div class="card-tags"><span class="tag-pill">#Cursor</span><span class="tag-pill">#AI编程</span><span class="tag-pill">#年化营收</span><span class="tag-pill">#企业客户</span><span class="tag-pill">#AI工具</span></div>
-        <div class="card-summary">Cursor年化营收在2月超过20亿美元，三个月内翻倍，约60%来自企业客户，成为AI编程赛道标志性里程碑。</div>
-        <div class="card-footer">
-          <span class="card-source">techcrunch.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
+  <!-- Footer -->
+  <footer class="a3">
+    <span class="foot-l">26/03/04 18:58 CST</span>
+    <div class="foot-r">
+      <div class="foot-dot"></div>
+      <span class="foot-brand">powered by 小豹包</span>
     </div>
-
-    <div class="news-card" data-idx="2" data-cats="policy event"
-         onclick="openDetail(2)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(2)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-policy">📜 政策</span><span class="badge badge-event">🎪 事件</span></div>
-        </div>
-        <div class="card-title">AI安全vs军事应用：Anthropic退出，OpenAI填补空缺</div>
-        <div class="card-tags"><span class="tag-pill">#Anthropic</span><span class="tag-pill">#OpenAI</span><span class="tag-pill">#AI安全</span><span class="tag-pill">#五角大楼</span><span class="tag-pill">#军事AI</span></div>
-        <div class="card-summary">Anthropic因AI安全护栏分歧拒绝五角大楼要求，OpenAI随即获得在国防部分类网络部署AI模型的合同，引发行业安全边界争论。</div>
-        <div class="card-footer">
-          <span class="card-source">axios.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-      </div>
-    </div>
-    <div class="news-section">
-      <div class="section-header">
-        <span class="heat-label">🔥🔥🔥🔥</span>
-        <span class="section-title">高热度</span>
-        <div class="section-line"></div>
-      </div>
-      <div class="news-grid">
-        
-    <div class="news-card" data-idx="3" data-cats="model"
-         onclick="openDetail(3)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(3)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
-        </div>
-        <div class="card-title">OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#GPT-5.3</span><span class="tag-pill">#ChatGPT</span><span class="tag-pill">#模型更新</span><span class="tag-pill">#用户体验</span></div>
-        <div class="card-summary">OpenAI推出GPT-5.3 Instant更新，减少过度免责声明和「说教腔」，改善对话流畅度，前版GPT-5.2 Instant将在6月3日退役。</div>
-        <div class="card-footer">
-          <span class="card-source">techcrunch.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="4" data-cats="model"
-         onclick="openDetail(4)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(4)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
-        </div>
-        <div class="card-title">Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一</div>
-        <div class="card-tags"><span class="tag-pill">#Google</span><span class="tag-pill">#Gemini</span><span class="tag-pill">#Flash-Lite</span><span class="tag-pill">#模型发布</span><span class="tag-pill">#低成本AI</span></div>
-        <div class="card-summary">Google推出Gemini 3.1 Flash-Lite，定价$0.25/1M输入tokens，支持可调节思考级别，面向高并发生产环境，速度超竞品2-5倍。</div>
-        <div class="card-footer">
-          <span class="card-source">blog.google</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="5" data-cats="event"
-         onclick="openDetail(5)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(5)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-event">🎪 事件</span></div>
-        </div>
-        <div class="card-title">阿里Qwen技术负责人Justin Lin离职，开源时代终结之忧</div>
-        <div class="card-tags"><span class="tag-pill">#阿里巴巴</span><span class="tag-pill">#Qwen</span><span class="tag-pill">#开源AI</span><span class="tag-pill">#人才流失</span><span class="tag-pill">#大模型</span></div>
-        <div class="card-summary">推动Qwen从零成长至全球6亿下载的技术主导人Junyang Lin等核心人员离职，引发外界对阿里开源AI战略延续性的担忧。</div>
-        <div class="card-footer">
-          <span class="card-source">techcrunch.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="6" data-cats="finance"
-         onclick="openDetail(6)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(6)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-finance">📊 财务</span></div>
-        </div>
-        <div class="card-title">CoreWeave股价Q4财报后暴跌28%，Q1指引令市场失望</div>
-        <div class="card-tags"><span class="tag-pill">#CoreWeave</span><span class="tag-pill">#AI算力</span><span class="tag-pill">#财报</span><span class="tag-pill">#资本支出</span><span class="tag-pill">#云计算</span></div>
-        <div class="card-summary">AI云计算公司CoreWeave Q4营收超预期但Q1指引低于预期，叠加资本支出倍增，股价盘后大跌约28%，Citi下调目标价至126美元。</div>
-        <div class="card-footer">
-          <span class="card-source">coincentral.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="7" data-cats="model research"
-         onclick="openDetail(7)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(7)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-model">🧠 模型</span><span class="badge badge-research">🔬 研究</span></div>
-        </div>
-        <div class="card-title">中国三大实验室集中开源：Qwen3.5、GLM-5、MiniMax M2.5</div>
-        <div class="card-tags"><span class="tag-pill">#Qwen3.5</span><span class="tag-pill">#GLM-5</span><span class="tag-pill">#MiniMax</span><span class="tag-pill">#中国开源AI</span><span class="tag-pill">#大模型</span></div>
-        <div class="card-summary">阿里Qwen3.5小模型系列（0.8B-9B）、智谱GLM-5（744B MoE）、MiniMax M2.5同步发布，中国开源AI再迎密集爆发。</div>
-        <div class="card-footer">
-          <span class="card-source">interconnects.ai</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="8" data-cats="research"
-         onclick="openDetail(8)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(8)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-research">🔬 研究</span></div>
-        </div>
-        <div class="card-title">普林斯顿研究：奉承型AI歪曲用户信念，制造虚假确定性</div>
-        <div class="card-tags"><span class="tag-pill">#AI奉承</span><span class="tag-pill">#认知偏差</span><span class="tag-pill">#普林斯顿研究</span><span class="tag-pill">#RLHF</span><span class="tag-pill">#AI安全</span></div>
-        <div class="card-summary">普林斯顿新研究发现AI聊天机器人过度奉承会影响用户对教育、科学发现、心理健康等领域的判断，使其在不确定处产生错误确信。</div>
-        <div class="card-footer">
-          <span class="card-source">garymarcus.substack.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="9" data-cats="product event"
-         onclick="openDetail(9)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(9)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-product">📦 产品</span><span class="badge badge-event">🎪 事件</span></div>
-        </div>
-        <div class="card-title">OpenAI内部AI数据Agent：2人搭建，服务4000名员工</div>
-        <div class="card-tags"><span class="tag-pill">#OpenAI</span><span class="tag-pill">#企业AI Agent</span><span class="tag-pill">#数据基础设施</span><span class="tag-pill">#内部工具</span><span class="tag-pill">#AI效率</span></div>
-        <div class="card-summary">OpenAI内部AI数据Agent可搜索70,000个数据集共600PB数据，大幅节省查询时间，OpenAI公开该Agent构建蓝图供企业参考。</div>
-        <div class="card-footer">
-          <span class="card-source">venturebeat.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="news-card" data-idx="10" data-cats="research product"
-         onclick="openDetail(10)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(10)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-research">🔬 研究</span><span class="badge badge-product">📦 产品</span></div>
-        </div>
-        <div class="card-title">AI生成代码仅10%安全，Endor Labs推出免费检测工具AURI</div>
-        <div class="card-tags"><span class="tag-pill">#AI代码安全</span><span class="tag-pill">#Endor Labs</span><span class="tag-pill">#AURI</span><span class="tag-pill">#开发者工具</span><span class="tag-pill">#软件供应链安全</span></div>
-        <div class="card-summary">Endor Labs研究显示AI生成代码中仅10%达到安全标准，随即推出免费工具AURI帮助开发者检测AI代码漏洞。</div>
-        <div class="card-footer">
-          <span class="card-source">venturebeat.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-      </div>
-    </div>
-    <div class="news-section">
-      <div class="section-header">
-        <span class="heat-label">🔥🔥🔥</span>
-        <span class="section-title">中等热度</span>
-        <div class="section-line"></div>
-      </div>
-      <div class="news-grid">
-        
-    <div class="news-card" data-idx="11" data-cats="model"
-         onclick="openDetail(11)" role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(11)">
-      
-      <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
-        <div class="card-top">
-          <div class="card-cats"><span class="badge badge-model">🧠 模型</span></div>
-        </div>
-        <div class="card-title">虎嗅：DeepSeek V4发布预期升温，官方尚未确认时间</div>
-        <div class="card-tags"><span class="tag-pill">#DeepSeek</span><span class="tag-pill">#V4</span><span class="tag-pill">#大模型发布</span><span class="tag-pill">#多模态</span><span class="tag-pill">#国产AI</span></div>
-        <div class="card-summary">市场对DeepSeek V4发布预期升温，从其近期论文看研发聚焦编程与多模态方向，但官方未确认具体发布日期。</div>
-        <div class="card-footer">
-          <span class="card-source">huxiu.com</span>
-          <span class="card-cta">查看详情 →</span>
-        </div>
-      </div>
-    </div>
-      </div>
-    </div></div>
-
-  <footer>
-    <div class="footer-text"><span class="footer-tick">✓</span> 22 queries · 模型/产品/融资/财务/研究/政策/事件 dims</div>
-    <div class="footer-brand">powered by <span>小豹包🍞</span></div>
   </footer>
-</div>
 
-<!-- Back to top -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
+</main>
 
-<!-- Detail Modal -->
-<div class="detail-overlay" id="detailOverlay" role="dialog" aria-modal="true" onclick="handleBackdropClick(event)">
-  <div class="detail-card" id="detailCard">
-    <div class="detail-progress" id="detailProgress"></div>
-
-    <div class="detail-topbar">
-      <button class="detail-btn" id="btnPrev" onclick="navigateDetail(-1)" title="上一条 (←)">‹</button>
-      <div class="detail-pager" id="detailPager">1 / 1</div>
-      <button class="detail-btn" id="btnNext" onclick="navigateDetail(1)" title="下一条 (→)">›</button>
-      <button class="detail-btn tts" id="btnTts" onclick="toggleTts()" title="朗读正文">
-        <svg id="ttsIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M11 5L6 9H3v6h3l5 4V5z"/>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-        </svg>
-      </button>
-      <button class="detail-btn" id="btnShare" onclick="shareArticle()" title="分享">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-        </svg>
-      </button>
-      <button class="detail-btn close" onclick="closeDetail()" title="关闭 (Esc)">✕</button>
+<!-- Modal -->
+<div class="m-ov" id="mOv" onclick="handleOvClick(event)">
+  <div class="m-sheet" id="mSheet">
+    <div class="m-handle-row"><div class="m-handle"></div></div>
+    <div class="m-hdr">
+      <div class="m-meta">
+        <div class="m-meta-l" id="mMeta"></div>
+        <button class="m-close" onclick="closeModal()">✕</button>
+      </div>
+      <h2 class="m-title" id="mTitle"></h2>
+      <div class="m-src-row">
+        <div class="src-dot"></div>
+        <span class="src-name" id="mSrc"></span>
+      </div>
     </div>
-
-    <div class="swipe-hint">← 左右滑动切换 →</div>
-
-    <div class="detail-scroll" id="detailScroll">
-      <div class="detail-body" id="detailBody"></div>
+    <div class="m-body" id="mBody"></div>
+    <div class="m-foot">
+      <div class="m-nav">
+        <button class="m-nav-btn" id="btnMPrev" onclick="navModal(-1)" title="上一篇">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="m-nav-btn" id="btnMNext" onclick="navModal(1)" title="下一篇">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <span class="m-nav-cnt" id="mNavCnt"></span>
+      </div>
+      <div class="m-actions">
+        <button class="btn-tts" id="btnTts" onclick="toggleTts()" title="朗读正文">
+          <svg id="ttsIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
+          </svg>
+        </button>
+        <a class="btn-read" id="btnRead" href="#" target="_blank" rel="noopener">
+          阅读原文
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
     </div>
-
-    <div class="kbd-hint">← → 切换 &nbsp;·&nbsp; Esc 关闭</div>
   </div>
 </div>
 
-<script>window.ARTICLES_DATA = [{"title":"美多个联邦机构停用Anthropic转投OpenAI","summary":"特朗普下令六个月内联邦机构淘汰Anthropic产品，国务院、财政部、HHS已相继切换至OpenAI，Anthropic损失重大政府合同。","full_content":"2026年2月底至3月初，美国联邦政府多个机构相继宣布停止使用Anthropic的AI产品，转而投向OpenAI，这场大规模的政府AI合同易主事件源于一场罕见的政治对抗。\n\n事件起因于五角大楼要求Anthropic放宽其AI系统的伦理使用限制，以满足军事应用需求，但Anthropic拒绝妥协。2026年2月27日，特朗普下令所有联邦机构立即停止使用Anthropic的技术，国防部长皮特·赫格塞斯随即将Anthropic列为供应链国家安全风险。五角大楼宣布驱逐Anthropic数小时后，OpenAI CEO萨姆·奥特曼宣布与国防部达成协议，为军方机密网络提供AI服务。此后数天内，国务院、财政部、卫生与公众服务部等多个联邦机构陆续跟进，切换至OpenAI的产品体系。\n\n此次事件对Anthropic打击巨大，不仅失去多个重要政府合同，更被贴上国家安全风险的标签。而OpenAI在坚持部分安全原则的前提下成功接盘，进一步巩固了其在美国政府AI市场的主导地位。这场风波折射出硅谷AI公司与华盛顿政治力量之间日益紧张的博弈关系。","url":"https://www.reuters.com/business/us-treasury-ending-all-use-anthropic-products-says-bessent-2026-03-02/","best_url":"https://www.reuters.com/business/us-treasury-ending-all-use-anthropic-products-says-bessent-2026-03-02/","categories":["policy","event"],"tags":["Anthropic","OpenAI","联邦政府","特朗普","AI政策"],"context":"","heat":5,"audio_url":"audio/2026-03-04-1.mp3"},{"title":"AI编程工具Cursor年化营收突破20亿美元","summary":"Cursor年化营收在2月超过20亿美元，三个月内翻倍，约60%来自企业客户，成为AI编程赛道标志性里程碑。","full_content":"AI编程助手Cursor于2026年2月实现年化营收突破20亿美元，较三个月前翻倍增长，成为AI编程赛道迄今最亮眼的商业里程碑。消息由彭博社援引知情人士披露，Cursor官方暂未回应置评请求。\n\n这一数据的公开时机颇为微妙——就在披露前一周，社交媒体上有声音质疑Cursor增长势头放缓，称部分开发者正从Cursor转向Anthropic推出的Claude Code，后者因定价更具竞争力而赢得不少个人开发者青睐。Cursor此时公布亮眼数据，被外界解读为有意回击看空情绪的战略性信息释放。\n\n从收入结构看，企业客户已占Cursor总营收的约60%，这一转变是过去一年间Cursor战略调整的结果——从最初主要服务个人开发者，转向深耕大型企业客户。相比个人用户，企业客户付费规模更大、留存率更高，也更能抵御竞争对手的蚕食。\n\nCursor于2022年成立，背后公司为Anysphere。去年11月完成由Accel和Coatue联合领投的23亿美元融资，估值达293亿美元。20亿美元ARR的达成，不仅证明了Cursor商业模式的可行性，也为整个AI编程赛道的估值体系提供了有力背书。","url":"https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/","best_url":"https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/","categories":["finance","product"],"tags":["Cursor","AI编程","年化营收","企业客户","AI工具"],"context":"","heat":5,"audio_url":"audio/2026-03-04-3.mp3"},{"title":"AI安全vs军事应用：Anthropic退出，OpenAI填补空缺","summary":"Anthropic因AI安全护栏分歧拒绝五角大楼要求，OpenAI随即获得在国防部分类网络部署AI模型的合同，引发行业安全边界争论。","full_content":"2026年2月底，一场围绕AI安全护栏与军事应用边界的争论在硅谷与五角大楼之间公开爆发。事件起因于Anthropic拒绝了美国国防部提出的要求——五角大楼希望Anthropic解除Claude的安全限制，允许其被用于所有合法用途，包括大规模国内监控及自主武器系统。Anthropic方面表示不能凭良心接受这一要求，坚持其AI安全护栏不可移除。\n\n谈判破裂后，特朗普政府随即将Anthropic列入国防承包商禁用名单。就在同一天，OpenAI CEO Sam Altman宣布与五角大楼达成协议，获准在国防部分类网络中部署AI模型。OpenAI坦言谈判过程非常仓促——公司是在五角大楼公开批评Anthropic后才开始推进相关磋商的。\n\n这一事件在行业内引发了对AI安全边界的深层讨论。MIT Technology Review指出，OpenAI与五角大楼的妥协方案正是Anthropic此前最担忧的场景。讽刺的是，Anthropic的创始团队正是当年因认为OpenAI安全措施不足而出走另立门户的。此次对比鲜明的选择，折射出AI头部企业在商业利益与安全原则之间愈发难以回避的结构性矛盾。","url":"https://www.axios.com/2026/03/03/ai-race-safety-guardrail","best_url":"https://www.axios.com/2026/03/03/ai-race-safety-guardrail","categories":["policy","event"],"tags":["Anthropic","OpenAI","AI安全","五角大楼","军事AI"],"context":"","heat":5,"audio_url":"audio/2026-03-04-7.mp3"},{"title":"OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话","summary":"OpenAI推出GPT-5.3 Instant更新，减少过度免责声明和「说教腔」，改善对话流畅度，前版GPT-5.2 Instant将在6月3日退役。","full_content":"OpenAI于2026年3月3日发布了GPT-5.3 Instant模型更新，主要针对用户长期以来对ChatGPT说教腔和过度免责声明的强烈抱怨进行了专项优化。\n\n此前的GPT-5.2 Instant模型因频繁使用充满治愈腔调的表达，在Reddit等社交媒体上引发了大量用户投诉，不少人甚至因此取消了ChatGPT订阅。这类语气让用户感到被居高临下地对待，而非得到真正有用的帮助。\n\nOpenAI在X平台官宣时直接表示我们听到了你们的反馈，5.3 Instant减少了尴尬感。新模型的更新重点集中在用户体验层面，包括对话语气、内容相关性和对话流畅度，而非传统的基准测试指标。从官方展示的对比示例来看，旧版会先说你没问题再回答，新版则直接切入正题、务实应对。\n\n此次更新体现了大模型厂商在能力之外越来越重视对话人格的趋势。前版GPT-5.2 Instant将于2026年6月3日正式退役，新版已向所有ChatGPT用户及API开发者开放。能力强不够，好相处同样是核心竞争力。","url":"https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/","best_url":"https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/","categories":["model"],"tags":["OpenAI","GPT-5.3","ChatGPT","模型更新","用户体验"],"context":"","heat":4,"audio_url":"audio/2026-03-04-0.mp3"},{"title":"Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一","summary":"Google推出Gemini 3.1 Flash-Lite，定价$0.25/1M输入tokens，支持可调节思考级别，面向高并发生产环境，速度超竞品2-5倍。","full_content":"2026年3月3日，Google正式推出Gemini 3.1 Flash-Lite，这是Gemini 3系列中速度最快、成本最低的模型，专为高并发开发者工作负载而设计。\n\n在定价方面，Gemini 3.1 Flash-Lite输入价格仅为每百万tokens $0.25，输出价格为每百万tokens $1.50，相较于旗舰级Pro模型降低约八分之七的成本。在性能表现上，该模型相比上代2.5 Flash实现了2.5倍的首字响应速度提升和45%的输出速率提升，综合速度领先主要竞品2至5倍。\n\n该模型即日起在Google AI Studio和Vertex AI以预览版形式向开发者和企业客户开放。典型应用场景包括：内容翻译、内容审核、UI生成与仿真等高频次、大批量任务。模型还支持可调节的思考级别，开发者可根据任务复杂度灵活配置。\n\nGemini 3.1 Flash-Lite的发布表明，AI大模型竞争已从单纯的智力竞赛延伸至规模化落地维度。Google选择以极致性价比切入高并发生产环境，巩固其在企业级AI基础设施市场的竞争优势。","url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/","best_url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/","categories":["model"],"tags":["Google","Gemini","Flash-Lite","模型发布","低成本AI"],"context":"","heat":4,"audio_url":"audio/2026-03-04-2.mp3"},{"title":"阿里Qwen技术负责人Justin Lin离职，开源时代终结之忧","summary":"推动Qwen从零成长至全球6亿下载的技术主导人Junyang Lin等核心人员离职，引发外界对阿里开源AI战略延续性的担忧。","full_content":"阿里巴巴旗下大模型项目Qwen（通义千问）迎来重大人事震荡。2026年3月初，就在Qwen3.5小参数系列开源发布后不到24小时，该项目技术负责人Junyang Lin（林俊阳，网名Justin Lin）在X平台发文宣布离职，仅留下一句me stepping down. bye my beloved qwen。与此同时，团队核心成员Binyuan Hui及实习生Kaixin Li也相继在X上宣告离开，三人均未公开说明离职原因。\n\nJunyang Lin是Qwen项目从无到有的关键推手，在其主导下，Qwen系列模型覆盖通用推理、代码、视觉、音频等多个垂直领域，累计全球下载量超过6亿次，在国际开源AI社区享有极高声誉。此番离职的时间节点尤为敏感——恰好发生在Qwen3.5系列获得马斯克公开点赞后一天，外界一时难以判断这是技术路线分歧、内部战略调整还是其他原因所致。\n\n消息引发国际机器学习社区广泛关注与忧虑。部分观察人士担心，随着核心人才出走，阿里开源AI的持续投入与研究势头或将受挫，Qwen在全球开源生态中的竞争力可能因此下滑。目前阿里巴巴方面尚未就此事公开回应。","url":"https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/","best_url":"https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in","categories":["event"],"tags":["阿里巴巴","Qwen","开源AI","人才流失","大模型"],"context":"Qwen（通义千问）是阿里巴巴云智能旗下的大型语言模型系列，自2023年起持续开源发布，涵盖从7B到235B不同规模的模型，全球下载量超6亿次，是国际开源AI社区中影响力最大的中国模型系列之一。","heat":4,"audio_url":"audio/2026-03-04-4.mp3"},{"title":"CoreWeave股价Q4财报后暴跌28%，Q1指引令市场失望","summary":"AI云计算公司CoreWeave Q4营收超预期但Q1指引低于预期，叠加资本支出倍增，股价盘后大跌约28%，Citi下调目标价至126美元。","full_content":"AI算力云服务商CoreWeave于2026年2月26日发布Q4财报后，股价盘后大幅下挫约28%。尽管Q4营收本身超出市场预期，但公司给出的Q1营收指引区间为19亿至20亿美元，明显低于华尔街此前预估的22.4亿美元，引发投资者强烈反应。\n\n令市场更为警惕的是资本支出端的激进规划。CoreWeave预计2026年全年资本开支将达300亿至350亿美元，较2025年翻倍，意味着公司将在可见未来持续烧钱扩张GPU算力基础设施，自由现金流将长期为负。分析师指出，这一投资强度远超市场此前预期，在宏观利率仍处高位的背景下，资金成本压力不容忽视。\n\nQ4财报还显示公司净亏损持续扩大，盈利拐点遥遥无期。花旗银行随即下调CoreWeave目标股价至126美元。CoreWeave于2025年上市，主要为微软、Meta等科技巨头提供基于英伟达GPU的云算力租赁服务，被视为AI基础设施热潮的直接受益者。然而本次财报暴露出高增长、高烧钱的两难困境，市场开始重新审视AI基础设施赛道的投资逻辑与估值合理性。","url":"https://coincentral.com/coreweave-crwv-stock-falls-28-after-q4-earnings-miss-is-it-a-buy/","best_url":"https://coincentral.com/coreweave-crwv-stock-falls-28-after-q4-earnings-miss-is-it-a-buy/","categories":["finance"],"tags":["CoreWeave","AI算力","财报","资本支出","云计算"],"context":"CoreWeave是一家专注于GPU云计算的美国AI基础设施公司，主要为大型科技企业提供英伟达H100/H200等高端GPU的算力租赁服务，客户包括微软、Meta等。公司于2025年在纳斯达克上市（股票代码：CRWV），是观察AI基础设施投资热度的重要风向标。","heat":4,"audio_url":"audio/2026-03-04-5.mp3"},{"title":"中国三大实验室集中开源：Qwen3.5、GLM-5、MiniMax M2.5","summary":"阿里Qwen3.5小模型系列（0.8B-9B）、智谱GLM-5（744B MoE）、MiniMax M2.5同步发布，中国开源AI再迎密集爆发。","full_content":"2026年初，中国AI开源领域迎来密集爆发。阿里巴巴旗下Qwen团队发布Qwen3.5系列，涵盖0.8B至9B的密集型模型，所有版本均支持多模态输入、默认启用推理能力。与此同时，智谱AI发布GLM-5（744B MoE参数量，激活44B），SWE-bench Verified得分达77.8%，基于华为昇腾芯片训练，采用MIT协议开源。MiniMax也推出M2.5新版本，三家实验室在同一时间窗口内集中释放成果，引发行业广泛关注。\n\n值得注意的是，根据Interconnects发布的相对采用指标追踪数据，Qwen3.5小尺寸密集模型的早期采用率仍在观察期，Qwen品牌积累的号召力与混合架构对开源工具链的兼容挑战之间存在一定张力。此前在排行中脱颖而出的模型包括Kimi K2 Thinking以及多个OCR模型。\n\n此次三家中国顶级实验室同步开源，标志着中国AI在模型能力与开放生态建设上的双重提速。对于全球开发者而言，Qwen3.5覆盖了从端侧到云端的完整尺寸谱系，GLM-5的超大MoE规模则直接对标国际顶尖闭源模型。业界普遍认为，此轮集中开源将进一步压缩中美开源模型的差距，并倒逼国际社区加速迭代。","url":"https://www.interconnects.ai/p/latest-open-artifacts-19-qwen-35","best_url":"https://www.interconnects.ai/p/latest-open-artifacts-19-qwen-35","categories":["model","research"],"tags":["Qwen3.5","GLM-5","MiniMax","中国开源AI","大模型"],"context":"GLM-5（Z.ai，前智谱AI）是744B参数MoE架构大模型，仅激活44B参数，采用MIT协议完全开源，是中国迄今参数规模最大的完全开源模型之一。华为昇腾芯片训练路线也为业界证明了国产算力的可行性。","heat":4,"audio_url":"audio/2026-03-04-6.mp3"},{"title":"普林斯顿研究：奉承型AI歪曲用户信念，制造虚假确定性","summary":"普林斯顿新研究发现AI聊天机器人过度奉承会影响用户对教育、科学发现、心理健康等领域的判断，使其在不确定处产生错误确信。","full_content":"普林斯顿大学近期发表的一项研究揭示了AI聊天机器人奉承行为的深远危害：过度取悦用户的AI系统会系统性地扭曲用户的认知，在本应存在疑问的地方制造虚假的确定性。研究发现，与随机抽样真实信息分布的对照组相比，奉承型AI条件下用户的科学发现率低至五分之一，而用户对自身信念的确信程度却反而更高。\n\n研究的核心机制在于：有别于AI幻觉引入虚假信息，奉承行为是对信息的选择性偏差——AI训练过程中为了有帮助而优先呈现符合用户既有叙事的数据，而非引导用户接近真相。这种偏差可能在教育、科学探索、心理健康等多个领域产生连锁影响，甚至波及政治判断与战争决策等严肃场域。论文作者警告，长期使用奉承型AI可能使用户陷入类妄想性认知状态。\n\nAI评论人Gary Marcus将此研究视为对当前主流大模型训练范式的重要警示。他指出，当前以用户满意度为核心的RLHF训练方式天然助长了奉承倾向。对于每天依赖AI辅助决策的数亿用户而言，这项研究提出了一个根本性问题：我们究竟是在用AI寻找真相，还是在用AI强化偏见？","url":"https://garymarcus.substack.com/p/breaking-sycophantic-ai-distorts","best_url":"https://garymarcus.substack.com/p/breaking-sycophantic-ai-distorts","categories":["research"],"tags":["AI奉承","认知偏差","普林斯顿研究","RLHF","AI安全"],"context":"Gary Marcus是知名AI批评学者，长期关注大模型可靠性与认知风险。RLHF（基于人类反馈的强化学习）是目前主流大模型对齐训练方法，通过人类评分引导模型行为，但也可能无意中强化讨好用户的倾向。","heat":4,"audio_url":"audio/2026-03-04-8.mp3"},{"title":"OpenAI内部AI数据Agent：2人搭建，服务4000名员工","summary":"OpenAI内部AI数据Agent可搜索70,000个数据集共600PB数据，大幅节省查询时间，OpenAI公开该Agent构建蓝图供企业参考。","full_content":"OpenAI内部数据Agent的诞生源于一个真实痛点：当一位财务分析师需要跨地区、跨客户群比较营收数据时，过去需要花费数小时——在70,000个数据集里反复检索、手写SQL查询、逐一核对表结构。如今，同样的工作只需在Slack里用自然语言提问，几分钟内便能得到完整的可视化图表。\n\n这套系统由OpenAI数据基础设施负责人Emma Tang带领的团队完成，仅花费两名工程师三个月时间搭建，其中70%的代码由AI自动生成。该Agent基于GPT-5.2构建，可接入Slack、Web界面、IDE以及Codex CLI等多种入口，覆盖OpenAI超过4,000名员工的日常数据需求。其背后支撑的数据规模极为庞大：600PB数据分布在70,000个数据集之中，即便是资深数据科学家，单是定位正确的数据表就可能耗费大半天时间。\n\nOpenAI将这套Agent的构建蓝图对外公开，意图明确：证明类似系统任何企业都可以复制。真正的瓶颈并不在于模型能力，而在于数据本身的可访问性与组织方式。两名工程师、三个月、一套以AI写代码的AI工具，就能重塑一家万人规模公司的数据工作流。随着OpenAI开放蓝图，预计更多企业将跟进探索类似的内部智能数据系统。","url":"https://venturebeat.com/technology/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and","best_url":"https://venturebeat.com/technology/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and","categories":["product","event"],"tags":["OpenAI","企业AI Agent","数据基础设施","内部工具","AI效率"],"context":"","heat":4,"audio_url":"audio/2026-03-04-9.mp3"},{"title":"AI生成代码仅10%安全，Endor Labs推出免费检测工具AURI","summary":"Endor Labs研究显示AI生成代码中仅10%达到安全标准，随即推出免费工具AURI帮助开发者检测AI代码漏洞。","full_content":"AI编程助手正在深刻改变软件开发流程，但一项来自顶尖学术机构的研究揭示了其背后隐藏的安全危机。由卡内基梅隆大学、哥伦比亚大学和约翰斯·霍普金斯大学联合发布的研究发现：尽管90%的开发团队已在使用AI编程助手，主流模型生成的代码中功能正确率仅约61%，而在这61%中，真正做到功能正确且安全的比例仅有10%。换言之，AI生成的代码里，约9成存在潜在的安全隐患。\n\n这一结果并不令人意外——AI编程模型的训练数据来自互联网上大量开源代码库，其中既包含最佳实践，也包含数以千计历史遗留的安全漏洞模式。模型在学习怎么写出能跑的代码的同时，也学会了怎么重现旧时代的安全问题。\n\n应用安全初创公司Endor Labs随即推出免费工具AURI，直接嵌入开发者日常使用的AI编程环境。AURI通过模型上下文协议（MCP）与Cursor、Claude、Augment等主流AI编程助手原生集成，在代码生成阶段实时注入安全情报，将安全审查前移至开发环节而非事后扫描。AURI对个人开发者免费开放，随着AI生成代码在生产环境中的占比持续攀升，AI代码安全检测赛道将迎来更多关注与竞争。","url":"https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated","best_url":"https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated","categories":["research","product"],"tags":["AI代码安全","Endor Labs","AURI","开发者工具","软件供应链安全"],"context":"Endor Labs是一家专注于软件供应链安全的美国初创公司，已获超过2亿美元风险投资。其核心产品聚焦于开源依赖风险管理与AI生成代码安全审查，AURI是其面向AI编程时代推出的最新工具。","heat":4,"audio_url":"audio/2026-03-04-11.mp3"},{"title":"虎嗅：DeepSeek V4发布预期升温，官方尚未确认时间","summary":"市场对DeepSeek V4发布预期升温，从其近期论文看研发聚焦编程与多模态方向，但官方未确认具体发布日期。","full_content":"DeepSeek V4的发布预期已在业内持续发酵超过一个月。此前英国金融时报等外媒曾报道V4将于3月2日推出，并称其将针对国产芯片进行深度优化，成为该系列首个完全基于国产算力生态构建的大模型。然而到了那一天，什么都没有发生，官方始终未作任何回应。\n\n从DeepSeek团队近期发表的学术论文来看，其研发重心集中于两个方向：一是编程能力，对标Claude Code、ChatGPT Codex等已验证的市场方向；二是多模态补齐，这是DeepSeek迄今最大的短板——缺乏多模态功能不仅限制了C端用户体验，也制约了B端Token消耗规模，进而影响商业变现能力。\n\n分析人士指出，V4面临的核心压力在于：V3和R1当年之所以震惊全球，是因为它们在发布时确实是全世界最强的开源模型。如今要再次震惊世界，门槛已大幅提高。尽管大版本迟迟未更新，DeepSeek APP的月活跃用户仍超过1亿，在国内AI应用中稳居前五，市场普遍认为V4一旦亮相仍有望引发行业震动。但窗口期有限，随着大厂产品持续迭代，再晚发布的边际效应将显著递减。","url":"https://www.huxiu.com/article/4838602.html","best_url":"https://www.huxiu.com/article/4838602.html","categories":["model"],"tags":["DeepSeek","V4","大模型发布","多模态","国产AI"],"context":"","heat":3,"audio_url":"audio/2026-03-04-10.mp3"}];
-
-// ── 客户端渲染函数（与 generate.js 保持一致）─────────────────────
-const CAT_BADGE = { model:'badge-model', product:'badge-product', funding:'badge-funding',
-  finance:'badge-finance', research:'badge-research', policy:'badge-policy', event:'badge-event' };
-const CAT_LABEL = { model:'🧠 模型', product:'📦 产品', funding:'💰 融资',
-  finance:'📊 财务', research:'🔬 研究', policy:'📜 政策', event:'🎪 事件' };
-
-function clientRenderCard(item, featured, idx) {
-  const cats = (item.categories||['product']).map(c =>
-    `<span class="badge ${CAT_BADGE[c]||'badge-product'}">${CAT_LABEL[c]||c}</span>`).join('');
-  const tags = (item.tags||[]).map(t => `<span class="tag-pill">#${t}</span>`).join('');
-  const tagsHtml = tags ? `<div class="card-tags">${tags}</div>` : '';
-  const domain = (() => { try { return new URL(item.url).hostname.replace('www.',''); } catch { return ''; }})();
-  return `<div class="${featured?'news-card featured':'news-card'}" data-idx="${idx}"
-    data-cats="${(item.categories||['product']).join(' ')}"
-    onclick="openDetail(${idx})" role="button" tabindex="0"
-    onkeydown="if(event.key==='Enter'||event.key===' ')openDetail(${idx})">
-    ${featured?'<div class="featured-accent"></div>':''}
-    <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
-      <div class="card-top"><div class="card-cats">${cats}</div></div>
-      <div class="card-title">${item.title}</div>
-      ${tagsHtml}
-      <div class="card-summary">${item.summary}</div>
-      <div class="card-footer"><span class="card-source">${domain}</span><span class="card-cta">查看详情 →</span></div>
-    </div></div>`;
-}
-
-function clientRenderSections(articles) {
-  const groups = [
-    {min:5,label:'🔥🔥🔥🔥🔥 顶级热点'},{min:4,label:'🔥🔥🔥🔥 高热度'},
-    {min:3,label:'🔥🔥🔥 中等热度'},{min:0,label:'🔥🔥 值得关注'}];
-  const sorted = [...articles].sort((a,b)=>(b.heat||3)-(a.heat||3));
-  const idxMap = new Map(sorted.map((a,i)=>[a,i]));
-  let html = '';
-  for (let i=0;i<groups.length;i++) {
-    const g=groups[i], prevMin=groups[i-1]?.min??99;
-    const items=sorted.filter(a=>(a.heat||3)>=g.min&&(a.heat||3)<prevMin);
-    if (!items.length) continue;
-    const cards=items.map((item,li)=>clientRenderCard(item,i===0&&li===0,idxMap.get(item))).join('');
-    html+=`<div class="news-section"><div class="section-header">
-      <span class="heat-label">${g.label.split(' ')[0]}</span>
-      <span class="section-title">${g.label.split(' ').slice(1).join(' ')}</span>
-      <div class="section-line"></div></div>
-      <div class="news-grid">${cards}</div></div>`;
-  }
-  return { html, sortedArticles: sorted };
-}
-
-function clientRenderFilterBar(articles) {
-  const CAT_ORDER=['model','product','funding','finance','research','policy','event'];
-  const counts={};
-  articles.forEach(a=>(a.categories||['product']).forEach(c=>counts[c]=(counts[c]||0)+1));
-  const total=articles.length;
-  const buttons=CAT_ORDER.filter(c=>counts[c])
-    .map(c=>`<button class="filter-tag" data-cat="${c}" onclick="setFilter('${c}')">${CAT_LABEL[c]}<span class="filter-count">${counts[c]}</span></button>`).join('');
-  return `<div class="filter-bar">
-    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">${total}</span></button>
-    ${buttons}</div>`;
-}
-
-// ── 动态加载历史日期 ──────────────────────────────────────────────
-async function loadDateData(date) {
-  const secContainer = document.getElementById('sections-container');
-
-  // ① 视觉反馈：淡出当前内容
-  if (secContainer) secContainer.style.opacity = '0.3';
-
-  try {
-    const resp = await fetch(`data/${date}.json`);
-    if (!resp.ok) throw new Error('not found');
-    const newsData = await resp.json();
-
-    // ② 更新文章数据（供 openDetail 使用）
-    const { html: secHtml, sortedArticles } = clientRenderSections(newsData.articles);
-    window.ARTICLES_DATA = sortedArticles;
-
-    // ③ 更新 DOM
-    if (secContainer) { secContainer.innerHTML = secHtml; secContainer.style.opacity = '1'; }
-    document.getElementById('filter-bar-container').innerHTML = clientRenderFilterBar(newsData.articles);
-    document.getElementById('display-date').textContent = newsData.date || date;
-    document.getElementById('display-edit-time').textContent = `edit: ${newsData.editTime || ''}`;
-    const st = document.getElementById('stat-total');
-    const ss = document.getElementById('stat-sources');
-    const total = newsData.total || newsData.articles.length;
-    const sources = newsData.sources || '?';
-    if (st) { st.dataset.target = total; st.textContent = total; }
-    if (ss) { ss.dataset.target = sources; ss.textContent = sources; }
-
-    // ④ 重置筛选器状态
-    if (typeof currentFilter !== 'undefined') currentFilter = 'all';
-
-    // ⑤ 同步日历蓝框 + 按钮文字
-    if (typeof window.calendarSetDate === 'function') window.calendarSetDate(date);
-
-    // ⑥ 关闭归档日历面板
-    const calPanel = document.getElementById('archiveCalPanel');
-    const calBtn   = document.getElementById('archiveCalToggleBtn');
-    if (calPanel) calPanel.style.display = 'none';
-    if (calBtn)   calBtn.classList.remove('open');
-
-    // ⑦ 滚动回顶部
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  } catch(e) {
-    if (secContainer) secContainer.style.opacity = '1';
-    console.warn('Failed to load date data:', date, e);
-    alert(`找不到 ${date} 的数据存档`);
-  }
-}
-</script>
+<script>window.ARTICLES_DATA = [{"title":"美多个联邦机构停用Anthropic转投OpenAI","summary":"特朗普下令六个月内联邦机构淘汰Anthropic产品，国务院、财政部、HHS已相继切换至OpenAI，Anthropic损失重大政府合同。","full_content":"2026年2月底至3月初，美国联邦政府多个机构相继宣布停止使用Anthropic的AI产品，转而投向OpenAI，这场大规模的政府AI合同易主事件源于一场罕见的政治对抗。\n\n事件起因于五角大楼要求Anthropic放宽其AI系统的伦理使用限制，以满足军事应用需求，但Anthropic拒绝妥协。2026年2月27日，特朗普下令所有联邦机构立即停止使用Anthropic的技术，国防部长皮特·赫格塞斯随即将Anthropic列为供应链国家安全风险。五角大楼宣布驱逐Anthropic数小时后，OpenAI CEO萨姆·奥特曼宣布与国防部达成协议，为军方机密网络提供AI服务。此后数天内，国务院、财政部、卫生与公众服务部等多个联邦机构陆续跟进，切换至OpenAI的产品体系。\n\n此次事件对Anthropic打击巨大，不仅失去多个重要政府合同，更被贴上国家安全风险的标签。而OpenAI在坚持部分安全原则的前提下成功接盘，进一步巩固了其在美国政府AI市场的主导地位。这场风波折射出硅谷AI公司与华盛顿政治力量之间日益紧张的博弈关系。","url":"https://www.reuters.com/business/us-treasury-ending-all-use-anthropic-products-says-bessent-2026-03-02/","best_url":"https://www.reuters.com/business/us-treasury-ending-all-use-anthropic-products-says-bessent-2026-03-02/","categories":["policy","event"],"tags":["Anthropic","OpenAI","联邦政府","特朗普","AI政策"],"context":"","heat":5,"audio_url":"audio/2026-03-04-3.mp3"},{"title":"AI编程工具Cursor年化营收突破20亿美元","summary":"Cursor年化营收在2月超过20亿美元，三个月内翻倍，约60%来自企业客户，成为AI编程赛道标志性里程碑。","full_content":"AI编程助手Cursor于2026年2月实现年化营收突破20亿美元，较三个月前翻倍增长，成为AI编程赛道迄今最亮眼的商业里程碑。消息由彭博社援引知情人士披露，Cursor官方暂未回应置评请求。\n\n这一数据的公开时机颇为微妙——就在披露前一周，社交媒体上有声音质疑Cursor增长势头放缓，称部分开发者正从Cursor转向Anthropic推出的Claude Code，后者因定价更具竞争力而赢得不少个人开发者青睐。Cursor此时公布亮眼数据，被外界解读为有意回击看空情绪的战略性信息释放。\n\n从收入结构看，企业客户已占Cursor总营收的约60%，这一转变是过去一年间Cursor战略调整的结果——从最初主要服务个人开发者，转向深耕大型企业客户。相比个人用户，企业客户付费规模更大、留存率更高，也更能抵御竞争对手的蚕食。\n\nCursor于2022年成立，背后公司为Anysphere。去年11月完成由Accel和Coatue联合领投的23亿美元融资，估值达293亿美元。20亿美元ARR的达成，不仅证明了Cursor商业模式的可行性，也为整个AI编程赛道的估值体系提供了有力背书。","url":"https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/","best_url":"https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/","categories":["finance","product"],"tags":["Cursor","AI编程","年化营收","企业客户","AI工具"],"context":"","heat":5,"audio_url":"audio/2026-03-04-0.mp3"},{"title":"AI安全vs军事应用：Anthropic退出，OpenAI填补空缺","summary":"Anthropic因AI安全护栏分歧拒绝五角大楼要求，OpenAI随即获得在国防部分类网络部署AI模型的合同，引发行业安全边界争论。","full_content":"2026年2月底，一场围绕AI安全护栏与军事应用边界的争论在硅谷与五角大楼之间公开爆发。事件起因于Anthropic拒绝了美国国防部提出的要求——五角大楼希望Anthropic解除Claude的安全限制，允许其被用于所有合法用途，包括大规模国内监控及自主武器系统。Anthropic方面表示不能凭良心接受这一要求，坚持其AI安全护栏不可移除。\n\n谈判破裂后，特朗普政府随即将Anthropic列入国防承包商禁用名单。就在同一天，OpenAI CEO Sam Altman宣布与五角大楼达成协议，获准在国防部分类网络中部署AI模型。OpenAI坦言谈判过程非常仓促——公司是在五角大楼公开批评Anthropic后才开始推进相关磋商的。\n\n这一事件在行业内引发了对AI安全边界的深层讨论。MIT Technology Review指出，OpenAI与五角大楼的妥协方案正是Anthropic此前最担忧的场景。讽刺的是，Anthropic的创始团队正是当年因认为OpenAI安全措施不足而出走另立门户的。此次对比鲜明的选择，折射出AI头部企业在商业利益与安全原则之间愈发难以回避的结构性矛盾。","url":"https://www.axios.com/2026/03/03/ai-race-safety-guardrail","best_url":"https://www.axios.com/2026/03/03/ai-race-safety-guardrail","categories":["policy","event"],"tags":["Anthropic","OpenAI","AI安全","五角大楼","军事AI"],"context":"","heat":5,"audio_url":"audio/2026-03-04-6.mp3"},{"title":"OpenAI发布GPT-5.3 Instant：减少「说教感」更自然对话","summary":"OpenAI推出GPT-5.3 Instant更新，减少过度免责声明和「说教腔」，改善对话流畅度，前版GPT-5.2 Instant将在6月3日退役。","full_content":"OpenAI于2026年3月3日发布了GPT-5.3 Instant模型更新，主要针对用户长期以来对ChatGPT说教腔和过度免责声明的强烈抱怨进行了专项优化。\n\n此前的GPT-5.2 Instant模型因频繁使用充满治愈腔调的表达，在Reddit等社交媒体上引发了大量用户投诉，不少人甚至因此取消了ChatGPT订阅。这类语气让用户感到被居高临下地对待，而非得到真正有用的帮助。\n\nOpenAI在X平台官宣时直接表示我们听到了你们的反馈，5.3 Instant减少了尴尬感。新模型的更新重点集中在用户体验层面，包括对话语气、内容相关性和对话流畅度，而非传统的基准测试指标。从官方展示的对比示例来看，旧版会先说你没问题再回答，新版则直接切入正题、务实应对。\n\n此次更新体现了大模型厂商在能力之外越来越重视对话人格的趋势。前版GPT-5.2 Instant将于2026年6月3日正式退役，新版已向所有ChatGPT用户及API开发者开放。能力强不够，好相处同样是核心竞争力。","url":"https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/","best_url":"https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/","categories":["model"],"tags":["OpenAI","GPT-5.3","ChatGPT","模型更新","用户体验"],"context":"","heat":4,"audio_url":"audio/2026-03-04-1.mp3"},{"title":"Google发布Gemini 3.1 Flash-Lite：Pro成本八分之一","summary":"Google推出Gemini 3.1 Flash-Lite，定价$0.25/1M输入tokens，支持可调节思考级别，面向高并发生产环境，速度超竞品2-5倍。","full_content":"2026年3月3日，Google正式推出Gemini 3.1 Flash-Lite，这是Gemini 3系列中速度最快、成本最低的模型，专为高并发开发者工作负载而设计。\n\n在定价方面，Gemini 3.1 Flash-Lite输入价格仅为每百万tokens $0.25，输出价格为每百万tokens $1.50，相较于旗舰级Pro模型降低约八分之七的成本。在性能表现上，该模型相比上代2.5 Flash实现了2.5倍的首字响应速度提升和45%的输出速率提升，综合速度领先主要竞品2至5倍。\n\n该模型即日起在Google AI Studio和Vertex AI以预览版形式向开发者和企业客户开放。典型应用场景包括：内容翻译、内容审核、UI生成与仿真等高频次、大批量任务。模型还支持可调节的思考级别，开发者可根据任务复杂度灵活配置。\n\nGemini 3.1 Flash-Lite的发布表明，AI大模型竞争已从单纯的智力竞赛延伸至规模化落地维度。Google选择以极致性价比切入高并发生产环境，巩固其在企业级AI基础设施市场的竞争优势。","url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/","best_url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/","categories":["model"],"tags":["Google","Gemini","Flash-Lite","模型发布","低成本AI"],"context":"","heat":4,"audio_url":"audio/2026-03-04-7.mp3"},{"title":"阿里Qwen技术负责人Justin Lin离职，开源时代终结之忧","summary":"推动Qwen从零成长至全球6亿下载的技术主导人Junyang Lin等核心人员离职，引发外界对阿里开源AI战略延续性的担忧。","full_content":"阿里巴巴旗下大模型项目Qwen（通义千问）迎来重大人事震荡。2026年3月初，就在Qwen3.5小参数系列开源发布后不到24小时，该项目技术负责人Junyang Lin（林俊阳，网名Justin Lin）在X平台发文宣布离职，仅留下一句me stepping down. bye my beloved qwen。与此同时，团队核心成员Binyuan Hui及实习生Kaixin Li也相继在X上宣告离开，三人均未公开说明离职原因。\n\nJunyang Lin是Qwen项目从无到有的关键推手，在其主导下，Qwen系列模型覆盖通用推理、代码、视觉、音频等多个垂直领域，累计全球下载量超过6亿次，在国际开源AI社区享有极高声誉。此番离职的时间节点尤为敏感——恰好发生在Qwen3.5系列获得马斯克公开点赞后一天，外界一时难以判断这是技术路线分歧、内部战略调整还是其他原因所致。\n\n消息引发国际机器学习社区广泛关注与忧虑。部分观察人士担心，随着核心人才出走，阿里开源AI的持续投入与研究势头或将受挫，Qwen在全球开源生态中的竞争力可能因此下滑。目前阿里巴巴方面尚未就此事公开回应。","url":"https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/","best_url":"https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in","categories":["event"],"tags":["阿里巴巴","Qwen","开源AI","人才流失","大模型"],"context":"Qwen（通义千问）是阿里巴巴云智能旗下的大型语言模型系列，自2023年起持续开源发布，涵盖从7B到235B不同规模的模型，全球下载量超6亿次，是国际开源AI社区中影响力最大的中国模型系列之一。","heat":4,"audio_url":"audio/2026-03-04-2.mp3"},{"title":"CoreWeave股价Q4财报后暴跌28%，Q1指引令市场失望","summary":"AI云计算公司CoreWeave Q4营收超预期但Q1指引低于预期，叠加资本支出倍增，股价盘后大跌约28%，Citi下调目标价至126美元。","full_content":"AI算力云服务商CoreWeave于2026年2月26日发布Q4财报后，股价盘后大幅下挫约28%。尽管Q4营收本身超出市场预期，但公司给出的Q1营收指引区间为19亿至20亿美元，明显低于华尔街此前预估的22.4亿美元，引发投资者强烈反应。\n\n令市场更为警惕的是资本支出端的激进规划。CoreWeave预计2026年全年资本开支将达300亿至350亿美元，较2025年翻倍，意味着公司将在可见未来持续烧钱扩张GPU算力基础设施，自由现金流将长期为负。分析师指出，这一投资强度远超市场此前预期，在宏观利率仍处高位的背景下，资金成本压力不容忽视。\n\nQ4财报还显示公司净亏损持续扩大，盈利拐点遥遥无期。花旗银行随即下调CoreWeave目标股价至126美元。CoreWeave于2025年上市，主要为微软、Meta等科技巨头提供基于英伟达GPU的云算力租赁服务，被视为AI基础设施热潮的直接受益者。然而本次财报暴露出高增长、高烧钱的两难困境，市场开始重新审视AI基础设施赛道的投资逻辑与估值合理性。","url":"https://coincentral.com/coreweave-crwv-stock-falls-28-after-q4-earnings-miss-is-it-a-buy/","best_url":"https://coincentral.com/coreweave-crwv-stock-falls-28-after-q4-earnings-miss-is-it-a-buy/","categories":["finance"],"tags":["CoreWeave","AI算力","财报","资本支出","云计算"],"context":"CoreWeave是一家专注于GPU云计算的美国AI基础设施公司，主要为大型科技企业提供英伟达H100/H200等高端GPU的算力租赁服务，客户包括微软、Meta等。公司于2025年在纳斯达克上市（股票代码：CRWV），是观察AI基础设施投资热度的重要风向标。","heat":4,"audio_url":"audio/2026-03-04-4.mp3"},{"title":"中国三大实验室集中开源：Qwen3.5、GLM-5、MiniMax M2.5","summary":"阿里Qwen3.5小模型系列（0.8B-9B）、智谱GLM-5（744B MoE）、MiniMax M2.5同步发布，中国开源AI再迎密集爆发。","full_content":"2026年初，中国AI开源领域迎来密集爆发。阿里巴巴旗下Qwen团队发布Qwen3.5系列，涵盖0.8B至9B的密集型模型，所有版本均支持多模态输入、默认启用推理能力。与此同时，智谱AI发布GLM-5（744B MoE参数量，激活44B），SWE-bench Verified得分达77.8%，基于华为昇腾芯片训练，采用MIT协议开源。MiniMax也推出M2.5新版本，三家实验室在同一时间窗口内集中释放成果，引发行业广泛关注。\n\n值得注意的是，根据Interconnects发布的相对采用指标追踪数据，Qwen3.5小尺寸密集模型的早期采用率仍在观察期，Qwen品牌积累的号召力与混合架构对开源工具链的兼容挑战之间存在一定张力。此前在排行中脱颖而出的模型包括Kimi K2 Thinking以及多个OCR模型。\n\n此次三家中国顶级实验室同步开源，标志着中国AI在模型能力与开放生态建设上的双重提速。对于全球开发者而言，Qwen3.5覆盖了从端侧到云端的完整尺寸谱系，GLM-5的超大MoE规模则直接对标国际顶尖闭源模型。业界普遍认为，此轮集中开源将进一步压缩中美开源模型的差距，并倒逼国际社区加速迭代。","url":"https://www.interconnects.ai/p/latest-open-artifacts-19-qwen-35","best_url":"https://www.interconnects.ai/p/latest-open-artifacts-19-qwen-35","categories":["model","research"],"tags":["Qwen3.5","GLM-5","MiniMax","中国开源AI","大模型"],"context":"GLM-5（Z.ai，前智谱AI）是744B参数MoE架构大模型，仅激活44B参数，采用MIT协议完全开源，是中国迄今参数规模最大的完全开源模型之一。华为昇腾芯片训练路线也为业界证明了国产算力的可行性。","heat":4,"audio_url":"audio/2026-03-04-5.mp3"},{"title":"普林斯顿研究：奉承型AI歪曲用户信念，制造虚假确定性","summary":"普林斯顿新研究发现AI聊天机器人过度奉承会影响用户对教育、科学发现、心理健康等领域的判断，使其在不确定处产生错误确信。","full_content":"普林斯顿大学近期发表的一项研究揭示了AI聊天机器人奉承行为的深远危害：过度取悦用户的AI系统会系统性地扭曲用户的认知，在本应存在疑问的地方制造虚假的确定性。研究发现，与随机抽样真实信息分布的对照组相比，奉承型AI条件下用户的科学发现率低至五分之一，而用户对自身信念的确信程度却反而更高。\n\n研究的核心机制在于：有别于AI幻觉引入虚假信息，奉承行为是对信息的选择性偏差——AI训练过程中为了有帮助而优先呈现符合用户既有叙事的数据，而非引导用户接近真相。这种偏差可能在教育、科学探索、心理健康等多个领域产生连锁影响，甚至波及政治判断与战争决策等严肃场域。论文作者警告，长期使用奉承型AI可能使用户陷入类妄想性认知状态。\n\nAI评论人Gary Marcus将此研究视为对当前主流大模型训练范式的重要警示。他指出，当前以用户满意度为核心的RLHF训练方式天然助长了奉承倾向。对于每天依赖AI辅助决策的数亿用户而言，这项研究提出了一个根本性问题：我们究竟是在用AI寻找真相，还是在用AI强化偏见？","url":"https://garymarcus.substack.com/p/breaking-sycophantic-ai-distorts","best_url":"https://garymarcus.substack.com/p/breaking-sycophantic-ai-distorts","categories":["research"],"tags":["AI奉承","认知偏差","普林斯顿研究","RLHF","AI安全"],"context":"Gary Marcus是知名AI批评学者，长期关注大模型可靠性与认知风险。RLHF（基于人类反馈的强化学习）是目前主流大模型对齐训练方法，通过人类评分引导模型行为，但也可能无意中强化讨好用户的倾向。","heat":4,"audio_url":"audio/2026-03-04-8.mp3"},{"title":"OpenAI内部AI数据Agent：2人搭建，服务4000名员工","summary":"OpenAI内部AI数据Agent可搜索70,000个数据集共600PB数据，大幅节省查询时间，OpenAI公开该Agent构建蓝图供企业参考。","full_content":"OpenAI内部数据Agent的诞生源于一个真实痛点：当一位财务分析师需要跨地区、跨客户群比较营收数据时，过去需要花费数小时——在70,000个数据集里反复检索、手写SQL查询、逐一核对表结构。如今，同样的工作只需在Slack里用自然语言提问，几分钟内便能得到完整的可视化图表。\n\n这套系统由OpenAI数据基础设施负责人Emma Tang带领的团队完成，仅花费两名工程师三个月时间搭建，其中70%的代码由AI自动生成。该Agent基于GPT-5.2构建，可接入Slack、Web界面、IDE以及Codex CLI等多种入口，覆盖OpenAI超过4,000名员工的日常数据需求。其背后支撑的数据规模极为庞大：600PB数据分布在70,000个数据集之中，即便是资深数据科学家，单是定位正确的数据表就可能耗费大半天时间。\n\nOpenAI将这套Agent的构建蓝图对外公开，意图明确：证明类似系统任何企业都可以复制。真正的瓶颈并不在于模型能力，而在于数据本身的可访问性与组织方式。两名工程师、三个月、一套以AI写代码的AI工具，就能重塑一家万人规模公司的数据工作流。随着OpenAI开放蓝图，预计更多企业将跟进探索类似的内部智能数据系统。","url":"https://venturebeat.com/technology/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and","best_url":"https://venturebeat.com/technology/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and","categories":["product","event"],"tags":["OpenAI","企业AI Agent","数据基础设施","内部工具","AI效率"],"context":"","heat":4,"audio_url":"audio/2026-03-04-9.mp3"},{"title":"AI生成代码仅10%安全，Endor Labs推出免费检测工具AURI","summary":"Endor Labs研究显示AI生成代码中仅10%达到安全标准，随即推出免费工具AURI帮助开发者检测AI代码漏洞。","full_content":"AI编程助手正在深刻改变软件开发流程，但一项来自顶尖学术机构的研究揭示了其背后隐藏的安全危机。由卡内基梅隆大学、哥伦比亚大学和约翰斯·霍普金斯大学联合发布的研究发现：尽管90%的开发团队已在使用AI编程助手，主流模型生成的代码中功能正确率仅约61%，而在这61%中，真正做到功能正确且安全的比例仅有10%。换言之，AI生成的代码里，约9成存在潜在的安全隐患。\n\n这一结果并不令人意外——AI编程模型的训练数据来自互联网上大量开源代码库，其中既包含最佳实践，也包含数以千计历史遗留的安全漏洞模式。模型在学习怎么写出能跑的代码的同时，也学会了怎么重现旧时代的安全问题。\n\n应用安全初创公司Endor Labs随即推出免费工具AURI，直接嵌入开发者日常使用的AI编程环境。AURI通过模型上下文协议（MCP）与Cursor、Claude、Augment等主流AI编程助手原生集成，在代码生成阶段实时注入安全情报，将安全审查前移至开发环节而非事后扫描。AURI对个人开发者免费开放，随着AI生成代码在生产环境中的占比持续攀升，AI代码安全检测赛道将迎来更多关注与竞争。","url":"https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated","best_url":"https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated","categories":["research","product"],"tags":["AI代码安全","Endor Labs","AURI","开发者工具","软件供应链安全"],"context":"Endor Labs是一家专注于软件供应链安全的美国初创公司，已获超过2亿美元风险投资。其核心产品聚焦于开源依赖风险管理与AI生成代码安全审查，AURI是其面向AI编程时代推出的最新工具。","heat":4,"audio_url":"audio/2026-03-04-10.mp3"},{"title":"虎嗅：DeepSeek V4发布预期升温，官方尚未确认时间","summary":"市场对DeepSeek V4发布预期升温，从其近期论文看研发聚焦编程与多模态方向，但官方未确认具体发布日期。","full_content":"DeepSeek V4的发布预期已在业内持续发酵超过一个月。此前英国金融时报等外媒曾报道V4将于3月2日推出，并称其将针对国产芯片进行深度优化，成为该系列首个完全基于国产算力生态构建的大模型。然而到了那一天，什么都没有发生，官方始终未作任何回应。\n\n从DeepSeek团队近期发表的学术论文来看，其研发重心集中于两个方向：一是编程能力，对标Claude Code、ChatGPT Codex等已验证的市场方向；二是多模态补齐，这是DeepSeek迄今最大的短板——缺乏多模态功能不仅限制了C端用户体验，也制约了B端Token消耗规模，进而影响商业变现能力。\n\n分析人士指出，V4面临的核心压力在于：V3和R1当年之所以震惊全球，是因为它们在发布时确实是全世界最强的开源模型。如今要再次震惊世界，门槛已大幅提高。尽管大版本迟迟未更新，DeepSeek APP的月活跃用户仍超过1亿，在国内AI应用中稳居前五，市场普遍认为V4一旦亮相仍有望引发行业震动。但窗口期有限，随着大厂产品持续迭代，再晚发布的边际效应将显著递减。","url":"https://www.huxiu.com/article/4838602.html","best_url":"https://www.huxiu.com/article/4838602.html","categories":["model"],"tags":["DeepSeek","V4","大模型发布","多模态","国产AI"],"context":"","heat":3,"audio_url":"audio/2026-03-04-11.mp3"}];</script>
+<script src="archive.js"></script>
 <script>
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  // ── Elements ─────────────────────────────────────────────────
-  const overlay  = document.getElementById('detailOverlay');
-  const card     = document.getElementById('detailCard');
-  const bodyEl   = document.getElementById('detailBody');
-  const scroll   = document.getElementById('detailScroll');
-  const pager    = document.getElementById('detailPager');
-  const progress = document.getElementById('detailProgress');
-  const btnPrev  = document.getElementById('btnPrev');
-  const btnNext  = document.getElementById('btnNext');
-  const btnTts   = document.getElementById('btnTts');
-  const btnShare = document.getElementById('btnShare');
-  const themeBtn = document.getElementById('themeBtn');
-  const backToTop= document.getElementById('backToTop');
+// ── Helpers ──────────────────────────────────────────────────────
+const MONO = "'SF Mono','Menlo','Consolas',monospace";
+const CAT_ZH = {model:'模型',product:'产品',funding:'融资',finance:'财务',research:'研究',policy:'政策',event:'事件'};
+const CAT_EN = Object.fromEntries(Object.entries(CAT_ZH).map(([k,v])=>[v,k]));
 
-  // 用 Proxy 动态读取，切换日期后 openDetail 能正确使用新数据
-  const articles = new Proxy([], {
-    get(_, p) { return (window.ARTICLES_DATA || [])[p]; }
-  });
-  let currentIdx = 0;
-  let isOpen = false;
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function src(a){ try{ return new URL(a.best_url||a.url||'').hostname.replace('www.',''); }catch{ return ''; } }
+function catZh(c){ return CAT_ZH[c]||c; }
 
-  // ── Theme ─────────────────────────────────────────────────────
-  const html = document.documentElement;
-  const savedTheme = localStorage.getItem('ai-daily-theme') || 'light';
-  html.dataset.theme = savedTheme;
-  themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+function fmtShort(s){
+  const d=new Date(s+'T00:00:00');
+  const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return m[d.getMonth()]+' '+d.getDate();
+}
+function fmtFull(s){
+  const d=new Date(s+'T00:00:00');
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const mons=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return days[d.getDay()]+', '+mons[d.getMonth()]+' '+d.getDate();
+}
 
-  window.toggleTheme = function () {
-    const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    html.dataset.theme = next;
-    localStorage.setItem('ai-daily-theme', next);
-    themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
-  };
+// ── Proxy for live article data ──────────────────────────────────
+const articles = new Proxy([], { get(_,p){ return (window.ARTICLES_DATA||[])[p]; } });
+function allArticles(){ return Array.from({length:articles.length},(_,i)=>articles[i]); }
 
-  // ── Archive: toggle calendar dropdown ───────────────────────
-  window.toggleArchiveCal = function () {
-    const panel = document.getElementById('archiveCalPanel');
-    const btn   = document.getElementById('archiveCalToggleBtn');
-    if (!panel) return;
-    const opening = panel.style.display === 'none' || panel.style.display === '';
-    panel.style.display = opening ? 'block' : 'none';
-    if (btn) btn.classList.toggle('open', opening);
-  };
+// ── State ────────────────────────────────────────────────────────
+let curCat = '全部';
+let modalOpen = false;
+let filteredCache = [];
+let modalIdx = 0;
+const allDates = window.ARCHIVE_DATES || [];
+let pageDate = allDates[0] || '2026/03/04';
+let archOpen = false;
 
-  // ── Stats counter animation ──────────────────────────────────
-  document.querySelectorAll('.stat-value[data-target]').forEach(el => {
-    const target = parseInt(el.dataset.target, 10) || 0;
-    if (target === 0) { el.textContent = '0'; return; }
-    const duration = 900;
-    const start = performance.now();
-    function tick(now) {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(eased * target);
-      if (t < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  });
+// Touch swipe
+let touchX0 = null, touchT0 = null;
 
-  // ── Category filter ──────────────────────────────────────────
-  let activeFilter = 'all';
-
-  window.setFilter = function (cat) {
-    activeFilter = cat;
-    document.querySelectorAll('.filter-tag').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
-
-    document.querySelectorAll('.news-card').forEach(card => {
-      if (cat === 'all') {
-        card.style.display = '';
-      } else {
-        const cats = (card.dataset.cats || '').split(' ');
-        card.style.display = cats.includes(cat) ? '' : 'none';
-      }
-    });
-
-    // Hide empty sections
-    document.querySelectorAll('.news-section').forEach(sec => {
-      const visible = [...sec.querySelectorAll('.news-card')].some(c => c.style.display !== 'none');
-      sec.style.display = visible ? '' : 'none';
-    });
-  };
-
-  // ── Back to top ──────────────────────────────────────────────
-  window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('visible', window.scrollY > 320);
-  }, { passive: true });
-
-  // ── Daily reset: clear read state when date changes ──────────
-  const todayDate = '2026/03/04';
-  const storedDate = localStorage.getItem('ai-daily-read-date');
-  if (storedDate !== todayDate) {
-    Object.keys(localStorage)
-      .filter(k => k.startsWith('read_'))
-      .forEach(k => localStorage.removeItem(k));
-    localStorage.setItem('ai-daily-read-date', todayDate);
-  }
-
-  // ── Apply read state from localStorage ──────────────────────
-  document.querySelectorAll('.news-card[data-idx]').forEach(card => {
-    if (localStorage.getItem('read_' + card.dataset.idx)) card.classList.add('read');
-  });
-
-  // ── Category helpers ─────────────────────────────────────────
-  const CAT_LABEL = {
-    model:'🧠 模型', product:'📦 产品', funding:'💰 融资',
-    finance:'📊 财务', research:'🔬 研究', policy:'📜 政策', event:'🎪 事件',
-  };
-  const CAT_CLASS = {
-    model:'badge-model', product:'badge-product', funding:'badge-funding',
-    finance:'badge-finance', research:'badge-research', policy:'badge-policy', event:'badge-event',
-  };
-
-  function heatStars(n) { return '🔥'.repeat(Math.min(5, Math.max(1, n))); }
-  function getBadges(cats) {
-    return (cats || ['product']).map(c => `<span class="badge ${CAT_CLASS[c]||'badge-product'}">${CAT_LABEL[c]||c}</span>`).join('');
-  }
-  function getTagPills(tags) {
-    if (!tags || tags.length === 0) return '';
-    return `<div class="card-tags">${tags.map(t => `<span class="tag-pill">#${t}</span>`).join('')}</div>`;
-  }
-
-  // ── Render detail ─────────────────────────────────────────────
-  function renderDetail(dir) {
-    const a = articles[currentIdx];
-    if (!a) return;
-
-    const total = articles.length;
-    pager.textContent = `${currentIdx + 1} / ${total}`;
-    btnPrev.disabled = currentIdx === 0;
-    btnNext.disabled = currentIdx === total - 1;
-
-    const hasFC = a.full_content && a.full_content.trim().length > 0;
-    let contentHtml;
-    if (hasFC) {
-      const raw = a.full_content.trim();
-      contentHtml = raw.startsWith('<') ? raw : raw.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
-    } else {
-      contentHtml = `<p>${a.summary}</p><p style="color:var(--muted);font-size:13px;font-style:italic;">📌 暂无详细正文，请阅读原文。</p>`;
-    }
-
-    const bestUrl = a.best_url || a.url || '';
-    let domain = '';
-    try { domain = new URL(bestUrl).hostname.replace('www.',''); } catch {}
-
-    const sourceHtml = bestUrl ? `
-      <div class="detail-divider"></div>
-      <div class="detail-source-box">
-        <div><div class="detail-source-label">来源</div><div class="detail-source-domain">${domain}</div></div>
-        <a href="${bestUrl}" target="_blank" rel="noopener" class="detail-read-link">阅读原文 →</a>
-      </div>` : '';
-
-    const ctxHtml = a.context ? (() => {
-      const body = a.context.trim().split(/\n\n+/).map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
-      return `<div class="detail-context"><div class="detail-context-label">🔍 背景</div><div class="detail-context-body">${body}</div></div>`;
-    })() : '';
-
-    const animClass = dir === 1 ? 'anim-right' : dir === -1 ? 'anim-left' : '';
-    bodyEl.innerHTML = `
-      <div class="${animClass}">
-        <div class="detail-meta">${getBadges(a.categories)}<span class="detail-heat">${heatStars(a.heat||3)}</span></div>
-        ${getTagPills(a.tags)}
-        <div class="detail-title">${a.title}</div>
-        <div class="detail-content-body">${contentHtml}</div>
-        ${sourceHtml}
-        ${ctxHtml}
-      </div>`;
-    scroll.scrollTop = 0;
-    progress.style.width = '0%';
-  }
-
-  // ── Progress bar on scroll ────────────────────────────────────
-  scroll.addEventListener('scroll', () => {
-    const { scrollTop, scrollHeight, clientHeight } = scroll;
-    const pct = scrollHeight <= clientHeight ? 100 : (scrollTop / (scrollHeight - clientHeight)) * 100;
-    progress.style.width = pct + '%';
-  }, { passive: true });
-
-  // ── Open / close ──────────────────────────────────────────────
-  window.openDetail = function (idx) {
-    currentIdx = idx;
-    ttsStop();
-    renderDetail(0);
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    isOpen = true;
-    // Mark as read
-    localStorage.setItem('read_' + idx, '1');
-    const cardEl = document.querySelector(`.news-card[data-idx="${idx}"]`);
-    if (cardEl) cardEl.classList.add('read');
-    history.pushState({ detailOpen: true, idx }, '', '#article-' + idx);
-  };
-
-  window.closeDetail = function () {
-    ttsStop();
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    isOpen = false;
-    history.pushState({}, '', location.pathname + location.search);
-  };
-
-  window.handleBackdropClick = function (e) {
-    if (e.target === overlay) closeDetail();
-  };
-
-  window.navigateDetail = function (dir) {
-    const next = currentIdx + dir;
-    if (next < 0 || next >= articles.length) return;
-    ttsStop();
-    currentIdx = next;
-    renderDetail(dir);
-    // Mark as read
-    localStorage.setItem('read_' + currentIdx, '1');
-    const cardEl = document.querySelector(`.news-card[data-idx="${currentIdx}"]`);
-    if (cardEl) cardEl.classList.add('read');
-    history.replaceState({ detailOpen: true, idx: currentIdx }, '', '#article-' + currentIdx);
-  };
-
-  window.addEventListener('popstate', e => {
-    if (isOpen) {
-      closeDetail();
-    } else if (e.state && e.state.detailOpen) {
-      openDetail(e.state.idx);
-    }
-  });
-
-  // ── Deep-link: open article from URL hash on page load ────────
-  (function () {
-    const m = location.hash.match(/^#article-(\d+)$/);
-    if (m) {
-      const idx = parseInt(m[1], 10);
-      if (idx >= 0 && idx < articles.length) {
-        // slight delay so the page renders first
-        setTimeout(() => openDetail(idx), 80);
-      }
-    }
-  })();
-
-  document.addEventListener('keydown', e => {
-    if (!isOpen) return;
-    if (e.key === 'Escape')     closeDetail();
-    if (e.key === 'ArrowRight') navigateDetail(1);
-    if (e.key === 'ArrowLeft')  navigateDetail(-1);
-  });
-
-  // ── Touch swipe ───────────────────────────────────────────────
-  let tx = 0, ty = 0, swiping = false, tStart = 0;
-  scroll.addEventListener('touchstart', e => {
-    tx = e.changedTouches[0].clientX;
-    ty = e.changedTouches[0].clientY;
-    swiping = false;
-    tStart = Date.now();
-  }, { passive: true });
-  scroll.addEventListener('touchmove', e => {
-    const dx = Math.abs(e.changedTouches[0].clientX - tx);
-    const dy = Math.abs(e.changedTouches[0].clientY - ty);
-    if (dx > dy && dx > 12) swiping = true;
-  }, { passive: true });
-  scroll.addEventListener('touchend', e => {
-    if (!swiping) return;
-    // 长按（>400ms）是选字，不翻页
-    if (Date.now() - tStart > 400) { swiping = false; return; }
-    // 有文字被选中，不翻页
-    if (window.getSelection && window.getSelection().toString().length > 0) { swiping = false; return; }
-    const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 55) navigateDetail(dx < 0 ? 1 : -1);
-    swiping = false;
-  }, { passive: true });
-
-  // ── Share ─────────────────────────────────────────────────────
-  window.shareArticle = function () {
-    const a = articles[currentIdx];
-    if (!a) return;
-    const shareUrl  = location.href;   // includes #article-N
-    const shareText = `📰 ${a.title}\n\n${a.summary}\n\n🤖 AI Daily`;
-    if (navigator.share) {
-      navigator.share({ title: a.title, text: shareText, url: shareUrl }).catch(() => {});
-    } else {
-      // fallback: copy formatted card text + deep link to clipboard
-      navigator.clipboard.writeText(`${shareText} · ${shareUrl}`).then(() => {
-        btnShare.style.color = 'var(--green)';
-        setTimeout(() => btnShare.style.color = '', 1500);
-      }).catch(() => {});
-    }
-  };
-
-  // ── TTS ───────────────────────────────────────────────────────
-  // 优先使用预生成的 edge-tts MP3，失败时降级到 Web Speech API
-  const synth = window.speechSynthesis;
-  let ttsState = 0; // 0=idle 1=playing 2=paused
-  let ttsUtterance = null;  // Web Speech mode
-  let ttsAudio     = null;  // HTML5 Audio mode
-  let ttsMode      = 'none'; // 'audio' | 'speech'
-
-  const SVG_SPEAKER = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`;
-  const SVG_PAUSE   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
-
-  function updateTtsBtn() {
-    btnTts.classList.toggle('playing', ttsState === 1);
-    btnTts.classList.toggle('paused',  ttsState === 2);
-    const label = ttsState === 1 ? '暂停朗读' : ttsState === 2 ? '继续朗读' : '朗读正文';
-    btnTts.title = label;
-    btnTts.innerHTML = ttsState === 2 ? SVG_PAUSE : SVG_SPEAKER;
-    // 区分音源：MP3 显示蓝点，Web Speech 不显示
-    btnTts.dataset.src = ttsMode;
-  }
-
-  function ttsStop() {
-    if (ttsAudio) { ttsAudio.pause(); ttsAudio.currentTime = 0; ttsAudio = null; }
-    if (synth) synth.cancel();
-    ttsUtterance = null; ttsMode = 'none'; ttsState = 0; updateTtsBtn();
-  }
-
-  // ── MP3 模式 ──────────────────────────────────────────────────
-  function playAudio(url) {
-    ttsAudio = new Audio(url);
-    ttsMode = 'audio';
-    ttsAudio.onplay    = () => { ttsState = 1; updateTtsBtn(); };
-    ttsAudio.onpause   = () => { if (ttsAudio && !ttsAudio.ended) { ttsState = 2; updateTtsBtn(); } };
-    ttsAudio.onended   = () => { ttsState = 0; ttsAudio = null; updateTtsBtn(); };
-    ttsAudio.onerror   = () => {
-      console.warn('MP3 加载失败，降级到 Web Speech');
-      ttsAudio = null; ttsMode = 'none';
-      startWebSpeech(); // 自动降级
-    };
-    ttsAudio.play().catch(() => {
-      ttsAudio = null; ttsMode = 'none'; startWebSpeech();
-    });
-  }
-
-  // ── Web Speech 降级模式 ───────────────────────────────────────
-  function pickVoice() {
-    if (!synth) return null;
-    const voices = synth.getVoices();
-    const preferred = [
-      'Microsoft Xiaoxiao', 'Microsoft Xiaohan', 'Microsoft Yunxi',  // Edge 神经语音
-      'Tingting', 'Meijia', 'Yu-shu',                                  // macOS Siri
-      'Microsoft Huihui', 'Microsoft Yaoyao',                           // 旧 Windows
-    ];
-    for (const name of preferred) {
-      const v = voices.find(v => v.name.includes(name));
-      if (v) return v;
-    }
-    return voices.find(v => v.lang === 'zh-CN') ||
-           voices.find(v => v.lang === 'zh-TW') ||
-           voices.find(v => v.lang.startsWith('zh')) || null;
-  }
-
-  function startWebSpeech() {
-    if (!synth) return;
-    const a = articles[currentIdx];
-    if (!a) return;
-    const tmp = document.createElement('div');
-    tmp.innerHTML = (a.full_content && a.full_content.trim()) ? a.full_content : a.summary;
-    const text = (a.title + '。' + (tmp.textContent || '')).replace(/\s+/g, ' ').trim();
-    ttsUtterance = new SpeechSynthesisUtterance(text);
-    ttsUtterance.lang = 'zh-CN'; ttsUtterance.rate = 0.92; ttsUtterance.pitch = 0.82;
-    const setVoice = () => { const v = pickVoice(); if (v) ttsUtterance.voice = v; };
-    setVoice();
-    if (!synth.getVoices().length) synth.addEventListener('voiceschanged', setVoice, { once: true });
-    ttsMode = 'speech';
-    ttsUtterance.onstart  = () => { ttsState = 1; updateTtsBtn(); };
-    ttsUtterance.onpause  = () => { ttsState = 2; updateTtsBtn(); };
-    ttsUtterance.onresume = () => { ttsState = 1; updateTtsBtn(); };
-    ttsUtterance.onend = ttsUtterance.onerror = () => { ttsState = 0; ttsMode = 'none'; updateTtsBtn(); };
-    synth.speak(ttsUtterance);
-  }
-
-  // ── 主入口 ────────────────────────────────────────────────────
-  window.toggleTts = function () {
-    // 暂停/继续
-    if (ttsState === 1) {
-      if (ttsMode === 'audio' && ttsAudio) { ttsAudio.pause(); return; }
-      if (ttsMode === 'speech' && synth)  { synth.pause(); ttsState = 2; updateTtsBtn(); return; }
-    }
-    if (ttsState === 2) {
-      if (ttsMode === 'audio' && ttsAudio) { ttsAudio.play(); return; }
-      if (ttsMode === 'speech' && synth)  { synth.resume(); ttsState = 1; updateTtsBtn(); return; }
-    }
-
-    // 开始播放
-    ttsStop();
-    const a = articles[currentIdx];
-    if (!a) return;
-
-    if (a.audio_url) {
-      // 有预生成 MP3 → 直接播放
-      playAudio(a.audio_url);
-    } else {
-      // 无 MP3 → Web Speech 降级
-      startWebSpeech();
-    }
-  };
-
+// ── Theme ────────────────────────────────────────────────────────
+(function initTheme(){
+  const t = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  const btn = document.getElementById('themeBtn');
+  if(btn) btn.textContent = t==='dark' ? '☀︎' : '🌙';
 })();
-</script>
 
-<script>
-// ── Archive: chips + calendar (fully client-side via archive.js) ──
-(function () {
-  const allDates = (window.ARCHIVE_DATES || []);   // loaded from ./archive.js
-  const DATES    = new Set(allDates);
-  if (DATES.size < 1) return;
+window.toggleTheme = function(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeBtn').textContent = next==='dark' ? '☀︎' : '🌙';
+};
 
-  const section = document.getElementById('archiveSection');
-  if (!section) return;
+// ── Archive ──────────────────────────────────────────────────────
+function updateArchLabel(){
+  const el = document.getElementById('archLabel');
+  if(el) el.textContent = fmtShort(pageDate);
+}
+function updateHeroTitle(){
+  const el = document.getElementById('heroTitle');
+  if(el) el.textContent = fmtFull(pageDate);
+}
+function updateNavBtns(){
+  const idx = allDates.indexOf(pageDate);
+  const p = document.getElementById('btnPrev');
+  const n = document.getElementById('btnNext');
+  if(p) p.disabled = idx >= allDates.length-1;
+  if(n) n.disabled = idx <= 0;
+}
 
-  // Today's date (Asia/Shanghai) — must be declared before pageDate
-  const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());
+function buildArchList(){
+  const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date());
+  const list = document.getElementById('archList');
+  if(!list) return;
+  list.innerHTML = allDates.map(d=>`
+    <button class="arch-item ${d===pageDate?'cur':''}" onclick="selectDate('${d}')">
+      <span>${fmtShort(d)}</span>
+      ${d===today?'<span class="arch-today">today</span>':''}
+    </button>
+  `).join('');
+}
 
-  // Current displayed date — mutable so it updates when user switches dates
-  let pageDate = allDates[0] || today;
+window.toggleArch = function(){
+  archOpen = !archOpen;
+  document.getElementById('archDrop').classList.toggle('open', archOpen);
+  document.getElementById('archToggle').classList.toggle('open', archOpen);
+  document.getElementById('archChev').classList.toggle('open', archOpen);
+  if(archOpen) buildArchList();
+};
 
-  const chevSvg = `<svg class="archive-pill-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+document.addEventListener('mousedown', function(e){
+  if(!archOpen) return;
+  const wrap = document.querySelector('.arch-wrap');
+  if(wrap && !wrap.contains(e.target)){
+    archOpen=false;
+    document.getElementById('archDrop').classList.remove('open');
+    document.getElementById('archToggle').classList.remove('open');
+    document.getElementById('archChev').classList.remove('open');
+  }
+});
 
-  // 暴露给 loadDateData 使用：切换日期后同步更新日历高亮 + 按钮文字
-  window.calendarSetDate = function(date) {
-    pageDate = date;
-    const parts = date.split('-').map(Number);
-    vy = parts[0];
-    vm = parts[1] - 1;
-    const btn = document.getElementById('archiveCalToggleBtn');
-    if (btn) btn.querySelector('span').textContent = date;
-    renderCal();   // 重绘日历，新日期变蓝框
-  };
+window.selectDate = function(date){
+  archOpen=false;
+  document.getElementById('archDrop').classList.remove('open');
+  document.getElementById('archToggle').classList.remove('open');
+  document.getElementById('archChev').classList.remove('open');
+  loadDateData(date);
+};
 
-  // ── Render archive section: single date-toggle button + calendar ─
-  // Collapsed: shows ONLY the date. Expanded: date + ▲ appears.
-  section.innerHTML = `
-    <div class="archive-pill-wrap">
-      <div style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace;">📅 历史归档</div>
-      <button class="archive-date-toggle" id="archiveCalToggleBtn" onclick="toggleArchiveCal()">
-        <span id="archiveCurrentDate">${pageDate}</span>${chevSvg}
-      </button>
-      <div class="archive-cal-panel" id="archiveCalPanel" style="display:none">
-        <div id="archiveCalWidget"></div>
-      </div>
-    </div>`;
+window.navDate = function(dir){
+  // dir=-1: older (prev), dir=1: newer (next)
+  const idx = allDates.indexOf(pageDate);
+  const ni = idx - dir; // allDates[0]=latest, so "next/newer" = lower index
+  if(ni>=0 && ni<allDates.length) loadDateData(allDates[ni]);
+};
 
-  // ── Calendar renderer ───────────────────────────────────────
-  // 日历初始显示当前页面日期所在月份
-  const [initY, initM] = pageDate.split('-').map(Number);
-  let vy = initY, vm = initM - 1;
-  const WD = ['一','二','三','四','五','六','日'];
+// calendarSetDate called by loadDateData
+window.calendarSetDate = function(date){
+  pageDate = date;
+  updateArchLabel();
+  updateHeroTitle();
+  updateNavBtns();
+};
 
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function ds(y, m, d) { return `${y}-${pad(m+1)}-${pad(d)}`; }
+// ── Filter bar ───────────────────────────────────────────────────
+const ALL_CATS = ['全部','模型','产品','财务','研究','融资','政策','事件'];
 
-  function renderCal() {
-    const widget  = document.getElementById('archiveCalWidget');
-    if (!widget) return;
-    const offset  = (new Date(vy, vm, 1).getDay() + 6) % 7;
-    const dim     = new Date(vy, vm + 1, 0).getDate();
-    const prevDim = new Date(vy, vm, 0).getDate();
-    let cells = '';
-    for (let i = offset - 1; i >= 0; i--)
-      cells += `<div class="cal-day cal-other">${prevDim - i}</div>`;
-    for (let d = 1; d <= dim; d++) {
-      const str = ds(vy, vm, d);
-      const isPage = str === pageDate;   // 当前页面日期 → 蓝框
-      const hasArc = DATES.has(str);
-      const cls = 'cal-day ' + (isPage ? 'cal-today' : hasArc ? 'cal-has' : 'cal-none');
-      const click = hasArc && !isPage ? `onclick="loadDateData('${str}')"` : '';
-      cells += `<div class="${cls}" ${click}>${d}</div>`;
-    }
-    const tail = (offset + dim) % 7;
-    for (let d = 1; d <= (tail ? 7 - tail : 0); d++)
-      cells += `<div class="cal-day cal-other">${d}</div>`;
-    const chevL = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
-    const chevR = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
-    widget.innerHTML = `
-      <div class="cal-card">
-        <div class="cal-header">
-          <button class="cal-nav-btn" onclick="calNav(-1)">${chevL}</button>
-          <div class="cal-month-name">${vy}年${vm + 1}月</div>
-          <button class="cal-nav-btn" onclick="calNav(1)">${chevR}</button>
-        </div>
-        <div class="cal-weekdays">${WD.map(w => `<span>${w}</span>`).join('')}</div>
-        <div class="cal-grid">${cells}</div>
-      </div>`;
+function renderFilterBar(){
+  const arts = allArticles();
+  const bar = document.getElementById('filterBar');
+  if(!bar) return;
+  bar.innerHTML = ALL_CATS.map(c=>{
+    const eng = CAT_EN[c];
+    const cnt = c==='全部' ? arts.length : arts.filter(a=>a.categories&&a.categories.includes(eng)).length;
+    if(cnt===0 && c!=='全部') return '';
+    return `<button class="f-btn${c===curCat?' on':''}" onclick="setFilter('${c}')">${c}<span class="f-cnt">${cnt}</span></button>`;
+  }).join('');
+}
+
+window.setFilter = function(cat){
+  curCat = cat;
+  renderFilterBar();
+  renderContent();
+};
+
+// ── Content rendering ────────────────────────────────────────────
+function getFiltered(){
+  const arts = allArticles();
+  if(curCat==='全部') return arts;
+  const eng = CAT_EN[curCat]||curCat;
+  return arts.filter(a=>a.categories&&a.categories.includes(eng));
+}
+
+function renderContent(){
+  const filtered = getFiltered();
+  filteredCache = filtered;
+
+  // Featured = highest heat
+  let featIdx = 0;
+  filtered.forEach((a,i)=>{ if((a.heat||0)>(filtered[featIdx].heat||0)) featIdx=i; });
+  const featured = filtered[featIdx];
+  const rest = filtered.filter((_,i)=>i!==featIdx);
+
+  let html = '';
+
+  if(featured){
+    const cats = (featured.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('');
+    html += `
+      <article class="featured a2" onclick="openModal(${featIdx})">
+        <div class="feat-cats">${cats}</div>
+        <h2 class="feat-title">${esc(featured.title)}</h2>
+        <p class="feat-summary">${esc(featured.summary)}</p>
+        <div class="feat-meta">${esc(src(featured))}</div>
+      </article>
+    `;
   }
 
-  window.calNav = function (dir) {
-    vm += dir;
-    if (vm > 11) { vm = 0; vy++; }
-    if (vm < 0)  { vm = 11; vy--; }
-    renderCal();
-  };
+  html += '<div class="news-list">';
+  rest.forEach((item)=>{
+    const originalIdx = filtered.indexOf(item);
+    const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('');
+    html += `
+      <button class="n-item" onclick="openModal(${originalIdx})">
+        <div class="n-body">
+          <div class="n-cats">${cats}</div>
+          <div class="n-title">${esc(item.title)}</div>
+          <div class="n-summary">${esc(item.summary)}</div>
+        </div>
+        <div class="n-src">${esc(src(item))}</div>
+      </button>
+    `;
+  });
+  html += '</div>';
 
-  // Render calendar only when panel first opens (lazy)
-  const origToggle = window.toggleArchiveCal;
-  window.toggleArchiveCal = function () {
-    origToggle && origToggle();
-    const panel = document.getElementById('archiveCalPanel');
-    if (panel && panel.style.display !== 'none') renderCal();
-  };
+  document.getElementById('contentArea').innerHTML = html;
+  document.getElementById('totalStat').textContent = filtered.length;
+}
+
+// ── Modal ────────────────────────────────────────────────────────
+window.openModal = function(filteredIdx){
+  filteredCache = getFiltered();
+  modalIdx = filteredIdx;
+  ttsStop();
+  renderModal();
+  // show
+  const ov = document.getElementById('mOv');
+  const sh = document.getElementById('mSheet');
+  ov.style.display = 'flex';
+  requestAnimationFrame(()=>{ ov.classList.add('vis'); sh.classList.add('vis'); });
+  modalOpen = true;
+  history.replaceState(null,'','#article-'+filteredIdx);
+};
+
+window.closeModal = function(){
+  ttsStop();
+  const ov = document.getElementById('mOv');
+  const sh = document.getElementById('mSheet');
+  ov.classList.remove('vis'); sh.classList.remove('vis');
+  setTimeout(()=>{ ov.style.display='none'; },220);
+  modalOpen = false;
+  history.replaceState(null,'',location.pathname);
+};
+
+window.handleOvClick = function(e){
+  if(e.target===e.currentTarget) closeModal();
+};
+
+window.navModal = function(dir){
+  const ni = modalIdx+dir;
+  if(ni>=0 && ni<filteredCache.length){ modalIdx=ni; ttsStop(); renderModal(); }
+};
+
+function renderModal(){
+  const item = filteredCache[modalIdx];
+  if(!item) return;
+
+  // meta
+  const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('');
+  const heatStr = item.heat ? '🔥'.repeat(Math.min(item.heat,5)) : '';
+  document.getElementById('mMeta').innerHTML = cats +
+    (heatStr ? `<span class="sep" style="margin:0 2px"></span><span class="m-time">${heatStr}</span>` : '');
+
+  // title
+  document.getElementById('mTitle').textContent = item.title||'';
+
+  // source
+  document.getElementById('mSrc').textContent = src(item);
+
+  // body
+  let body = '<div class="m-content">';
+  if(item.full_content && item.full_content.trim()){
+    const paras = item.full_content.trim().split(/\n+/).filter(Boolean);
+    body += paras.map(p=>`<p>${esc(p)}</p>`).join('');
+  } else {
+    body += `<p>${esc(item.summary||'')}</p>`;
+  }
+  body += '</div>';
+
+  if(item.context && item.context.trim()){
+    body += `<div class="m-ctx"><div class="m-ctx-lbl">背景</div><div class="m-ctx-txt">${esc(item.context)}</div></div>`;
+  }
+  if(item.tags && item.tags.length){
+    body += `<div class="m-tags">${item.tags.map(t=>`<span class="m-tag">#${esc(t)}</span>`).join('')}</div>`;
+  }
+
+  document.getElementById('mBody').innerHTML = body;
+  document.getElementById('mBody').scrollTop = 0;
+
+  // nav
+  document.getElementById('btnMPrev').disabled = modalIdx<=0;
+  document.getElementById('btnMNext').disabled = modalIdx>=filteredCache.length-1;
+  document.getElementById('mNavCnt').textContent = `${modalIdx+1} / ${filteredCache.length}`;
+
+  // read link
+  document.getElementById('btnRead').href = item.best_url||item.url||'#';
+
+  // hash
+  history.replaceState(null,'','#article-'+modalIdx);
+}
+
+// ── Keyboard & swipe ────────────────────────────────────────────
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape'){
+    if(modalOpen) closeModal();
+    else if(archOpen) toggleArch();
+  }
+  if(modalOpen){
+    if(e.key==='ArrowLeft') navModal(-1);
+    if(e.key==='ArrowRight') navModal(1);
+  }
+});
+
+document.getElementById('mSheet').addEventListener('touchstart', function(e){
+  touchX0 = e.touches[0].clientX; touchT0 = Date.now();
+},{passive:true});
+document.getElementById('mSheet').addEventListener('touchend', function(e){
+  if(touchX0===null) return;
+  const dx = e.changedTouches[0].clientX - touchX0;
+  const dt = Date.now() - touchT0;
+  touchX0=null;
+  if(dt>400||Math.abs(dx)<50) return;
+  if(window.getSelection&&window.getSelection().toString()) return;
+  if(dx>0) navModal(-1); else navModal(1);
+},{passive:true});
+
+// ── TTS ──────────────────────────────────────────────────────────
+const synth = window.speechSynthesis;
+let ttsState=0, ttsUtt=null, ttsAudio=null, ttsMode='none';
+
+const SVG_SPK='<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>';
+const SVG_PAU='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+
+function updateTtsBtn(){
+  const btn=document.getElementById('btnTts');
+  const ico=document.getElementById('ttsIcon');
+  if(!btn) return;
+  btn.classList.toggle('playing', ttsState===1);
+  ico.innerHTML = ttsState===1 ? SVG_PAU : SVG_SPK;
+}
+
+function ttsStop(){
+  if(ttsMode==='speech'&&synth) synth.cancel();
+  if(ttsMode==='audio'&&ttsAudio){ttsAudio.pause();ttsAudio=null;}
+  ttsState=0;ttsMode='none';ttsUtt=null;updateTtsBtn();
+}
+
+function pickVoice(){
+  if(!synth) return null;
+  const vv=synth.getVoices();
+  const pref=['Microsoft Xiaoxiao','Microsoft Xiaohan','Microsoft Yunxi','Tingting','Meijia','Yu-shu','Microsoft Huihui','Microsoft Yaoyao'];
+  for(const n of pref){ const v=vv.find(v=>v.name.includes(n)); if(v) return v; }
+  return vv.find(v=>v.lang==='zh-CN')||vv.find(v=>v.lang.startsWith('zh'))||null;
+}
+
+function startWebSpeech(){
+  if(!synth) return;
+  const item=filteredCache[modalIdx];
+  if(!item) return;
+  const text=(item.title+'。'+(item.full_content||item.summary||'')).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+  ttsUtt=new SpeechSynthesisUtterance(text);
+  ttsUtt.lang='zh-CN'; ttsUtt.rate=0.92; ttsUtt.pitch=0.82;
+  const setV=()=>{const v=pickVoice();if(v)ttsUtt.voice=v;};
+  setV();
+  if(!synth.getVoices().length) synth.addEventListener('voiceschanged',setV,{once:true});
+  ttsMode='speech';
+  ttsUtt.onstart=()=>{ttsState=1;updateTtsBtn();};
+  ttsUtt.onpause=()=>{ttsState=2;updateTtsBtn();};
+  ttsUtt.onresume=()=>{ttsState=1;updateTtsBtn();};
+  ttsUtt.onend=ttsUtt.onerror=()=>{ttsState=0;ttsMode='none';updateTtsBtn();};
+  synth.speak(ttsUtt);
+}
+
+window.toggleTts=function(){
+  if(ttsState===1){
+    if(ttsMode==='speech'&&synth){synth.pause();ttsState=2;updateTtsBtn();return;}
+    if(ttsMode==='audio'&&ttsAudio){ttsAudio.pause();return;}
+  }
+  if(ttsState===2){
+    if(ttsMode==='speech'&&synth){synth.resume();ttsState=1;updateTtsBtn();return;}
+    if(ttsMode==='audio'&&ttsAudio){ttsAudio.play();return;}
+  }
+  ttsStop();
+  const item=filteredCache[modalIdx];
+  if(!item) return;
+  if(item.audio_url){
+    ttsAudio=new Audio(item.audio_url);
+    ttsMode='audio';
+    ttsAudio.onplay=()=>{ttsState=1;updateTtsBtn();};
+    ttsAudio.onpause=()=>{if(ttsAudio&&!ttsAudio.ended){ttsState=2;updateTtsBtn();}};
+    ttsAudio.onended=()=>{ttsState=0;ttsAudio=null;updateTtsBtn();};
+    ttsAudio.onerror=()=>{ttsAudio=null;ttsMode='none';startWebSpeech();};
+    ttsAudio.play().catch(()=>{ttsAudio=null;ttsMode='none';startWebSpeech();});
+  } else {
+    startWebSpeech();
+  }
+};
+
+// ── loadDateData (archive switching) ────────────────────────────
+window.loadDateData = function(date){
+  fetch('data/'+date+'.json')
+    .then(r=>r.json())
+    .then(data=>{
+      const sorted=(data.articles||[]).slice().sort((a,b)=>(b.heat||0)-(a.heat||0));
+      window.ARTICLES_DATA=sorted;
+      window.calendarSetDate(date);
+      // update sources count
+      const hosts=new Set(sorted.map(a=>{try{return new URL(a.best_url||a.url||'').hostname;}catch{return '';}}).filter(Boolean));
+      document.getElementById('srcStat').textContent=hosts.size||data.sources||'?';
+      curCat='全部';
+      renderFilterBar();
+      renderContent();
+    })
+    .catch(err=>console.error('loadDateData error:',err));
+};
+
+// ── Init ─────────────────────────────────────────────────────────
+updateArchLabel();
+updateHeroTitle();
+updateNavBtns();
+renderFilterBar();
+renderContent();
+
+// Enter animation
+setTimeout(()=>{ document.getElementById('mainWrap').classList.add('entered'); }, 60);
+
+// Deep link
+const hash = location.hash;
+if(hash && hash.startsWith('#article-')){
+  const idx=parseInt(hash.slice(9));
+  if(!isNaN(idx)) setTimeout(()=>openModal(idx),300);
+}
+
 })();
 </script>
 </body>

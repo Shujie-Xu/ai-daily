@@ -158,16 +158,17 @@ function renderCard(item, featured = false, globalIdx = 0) {
 
 // Returns { html, sortedArticles } — sortedArticles is in display order (by heat desc)
 function renderSections(articles) {
+  // New template is fully client-rendered; sections HTML is empty
+  const sorted = [...articles].sort((a, b) => (b.heat || 3) - (a.heat || 3));
+  return { html: '', sortedArticles: sorted };
+
+  // ── legacy code below (kept for reference, never reached) ──
   const groups = [
     { min: 5, label: '🔥🔥🔥🔥🔥 顶级热点' },
     { min: 4, label: '🔥🔥🔥🔥 高热度' },
     { min: 3, label: '🔥🔥🔥 中等热度' },
     { min: 0, label: '🔥🔥 值得关注' },
   ];
-
-  // Sort once — this is the canonical display order; indices used in openDetail()
-  const sorted = [...articles].sort((a, b) => (b.heat || 3) - (a.heat || 3));
-  // Map each article object → its position in the sorted array
   const idxMap = new Map(sorted.map((a, i) => [a, i]));
 
   let html = '';
@@ -199,30 +200,8 @@ function renderSections(articles) {
 }
 
 function renderFilterBar(articles) {
-  const CAT_ORDER = ['model', 'product', 'funding', 'finance', 'research', 'policy', 'event'];
-  const CAT_LABELS = {
-    model: '🧠 模型', product: '📦 产品', funding: '💰 融资',
-    finance: '📊 财务', research: '🔬 研究', policy: '📜 政策', event: '🎪 事件',
-  };
-
-  // count articles per category (an article in multiple cats counts in each)
-  const counts = {};
-  articles.forEach(a => {
-    (a.categories || ['product']).forEach(c => {
-      counts[c] = (counts[c] || 0) + 1;
-    });
-  });
-
-  const total = articles.length;
-  const buttons = CAT_ORDER
-    .filter(c => counts[c])   // hide empty categories
-    .map(c => `<button class="filter-tag" data-cat="${c}" onclick="setFilter('${c}')">${CAT_LABELS[c]}<span class="filter-count">${counts[c]}</span></button>`)
-    .join('\n    ');
-
-  return `<div class="filter-bar" id="filterBar">
-    <button class="filter-tag active" data-cat="all" onclick="setFilter('all')">全部<span class="filter-count">${total}</span></button>
-    ${buttons}
-  </div>`;
+  // New template renders filter bar client-side; return empty string
+  return '';
 }
 
 function getArchiveFiles(outputDir, currentDate) {

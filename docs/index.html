@@ -123,8 +123,11 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
   position:absolute;top:calc(100% + 6px);left:0;z-index:200;
   background:var(--card);border:1px solid var(--border);
   border-radius:12px;width:252px;
-  box-shadow:var(--shadow);animation:archDrop .15s ease;
+  box-shadow:0 8px 32px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.08);
+  animation:archDrop .15s ease;
   display:none;overflow:hidden;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  isolation:isolate;
 }
 .arch-drop.open{display:block}
 /* ── Calendar ── */
@@ -373,7 +376,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/04 19:33 CST</span>
+    <span class="foot-l">26/03/04 19:34 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>

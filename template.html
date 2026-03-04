@@ -19,30 +19,36 @@ a{text-decoration:none}
 
 /* ── Theme tokens ── */
 :root{
-  --bg:#ffffff;--card:#ffffff;--subtle:#f7f7f8;--muted:#f0f0f2;
-  --border:#e4e4e7;--border-s:#ededf0;
+  --bg:#f0f0f4;--card:#f0f0f4;--subtle:#e8e8ed;--muted:#e0e0e6;
+  --border:#d8d8de;--border-s:#e0e0e6;
   --t1:#09090b;--t2:#3f3f46;--t3:#71717a;--t4:#a1a1aa;--t5:#d4d4d8;
   --pill:#09090b;--pill-txt:#ffffff;
   --accent:#09090b;--acc-txt:#ffffff;
   --hov:rgba(0,0,0,0.012);
   --modal-ov:rgba(0,0,0,0.4);
   --shadow:0 32px 80px rgba(0,0,0,0.08);
-  --hdr-bg:rgba(255,255,255,0.84);
+  --hdr-bg:rgba(240,240,244,0.88);
   --ctx:rgba(0,0,0,0.06);
   --ctx-border:#d4d4d8;
+  --neu-raised:-7px -7px 14px rgba(255,255,255,0.9),7px 7px 14px rgba(174,174,192,0.42);
+  --neu-hover:-5px -5px 10px rgba(255,255,255,0.9),5px 5px 10px rgba(174,174,192,0.55);
+  --neu-press:inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 7px rgba(174,174,192,0.38);
 }
 [data-theme="dark"]{
-  --bg:#0a0a0c;--card:#111114;--subtle:#19191d;--muted:#222226;
-  --border:#232328;--border-s:#1c1c20;
+  --bg:#1a1a1f;--card:#1a1a1f;--subtle:#222228;--muted:#2a2a30;
+  --border:#2e2e35;--border-s:#262630;
   --t1:#fafafa;--t2:#d4d4d8;--t3:#a1a1aa;--t4:#71717a;--t5:#52525b;
   --pill:#fafafa;--pill-txt:#0a0a0c;
   --accent:#fafafa;--acc-txt:#09090b;
   --hov:rgba(255,255,255,0.025);
   --modal-ov:rgba(0,0,0,0.72);
   --shadow:0 32px 80px rgba(0,0,0,0.55);
-  --hdr-bg:rgba(10,10,12,0.82);
+  --hdr-bg:rgba(26,26,31,0.88);
   --ctx:rgba(255,255,255,0.04);
   --ctx-border:#3b3b42;
+  --neu-raised:-5px -5px 10px rgba(255,255,255,0.05),6px 6px 12px rgba(0,0,0,0.7);
+  --neu-hover:-3px -3px 7px rgba(255,255,255,0.06),4px 4px 9px rgba(0,0,0,0.75);
+  --neu-press:inset -2px -2px 5px rgba(255,255,255,0.04),inset 3px 3px 7px rgba(0,0,0,0.65);
 }
 
 /* ── Base ── */
@@ -151,8 +157,7 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 
 /* ── Filters ── */
 .filters{
-  display:flex;gap:5px;padding-bottom:24px;
-  border-bottom:1px solid var(--border);
+  display:flex;gap:5px;padding-bottom:20px;
   overflow-x:auto;scrollbar-width:none;
 }
 .filters::-webkit-scrollbar{display:none}
@@ -168,8 +173,15 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .cat{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);line-height:1}
 
 /* ── Featured ── */
-.featured{padding:32px 0 28px;border-bottom:1px solid var(--border);cursor:pointer}
-.featured:hover .feat-title{opacity:.75}
+.featured{
+  padding:24px 22px 22px;border-radius:16px;cursor:pointer;
+  background:var(--card);border:none;
+  box-shadow:var(--neu-raised);
+  transition:box-shadow .18s,transform .18s;
+  margin-bottom:10px;
+}
+.featured:hover{box-shadow:var(--neu-hover);transform:translateY(-1px)}
+.featured:active{box-shadow:var(--neu-press);transform:translateY(0)}
 .feat-cats{display:flex;align-items:center;gap:6px;margin-top:14px}
 .card-dot{width:2px;height:2px;border-radius:50%;background:var(--t5);flex-shrink:0}
 .feat-title{
@@ -179,22 +191,36 @@ main{max-width:880px;margin:0 auto;padding:0 24px}
 .feat-summary{font-size:14.5px;line-height:1.7;color:var(--t3);margin-top:8px;max-width:580px}
 .feat-meta{margin-top:16px;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:11px;color:var(--t4);display:flex;align-items:center;gap:8px}
 
-/* ── News list ── */
-.news-list{}
-.n-item{color:inherit;
-  display:flex;gap:16px;padding:18px 12px;margin:0 -12px;
-  border-bottom:1px solid var(--border);cursor:pointer;
-  border-radius:0;background:transparent;
-  transition:background .12s,border-radius .12s;
-  width:calc(100% + 24px);text-align:left;border-left:none;border-right:none;border-top:none;
+/* ── News grid (neumorphic cards) ── */
+.news-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  padding-top:14px;
 }
-.n-item:hover{background:var(--hov);border-radius:8px}
-.n-body{flex:1;min-width:0}
-.n-cats{display:flex;align-items:center;gap:6px}
-.n-title{font-size:14.5px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--t1)}
-.n-summary{font-size:13px;line-height:1.55;color:var(--t3);margin-top:2px}
-.n-src{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4);white-space:nowrap;padding-top:18px;flex-shrink:0}
-@media(max-width:600px){.n-src{display:none}}
+@media(max-width:560px){.news-list{grid-template-columns:1fr;gap:12px}}
+.n-item{
+  color:inherit;
+  display:flex;flex-direction:column;
+  padding:18px 18px 14px;
+  border-radius:16px;
+  background:var(--card);
+  border:none;
+  box-shadow:var(--neu-raised);
+  cursor:pointer;
+  text-align:left;
+  transition:box-shadow .18s,transform .18s;
+  width:100%;
+}
+.n-item:hover{box-shadow:var(--neu-hover);transform:translateY(-2px)}
+.n-item:active{box-shadow:var(--neu-press);transform:translateY(0)}
+.n-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.n-cats{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.n-title{font-size:14px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--t1)}
+.n-summary{font-size:12.5px;line-height:1.55;color:var(--t3);margin-top:2px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.n-heat{margin-top:auto;padding-top:10px;font-size:11px;color:var(--t4)}
+.n-src{display:none}
 
 /* ── Footer ── */
 footer{
@@ -687,9 +713,10 @@ function renderContent(){
     html += `
       <button class="n-item" onclick="openModal(${originalIdx})">
         <div class="n-body">
+          <div class="n-cats">${cats}</div>
           <div class="n-title">${esc(item.title)}</div>
           <div class="n-summary">${esc(item.summary)}</div>
-          <div class="n-cats" style="margin-top:6px;margin-bottom:0">${cats}</div>
+          <div class="n-heat">${'🔥'.repeat(item.heat||1)}</div>
         </div>
       </button>
     `;

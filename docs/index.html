@@ -444,7 +444,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 03:57 CST</span>
+    <span class="foot-l">26/03/05 04:02 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -793,6 +793,17 @@ window.openModal = function(filteredIdx, triggerEl){
   ov.style.display = 'flex';
   sh.classList.remove('spring');
 
+  // Set transform-origin to the clicked card's center
+  if(triggerEl){
+    const rect = triggerEl.getBoundingClientRect();
+    const shRect = sh.getBoundingClientRect();
+    const cx = rect.left + rect.width/2 - shRect.left;
+    const cy = rect.top + rect.height/2 - shRect.top;
+    sh.style.transformOrigin = cx + 'px ' + cy + 'px';
+  } else {
+    sh.style.transformOrigin = 'center center';
+  }
+
   // Force layout so DOM is fully painted before we kick off animation
   void sh.offsetHeight;
 
@@ -802,7 +813,10 @@ window.openModal = function(filteredIdx, triggerEl){
       ov.classList.add('vis');
       sh.classList.add('vis');
       sh.classList.add('spring');
-      sh.addEventListener('animationend', ()=>sh.classList.remove('spring'), {once:true});
+      sh.addEventListener('animationend', ()=>{
+        sh.classList.remove('spring');
+        sh.style.transformOrigin = 'center center'; // reset for nav
+      }, {once:true});
     });
     modalOpen = true;
     document.body.style.overflow = 'hidden';

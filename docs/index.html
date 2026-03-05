@@ -443,7 +443,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 22:31 CST</span>
+    <span class="foot-l">26/03/05 22:33 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -774,7 +774,13 @@ function renderContent(){
 }
 
 // ── Modal ────────────────────────────────────────────────────────
+// Haptic feedback (mobile)
+function haptic(style){
+  if(navigator.vibrate) navigator.vibrate(style==='heavy'?[12]:style==='light'?[4]:[8]);
+}
+
 window.openModal = function(filteredIdx, triggerEl){
+  haptic('medium');
   filteredCache = getFiltered();
   modalIdx = filteredIdx;
   ttsStop();
@@ -841,6 +847,7 @@ window.openModal = function(filteredIdx, triggerEl){
 };
 
 window.closeModal = function(){
+  haptic('light');
   ttsStop();
   const ov = document.getElementById('mOv');
   const sh = document.getElementById('mSheet');
@@ -857,6 +864,7 @@ window.handleOvClick = function(e){
 
 let _slideDir = 0;
 window.navModal = function(dir){
+  haptic('light');
   const ni = modalIdx+dir;
   if(ni>=0 && ni<filteredCache.length){ _slideDir=dir; modalIdx=ni; ttsStop(); renderModal(); }
 };

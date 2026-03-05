@@ -318,8 +318,6 @@ footer{
   will-change:transform,opacity;
 }
 .m-sheet{will-change:transform,opacity}
-.m-sheet.text-fade .m-title,.m-sheet.text-fade .m-body,.m-sheet.text-fade .m-body *{color:transparent !important;transition:color .22s ease !important}
-.m-sheet.text-fade.text-show .m-title,.m-sheet.text-fade.text-show .m-body,.m-sheet.text-fade.text-show .m-body *{color:inherit !important}
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
   height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
@@ -445,7 +443,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 15:56 CST</span>
+    <span class="foot-l">26/03/05 21:37 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -813,8 +811,6 @@ window.openModal = function(filteredIdx, triggerEl){
     requestAnimationFrame(()=>{
       ov.classList.add('vis');
       sh.classList.add('vis');
-      sh.classList.add('text-fade');
-      sh.classList.add('text-show');
 
       // Two dimensions: size + aspect ratio morph simultaneously
       // Width narrows slightly at first then expands; height always grows
@@ -836,7 +832,6 @@ window.openModal = function(filteredIdx, triggerEl){
       anim.onfinish = () => {
         anim.cancel();
         sh.style.transformOrigin = 'center center';
-        sh.classList.remove('text-fade','text-show');
       };
     });
     modalOpen = true;

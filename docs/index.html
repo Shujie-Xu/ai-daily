@@ -443,7 +443,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 22:33 CST</span>
+    <span class="foot-l">26/03/05 22:35 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -780,7 +780,6 @@ function haptic(style){
 }
 
 window.openModal = function(filteredIdx, triggerEl){
-  haptic('medium');
   filteredCache = getFiltered();
   modalIdx = filteredIdx;
   ttsStop();
@@ -817,6 +816,7 @@ window.openModal = function(filteredIdx, triggerEl){
     requestAnimationFrame(()=>{
       ov.classList.add('vis');
       sh.classList.add('vis');
+      haptic('medium');
 
       // Two dimensions: size + aspect ratio morph simultaneously
       // Width narrows slightly at first then expands; height always grows

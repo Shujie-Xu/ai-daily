@@ -318,6 +318,8 @@ footer{
   will-change:transform,opacity;
 }
 .m-sheet{will-change:transform,opacity}
+.m-title,.m-body{transition:filter .18s ease,transform .18s ease,opacity .18s ease}
+.m-title.nav-out,.m-body.nav-out{filter:blur(4px);transform:scale(0.96);opacity:0.3}
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
   height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
@@ -866,7 +868,17 @@ let _slideDir = 0;
 window.navModal = function(dir){
   haptic('light');
   const ni = modalIdx+dir;
-  if(ni>=0 && ni<filteredCache.length){ _slideDir=dir; modalIdx=ni; ttsStop(); renderModal(); }
+  if(ni<0 || ni>=filteredCache.length) return;
+  _slideDir=dir;
+  const title = document.getElementById('mTitle');
+  const body = document.getElementById('mBody');
+  title.classList.add('nav-out');
+  body.classList.add('nav-out');
+  setTimeout(()=>{
+    modalIdx=ni; ttsStop(); renderModal();
+    title.classList.remove('nav-out');
+    body.classList.remove('nav-out');
+  }, 180);
 };
 
 function renderModal(){

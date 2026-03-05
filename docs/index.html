@@ -318,8 +318,11 @@ footer{
   will-change:transform,opacity;
 }
 .m-sheet{will-change:transform,opacity}
-.m-title,.m-body{transition:filter .18s ease,transform .18s ease,opacity .18s ease}
-.m-title.nav-out,.m-body.nav-out{filter:blur(4px);transform:scale(0.96);opacity:0.3}
+.m-title,.m-body{transition:filter .2s ease,transform .2s ease,opacity .2s ease}
+.m-title.nav-out-l,.m-body.nav-out-l{filter:blur(5px);transform:translateX(-30px) scale(0.97);opacity:0}
+.m-title.nav-out-r,.m-body.nav-out-r{filter:blur(5px);transform:translateX(30px) scale(0.97);opacity:0}
+.m-title.nav-in-l,.m-body.nav-in-l{filter:blur(5px);transform:translateX(30px) scale(0.97);opacity:0}
+.m-title.nav-in-r,.m-body.nav-in-r{filter:blur(5px);transform:translateX(-30px) scale(0.97);opacity:0}
 /* ── Progress bar fused into header bottom border ── */
 .m-progress{
   height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
@@ -445,7 +448,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/03/05 22:42 CST</span>
+    <span class="foot-l">26/03/05 22:49 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -872,13 +875,24 @@ window.navModal = function(dir){
   _slideDir=dir;
   const title = document.getElementById('mTitle');
   const body = document.getElementById('mBody');
-  title.classList.add('nav-out');
-  body.classList.add('nav-out');
+  const outCls = dir>0 ? 'nav-out-l' : 'nav-out-r';
+  const inCls  = dir>0 ? 'nav-in-l'  : 'nav-in-r';
+  title.classList.add(outCls);
+  body.classList.add(outCls);
   setTimeout(()=>{
     modalIdx=ni; ttsStop(); renderModal();
-    title.classList.remove('nav-out');
-    body.classList.remove('nav-out');
-  }, 180);
+    // Remove out, add in (start from opposite side)
+    title.classList.remove(outCls);
+    body.classList.remove(outCls);
+    title.classList.add(inCls);
+    body.classList.add(inCls);
+    // Force reflow then remove in class to trigger slide-in
+    void title.offsetWidth;
+    requestAnimationFrame(()=>{
+      title.classList.remove(inCls);
+      body.classList.remove(inCls);
+    });
+  }, 200);
 };
 
 function renderModal(){

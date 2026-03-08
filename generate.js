@@ -15,6 +15,12 @@ const TTS_SCRIPT = path.join(__dirname, 'tts_gen.py');
 if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 if (!fs.existsSync(AUDIO_DIR))  fs.mkdirSync(AUDIO_DIR, { recursive: true });
 
+// ── 根据标题生成稳定的短 hash（不依赖索引）──────────────────
+function titleHash(title) {
+  const crypto = require('crypto');
+  return crypto.createHash('md5').update(title || '').digest('hex').slice(0, 8);
+}
+
 // ── TTS: 为文章生成音频 ──────────────────────────────────────
 function generateAudio(articles, date, forceTts = false) {
   const { spawnSync } = require('child_process');
@@ -22,7 +28,8 @@ function generateAudio(articles, date, forceTts = false) {
 
   for (let i = 0; i < articles.length; i++) {
     const a = articles[i];
-    const filename = `${date}-${i}.mp3`;
+    const hash = titleHash(a.title);
+    const filename = `${date}-${hash}.mp3`;
     const outPath  = path.join(AUDIO_DIR, filename);
 
     // 已存在就跳过（除非传入 forceTts=true）
@@ -65,8 +72,8 @@ function cleanupOldAudio(days = 90) {
   const files = fs.readdirSync(AUDIO_DIR).filter(f => f.endsWith('.mp3'));
   let removed = 0;
   for (const f of files) {
-    // 文件名格式 YYYY-MM-DD-N.mp3，从名称解析日期
-    const m = f.match(/^(\d{4}-\d{2}-\d{2})-\d+\.mp3$/);
+    // 文件名格式 YYYY-MM-DD-HASH.mp3 或旧格式 YYYY-MM-DD-N.mp3
+    const m = f.match(/^(\d{4}-\d{2}-\d{2})-.+\.mp3$/);
     if (m) {
       const fileDate = new Date(m[1]).getTime();
       if (fileDate < cutoff) {
@@ -364,7 +371,9 @@ function generate(newsData) {
 // CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD] [--no-tts] [--force-tts]
 if (require.main === module) {
   const { execSync } = require('child_process');
-  const inputFile = process.argv[2] || path.join(__dirname, 'latest-news.json');
+  // argv[2] 是输入文件，但如果以 -- 开头则视为 flag，用默认文件
+  const arg2 = process.argv[2];
+  const inputFile = (arg2 && !arg2.startsWith('--')) ? arg2 : path.join(__dirname, 'latest-news.json');
   const shouldPush  = process.argv.includes('--push');
   const skipTts     = process.argv.includes('--no-tts');
   const forceTts    = process.argv.includes('--force-tts');
@@ -409,12 +418,13 @@ if (require.main === module) {
         ...a, audio_url: a.audio_url || urlMap.get(a.title) || null
       }));
     }
-    // 如果 JSON 里仍然没有，尝试从 audio/ 目录按命名规则找
+    // 如果 JSON 里仍然没有，尝试从 audio/ 目录按 hash 命名规则找
     const audioDir = path.join(OUTPUT_DIR, 'audio');
-    data.articles = data.articles.map((a, i) => {
+    data.articles = data.articles.map((a) => {
       if (a.audio_url) return a;
-      const mp3 = path.join(audioDir, `${fileDate}-${i}.mp3`);
-      return fs.existsSync(mp3) ? { ...a, audio_url: `audio/${fileDate}-${i}.mp3` } : a;
+      const hash = titleHash(a.title);
+      const mp3 = path.join(audioDir, `${fileDate}-${hash}.mp3`);
+      return fs.existsSync(mp3) ? { ...a, audio_url: `audio/${fileDate}-${hash}.mp3` } : a;
     });
     const preserved = data.articles.filter(a => a.audio_url).length;
     if (preserved > 0) console.log(`  🔇 --no-tts：保留已有音频 ${preserved} 篇`);

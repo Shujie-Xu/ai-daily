@@ -911,7 +911,12 @@ function renderModal(){
   let body = '<div class="m-content">';
   if(item.full_content && item.full_content.trim()){
     const paras = item.full_content.trim().split(/\n+/).filter(Boolean);
-    body += paras.map(p=>`<p>${esc(p)}</p>`).join('');
+    body += paras.map(p=>{
+      let h = esc(p);
+      // render **bold** as <strong>
+      h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      return `<p>${h}</p>`;
+    }).join('');
   } else {
     body += `<p>${esc(item.summary||'')}</p>`;
   }

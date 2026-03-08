@@ -613,5 +613,85 @@
     "title": "阿里CoPaw开源发布：对标OpenClaw的国产个人AI助理，接入钉钉飞书QQ",
     "date": "2026-03-05",
     "expires": "2026-03-19"
+  },
+  {
+    "title": "OpenAI发布GPT-5.4，原生支持电脑操控与金融插件",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "黄仁勋暗示英伟达将停止投资OpenAI和Anthropic",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "博通Q1财报超预期，AI收入翻倍至84亿美元",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "AI采购初创Lio获a16z领投3000万美元A轮融资",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "瑞典AI初创Agaton获1000万美元种子轮融资",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "Databricks推出KARL智能体，用强化学习解决企业RAG搜索难题",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "面壁智能开源MiniCPM-o 4.5全模态模型",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "科技巨头白宫会议讨论AI发展下一阶段",
+    "date": "2026-03-06",
+    "expires": "2026-03-20"
+  },
+  {
+    "title": "Anthropic推出Claude Marketplace企业工具市场",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "Google发布Workspace CLI，为AI Agent打通办公套件",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "Google PM开源Always On Memory Agent记忆框架",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "KV缓存压缩新技术：内存占用降低50倍无精度损失",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "白宫审查各州AI法案，多项立法被迫搁浅",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "City Detect获1300万美元A轮融资，用AI监测城市安全",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "Nota AI将Solar大模型内存占用压缩72%",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
+  },
+  {
+    "title": "AI血液检测以94%准确率早期发现胰腺癌",
+    "date": "2026-03-07",
+    "expires": "2026-03-21"
   }
 ]

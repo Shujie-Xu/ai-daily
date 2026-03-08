@@ -1045,7 +1045,7 @@ function startWebSpeech(){
   if(!synth) return;
   const item=filteredCache[modalIdx];
   if(!item) return;
-  const text=(item.title+'。'+(item.full_content||item.summary||'')).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+  const text=(item.title+'。'+(item.full_content||item.summary||'')).replace(/<[^>]+>/g,'').replace(/\*\*/g,'').replace(/\s+/g,' ').trim();
   ttsUtt=new SpeechSynthesisUtterance(text);
   ttsUtt.lang='zh-CN'; ttsUtt.rate=0.92; ttsUtt.pitch=0.82;
   const setV=()=>{const v=pickVoice();if(v)ttsUtt.voice=v;};

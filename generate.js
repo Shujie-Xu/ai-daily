@@ -40,8 +40,8 @@ function generateAudio(articles, date, forceTts = false) {
     // force 时先删旧文件
     if (forceTts && fs.existsSync(outPath)) fs.unlinkSync(outPath);
 
-    // 拼接朗读文本：标题 + 正文（去除 HTML 标签）
-    const rawContent = (a.full_content || a.summary || '').replace(/<[^>]+>/g, '');
+    // 拼接朗读文本：标题 + 正文（去除 HTML 标签和 markdown 标记）
+    const rawContent = (a.full_content || a.summary || '').replace(/<[^>]+>/g, '').replace(/\*\*/g, '');
     const ttsText = `${a.title}。${rawContent}`.slice(0, 2000); // 最多 2000 字
 
     try {

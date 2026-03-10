@@ -1,162 +1,102 @@
 {
-  "date": "2026-03-09",
+  "date": "2026-03-10",
   "searchCount": 29,
-  "dimensions": "模型/产品/融资/财务/研究/政策/事件",
-  "sourceCount": 13,
+  "dimensions": "模型/产品/融资/财务/政策/事件",
+  "sourceCount": 8,
   "articles": [
     {
-      "title": "OpenAI机器人负责人因五角大楼协议辞职",
-      "summary": "OpenAI硬件团队负责人Caitlin Kalinowski因公司与美国国防部达成协议而宣布辞职，引发行业震动。",
-      "url": "https://techcrunch.com/2026/03/07/openai-robotics-lead-caitlin-kalinowski-quits-in-response-to-pentagon-deal/",
-      "best_url": "https://techcrunch.com/2026/03/07/openai-robotics-lead-caitlin-kalinowski-quits-in-response-to-pentagon-deal/",
-      "full_content": "OpenAI机器人硬件团队负责人Caitlin Kalinowski于3月7日宣布辞职，明确表示此举是为了抗议公司与美国国防部达成的AI技术合作协议。Kalinowski此前曾在Meta领导AR眼镜Orion项目，2024年11月加入OpenAI负责机器人硬件方向。\n\n她在社交媒体上表示：\"AI在国家安全中有重要角色，但在没有司法监督的情况下监控美国公民、在没有人类授权的情况下赋予AI致命自主权，这些红线在协议中没有得到充分审议。\"她在后续帖文中补充称，核心问题在于\"协议公布过于仓促，护栏尚未到位\"，这首先是一个治理层面的问题。\n\nOpenAI发言人确认了Kalinowski的离职，并回应称公司与五角大楼的协议\"为负责任的国家安全AI应用提供了可行路径\"，并明确划定了\"不进行大规模国内监控、不部署自主武器\"的红线。\n\n这起辞职事件是OpenAI自2月28日宣布五角大楼协议以来面临的最具象征意义的人事震荡。此前竞争对手Anthropic拒绝了类似协议，五角大楼随后将Anthropic列为\"供应链风险\"。而OpenAI签约后ChatGPT卸载量暴涨295%，Claude一度登上App Store免费榜首位，反映出消费者层面的强烈不满。",
-      "categories": [
-        "event"
-      ],
-      "tags": [
-        "OpenAI",
-        "五角大楼",
-        "AI伦理",
-        "人事变动",
-        "Caitlin Kalinowski"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "OpenAI五角大楼协议引发持续反弹",
-      "summary": "OpenAI与五角大楼签约后连遭负面消息，员工公开批评、900人请愿要求增加AI安全限制。",
-      "url": "https://www.businessinsider.com/openai-pentagon-deal-fallout-backlash-anthropic-altman-amodei-trump-2026-3",
-      "best_url": "https://www.businessinsider.com/openai-pentagon-deal-fallout-backlash-anthropic-altman-amodei-trump-2026-3",
-      "full_content": "OpenAI于2月28日宣布与美国国防部达成AI技术合作协议后，公司正面临来自员工和消费者的持续性反弹浪潮。这份协议允许OpenAI技术在机密环境中使用，此前竞争对手Anthropic因坚持\"不用于自主武器和大规模监控\"的立场而拒绝了类似合作。\n\n在员工层面，近900名OpenAI和Google现任及前任员工联合签署请愿书，支持Anthropic的立场，反对将AI技术用于无人类监督的杀伤性武器和大规模监控。OpenAI研究科学家Aidan McLaughlin公开表示\"个人认为这笔交易不值得\"，另有员工向媒体透露，许多同事\"非常尊重\"Anthropic拒绝五角大楼的决定。技术人员Clive Chan则呼吁公司公开更多协议细节，并表示若发现协议违背承诺，将推动终止合同。\n\n在消费者层面，ChatGPT卸载量在协议公布后暴涨295%，Anthropic的Claude迅速攀升至美国App Store免费榜第一位。CEO Sam Altman随后宣布修改协议条款以回应批评，但未能平息风波。此事件凸显AI公司在商业利益与伦理承诺之间的深层矛盾，也使得\"AI军事化\"成为行业最敏感议题之一。",
-      "categories": [
-        "event",
-        "policy"
-      ],
-      "tags": [
-        "OpenAI",
-        "Anthropic",
-        "AI军事化",
-        "员工抗议",
-        "ChatGPT"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "英伟达Vera Rubin芯片仅选用三星和SK海力士HBM4",
-      "summary": "消息称英伟达下一代AI芯片Vera Rubin的HBM4内存供应商仅保留三星和SK海力士，美光被排除在外。",
-      "url": "https://en.bloomingbit.io/feed/news/107493",
-      "best_url": "https://en.bloomingbit.io/feed/news/107493",
-      "full_content": "据韩国经济日报报道，英伟达下一代AI加速器Vera Rubin的HBM4内存供应商已确定为三星电子和SK海力士两家，美光被排除在外。Vera Rubin实物将于3月16日在英伟达开发者大会GTC 2026上首次亮相，计划于今年下半年正式发布。\n\n英伟达对Vera Rubin的HBM4提出了极高的性能要求：运行速度需达到10Gbps以上，远超行业标准组织JEDEC设定的基准。单颗芯片将搭载16层堆叠的HBM4，总容量达576GB，超过AMD下一代AI加速器MI450的432GB配置。据报道，美光未能通过英伟达11Gbps规格的测试，因此被排除出首批Vera Rubin的供应链。\n\n三星在竞争中取得领先优势，已通过英伟达针对10Gbps和11Gbps两个速度档次的HBM4品质测试，并于上月开始向英伟达交付小批量成品。SK海力士也在与英伟达进行11Gbps产品的最终优化工作，两家韩国企业有望在本月内实现HBM4同步量产。\n\n这一格局意味着韩国半导体企业在未来一到两年内将主导HBM高端市场，而美光则面临在AI芯片供应链中被边缘化的风险。同时，普通DRAM价格上涨至HBM3E水平，也为三星在与英伟达的价格谈判中提供了更多筹码。",
+      "title": "微软发布Copilot Cowork联手Anthropic，推出99美元M365 E7套餐",
+      "summary": "微软推出基于Anthropic Claude Cowork的Copilot Cowork，AI Agent可跨M365全套应用自主执行任务，同步发布E7新许可层级。",
+      "url": "https://www.reuters.com/business/microsoft-taps-anthropic-copilot-cowork-push-ai-agents-2026-03-09/",
+      "best_url": "https://fortune.com/2026/03/09/microsoft-copilot-cowork-ai-agents-anthropic-e7-m365-saas/",
+      "full_content": "微软于3月9日发布了Microsoft 365 Copilot的第三波更新（Wave 3），核心产品是与Anthropic深度合作打造的Copilot Cowork——一个能在M365全套应用中自主执行多步骤复杂任务的AI Agent系统。例如，用户只需发出一条指令，Copilot Cowork就能自动完成会议准备工作：组装演示文稿、汇总财务数据、发送邮件并安排日程。\n\n微软AI工作首席营销官Jared Spataro表示，Copilot Cowork使用Anthropic的Claude模型作为推理引擎，并采用与Claude Cowork相同的Agent框架，但关键区别在于它运行在云端的企业租户内，而非本地设备，能够接入用户的邮件、文档、会议等全量企业数据。目前该功能已在部分客户中试点，将于3月内开放研究预览。\n\n与此同时，微软发布了全新的Microsoft 365 E7 Frontier Worker套餐，定价每用户每月99美元，打包了M365 E5、Copilot、Agent 365及全套安全产品，低于分别购买的117美元总价。Agent 365作为AI Agent的统一管控平台，将于5月1日正式上线，定价每用户每月15美元。微软透露，仅两个月预览期内，Agent 365注册表中已出现数千万个AI Agent，内部已有超过50万个Agent在运行。\n\n此次发布被视为微软对AI Agent竞争的全面回应。自Anthropic 1月推出Claude Cowork以来，微软股价已下跌超14%，投资者担忧AI Agent将削弱传统SaaS订阅模式。微软此举意在证明其平台仍是企业AI Agent落地的首选入口，目前Fortune 500中已有90%使用Copilot，80%正在使用微软AI Agent。",
       "categories": [
         "product"
       ],
       "tags": [
-        "NVIDIA",
-        "HBM4",
-        "Vera Rubin",
-        "三星",
-        "SK海力士"
+        "Microsoft",
+        "Copilot Cowork",
+        "Anthropic",
+        "AI Agent",
+        "M365 E7"
       ],
-      "context": "HBM（高带宽内存）是AI加速器的核心组件，通过垂直堆叠多层DRAM芯片实现超高带宽数据传输。HBM4为第六代技术，较上一代HBM3E在带宽和容量上大幅提升。目前全球HBM市场由SK海力士、三星和美光三家垄断，英伟达占据AI加速器市场超80%份额，其供应商选择直接决定内存厂商的行业地位和营收前景。",
-      "heat": 3
+      "context": "",
+      "heat": 5
     },
     {
-      "title": "博通AI芯片收入同比增长106%，预测2027年超千亿美元",
-      "summary": "博通Q1财报AI芯片收入同比翻倍，管理层预测2027财年AI芯片收入将超1000亿美元，摩根士丹利上调目标价。",
-      "url": "https://blockonomi.com/broadcom-avgo-stock-climbs-as-ai-chip-sales-more-than-double-in-first-quarter/",
-      "best_url": "https://www.analyticsinsight.net/news/broadcom-ai-revenue-jumps-106-as-custom-chips-drive-growth",
-      "full_content": "博通（Broadcom）发布2026财年第一季度财报，总收入达193.1亿美元，同比增长29%，调整后每股收益2.05美元，双双超出分析师预期。其中AI相关收入达到84亿美元，同比大幅增长106%，成为公司增长的核心引擎。\n\n从细分来看，定制AI加速器（ASIC）收入飙升140%，AI网络产品收入增长60%，显示博通在算力与数据中心互联两大赛道均获得强劲增长。半导体解决方案部门整体收入125亿美元，同比增长52%，远超基础设施软件部门1%的增速。\n\n管理层对前景保持乐观，预测第二季度总收入约220亿美元（同比增长47%），AI半导体收入将达107亿美元。公司还提出到2027财年AI芯片收入超过1000亿美元的远景目标，并计划到2027年出货至少100万颗3D堆叠芯片。此外，公司宣布了100亿美元的股票回购计划。\n\n财报发布后博通股价上涨4.8%，摩根士丹利将目标价上调至470美元。截至3月7日，博通市值约1.36万亿美元。不过也有分析师对毛利率从79.1%降至77%表示关注，认为定制ASIC业务利润率偏低，AI高速增长能否持续仍需后续季度验证。",
+      "title": "Anthropic发布Claude Code Review：多Agent代码审查工具",
+      "summary": "Anthropic推出Code Review功能，多Agent系统自动审查PR，每次审查费用15-25美元，内测中有意义反馈量提升3倍。",
+      "url": "https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/",
+      "best_url": "https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/",
+      "full_content": "Anthropic于3月9日正式推出Code Review功能，这是一款内置于Claude Code的多Agent代码审查工具，面向Claude for Teams和Claude for Enterprise客户开放研究预览。该工具旨在解决AI生成代码激增后带来的审查瓶颈——随着Claude Code大幅提升代码产出，Pull Request数量急剧增加，人工审查已成为交付的主要阻碍。\n\nAnthropic产品负责人Cat Wu介绍，Code Review集成GitHub后可自动分析每个Pull Request，直接在代码中留下评论和修复建议。与市面上其他AI代码审查工具不同的是，它专注于逻辑错误而非代码风格问题，以确保反馈具有即时可操作性。系统使用红、黄、紫三色标注问题严重程度，分别对应高优先级缺陷、潜在风险和历史遗留问题。\n\n技术架构上，Code Review采用多Agent并行工作模式：多个Agent从不同维度同时检查代码库，最终由一个聚合Agent汇总排序、去重并输出优先级排列的审查结果。由于是资源密集型产品，每次审查的Token消耗成本约为15至25美元。\n\n这一发布正值Anthropic的关键时刻。Claude Code自上线以来年化收入已突破25亿美元，企业订阅量年初至今翻了四倍。Uber、Salesforce、Accenture等大型企业客户是该产品的核心目标用户群。Code Review的推出标志着Anthropic正从代码生成向代码质量保障延伸，构建更完整的开发者工具链。",
       "categories": [
-        "finance"
+        "product"
       ],
       "tags": [
-        "Broadcom",
-        "AI芯片",
-        "财报",
-        "定制ASIC",
+        "Anthropic",
+        "Claude Code",
+        "Code Review",
+        "AI编程",
+        "开发者工具"
+      ],
+      "context": "",
+      "heat": 4
+    },
+    {
+      "title": "英国AI基建公司Nscale获20亿美元C轮融资，估值146亿",
+      "summary": "Nvidia领投，Citadel、Dell、联想等参投，创欧洲史上最大C轮。Nscale专注AI数据中心与云计算基础设施建设。",
+      "url": "https://www.reuters.com/business/nvidia-backed-uk-ai-firm-nscale-raises-2-billion-funding-round-2026-03-09/",
+      "best_url": "https://www.cnbc.com/2026/03/09/nscale-ai-data-center-nvidia-raise.html",
+      "full_content": "英国AI基础设施公司Nscale于3月9日宣布完成20亿美元C轮融资，估值达到146亿美元，创下欧洲科技公司有史以来最大的C轮融资记录。本轮由Aker ASA和8090 Industries领投，Nvidia参投，Citadel、Dell、Jane Street、联想、Nokia、Point72等知名机构跟投。此前Nscale在去年9月完成了11亿美元B轮融资，知情人士透露本轮估值较B轮翻了一倍以上。\n\n伴随融资公告，Nscale还宣布三位重量级董事加入董事会：前Meta首席运营官Sheryl Sandberg、前英国副首相兼Meta高管Nick Clegg以及前Yahoo总裁Susan Decker。公司创始人兼CEO Josh Payne表示，AI浪潮正在推动「人类历史上最大规模的基础设施建设」，Nscale要成为「超级智能的引擎」。\n\nNscale成立于2024年，专注于构建垂直整合的AI基础设施，涵盖GPU算力、网络、数据服务和编排软件。目前在英国、美国、挪威、葡萄牙和冰岛运营数据中心，并已与微软达成价值140亿美元的扩展合作，还与OpenAI合作在挪威建设了Stargate品牌AI数据中心。加上今年2月的14亿美元定期贷款和去年10月的4.33亿美元Pre-C轮，Nscale过去一年累计融资规模极为可观。公司已确认正在筹备IPO。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "Nscale",
+        "AI基础设施",
+        "融资",
+        "Nvidia",
         "数据中心"
       ],
-      "context": "",
+      "context": "Nscale是一家2024年成立的英国AI基础设施公司，定位为AI时代的「算力底座」，提供从GPU计算、网络到数据服务和编排软件的垂直整合方案。公司在欧美及北欧多地运营数据中心，已与微软、OpenAI等巨头建立深度合作。创始人Josh Payne此前在量化交易和云计算领域有丰富经验。",
       "heat": 4
     },
     {
-      "title": "Netflix收购本·阿弗莱克AI电影技术公司InterPositive",
-      "summary": "Netflix宣布收购奥斯卡影帝本·阿弗莱克创办的AI电影制作技术公司InterPositive，阿弗莱克出任高级顾问。",
-      "url": "https://finance.yahoo.com/news/netflix-buys-ben-afflecks-ai-104509792.html",
-      "best_url": "https://variety.com/2026/film/news/netflix-acquires-ben-affleck-ai-filmmaking-startup-interpositive-1236679498/",
-      "full_content": "Netflix宣布收购由奥斯卡影帝本·阿弗莱克于2022年创办的AI电影制作技术公司InterPositive，收购金额未披露。InterPositive的16人团队（包括工程师、研究员和创意人员）将整体并入Netflix，阿弗莱克本人将担任Netflix高级顾问。\n\n与市面上以文本生成视频为主的AI工具不同，InterPositive的技术路线独树一帜——它基于拍摄完成的素材（dailies）构建AI模型，让导演在后期制作中进行调色、重新打光、添加视觉特效等操作，核心理念是\"扩展创作自由而非取代创作者\"。阿弗莱克强调：\"这不是从无到有地生成内容，而是让电影人在已有素材基础上获得更多控制力。\"\n\n这是Netflix历史上罕见的收购行为，该公司一贯倾向自建而非外购。Netflix首席内容官贝拉·巴贾里亚表示，InterPositive的技术将为创作伙伴提供\"更多选择、更多控制和更多保护\"。Netflix计划向其创作合作伙伴开放该技术，但不会将其商业化对外销售。\n\n此举表明流媒体巨头正在从内容分发向制作工具层深度布局，AI正以更实用的方式渗透进好莱坞工作流程。",
+      "title": "开源AI工作流平台Dify完成3000万美元Pre-A轮融资",
+      "summary": "Dify提供可视化AI工作流构建器，支持Prompt管理、知识检索、调试和API部署，面向企业级Agent应用场景。",
+      "url": "https://venturebeat.com/business/dify-raises-30-million-series-pre-a-to-power-enterprise-grade-agentic-workflows",
+      "best_url": "https://venturebeat.com/business/dify-raises-30-million-series-pre-a-to-power-enterprise-grade-agentic-workflows",
+      "full_content": "开源AI工作流平台Dify宣布完成3000万美元Pre-A轮融资，估值达1.8亿美元。本轮由HSG领投，GL Ventures、Alt-Alpha Capital（Bessemer Venture Partners新拆分基金）、五源资本、瑞穗Leaguer Investment和NYX Ventures跟投。\n\nDify成立于2023年，定位为帮助团队构建、部署和运营生产级AI应用与Agent工作流的开源平台。平台提供可视化工作流构建器，集成了Prompt管理、工具集成、知识检索、调试能力和API部署等企业级基础设施。目前Dify已跻身GitHub历史最高星标开源项目之列，在全球超过140万台设备上运行，商业版本已被超过2000个团队和280家企业采用，客户包括航运巨头马士基、ETS、安克创新和诺华制药等。\n\nDify创始人兼CEO张路宇表示，AI正从Demo阶段走向生产系统，团队需要可信赖的基础设施。Dify让团队能够将领域知识和工作流转化为生产级AI应用，而无需每次重建技术栈。企业用户已利用该平台构建文档审核流水线、企业知识驱动的内部Copilot、带升级路径的客服自动化以及发票审计等运营工作流。\n\n本轮融资将用于加速2026年产品路线图，包括将前沿Agent能力集成到核心产品、组建专注性能和合规的企业产品团队、启动开发者社区支持计划，以及持续降低团队采用门槛。在AI应用层加速发展的背景下，Dify作为标准化AI开发工作流的平台型产品，有望在企业级Agent赛道占据关键生态位。",
       "categories": [
-        "product",
-        "event"
+        "funding"
       ],
       "tags": [
-        "Netflix",
-        "InterPositive",
-        "AI电影",
-        "本·阿弗莱克",
-        "收购"
+        "Dify",
+        "开源AI",
+        "Agent工作流",
+        "融资",
+        "企业级AI"
       ],
-      "context": "InterPositive是本·阿弗莱克2022年创办的AI电影技术公司，此前一直处于隐身模式。与Sora等生成式视频工具不同，InterPositive专注于后期制作环节，利用AI模型处理已拍摄的影像素材，帮助导演进行调色、打光和视觉特效等工作，强调\"以电影人为中心\"的技术理念。",
-      "heat": 3
-    },
-    {
-      "title": "OpenAI与Anthropic竞相IPO，均目标年内上市",
-      "summary": "OpenAI加速IPO准备瞄准Q4上市估值或达万亿，Anthropic也启动上市程序，两大AI巨头争夺先发优势。",
-      "url": "https://www.digitaltoday.co.kr/en/view/31985/openai-anthropic-who-will-list-first-ipo-target-within-this-year",
-      "best_url": "https://investorplace.com/hypergrowthinvesting/2026/03/the-openai-ipo-could-be-the-biggest-ai-ipo-ever/",
-      "full_content": "2026年有望成为AI行业最重要的IPO之年。OpenAI正加速推进上市准备，目标锁定2026年第四季度，估值可能接近万亿美元级别，若成功将成为史上最大科技IPO之一。OpenAI目前年化收入超过200亿美元，保持三位数增长率，月活用户达8.1亿，企业客户超过100万家。今年早些时候，公司刚完成一轮由亚马逊、软银、英伟达和微软参投的融资，估值达7300亿美元。\n\n与此同时，Anthropic也在积极筹备上市。2025年12月，Anthropic聘请Wilson Sonsini律所支持IPO准备工作，并与多家大型投行进行了初步接触。2026年1月，公司启动新一轮融资，目标估值约3500亿美元，较2025年9月1830亿美元的Series F估值接近翻倍。Anthropic预计2026年年化收入可达260亿美元，企业客户收入占比持续提升。\n\n两大AI巨头竞相上市的背后，是私募市场估值已推至极限、公司需要通过公开市场获得更大规模资金支持的现实。谁率先完成IPO，不仅关乎融资优势，更将在品牌影响力和人才争夺上占得先机。分析人士认为，Anthropic可能在2026年下半年或2027年上市，具体时间取决于其新一轮融资进展和市场环境。",
-      "categories": [
-        "finance"
-      ],
-      "tags": [
-        "OpenAI",
-        "Anthropic",
-        "IPO",
-        "估值",
-        "AI融资"
-      ],
-      "context": "",
+      "context": "Dify是一个广受欢迎的开源AI应用开发平台，由张路宇于2023年创立。平台核心理念是让企业从「AI方案购买者」转变为「AI方案构建者」，通过可视化界面降低Agent工作流的构建门槛。Dify在GitHub上拥有极高星标数，是开源AI基础设施领域的标杆项目之一，在国内开发者社区也有广泛影响力。",
       "heat": 4
     },
     {
-      "title": "三星SDI将展示面向AI机器人的全固态电池原型",
-      "summary": "三星SDI宣布将在本周展示专为物理AI（机器人）设计的全固态电池样品，采用软包形态实现轻量化设计。",
-      "url": "https://en.yna.co.kr/view/AEN20260309001000320",
-      "best_url": "https://en.yna.co.kr/view/AEN20260309001000320",
-      "full_content": "三星SDI宣布将于本周在首尔举办的InterBattery 2026展会上，首次展示面向物理AI（机器人）领域的全固态电池原型样品。该电池采用软包（pouch）形态设计，旨在为人形机器人、各类机器人平台、航空平台及新一代可穿戴设备提供兼具高安全性与高功率输出的电池方案。\n\n三星SDI表示，此前公司主要聚焦于方形全固态电池在电动汽车领域的应用，此次向软包形态的扩展标志着其技术路线的重大拓宽。公司计划于2027年下半年启动该电池的量产，届时将成为全球最早实现全固态电池商用化的厂商之一。\n\n本次展会以\"Inside AI\"为主题，三星SDI的展位将展示电池如何嵌入不同工业场景，包括实际运行中的IT数据中心等应用案例。随着具身智能和人形机器人产业的快速升温，电池技术已成为制约机器人续航和性能的关键瓶颈。全固态电池相比传统锂电池具有更高能量密度、更好安全性，被视为下一代动力电池的核心方向。三星SDI此举表明，电池巨头正加速将全固态技术从汽车赛道向机器人及AI硬件赛道延伸。",
+      "title": "SolveAI获5000万美元融资，扩展企业AI自动化平台",
+      "summary": "SolveAI专注企业智能自动化和可扩展AI解决方案，本轮融资将用于平台能力扩展和市场拓展。",
+      "url": "https://ventureburn.com/solveai-secures-50m-to-expand-enterprise-ai-platform/",
+      "best_url": "https://ventureburn.com/solveai-secures-50m-to-expand-enterprise-ai-platform/",
+      "full_content": "总部位于伦敦的AI初创公司SolveAI宣布获得5000万美元融资，其中包括由GV（Google Ventures）参投的4500万美元A轮融资，以及此前未披露的由Accel领投的500万美元pre-seed轮。其他投资者包括Northzone、Mantis VC和NeverLift等。值得注意的是，公司成立仅约8个月便完成了总计5000万美元的募资，节奏在同期初创公司中极为突出。\n\nSolveAI由前Palantir员工Steve Basher创立，平台核心理念是让企业员工用自然语言「说出」自己需要的软件，无需编程即可构建企业级应用。与市面上大多面向个人开发者的AI编程工具不同，SolveAI专注于企业场景，覆盖运营、财务、供应链等多个部门。平台能够理解组织内部的数据、工作流和策略上下文，生成的应用可无缝接入现有基础设施，并符合合规与安全要求。\n\nBasher认为，缺乏对企业内部运营的深入理解，AI生成的工具只能产出功能性草稿而非真正可用的解决方案，因此上下文理解能力是企业AI的关键差异点。本轮融资将用于增强平台能力、招募工程人才并扩大企业客户覆盖，重点瞄准制造、零售和金融服务等存在大量遗留系统和内部软件积压的行业。SolveAI的快速崛起反映出市场对降低企业软件开发依赖、以AI重塑内部工具构建方式的强烈需求。",
       "categories": [
-        "product",
-        "research"
+        "funding"
       ],
       "tags": [
-        "三星SDI",
-        "全固态电池",
-        "具身智能",
-        "机器人",
-        "InterBattery"
+        "SolveAI",
+        "企业AI",
+        "自然语言编程",
+        "融资",
+        "no-code"
       ],
-      "context": "",
-      "heat": 3
-    },
-    {
-      "title": "习近平敦促江苏引领AI产业发展",
-      "summary": "中国江苏省宣布将大力推进AI应用于制造业升级，响应习近平对该省引领科技驱动增长的要求。",
-      "url": "https://enterpriseai.economictimes.indiatimes.com/news/industry/chinas-jiangsu-province-focuses-on-ai-innovation-amid-xi-jinpings-call-for-tech-leadership/129259855",
-      "best_url": "https://enterpriseai.economictimes.indiatimes.com/news/industry/chinas-jiangsu-province-focuses-on-ai-innovation-amid-xi-jinpings-call-for-tech-leadership/129259855",
-      "full_content": "在全国两会期间，习近平参加江苏代表团审议时强调，江苏要在发展科技驱动型经济中走在前列。随后，江苏省多位官员密集表态，围绕AI产业布局释放了一系列政策信号。\n\n江苏省省长刘小涛透露，目前江苏省拥有超过1500家人工智能企业，算力规模全国排名第二，已有66个大模型和283个算法完成监管备案。交通领域官员吴永红表示，江苏将深化\"AI+\"交通行动，开发约50个试点应用，利用AI提升基础设施管理和物流服务效率。扬州市市长郑海涛介绍，当地已在汽车零部件、环保装备等行业建成186条智能化产线，并推出算力补贴和AI人才计划等激励措施。\n\n江苏是中国第二大省域经济体，2025年GDP约14万亿元人民币（约2万亿美元），经济体量超过西班牙，是中国最重要的制造业和出口基地之一。在中美贸易摩擦升级的背景下，北京正大力推动AI赋能制造业升级以维持产业竞争力，江苏凭借其雄厚的产业基础和算力资源，被寄予厚望。",
-      "categories": [
-        "policy"
-      ],
-      "tags": [
-        "两会",
-        "江苏",
-        "AI政策",
-        "制造业升级",
-        "AI+"
-      ],
-      "context": "",
+      "context": "SolveAI是一家2025年成立的伦敦AI初创公司，创始人Steve Basher曾任职于大数据分析公司Palantir。公司属于近期兴起的「AI辅助企业软件开发」赛道，与面向开发者的Copilot类工具不同，SolveAI面向非技术业务人员，让他们通过自然语言直接构建企业级应用，属于no-code/low-code与AI结合的新方向。",
       "heat": 3
     }
   ]

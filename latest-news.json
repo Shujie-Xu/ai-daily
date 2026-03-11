@@ -25,7 +25,8 @@
         "AMI",
         "NVIDIA",
         "世界模型"
-      ]
+      ],
+      "summary": "Meta前首席AI科学家杨立昆（Yann LeCun）创办的初创公司Advanced Machine Intelligence (AMI)宣布获得10.3亿美元"
     },
     {
       "title": "OpenAI收购Promptfoo以增强AI Agent安全性",
@@ -49,7 +50,8 @@
         "OpenAI",
         "Promptfoo",
         "AI Agent"
-      ]
+      ],
+      "summary": "OpenAI宣布收购Promptfoo，旨在加强其AI Agent平台的安全性。Promptfoo的技术将集成到OpenAI Frontier平台中，为企业提供"
     },
     {
       "title": "Anthropic发布'Code Review'功能，自动化分析代码逻辑错误",
@@ -72,7 +74,8 @@
         "Anthropic",
         "Claude Code",
         "Code Review"
-      ]
+      ],
+      "summary": "Anthropic在Claude Code中推出了全新的'Code Review'功能。这是一个多Agent系统，可以自动分析AI生成的代码，标记潜在的逻辑错误"
     },
     {
       "title": "Meta收购AI Agent社交网络Moltbook",
@@ -97,7 +100,8 @@
         "Meta",
         "Moltbook",
         "AI Agent"
-      ]
+      ],
+      "summary": "Meta宣布收购专门为AI Agent构建的社交网络平台Moltbook。Moltbook的创始人将加入Meta的AI研究团队，此举显示出Meta在推动AI A"
     },
     {
       "title": "Anthropic起诉阻击五角大楼黑名单，揭露公司财务现状",
@@ -122,7 +126,8 @@
         "Anthropic",
         "五角大楼",
         "财务数据"
-      ]
+      ],
+      "summary": "Anthropic起诉以阻止美国国防部将其列入黑名单。诉讼文件披露，Anthropic的累计销售额超过50亿美元，而此前宣传的“运行率”高达190亿美元，这一差"
     },
     {
       "title": "德国初创公司Polarise计划建造30MW主权AI数据中心",
@@ -149,7 +154,8 @@
         "德国",
         "数据中心",
         "主权AI"
-      ]
+      ],
+      "summary": "德国初创公司Polarise计划建造一个新的30兆瓦AI数据中心，旨在将德国国内运行的计算能力翻倍。这是欧洲国家推动对关键技术基础设施主权控制努力的一部分。"
     }
   ]
 }

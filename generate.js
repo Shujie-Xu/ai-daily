@@ -8,9 +8,14 @@ const fs = require('fs');
 const path = require('path');
 
 const TEMPLATE = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
+const OG_TEMPLATE_PATH = path.join(__dirname, 'og-template.html');
 const OUTPUT_DIR = path.join(__dirname, 'docs');
 const AUDIO_DIR  = path.join(OUTPUT_DIR, 'audio');
+const OG_DIR = path.join(OUTPUT_DIR, 'og');
 const TTS_SCRIPT = path.join(__dirname, 'tts_gen.py');
+const DEFAULT_OG_IMAGE_URL = 'https://shujie-xu.github.io/ai-daily/og.png';
+
+if (!fs.existsSync(OG_DIR))     fs.mkdirSync(OG_DIR, { recursive: true });
 
 if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 if (!fs.existsSync(AUDIO_DIR))  fs.mkdirSync(AUDIO_DIR, { recursive: true });
@@ -19,6 +24,78 @@ if (!fs.existsSync(AUDIO_DIR))  fs.mkdirSync(AUDIO_DIR, { recursive: true });
 function titleHash(title) {
   const crypto = require('crypto');
   return crypto.createHash('md5').update(title || '').digest('hex').slice(0, 8);
+}
+
+function escapeHtml(text = '') {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function truncateOgTitle(text = '', maxChars = 28) {
+  const chars = Array.from(String(text || '').trim().replace(/\s+/g, ' '));
+  if (chars.length <= maxChars) return chars.join('');
+  return chars.slice(0, Math.max(0, maxChars - 1)).join('') + '…';
+}
+
+function formatOgDateDisplay(dateStr) {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const dt = new Date(Date.UTC(year, month - 1, day));
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(dt);
+}
+
+function generateOgImage(articles, dateStr) {
+  const { execFileSync } = require('child_process');
+  const outputPath = path.join(OG_DIR, `${dateStr}.jpg`);
+  const ogImageUrl = `https://shujie-xu.github.io/ai-daily/og/${dateStr}.jpg`;
+
+  if (fs.existsSync(outputPath) && fs.statSync(outputPath).size > 0) {
+    return { ok: true, outputPath, ogImageUrl, skipped: true };
+  }
+
+  try {
+    const ogTemplate = fs.readFileSync(OG_TEMPLATE_PATH, 'utf8');
+    const topTitles = articles.slice(0, 3).map(a => truncateOgTitle(a.title || ''));
+    while (topTitles.length < 3) topTitles.push('今日 AI 动态整理中');
+
+    const html = ogTemplate
+      .replace(/{{DATE_DISPLAY}}/g, escapeHtml(formatOgDateDisplay(dateStr)))
+      .replace(/{{TOTAL}}/g, escapeHtml(String(articles.length || 0)))
+      .replace(/{{T1}}/g, escapeHtml(topTitles[0]))
+      .replace(/{{T2}}/g, escapeHtml(topTitles[1]))
+      .replace(/{{T3}}/g, escapeHtml(topTitles[2]));
+
+    const tempHtmlPath = `/tmp/og-render-${dateStr}.html`;
+    fs.writeFileSync(tempHtmlPath, html, 'utf8');
+
+    execFileSync('chromium', [
+      '--headless=new',
+      '--no-sandbox',
+      '--disable-gpu',
+      '--hide-scrollbars',
+      '--virtual-time-budget=3000',
+      '--window-size=1200,630',
+      `--screenshot=${outputPath}`,
+      `file://${tempHtmlPath}`,
+    ], { timeout: 30000, stdio: 'pipe' });
+
+    if (!fs.existsSync(outputPath) || fs.statSync(outputPath).size === 0) {
+      throw new Error('Chromium screenshot output missing or empty');
+    }
+
+    return { ok: true, outputPath, ogImageUrl, skipped: false };
+  } catch (error) {
+    console.warn(`⚠️ OG 图生成失败：${error.message}`);
+    return { ok: false, outputPath: null, ogImageUrl: DEFAULT_OG_IMAGE_URL, error: error.message };
+  }
 }
 
 // ── TTS: 为文章生成音频 ──────────────────────────────────────
@@ -275,6 +352,7 @@ function generate(newsData) {
 
   const archiveHtml = renderArchive(OUTPUT_DIR, fileDate);
   const archiveNav  = renderArchiveNav(OUTPUT_DIR, fileDate);
+  const ogResult = generateOgImage(articles, fileDate);
 
   // OG description: top 3 headlines
   const top3 = articles.slice(0, 3).map(a => a.title).join(' · ');
@@ -310,6 +388,7 @@ function generate(newsData) {
     .replace(/{{SEARCH_COUNT}}/g, newsData.searchCount || '?')
     .replace(/{{DIMENSIONS}}/g, newsData.dimensions || '模型/产品/融资/财务/研究/政策/事件')
     .replace(/{{OG_DESC}}/g, ogDesc)
+    .replace(/{{OG_IMAGE_URL}}/g, ogResult.ogImageUrl)
     .replace(/{{ARCHIVE_NAV}}/g, archiveNav)
     .replace(/{{ARTICLES_JSON}}/g, articlesJson)
     .replace(/{{FILTER_BAR}}/g, filterBarHtml)
@@ -365,7 +444,12 @@ function generate(newsData) {
   );
 
   console.log(`✅ Generated: docs/data/${fileDate}.json + index.html`);
-  return { latestFile, date: fileDate };
+  if (ogResult.ok) {
+    console.log(`🖼️  OG image ${ogResult.skipped ? 'reused' : 'generated'}: ${path.relative(__dirname, ogResult.outputPath)}`);
+  } else {
+    console.log(`🖼️  OG image fallback: ${ogResult.ogImageUrl}`);
+  }
+  return { latestFile, date: fileDate, og: ogResult };
 }
 
 // CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD] [--no-tts] [--force-tts]

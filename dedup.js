@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /**
- * dedup.js — AI 日报事件级语义去重
+ * dedup.js — AI 日报去重辅助脚本（纯程序化，无需 API key）
  *
- * 读取 latest-news.json（候选）和 seen-events.json（指纹库），
- * 调用 Claude API 做语义判断，输出 keep 列表并过滤 latest-news.json。
+ * 职责：
+ *   1. 读取 latest-news.json（候选）和 seen-events.json（历史指纹）
+ *   2. 精确标题匹配去重（不需要 AI）
+ *   3. 输出给 subagent 用的结构化数据文件 /tmp/dedup-input.json
+ *   4. --apply 模式：读取 subagent 写入的 /tmp/dedup-result.json，应用到 latest-news.json
  *
- * 用法：node dedup.js [--dry-run]
- *   --dry-run  只打印结果，不写文件
+ * 用法：
+ *   node dedup.js             → 生成 /tmp/dedup-input.json（供 subagent 读取）
+ *   node dedup.js --apply     → 应用 /tmp/dedup-result.json 到 latest-news.json
+ *   node dedup.js --dry-run   → 预览，不写文件
  */
 
 const fs = require('fs');
@@ -15,26 +20,32 @@ const path = require('path');
 const DIR = path.dirname(process.argv[1]) || __dirname;
 const NEWS_PATH = path.join(DIR, 'latest-news.json');
 const SEEN_PATH = path.join(DIR, 'seen-events.json');
-const DRY_RUN = process.argv.includes('--dry-run');
+const INPUT_PATH = '/tmp/dedup-input.json';
+const RESULT_PATH = '/tmp/dedup-result.json';
 
-// ── 读取 API key ──
-function getApiKey() {
-  // 1. 环境变量
-  if (process.env.ANTHROPIC_API_KEY) return process.env.ANTHROPIC_API_KEY;
-  // 2. OpenClaw auth-profiles.json
-  try {
-    const ap = JSON.parse(fs.readFileSync(
-      path.join(process.env.HOME, '.openclaw/agents/main/agent/auth-profiles.json'), 'utf8'
-    ));
-    const p = ap.profiles?.['anthropic:default'] || {};
-    return p.token || p.apiKey || p.credentials?.token || '';
-  } catch { return ''; }
+const DRY_RUN = process.argv.includes('--dry-run');
+const APPLY = process.argv.includes('--apply');
+
+// ── 工具：规范化标题（去空格、标点、大小写）
+function normalize(title) {
+  return title.replace(/[\s\u3000，。！？、：；「」【】""''《》\-_\/\\]/g, '').toLowerCase();
+}
+
+// ── 精确匹配去重（阶段一，快速过滤标题完全相同的）
+function exactDedup(candidates, activeSeen) {
+  const seenNorm = new Set(activeSeen.map(e => normalize(e.title)));
+  const keep = [], removed = [];
+  candidates.forEach((c, i) => {
+    if (seenNorm.has(normalize(c.title))) {
+      removed.push({ idx: i, title: c.title, reason: '精确标题匹配' });
+    } else {
+      keep.push(i);
+    }
+  });
+  return { keep, removed };
 }
 
 async function main() {
-  const apiKey = getApiKey().trim();
-  if (!apiKey) { console.error('❌ No Anthropic API key found'); process.exit(1); }
-
   const news = JSON.parse(fs.readFileSync(NEWS_PATH, 'utf8'));
   const seen = JSON.parse(fs.readFileSync(SEEN_PATH, 'utf8'));
 
@@ -47,93 +58,69 @@ async function main() {
     process.exit(0);
   }
 
-  if (activeSeen.length === 0) {
-    console.log('✅ 指纹库为空，全部保留（' + news.articles.length + ' 篇）');
-    process.exit(0);
+  if (APPLY) {
+    // ── Apply 模式：读取 subagent 的判断结果并写回
+    if (!fs.existsSync(RESULT_PATH)) {
+      console.error('❌ 找不到 /tmp/dedup-result.json，subagent 可能未完成');
+      process.exit(1);
+    }
+    const result = JSON.parse(fs.readFileSync(RESULT_PATH, 'utf8'));
+    const keep = new Set(result.keep || []);
+    const removed = result.removed || [];
+
+    console.log(`\n✅ 保留 ${keep.size} 篇，去除 ${removed.length} 篇：`);
+    removed.forEach(r => {
+      const title = news.articles[r.idx]?.title?.slice(0, 40) || '?';
+      console.log(`   ❌ [${r.idx}] ${title} → ${r.reason}`);
+    });
+
+    if (!DRY_RUN) {
+      news.articles = news.articles.filter((_, i) => keep.has(i));
+      fs.writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2));
+      console.log(`\n📝 已写回 ${NEWS_PATH}（${news.articles.length} 篇）`);
+    } else {
+      console.log('\n🔍 dry-run，不写文件');
+    }
+    return;
   }
 
-  // 构造候选列表（精简字段）
+  // ── 准备模式：精确去重 + 生成 subagent 输入文件
   const candidates = news.articles.map((a, i) => ({
-    idx: i, title: a.title, summary: a.summary
+    idx: i, title: a.title, summary: a.summary || ''
   }));
 
-  // 构造 prompt
-  const prompt = `你是去重判断员。判断候选新闻是否与事件指纹库中的事件重复。
+  // 阶段一：精确匹配（免 AI）
+  const { keep: keepAfterExact, removed: exactRemoved } = exactDedup(candidates, activeSeen);
 
-判断规则：
-- 如果候选新闻与指纹库中某条事件描述的是「同一件事」（相同公司/主体 + 相同事件类型），则标记为重复
-- 判断维度：融资=相同公司+融资事件 / 产品发布=相同公司+同一产品 / 政策=相同法规/机构+同一政策动向
-- 「同一事件的后续报道/不同角度」也算重复
-- 不同公司、不同事件类型 → 不重复
-- 宽松判断：如果不确定，偏向保留
-
-候选新闻：
-${JSON.stringify(candidates, null, 2)}
-
-事件指纹库（${activeSeen.length} 条）：
-${JSON.stringify(activeSeen.map(e => ({ title: e.title, date: e.date })), null, 2)}
-
-输出纯 JSON（不要 markdown code fence，不要任何额外文字）：
-{"keep":[0,1,3],"removed":[{"idx":2,"reason":"与指纹库 'xxx' 描述同一事件"}]}`;
-
-  console.log(`📋 候选 ${candidates.length} 篇，指纹库 ${activeSeen.length} 条`);
-  console.log('🤖 调用 Claude API 做语义去重...');
-
-  // 调用 Anthropic Messages API（用 haiku 即可，便宜快速）
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01'
-    },
-    body: JSON.stringify({
-      model: 'claude-opus-4-6',
-      max_tokens: 2000,
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    console.error('❌ API 错误:', res.status, err);
-    process.exit(1);
+  if (exactRemoved.length > 0) {
+    console.log(`\n🔍 精确匹配去除 ${exactRemoved.length} 篇：`);
+    exactRemoved.forEach(r => console.log(`   ❌ [${r.idx}] ${r.title.slice(0, 45)}`));
   }
 
-  const data = await res.json();
-  const text = data.content?.[0]?.text || '';
+  // 剩余候选（精确匹配没过滤的）送给 subagent 做语义判断
+  const semanticCandidates = keepAfterExact.map(i => candidates[i]);
 
-  // 解析 JSON（容忍 markdown fence）
-  let result;
-  try {
-    const jsonStr = text.replace(/```json?\n?/g, '').replace(/```/g, '').trim();
-    result = JSON.parse(jsonStr);
-  } catch (e) {
-    console.error('❌ 无法解析返回结果:', text.slice(0, 500));
-    process.exit(1);
+  if (semanticCandidates.length === 0) {
+    // 精确去重已过滤完，直接应用
+    console.log('✅ 精确去重已处理完所有重复，无需语义判断');
+    const result = { keep: [], removed: exactRemoved };
+    fs.writeFileSync(RESULT_PATH, JSON.stringify(result, null, 2));
+    console.log('💾 已写入 /tmp/dedup-result.json，运行 --apply 应用');
+    return;
   }
 
-  const keep = new Set(result.keep || []);
-  const removed = result.removed || [];
+  // 生成 subagent 输入文件
+  const input = {
+    exactRemoved,          // 精确匹配已去除的
+    candidates: semanticCandidates,   // 待语义判断的候选
+    seen: activeSeen.map(e => ({ title: e.title, date: e.date }))
+  };
 
-  console.log(`\n✅ 保留 ${keep.size} 篇，去除 ${removed.length} 篇：`);
-  removed.forEach(r => console.log(`   ❌ [${r.idx}] ${candidates[r.idx]?.title?.slice(0, 40)} → ${r.reason}`));
-  console.log('   保留:');
-  news.articles.forEach((a, i) => { if (keep.has(i)) console.log(`   ✅ [${i}] ${a.title.slice(0, 50)}`); });
-
-  if (DRY_RUN) {
-    console.log('\n🔍 dry-run 模式，不写文件');
-    process.exit(0);
-  }
-
-  // 过滤并写回
-  news.articles = news.articles.filter((_, i) => keep.has(i));
-  fs.writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2));
-  console.log(`\n📝 已写回 ${NEWS_PATH}（${news.articles.length} 篇）`);
-
-  // 打印 token 用量
-  const usage = data.usage || {};
-  console.log(`💰 tokens: in=${usage.input_tokens || '?'} out=${usage.output_tokens || '?'}`);
+  fs.writeFileSync(INPUT_PATH, JSON.stringify(input, null, 2));
+  console.log(`\n📋 精确去重后剩余 ${semanticCandidates.length} 篇需语义判断`);
+  console.log(`💾 输入数据已写入 ${INPUT_PATH}`);
+  console.log(`\n⏭️  下一步：spawn subagent 读取 ${INPUT_PATH} 做语义去重，结果写入 ${RESULT_PATH}`);
+  console.log(`   然后运行：node dedup.js --apply`);
 }
 
 main().catch(e => { console.error('❌', e.message); process.exit(1); });

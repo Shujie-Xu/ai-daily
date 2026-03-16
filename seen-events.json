@@ -1,305 +1,5 @@
 [
   {
-    "title": "路透独家：DeepSeek违禁使用Nvidia Blackwell芯片训练最新模型",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "Anthropic指控DeepSeek等三家中国AI公司大规模蒸馏Claude模型",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "IBM股价暴跌13%！Anthropic宣称Claude Code可自动化COBOL现代化",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "OpenAI Frontier进军企业市场，千亿美元SaaS末日恐慌横扫科技股",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "Gemini 3.1 Pro深度评测：ARC-AGI-2得分77.1%，推理能力翻倍",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "MIT研究：30款主流AI智能体失控，普遍缺乏安全披露和停止机制",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "Anthropic完成300亿美元G轮融资，估值3800亿刷新AI历史记录",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "AI投资者忠诚度消亡：OpenAI的VC们同时重仓押注Anthropic",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "ChatGPT正式引入广告，OpenAI商业模式迎历史性转变",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "OpenAI x Jony Ive AI硬件设备延迟，预计2027年才能交付用户",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "智谱GLM-5公开技术细节：7440亿参数，瞄准Agentic Engineering范式",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "智谱AI正式启动IPO，估值超200亿成大模型六小虎首家",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "Giant获800万美元种子轮，AI互动故事平台让儿童从内容消费者变创作者",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "Virtuals Protocol推出Eastworld Labs，加速人形机器人从数字走向物理世界",
-    "date": "2026-02-23",
-    "expires": "2026-03-09"
-  },
-  {
-    "title": "赫格塞斯威胁将Anthropic列入军方黑名单，AI安全护栏引发政企博弈",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "英伟达Q4财报今晚发布，华尔街在AI恐慌中期待定心丸",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Anthropic发布10款企业插件：从投行到HR，连续冲击传统软件市场",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "智谱AI发布GLM-5：744B参数MoE模型，国产昇腾芯片训练，MIT开源",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Wayve估值升至86亿美元：Uber、英伟达、奔驰等联合押注泛化式自动驾驶AI",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Meta与AMD签署6GW算力合作大单，拿到10%股权认购权",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Nimble完成4700万美元B轮：给AI智能体提供「干净可信」的实时网络数据",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "OpenAI COO直言：AI尚未真正渗透企业业务流程",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Oura发布首款自研大模型，专门服务女性健康全周期",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "西班牙AI独角兽Multiverse开源HyperNova 60B：量子压缩技术让大模型「瘦身」一半",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Uber工程师造了个「AI版老板」用来练兵，90%的工程师已在用AI",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "New Relic推出无代码AI智能体平台，专攻可观测性垂直场景",
-    "date": "2026-02-24",
-    "expires": "2026-03-10"
-  },
-  {
-    "title": "Anthropic更新责任扩展政策：放弃暂停部署承诺",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "Anthropic收购计算机操控AI初创公司Vercept",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "AI数据中心扩张引发公众反对浪潮，立法议程被迫调整",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "白宫要求AI公司承担因数据中心引发的电价上涨成本",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "加拿大考虑立法监管AI聊天机器人，起因是枪击案未报告事件",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "RLWRLD完成2600万美元Seed 2轮，总融资达4100万美元",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "Rowspace完成5000万美元融资，构建机构金融数据AI平台",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "Adobe Firefly视频编辑器新增Quick Cut：AI自动生成初剪",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "Khosla Ventures合伙人Keith Rabois押注Comp：AI驱动的HR薪酬软件",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "印度AI热潮：本土企业以牺牲短期营收换取用户规模",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "Koah完成2050万美元A轮融资，构建AI原生变现平台",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "Harbinger收购自动驾驶软件公司Phantom AI，推进技术垂直整合",
-    "date": "2026-02-26",
-    "expires": "2026-03-12"
-  },
-  {
-    "title": "月之暗面两个月内完成逾12亿美元融资，估值突破100亿美元晋升十角兽",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Google 发布 Nano Banana 2：更快的图像生成模型成为 Gemini 应用默认选项",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Mistral AI 与埃森哲达成全球合作，继 OpenAI、Anthropic 后第三家获大咨询公司背书",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Salesforce CEO 回应SaaSpocalypse：这不是我们第一次经历颠覆，AI 代理是新机遇",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Snowflake 因 AI 工作负载从试点转生产而创纪录预订额，股价大涨",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Harper 完成 4680 万美元融资，打造 AI 原生保险经纪平台",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Letter AI 完成 4000 万美元 B 轮融资，Battery Ventures 领投，主攻 AI 销售赋能",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Gushwork AI 获 900 万美元种子轮，押注 AI 搜索为企业获客新入口",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "MeltPlan 获 Bessemer 领投 1000 万美元种子轮，用 AI 重构施工前规划环节",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "Read AI 推出邮件 AI 数字分身 Ada，代你处理日程与知识库问答",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "美国 AI 立法周报（2月27日）：纽约 RAISE 法案经验分享，各州监管分歧加剧",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "欧盟科技政策简报（2026年2月）：AI 法案实施进展与数字权利最新动态",
-    "date": "2026-02-27",
-    "expires": "2026-03-13"
-  },
-  {
-    "title": "OpenAI开除员工：用内部机密信息在Polymarket预测市场交易",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "中国AI模型调用量2月首超美国：国产四款大模型霸占全球前五",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "Dell AI服务器需求爆炸：预测2027财年营收翻倍达500亿美元",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "Block大力推进AI后大规模裁员：员工说被鼓励拥抱AI、最终却被开除",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "智谱AI港股上市不足两月，市值暴涨突破2500亿港元",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "WIRED独家：OpenAI员工下注Polymarket押注公司产品发布日期",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "加拿大政府陷困境：如何监管AI聊天机器人",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "AI监管进入2026年美国竞选议题：议员们如何在监管与创新间走钢丝",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "AI Index报告：AI系统能力提升速度已超出社会与机构的适应速度",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
-    "title": "华尔街因AI焦虑再度承压：AI输家股票遭到重抛",
-    "date": "2026-02-28",
-    "expires": "2026-03-14"
-  },
-  {
     "title": "特朗普封禁Anthropic，OpenAI趁机签署五角大楼合同",
     "date": "2026-03-01",
     "expires": "2026-03-15"
@@ -693,5 +393,265 @@
     "title": "习近平敦促江苏引领AI产业发展",
     "date": "2026-03-09",
     "expires": "2026-03-23"
+  },
+  {
+    "title": "微软发布Copilot Cowork联手Anthropic，推出99美元M365 E7套餐",
+    "date": "2026-03-10",
+    "expires": "2026-03-24"
+  },
+  {
+    "title": "Anthropic发布Claude Code Review：多Agent代码审查工具",
+    "date": "2026-03-10",
+    "expires": "2026-03-24"
+  },
+  {
+    "title": "英国AI基建公司Nscale获20亿美元C轮融资，估值146亿",
+    "date": "2026-03-10",
+    "expires": "2026-03-24"
+  },
+  {
+    "title": "开源AI工作流平台Dify完成3000万美元Pre-A轮融资",
+    "date": "2026-03-10",
+    "expires": "2026-03-24"
+  },
+  {
+    "title": "SolveAI获5000万美元融资，扩展企业AI自动化平台",
+    "date": "2026-03-10",
+    "expires": "2026-03-24"
+  },
+  {
+    "title": "Anthropic起诉五角大楼：拒绝军事AI授权遭供应链风险黑名单，OpenAI谷歌员工联名声援",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "NVIDIA GTC 2026预热：黄仁勋承诺展示令世界震惊的芯片，Agentic AI时代到来",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "Apple发布MacBook Pro M5 Pro/Max：本地AI性能提升4倍，每个GPU核心内置神经加速器",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "Atlassian裁员1600人+2026年AI裁员浪潮：Meta、Oracle等科技巨头合计裁撤35000余岗",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "中国紧急限制国企政府机构使用OpenClaw AI：安全顾虑驱动全面管控",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "3月AI模型发布潮：一周内12+款大模型集中爆发，OpenAI、阿里、腾讯、字节等齐发力",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "DeepSeek V4再度跳票：多窗口落空，全球开发者焦灼等待",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "Gemini 3.1 Pro发布：ARC-AGI-2评分77.1%，百万Token上下文+全模态推理",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "Olmo Hybrid 7B开源：Transformer+线性递归混合架构，数据效率提升2倍",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "Claude Code上线语音指令：开发者可对话式编程，AI编码工具进入语音交互时代",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "2月全球VC投资189B美元创纪录：AI初创独占91%，OpenAI、Anthropic、Waymo三巨头主导",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "DeepMind新论文：AI能模拟意识但无法真正拥有——抽象谬误",
+    "date": "2026-03-12",
+    "expires": "2026-03-26"
+  },
+  {
+    "title": "杨立昆创办AI初创公司AMI融资10.3亿美元，挑战主流LLM架构",
+    "date": "2026-03-11",
+    "expires": "2026-03-25"
+  },
+  {
+    "title": "OpenAI收购Promptfoo以增强AI Agent安全性",
+    "date": "2026-03-11",
+    "expires": "2026-03-25"
+  },
+  {
+    "title": "Anthropic发布'Code Review'功能，自动化分析代码逻辑错误",
+    "date": "2026-03-11",
+    "expires": "2026-03-25"
+  },
+  {
+    "title": "Meta收购AI Agent社交网络Moltbook",
+    "date": "2026-03-11",
+    "expires": "2026-03-25"
+  },
+  {
+    "title": "Anthropic起诉阻击五角大楼黑名单，揭露公司财务现状",
+    "date": "2026-03-11",
+    "expires": "2026-03-25"
+  },
+  {
+    "title": "德国初创公司Polarise计划建造30MW主权AI数据中心",
+    "date": "2026-03-11",
+    "expires": "2026-03-25"
+  },
+  {
+    "title": "Meta一次发布四款MTIA AI推理芯片，六个月迭代一次",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "OpenAI计划将Sora并入ChatGPT，独立App下载量暴跌45%",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "Oracle准备新一轮裁员：AI提效驱动开发者减员，同时扩建数据中心",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "阿里巴巴投资的PixVerse融资3亿美元，AI视频独角兽诞生",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "企业AI平台Wonderful完成1.5亿美元B轮，成立一年估值20亿",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "Lovable单月ARR从3亿跃升至4亿美元，Vibe Coding赛道狂飙",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "可灵3.0新增动作控制+字节昂贵押注AI视频商业化",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "中国超声波BCI初创Gestala融资2100万美元，脑机接口新记录",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "VeryAI获1000万美元种子轮：掌纹识别对抗金融平台AI机器人欺诈",
+    "date": "2026-03-13",
+    "expires": "2026-03-27"
+  },
+  {
+    "title": "Meta旗舰模型Avocado再延期至5月，或临时引入Google Gemini",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "Adobe CEO执掌18年后宣布卸任，AI颠覆压力令股价跌逾6%",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "xAI联创大逃亡+Macrohard发布：马斯克认错重建，同时推出替代整个软件公司的AI",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "摩根士丹利警告：2026年AI重大突破将至，世界尚未准备好",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "Google发布Gemini Embedding 2：首个原生多模态embedding模型，统一文本图像视频音频",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "MiniMax M2开源：专为Agent和代码设计，价格仅Claude Sonnet的8%",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "NanoClaw x Docker联手：AI Agent沙箱化，为企业部署提供安全隔离",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "Meta智能眼镜集体诉讼：外包工在肯尼亚审查用户私密视频",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "Amigo AI融资1100万美元A轮：训练像医生一样工作的临床AI Agent",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "Qurrent融资1500万美元A轮，打造企业级自主数字劳动力平台",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "SerDes战争：Broadcom、Marvell、MediaTek三方争夺AI芯片互连主导权",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "MiniMax上市首份财报：营收增159%但亏损持续扩大",
+    "date": "2026-03-14",
+    "expires": "2026-03-28"
+  },
+  {
+    "title": "Meta计划裁员20%：AI成本飙升下史上最大规模调整",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "Anthropic取消长上下文溢价：100万Token窗口全面免费开放",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "马斯克宣布Tesla Terafab AI芯片工厂7天内启动",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "中国AI独角兽Moonshot AI（Kimi）寻求10亿美元融资，估值飙升至180亿",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "NVIDIA 20亿美元入股Nebius：以硬件换云基础设施的新战略",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "AI数据中心遭遇民意反弹：美国各地98亿项目受阻，两党立法提速",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "ElevenLabs SXSW发布百万声音倡议：免费为百万失声者修复声音",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
+  },
+  {
+    "title": "英伟达2026年密集出手：AI最大金主押注超级独角兽版图",
+    "date": "2026-03-15",
+    "expires": "2026-03-29"
   }
 ]

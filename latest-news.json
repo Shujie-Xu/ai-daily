@@ -1,184 +1,268 @@
 {
-  "date": "2026-03-27",
-  "searchCount": 22,
+  "date": "2026-03-29",
+  "searchCount": 29,
   "dimensions": "模型/产品/融资/财务/研究/政策/事件",
-  "sourceCount": 10,
+  "sourceCount": 13,
   "articles": [
     {
-      "title": "谷歌TurboQuant压缩算法掀存储股抛售，大摩称恐慌是认知偏差",
-      "summary": "谷歌研究院发布TurboQuant算法，可将AI模型KV缓存内存压缩6倍且不损失精度，引发三星、镁光等存储股急跌；摩根士丹利发报告称该技术旨在扩展模型能力而非减少采购，存储需求长期利好未变。",
-      "url": "https://www.cnbc.com/2026/03/26/google-ai-turboquant-memory-chip-stocks-samsung-micron.html",
-      "best_url": "https://arstechnica.com/ai/2026/03/google-says-new-turboquant-compression-can-lower-ai-memory-usage-without-sacrificing-quality/",
-      "full_content": "谷歌研究院近日发布了名为TurboQuant的新型AI压缩算法，声称可在不损失模型精度的前提下，将大型语言模型的KV缓存内存占用降低6倍，同时在部分测试场景下实现高达8倍的推理性能提升。这一消息迅速引发市场震动，三星、镁光等主要存储芯片厂商股价随即大幅下跌，投资者担忧AI对高带宽内存的旺盛需求将因此降温。\n\nTurboQuant的核心技术分为两步。第一步称为PolarQuant：传统AI模型使用标准XYZ笛卡尔坐标系编码向量，PolarQuant将其转换为极坐标表示，每个向量仅需存储半径和方向两个参数，大幅压缩存储空间并省去昂贵的数据归一化步骤。第二步是量化Johnson-Lindenstrauss误差修正层，通过将每个向量压缩为单bit来消除PolarQuant引入的残差误差，从而在极致压缩的同时保留模型注意力机制所需的关键语义信息。\n\n对于市场的恐慌情绪，摩根士丹利随即发布研究报告予以安抚。大摩认为TurboQuant的战略目标是通过降低内存瓶颈来扩展模型能力上限，而非替代或减少存储芯片采购。从历史规律看，算法效率每一次跃升往往带来更大规模模型部署和更多算力投入，存储需求的长期增长逻辑并未改变。TurboQuant的预印本论文已在arXiv公开，技术细节供研究界验证。",
+      "title": "OpenAI近期功能更新梳理",
+      "summary": "中文观察文章汇总OpenAI近期产品功能变化，涉及使用体验、能力边界与应用场景扩展。",
+      "url": "https://www.techgogogo.com/2025/03/13/OpenAI_%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E5%8A%9F%E8%83%BD%E8%A7%A3%E8%AF%BB",
+      "best_url": "https://openai.com/index/new-tools-for-building-agents/",
+      "full_content": "OpenAI 近期一轮功能更新的主线非常明确：把“能聊天的模型”升级成“能执行任务的 agent 平台”。其中最关键的是推出 Responses API、Agents SDK，以及内置的 web search、file search 和 computer use 工具。Responses API 被定位为新一代统一接口，兼顾 Chat Completions 的简洁性和 Assistants API 的工具调用能力，OpenAI 还明确表示未来会逐步把 agent 开发重心迁移到这一体系上。\n\n从官方披露的数据看，web search 已直接接入 GPT-4o 系列；computer use 则基于与 Operator 同源的 CUA 模型，在 OSWorld、WebArena、WebVoyager 等基准上给出 38.1%、58.1%、87% 的成绩，虽然离高可靠自动化还有距离，但已足以支撑研究、网页操作和部分流程自动化场景。文件搜索则继续强化企业知识库、客服和文档检索等落地能力。\n\n这轮更新的重要性在于，它不是单点新功能，而是 OpenAI 对 agent 基础设施的一次体系化补齐。对开发者，门槛被显著降低；对生态，平台方开始把搜索、文件与电脑控制这些高价值能力原生打包，意味着未来应用层竞争会更集中在产品设计、行业工作流和数据资产，而不是重复造通用 agent 底座。",
       "categories": [
-        "research",
-        "finance"
-      ],
-      "tags": [
-        "TurboQuant",
-        "谷歌AI",
-        "内存压缩",
-        "存储芯片",
-        "量化技术"
-      ],
-      "context": "KV缓存是大语言模型推理阶段的核心内存结构，用于存储已处理的上下文向量。随着模型上下文窗口不断扩大，KV缓存已成为AI推理系统中内存消耗的主要来源之一，也是HBM芯片需求的重要驱动力。量化是通过降低数值精度来压缩模型体积和加速推理的主流技术路线，但通常以牺牲精度为代价，TurboQuant声称同时实现高压缩比与零精度损失。",
-      "heat": 4
-    },
-    {
-      "title": "OpenAI奥特曼宣布将推出开源权重模型：应对中国开源AI挑战",
-      "summary": "OpenAI CEO山姆·奥特曼宣布将在数月内发布首个开源权重AI模型，称若不这样做世界将主要建立在中国开源模型之上，这将是OpenAI自2019年GPT-2以来首次开源模型权重。",
-      "url": "https://www.wired.com/story/openai-sam-altman-announce-open-source-model/",
-      "best_url": "https://www.wired.com/story/openai-sam-altman-announce-open-source-model/",
-      "full_content": "OpenAI CEO山姆·奥特曼于2026年3月底在X平台正式宣布，公司将在数月内发布一款具备推理能力的开源权重大型语言模型，并已开放开发者申请早期访问资格。这将是OpenAI自2019年发布GPT-2以来首次向公众开放模型权重，标志着公司在开源策略上的历史性转向。\n\n奥特曼在公告中直接点明了战略动因：如果OpenAI不发布开源模型，世界将主要建立在中国开源模型之上。这一表态被广泛解读为对DeepSeek R1爆发式成功的正面回应。DeepSeek于2025年1月发布的R1模型以极低训练成本实现顶尖性能并完全开源，迅速席卷全球开发者生态。此外，Meta持续迭代的Llama系列在企业部署场景中快速渗透，进一步压缩了OpenAI的护城河。\n\n开源权重模型的核心价值在于可本地部署和自由修改，适用于处理高度敏感数据的医疗、金融等合规场景，且边际使用成本近乎为零。OpenAI员工表示新模型可在用户自有硬件上运行，并将经过严格安全评估。这次开源战略调整预示着全球AI生态的开源竞争格局将进一步加剧，Hugging Face等开源生态参与者表示高度欢迎。",
-      "categories": [
-        "model",
-        "event"
+        "product"
       ],
       "tags": [
         "OpenAI",
-        "开源模型",
-        "奥特曼",
-        "DeepSeek",
-        "open-weight"
+        "Responses API",
+        "Agents SDK",
+        "Agent",
+        "开发者工具"
       ],
       "context": "",
-      "heat": 5
+      "heat": 5,
+      "idx": 2
     },
     {
-      "title": "Anthropic推Claude合作伙伴网络，2026年承诺投入1亿美元",
-      "summary": "Anthropic正式宣布Claude合作伙伴网络，2026年承诺1亿美元支持咨询公司和技术集成商，同期公司因五角大楼国家安全认定问题寻求联邦上诉法院紧急停止令，商业与政策博弈同步展开。",
-      "url": "https://thenextweb.com/news/anthropic-commits-100m-to-claude-partner-network",
-      "best_url": "https://thenextweb.com/news/anthropic-commits-100m-to-claude-partner-network",
-      "full_content": "Anthropic于2026年3月12日正式推出Claude合作伙伴网络，并承诺在2026年投入1亿美元支持咨询公司和技术集成商，以加速将Claude推广至全球大型企业。埃森哲、德勤、Cognizant和印孚瑟斯作为首批锚定合作伙伴加入网络，覆盖了全球企业技术采购的主要渠道。\n\n合作深度方面，埃森哲已成立专属Anthropic业务部门并培训3万名员工使用Claude；Cognizant向其全球约35万名员工开放了Claude访问权限；Infosys于2026年2月将Claude集成至其Agentic AI平台。Anthropic声称自与埃森哲建立合作以来，企业市场份额已从24%增长至40%，并推出首个技术认证项目。\n\n值得关注的是，Claude合作伙伴网络发布的同一周，Anthropic正在寻求联邦上诉法院的紧急停止令，以应对五角大楼将其认定为国家安全风险所带来的法律挑战。商业生态的高速扩张与政策层面的法律博弈同步推进，折射出Anthropic在快速商业化进程中面临的复杂地缘政治压力。",
-      "categories": [
-        "product",
-        "event"
-      ],
-      "tags": [
-        "Anthropic",
-        "Claude",
-        "合作伙伴网络",
-        "企业AI",
-        "1亿美元"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "Google更新Workspace Gemini：文档、表格、幻灯片全线AI整合",
-      "summary": "谷歌发布Workspace Gemini深度整合更新，覆盖Docs智能写作、Sheets数据分析自动化、Slides演示生成及Drive智能搜索，进一步在企业办公生产力赛道向微软Copilot发起挑战。",
-      "url": "https://blog.google/products-and-platforms/products/workspace/gemini-workspace-updates-march-2026/",
-      "best_url": "https://blog.google/products-and-platforms/products/workspace/gemini-workspace-updates-march-2026/",
-      "full_content": "谷歌在2026年3月10日正式推出Workspace Gemini重大更新，覆盖Docs、Sheets、Slides和Drive四大核心应用，新功能面向Google AI Ultra和Pro付费用户开放。这是谷歌在企业办公AI赛道与微软Copilot直接交锋的最新动作。\n\nDocs方面，Gemini可结合用户文件和邮件信息快速生成初稿，同时新增统一写作风格和匹配文档格式两项功能。Sheets方面，Gemini可从自然语言指令出发自动生成整套项目管理电子表格，Fill with Gemini功能支持从网络或现有数据中自动填充表格列，大幅降低手动研究成本。\n\nSlides方面，Gemini可根据指令和参考文件生成与现有主题风格一致的新幻灯片，支持对话式编辑，从单一提示词生成完整演示文稿的功能也在即将推出的列表中。Drive的AI搜索功能同步升级，用户可直接向Drive提问，AI会跨文件和邮件检索并整合答案，彻底改变传统关键词检索模式。\n\n此次更新标志着谷歌在生成式AI与办公生产力整合上进入新阶段，私人文件和企业数据作为上下文源被深度接入，谷歌在企业服务市场对微软Copilot构成更直接的竞争压力。",
-      "categories": [
-        "product"
-      ],
-      "tags": [
-        "Google Workspace",
-        "Gemini",
-        "AI办公",
-        "企业AI",
-        "生产力工具"
-      ],
-      "context": "",
-      "heat": 4
-    },
-    {
-      "title": "Normal Computing获三星领投5000万美元，热力学AI芯片降能耗千倍",
-      "summary": "纽约初创公司Normal Computing完成5000万美元战略融资，由三星Catalyst领投，开发AI驱动EDA软件和热力学ASIC处理器，声称可将AI推理能耗降低1000倍，目前EDA软件已被超半数顶级芯片公司使用。",
-      "url": "https://fortune.com/2026/03/25/normal-computing-raises-50m-from-samsung-catalyst-ai-chip-costs-power-demands/",
-      "best_url": "https://fortune.com/2026/03/25/normal-computing-raises-50m-from-samsung-catalyst-ai-chip-costs-power-demands/",
-      "full_content": "纽约初创公司Normal Computing于2026年3月完成5000万美元战略融资，由三星旗下投资部门Samsung Catalyst领投，新进投资方包括Galvanize、Brevan Howard Macro Venture Fund和ArcTern Ventures，老股东Celesta Capital、Drive Capital及Eric Schmidt旗下First Spark Ventures继续跟投。\n\n公司成立于2022年，创始团队来自Google Brain、Google X和Palantir，定位于解决AI时代的能源危机问题。Normal Computing的核心战略分为两条并行主线：其一是AI驱动的芯片设计EDA软件平台，目前已被超过一半的全球营收前十大半导体公司采用。设计一颗现代AI芯片的开发成本可超过5亿美元，任何设计错误都可能造成巨大损失，Normal的软件切入这一痛点。\n\n其二是基于热力学计算原理的实验性ASIC处理器。该路线利用物理系统的内在随机性进行计算，理论上可将AI推理能耗降低高达1000倍，公司已完成首颗原型芯片的tape-out。CEO Faris Sbahi表示，数据中心预计在2030年前后遭遇能源瓶颈，行业主流方案是寻找更多能源供应，而Normal选择从硬件层面根本解决问题。本轮融资将主要用于扩大EDA商业软件业务规模。",
+      "title": "OpenAI传获四巨头巨额注资",
+      "summary": "证券时报称英伟达、微软、亚马逊等正洽谈对OpenAI进行大额投资，AI基础设施军备赛继续升级。",
+      "url": "https://www.stcn.com/article/detail/3620373.html",
+      "best_url": "https://www.stcn.com/article/detail/3620373.html",
+      "full_content": "OpenAI再度传出超大额融资消息。证券时报援引The Information称，英伟达、微软和亚马逊正洽谈合计最多600亿美元投资，作为OpenAI新一轮最高1000亿美元融资的一部分；软银也被曝可能追加至多300亿美元。若交易最终落地，OpenAI估值最高或升至约8300亿美元，刷新全球AI公司融资纪录。\n\n从出资结构看，这笔钱并不只是财务投资。英伟达拟出资最高300亿美元，微软作为长期战略伙伴洽谈不超过100亿美元，亚马逊则可能投入逾100亿甚至超过200亿美元。背后反映的是同一逻辑：训练和部署前沿模型越来越依赖GPU、云平台和长期基础设施，OpenAI正在把资本、算力与生态绑定在一起。\n\n这一轮军备竞赛也在外溢到同行。报道同步提到，马斯克旗下xAI已完成200亿美元E轮融资，估值达2300亿美元，特斯拉还将追加20亿美元投资。行业影响在于，头部模型公司的竞争门槛已从单纯模型能力，抬升到“资金池+算力池+云伙伴”三位一体，AI基础设施寡头化趋势会进一步加速。",
       "categories": [
         "funding"
       ],
       "tags": [
-        "热力学计算",
-        "芯片融资",
-        "EDA",
-        "AI能耗",
-        "三星投资"
-      ],
-      "context": "热力学计算是一种新兴硬件范式，利用物理系统的随机热波动执行概率计算，理论能效远超传统GPU。Normal Computing是该方向的代表性公司之一。EDA（电子设计自动化）软件是芯片设计的核心工具链，Synopsys和Cadence是传统巨头，Normal以AI方式切入这一领域。",
-      "heat": 3
-    },
-    {
-      "title": "Deccan AI完成2500万美元融资，印度人才支撑AI训练数据市场",
-      "summary": "AI训练数据及后训练标注公司Deccan AI完成2500万美元融资，由A91 Partners领投，Prosus Ventures和SIG参与。公司从印度获取高质量AI评估专家，直接竞争Mercor等AI数据服务商。",
-      "url": "https://techcrunch.com/2026/03/25/deccan-ai-raises-25m-as-ai-training-push-relies-on-india-based-workforce/",
-      "best_url": "https://techcrunch.com/2026/03/25/deccan-ai-raises-25m-as-ai-training-push-relies-on-india-based-workforce/",
-      "full_content": "AI后训练数据服务商Deccan AI于2026年3月完成2500万美元Series A融资，由A91 Partners领投，SIG和Prosus Ventures参与跟投。公司成立于2024年10月，总部位于旧金山，在印度海德拉巴设有大规模运营团队。\n\nDeccan AI专注于为前沿AI实验室和企业客户提供后训练服务，涵盖数据生成、模型评估、强化学习环境搭建，以及代码能力、Agent能力和工具调用方向的训练优化。已公开的客户包括Google DeepMind和Snowflake，目前约服务10家客户、同时运行数十个活跃项目。\n\n人才供给是Deccan的核心差异化优势。公司依托超过100万名贡献者网络，每月活跃贡献者在5000至10000人之间，其中约10%拥有硕士或博士学位。与Mercor等竞争对手广泛布局100多个国家不同，Deccan将主要力量集中在印度，以更严格的质量管控应对后训练数据高标准需求。贡献者时薪从10美元到700美元不等。\n\n业务指标方面，Deccan过去一年实现10倍增长，当前年化收入达双位数百万美元量级，80%收入来自前五大客户。创始人Rukesh Reddy将公司定位为原生GenAI数据公司，从一开始就聚焦高技能任务。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "AI训练数据",
-        "后训练",
-        "Series A融资",
-        "印度AI",
-        "模型评估"
-      ],
-      "context": "AI后训练数据市场近年随大模型规模扩张快速崛起，覆盖RLHF标注、模型评估、强化学习数据生成等环节。Scale AI是该赛道最大的独角兽，Mercor、Turing、Surge AI等初创公司纷纷跟进。印度因拥有大量理工科高学历人才，正成为全球AI训练数据的重要供给来源。",
-      "heat": 3
-    },
-    {
-      "title": "AgentMail获600万美元：专为AI Agent打造独立邮件基础设施",
-      "summary": "AgentMail完成600万美元融资，为AI Agent提供专属邮件能力，支持双向对话、附件解析及API接入，让Agent能像人类一样拥有独立邮箱，已有多家企业客户将其用于自动化工作流。",
-      "url": "https://techcrunch.com/2026/03/10/agentmail-raises-6m-to-build-an-email-service-for-ai-agents/",
-      "best_url": "https://techcrunch.com/2026/03/10/agentmail-raises-6m-to-build-an-email-service-for-ai-agents/",
-      "full_content": "随着AI Agent从实验室走向企业级大规模部署，围绕Agent的基础设施赛道正在快速成形。AgentMail是其中的代表性玩家，这家旧金山初创公司专门为AI Agent提供独立的电子邮件基础设施，近日宣布完成600万美元种子轮融资，由General Catalyst领投，Y Combinator、Phosphor Capital跟投，天使投资人包括Paul Graham、HubSpot联合创始人Dharmesh Shah等。\n\nAgentMail的核心产品是一套API平台，允许开发者为AI Agent分配独立邮箱，支持双向对话、邮件解析与线程管理、标签分类、搜索和自动回复等功能。本次融资同步发布了Onboarding API，AI Agent可以通过该接口自主完成邮箱注册和创建，无需人工干预。此外，平台还支持手动管理收件箱权限、白名单和API密钥，以满足企业对安全合规的要求。\n\n创始团队看好这一方向的核心逻辑在于：随着AI Agent数量向与真实人类持平的方向快速增长，它们需要像人一样使用邮件进行沟通、收发文件、推进工作流。现有的通用邮件服务并非为Agent设计，缺乏原生API支持和细粒度的权限管控。AgentMail的获投折射出一个更大的趋势：AI Agent正在成为数字世界中独立的参与者，邮件只是专属基础设施赛道的起点。",
-      "categories": [
-        "funding",
-        "product"
-      ],
-      "tags": [
-        "AI Agent",
+        "OpenAI",
         "融资",
-        "邮件基础设施",
-        "seed round",
-        "General Catalyst"
-      ],
-      "context": "AgentMail代表了2025年前后兴起的AI Agent原生基础设施赛道，该赛道认为现有SaaS工具均为人类设计，无法满足AI Agent的自动化、高频、程序化操作需求，因此专门构建面向Agent的通信、支付、身份等底层能力。",
-      "heat": 3
-    },
-    {
-      "title": "2026中关村论坛AI主题日揭幕，聚焦前沿技术与产业国际化",
-      "summary": "2026中关村论坛年会人工智能主题日新闻发布会举行，主题为交融智享——AI新范式下的全球创新与产业融合，定位国内AI领域最高规格标杆平台，贯穿论坛全程，重点展示中国AI硬核实力与国际化战略。",
-      "url": "http://www.news.cn/tech/20260326/c94e0c98cb0b4580b1ff7921c5833fa5/c.html",
-      "best_url": "http://www.news.cn/tech/20260326/c94e0c98cb0b4580b1ff7921c5833fa5/c.html",
-      "full_content": "3月25日，2026中关村论坛年会人工智能主题日新闻发布会正式举行，宣布本届主题日将以交融智享——AI新范式下的全球创新与产业融合为主题，贯穿论坛年会全程，定位为中国AI领域规格最高、规模最大、影响力最强的标杆平台。\n\n本届主题日构建了1+6活动框架，围绕前沿技术与国际化两大核心展开。核心论坛于3月27日举行，聚焦AI开源前沿，嘉宾阵容包括硅谷人工智能研究院院长皮埃罗·斯加鲁菲、中国科学院院士王怀民、清华大学智能产业研究院院长张亚勤，以及银河通用创始人王鹤等国内外顶尖学者与创业者。论坛期间还将发布京张遗址公园AI创新带全球征集启动以及众智FlagOS的最新成果。\n\n六场平行论坛覆盖未来投资、AI for Science、教育人才、脑机接口等多个前沿议题，并将集中发布通通3.0通用智能人、通智大脑通用具身智能核心引擎、智能双束电镜系统等重磅技术成果。人工智能主题日已连续举办两届，正成为中国AI产业展示硬核实力、推动国际合作的重要窗口。",
-      "categories": [
-        "event",
-        "policy"
-      ],
-      "tags": [
-        "中关村论坛",
-        "AI政策",
-        "国际化",
-        "具身智能",
-        "开源AI"
+        "英伟达",
+        "微软",
+        "亚马逊"
       ],
       "context": "",
-      "heat": 3
+      "heat": 5,
+      "idx": 4
     },
     {
-      "title": "Crunchbase报告：2026年AI种子轮和A轮向超大额集中，赢家通吃加剧",
-      "summary": "Crunchbase报告显示2026年AI早期融资中超大额轮次占比快速上升，种子轮单笔突破亿美元成为常态，资本高度向少数头部项目集中，AI独角兽在早期阶段已可获传统C轮量级资金。",
-      "url": "https://news.crunchbase.com/venture/seed-seriesa-startup-megadeals-ai-2026/",
-      "best_url": "https://news.crunchbase.com/venture/seed-seriesa-startup-megadeals-ai-2026/",
-      "full_content": "Crunchbase最新报告揭示了2026年AI早期融资市场的一个显著结构性变化：种子轮和A轮融资中，超大额轮次（单笔1亿美元以上）所占份额正在急剧攀升，资本集中效应前所未有。\n\n数据显示，2026年迄今已有超过40%的种子轮和A轮融资流向了单笔规模1亿美元以上的轮次，若仅看美国市场这一比例更突破50%。今年已出现多起震撼市场的超大额早期融资案例：AI实验室Humans&完成4.8亿美元种子轮融资；Ricursive Intelligence以40亿美元估值完成3亿美元A轮；Sam Altman创立的脑机接口初创公司Merge Labs据报道完成2.52亿美元种子轮。这些数字在历史上任何时期都属于C轮乃至更晚期的融资规模。\n\n超大额早期融资现象曾在2021年市场高峰期短暂出现，随后随市场降温而回落，但自2024年起再度抬头，进入2026年则呈现爆发式增长。背后逻辑在于：当多家资金雄厚的机构投资人同时盯上同一批顶尖创始人，抢筹压力导致估值和轮次规模双双飙升。这种赢家通吃格局正在重塑早期VC生态——顶级创始人身价倍增，而未能进入头部赛道的项目则面临更难的融资环境。",
+      "title": "2月全球创投被AI大单主导",
+      "summary": "Crunchbase称OpenAI、Anthropic等超大额交易推动2月全球创投规模创纪录，AI继续吸走大部分增量资本。",
+      "url": "https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/",
+      "best_url": "https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/",
+      "full_content": "Crunchbase数据显示，2026年2月全球创投融资额达到1890亿美元，创下单月历史新高，但这场“繁荣”几乎完全由少数AI超大额交易支撑。OpenAI单笔融资1100亿美元，Anthropic融资300亿美元，Waymo融资160亿美元，三家公司合计就拿走1560亿美元，占当月全球融资总额的83%。\n\n如果只看总盘子，市场会误以为创投已全面复苏；但拆开结构后会发现，资本正在以前所未有的速度向头部AI资产集中。2月AI相关公司合计吸收1710亿美元，占全球融资总额约90%；美国公司获得1740亿美元，占比高达92%。与之形成反差的是，种子轮融资同比反而下滑约11%至26亿美元，说明早期项目并未同步受益。\n\n这一轮创纪录融资的意义，不只是数字夸张，更在于它揭示了AI时代的资本分层：顶级模型和算力平台可以持续吞噬增量资金，中长尾创业公司却面临更严苛的筛选。对行业来说，这既强化了OpenAI、Anthropic等公司的生态主导地位，也意味着未来创投市场的主题不会是普遍回暖，而是“少数巨头吸走大部分弹药”的高度集中化格局。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "VC",
+        "OpenAI",
+        "Anthropic",
+        "融资",
+        "AI资本市场"
+      ],
+      "context": "",
+      "heat": 5,
+      "idx": 8
+    },
+    {
+      "title": "GitHub开源AI项目热榜",
+      "summary": "GitHub梳理近期值得关注的10个开源AI项目，焦点从MCP扩展到多智能体协作。",
+      "url": "https://github.blog/open-source/maintainers/from-mcp-to-multi-agents-the-top-10-open-source-ai-projects-on-github-right-now-and-why-they-matter/",
+      "best_url": "https://github.blog/open-source/maintainers/from-mcp-to-multi-agents-the-top-10-open-source-ai-projects-on-github-right-now-and-why-they-matter/",
+      "full_content": "GitHub 发布了一份开源 AI 新项目热榜，对截至 2025 年 3 月 29 日前 99 天内创建的公开仓库进行筛选，综合参考 stars 增速、fork、流量峰值和贡献者活跃度，给出 10 个最受关注的新项目。这份榜单最鲜明的信号，是开源 AI 的重心正从“单模型能力”转向“工具接入、代理协作与工作流落地”。\n\n上榜项目里，MCP 相关工具占据明显位置，例如将 MCP 工具转成 OpenAPI 服务的 Open WebUI MCP、面向开发者的命令行工具 F/mcptools，以及连接 Blender 与 Claude 的 Blender-MCP，说明标准化工具接口已成为 agent 生态的关键底座。另一方面，OWL、Letta、Second-Me 等项目分别对应多智能体协作、可移植 agent 封装和数字分身，反映出开发者正在把 AI 从“聊天框”推向“可组合的软件实体”。\n\n榜单还显示语音与多模态仍是高活赛道，VoiceStar 与 Sesame CSM 代表开源语音合成继续进化。对行业而言，这份榜单的意义不只在于发现新项目，更在于验证了三条趋势：MCP 正加速成为接口层标准，多 agent 正从研究走向实用，而真正受欢迎的开源项目，越来越强调可接入、可复用、可编排，而不只是模型本身。",
+      "categories": [
+        "product"
+      ],
+      "tags": [
+        "GitHub",
+        "开源AI",
+        "MCP",
+        "Multi-Agent",
+        "AI Agents"
+      ],
+      "context": "",
+      "heat": 4,
+      "idx": 0
+    },
+    {
+      "title": "海螺AI新版模型开放",
+      "summary": "MiniMax宣布海螺AI发布新版视频生成模型并向全部用户开放，继续加码多模态内容生成。",
+      "url": "https://www.pingwest.com/w/302559",
+      "best_url": "https://www.minimaxi.com/news/minimax%E5%AF%BC%E6%BC%94%E7%BA%A7%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9E%8B%E4%B8%8A%E7%BA%BF",
+      "full_content": "MiniMax 宣布面向全球用户开放海螺视频新版导演模型，其中图生视频版 I2V-01-Director 与此前推出的文生视频版 T2V-01-Director 共同组成 01-Director 系列，并同步上线海螺视频 App。这次更新的核心不只是“生成更好看的视频”，而是把运镜控制从专业影视语言，进一步下放成普通创作者可直接调用的产品能力。\n\n官方介绍显示，新模型提供 15 种可自由组合的单一运镜，可扩展出上百种镜头组合，支持推、拉、摇、移、跟随、固定镜头等效果，也支持通过自然语言直接触发运镜指令。相比此前大量视频模型更偏重画面质感和人物一致性，海螺这次明显把重点放在“镜头语言”上，试图解决 AI 视频常见的叙事单调、镜头死板和缺乏导演感的问题。\n\n这意味着国内视频生成竞争正从基础模型能力，转向更贴近创作工作流的控制层体验。对 MiniMax 来说，开放 App 与导演模式，是在把海螺从单一模型升级为完整创作入口；对行业来说，这也说明下一阶段 AI 视频的比拼重点，可能不只是清晰度和时长，而是谁能先把“可控叙事”做成真正可消费的产品。",
+      "categories": [
+        "product"
+      ],
+      "tags": [
+        "MiniMax",
+        "海螺AI",
+        "视频生成",
+        "AIGC",
+        "多模态"
+      ],
+      "context": "",
+      "heat": 4,
+      "idx": 1
+    },
+    {
+      "title": "中概科技股押注AI芯片",
+      "summary": "市场报道聚焦中概科技股年内表现，AI芯片与相关IPO预期成为资金重新定价的重要线索。",
+      "url": "https://finance.yahoo.com/news/chinese-tech-stocks-charged-2026-053404474.html",
+      "best_url": "https://finance.yahoo.com/news/chinese-tech-stocks-charged-2026-053404474.html",
+      "full_content": "中概科技股在2026年开年重新获得资金追捧，核心催化来自AI芯片与国产算力链条的估值重估。市场焦点是上海壁仞科技在港股IPO募资约55.8亿港元，上市首日盘中涨幅一度接近120%，显示资本对中国本土AI芯片故事的风险偏好明显回升。\n\n这轮行情并不只是一家公司带动。报道提到，自DeepSeek-R1在去年破圈后，中国AI与半导体板块持续修复，恒生科技指数2025年累计上涨约23%。与此同时，百度半导体子公司昆仑芯等企业也在推进上市，进一步强化了“模型突破—算力需求—芯片融资与IPO”这条主线。\n\n对市场而言，这意味着中概科技股的定价逻辑，正从过去的监管压制和宏观拖累，转向AI基础设施、自主替代和资本开支周期。若后续更多中国AI芯片公司顺利融资或上市，港股与中概科技板块可能迎来一轮围绕算力、模型和应用联动的系统性重估。",
+      "categories": [
+        "finance"
+      ],
+      "tags": [
+        "中概股",
+        "AI芯片",
+        "港股IPO",
+        "壁仞科技",
+        "国产算力"
+      ],
+      "context": "壁仞科技是国内高性能AI GPU代表企业之一，长期被视作中国本土替代英伟达的重要观察样本。其港股IPO表现不仅关乎单家公司融资能力，也常被市场当作中国AI芯片产业链风险偏好、政策支持力度和国产算力商业化进展的风向标。",
+      "heat": 4,
+      "idx": 3
+    },
+    {
+      "title": "AI过亿融资潮持续升温",
+      "summary": "36氪统计显示，AI赛道近期过亿融资高频出现，资金继续向模型、基础设施和应用层头部集中。",
+      "url": "https://eu.36kr.com/zh/p/3546815118159749",
+      "best_url": "https://eu.36kr.com/zh/p/3546815118159749",
+      "full_content": "36氪援引IT桔子数据称，2025年1至10月中国AI领域已出现139笔过亿元融资，总额突破600亿元，说明一级市场虽然不再为纯概念买单，但对AI主线的投入依旧凶猛，只是资金更集中地流向可验证商业化与产业落地的方向。\n\n从结构上看，融资最明显的特征是分层。大模型领域共有29笔过亿融资、累计142亿元，月之暗面、智谱和MiniMax等头部公司继续吸金；但真正成为全年最大热点的是具身智能，73家公司合计融资257亿元，超过大模型，背后支撑来自订单、量产和交付预期。与此同时，AI基础设施也维持高热度，芯片、算力服务和计算底座项目持续获得亿元级押注。\n\n应用层则呈现“价值明确优先”的风格，医疗、零售和工业最受欢迎，其中医疗占15笔过亿应用融资中的6笔。整体来看，资本判断标准已从“讲AGI故事”转向“看收入、看订单、看量产、看算力效率”，这意味着中国AI融资进入产业现实主义阶段，头部集中和赛道分化都会继续加剧。",
       "categories": [
         "funding"
       ],
       "tags": [
         "AI融资",
-        "种子轮",
-        "超大额融资",
-        "VC生态",
-        "赢家通吃"
+        "一级市场",
+        "具身智能",
+        "大模型",
+        "算力基础设施"
       ],
       "context": "",
-      "heat": 4
+      "heat": 4,
+      "idx": 5
+    },
+    {
+      "title": "C3.ai财报不及预期",
+      "summary": "C3.ai季度业绩逊于市场预期，收入与盈利表现承压，引发投资者对AI软件商业兑现的再审视。",
+      "url": "https://www.investing.com/news/earnings/c3ai-earnings-missed-by-011-revenue-fell-short-of-estimates-4525732",
+      "best_url": "https://www.investing.com/news/earnings/c3ai-earnings-missed-by-011-revenue-fell-short-of-estimates-4525732",
+      "full_content": "企业AI软件公司C3.ai最新季度财报明显低于市场预期，再次把“AI商业化到底何时兑现”这个问题摆到台前。根据披露，公司当季营收为5326万美元，不仅较市场预期的7561万美元低出约29%，也低于上年同期的9878万美元；调整后每股亏损40美分，同样差于市场预期的亏损29美分。\n\n更令投资者担忧的是指引全面下修。C3.ai预计下一季度营收仅为4800万至5200万美元，显著低于市场原先预估的7769万美元；全年营收指引也从此前的4.475亿至4.845亿美元，大幅砍至2.467亿至2.507亿美元。与此同时，公司宣布重组与裁员，说明新管理层已判断原有组织与销售体系难以支撑增长目标。\n\n财报发布后，C3.ai股价盘中重挫逾24%。这家公司曾是美股“企业级AI平台”叙事的代表，如今却暴露出客户转化慢、收入确认承压和费用结构失衡的问题。对市场而言，这不仅是单一公司的业绩失速，更是一次提醒：AI软件估值要站稳，最终仍要回到订单、续费和利润率，而不是只靠概念溢价。",
+      "categories": [
+        "finance"
+      ],
+      "tags": [
+        "C3.ai",
+        "财报",
+        "Enterprise AI",
+        "美股",
+        "商业化"
+      ],
+      "context": "",
+      "heat": 4,
+      "idx": 7
+    },
+    {
+      "title": "AI初创估值继续抬升",
+      "summary": "财经报道指出AI初创公司估值仍在翻倍甚至数倍上行，一级市场对稀缺AI资产追逐未降温。",
+      "url": "https://finance.yahoo.com/news/ai-startup-valuations-doubling-tripling-123000921.html",
+      "best_url": "https://finance.yahoo.com/news/ai-startup-valuations-doubling-tripling-123000921.html",
+      "full_content": "最新报道指出，AI初创公司的估值膨胀仍在持续，且不少公司在几个月内就能完成连续融资，估值直接翻倍甚至翻数倍。这种现象已不只出现在OpenAI、Anthropic等基础模型巨头，也蔓延到法律AI、医疗AI、代码生成等垂直赛道，反映出一级市场对“稀缺AI资产”的争抢仍处在高热状态。\n\n文中列举的案例极具代表性：Anthropic在2025年3月以615亿美元估值完成E轮融资，6个月后F轮融资时估值已升至1830亿美元；OpenAI则从年初约1570亿美元估值一路抬升，到后续交易中达到5000亿美元。垂直应用层同样夸张，例如Cursor从2024年底约26亿美元估值，至2025年中融资后升至100亿美元，随后又进一步被市场推高。Harvey、OpenEvidence、Abridge等公司也都在短时间内经历多轮融资和估值跃升。\n\n投资人给出的解释是，这并非简单复制2021年的泡沫，而是AI公司在收入增长、产品渗透和资本竞争上都呈现出前所未见的速度。与此同时，风险同样明显：若企业尚未稳固产品市场匹配，就被高估值和高烧钱节奏裹挟，未来一旦融资环境转冷，员工期权、融资结构和经营现金流都可能承压。换句话说，这轮估值狂飙既是AI商业化加速的证明，也可能埋下下一阶段分化和回调的伏笔。",
+      "categories": [
+        "finance"
+      ],
+      "tags": [
+        "AI估值",
+        "一级市场",
+        "OpenAI",
+        "Anthropic",
+        "Venture Capital"
+      ],
+      "context": "",
+      "heat": 4,
+      "idx": 10
+    },
+    {
+      "title": "AI硬件融资持续领跑",
+      "summary": "创投媒体梳理AI硬件成为融资最活跃方向之一，GPU与端侧设备相关项目仍受资本追捧。",
+      "url": "https://m.cyzone.cn/article/801609",
+      "best_url": "https://m.cyzone.cn/article/801609",
+      "full_content": "AI硬件正重新成为一级市场最拥挤、也最确定的融资方向之一。近期创投媒体梳理显示，资金并没有从AI赛道整体撤退，而是进一步向“卖铲子”和底层基础设施集中，尤其是GPU相关配套、端侧设备、机器人与半导体链条最受追捧。\n\n这波热度背后有很强的产业逻辑：一方面，大模型训练与推理继续推高算力密度，带动芯片、散热、网络、存储、电源等环节同步扩容；另一方面，端侧AI开始从概念走向产品化，具备本地推理、语音交互和Agent能力的智能硬件更容易讲出“设备+订阅”的商业故事。以近期被关注的散热公司Frore Systems为例，其完成1.43亿美元D轮融资后估值达16.4亿美元，反映资本正押注那些不直接造芯片、但能卡住AI基础设施瓶颈的公司。\n\n与上一轮只追模型不同，当前资金明显偏好更接近落地的硬件资产：谁能解决功耗、散热、部署和端云协同问题，谁就更容易拿到钱。这意味着AI投资主线正从“能力炫技”转向“基础设施兑现”，也预示未来一段时间，硬件链条的融资活跃度仍可能高于纯应用层。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "AI硬件",
+        "融资",
+        "GPU",
+        "端侧设备",
+        "半导体基础设施"
+      ],
+      "context": "",
+      "heat": 3,
+      "idx": 6
+    },
+    {
+      "title": "SparkLabs设立5000万美元AI基金",
+      "summary": "SparkLabs完成新基金募集，计划重点投资AI初创公司，反映早期基金仍在积极布局AI周期。",
+      "url": "https://www.scommerce.com/sparklabs-closes-new-50-million-fund-to-back-ai-startups/",
+      "best_url": "https://www.scommerce.com/sparklabs-closes-new-50-million-fund-to-back-ai-startups/",
+      "full_content": "SparkLabs宣布完成一只5000万美元的AI专项基金“​​AIM AI Fund”，继续加码其最擅长的早期科技投资。该机构此前曾押中过OpenAI，也投资过Anthropic、xAI、Vectara、Allganize、Kneron等AI公司，这次新基金的设立，说明即使一级市场整体分化，专注AI的头部早期资本仍在积极募集并提前卡位下一轮创新周期。\n\n从资金分配看，约35%将投向其在沙特推出的AI加速器AIM-X项目，剩余65%将用于全球范围内的A轮和B轮投资。SparkLabs透露，加速器项目的单笔支票通常为20万至50万美元，后续成长轮投资区间则在100万到500万美元之间，整只基金预计投50到70家公司。基金LP中还包含政府背景资金，显示中东官方资本也在持续推动本地AI生态建设。\n\n这笔基金的意义不只是“多了一只AI基金”，更在于它把沙特、中东与全球AI创业网络连接起来。对创业公司而言，这意味着除硅谷外，新的资本和试点场景正在形成；对投资行业而言，则再次验证AI仍是少数能持续吸引跨周期资金、并在全球范围内形成新地缘资本版图的核心主题。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "AI融资",
+        "SparkLabs",
+        "VC",
+        "Saudi Arabia",
+        "早期投资"
+      ],
+      "context": "SparkLabs是较早布局全球创业投资网络的早期VC，创始团队活跃于美国、韩国和中东市场。其新推出的AIM-X加速器落地沙特，背后对应的是沙特“AI Mission”等国家级科技转型计划。对国内读者而言，这条新闻的重点不只在基金规模，更在于中东正在成为AI资本、算力和创业项目的新聚集地。",
+      "heat": 3,
+      "idx": 9
+    },
+    {
+      "title": "Winn.ai获1800万美元A轮",
+      "summary": "销售助手初创Winn.ai完成1800万美元A轮融资，主打实时会议辅助与销售流程自动化。",
+      "url": "https://news.crunchbase.com/venture/startup-winn-ai-seriesa-real-time-assistant/",
+      "best_url": "https://news.crunchbase.com/venture/startup-winn-ai-seriesa-real-time-assistant/",
+      "full_content": "以色列销售AI初创公司Winn.ai宣布完成1800万美元A轮融资，本轮由Insight Partners、S Capital和Mangusta Capital共同领投，Moneta VC、HighSage Ventures、Alumni Ventures、Sarona Ventures和OurCrowd等跟投。公司自2022年成立以来累计融资已达3500万美元，显示销售流程自动化仍是企业级AI里最具付费确定性的方向之一。\n\nWinn.ai的核心产品是“实时销售助手”：在销售与客户通话过程中，系统会同步给出提问建议、流程提醒和信息抓取，并自动连接企业CRM与BI系统，减少会前准备、会中记录和会后录入等行政工作。与大量事后复盘型对话分析工具不同，Winn.ai强调在通话发生的当下提供辅助，帮助销售代表即时调整话术和推进节奏。这种“实时执行”定位，是它区别于传统会话智能工具的关键。\n\n公司透露，其2025年ARR同比增长3倍、过去两年整体增长30倍，客户已包括Deel、Kaseya和Cyera等企业。目前团队规模超过40人，计划用新资金扩展美国市场团队并继续投入研发。放在更大背景下看，AI与销售、营销交叉领域去年获得的风投资金接近40亿美元，说明资本正在把“能直接拉动收入效率”的AI工具视作优先下注方向。Winn.ai此轮融资，也再次验证企业愿意为明确ROI的工作流AI买单。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "Winn.ai",
+        "Sales AI",
+        "企业SaaS",
+        "Series A",
+        "Revenue Tech"
+      ],
+      "context": "Winn.ai是一家总部位于特拉维夫的企业软件初创公司，面向销售团队提供实时AI辅助工具。它所在的“Revenue AI / Sales AI”赛道，核心逻辑不是替代销售，而是通过会议辅助、自动记录、CRM写回和流程标准化，提升成单效率与团队复制能力。相比通用聊天机器人，这类垂直SaaS更强调可量化的业务回报。",
+      "heat": 3,
+      "idx": 11
+    },
+    {
+      "title": "Distyl AI获1.75亿美元B轮",
+      "summary": "企业级AI服务商Distyl AI宣布完成1.75亿美元B轮融资，估值进一步抬升，企业落地能力获资本认可。",
+      "url": "https://news.crunchbase.com/ai/distyl-raises-valuation-175m-seriesb/",
+      "best_url": "https://www.prnewswire.com/news-releases/distyl-ai-raises-175-million-at-1-8-billion-valuation-to-help-global-enterprises-become-ai-native-302564270.html",
+      "full_content": "企业级AI服务商 Distyl AI 宣布完成1.75亿美元B轮融资，估值达到18亿美元，较其上一轮约2亿美元估值大幅跃升近9倍。此轮由 Lightspeed Venture Partners 与 Khosla Ventures 领投，DST Global、Coatue 和 Dell Technologies Capital 参投，公司自2022年成立以来累计融资已超过2亿美元。\n\nDistyl 的核心定位不是单纯卖模型或卖软件，而是帮助《财富》500强企业把 AI 真正嵌入业务流程，推动“AI-native enterprise（AI原生企业）”转型。公司称其服务覆盖医疗、通信、保险、制造和金融等行业，已触达超过1.2亿终端用户，并为客户带来数亿美元级别的经营改善。公开案例显示，其平台曾帮助一家《财富》50强硬件制造商将根因分析速度提升80%，也帮助医疗客户实现2300万美元年度成本节约。\n\n这笔融资反映出资本市场对“企业AI落地层”的持续追捧。相比只押注底层模型，投资人开始更看重谁能把大模型真正转化为组织效率、成本节约和流程重构。Distyl 由两位前 Palantir 员工创立，强调在3个月内交付可验证成果，这种“咨询+工程+平台”的混合模式，或将成为下一阶段企业AI商业化的重要范式。",
+      "categories": [
+        "funding"
+      ],
+      "tags": [
+        "企业AI",
+        "融资",
+        "Distyl AI",
+        "AI-native enterprise",
+        "Palantir系创业"
+      ],
+      "context": "Distyl AI 是一家成立于2022年的美国企业AI初创公司，创始团队出身 Palantir，主打帮助大型企业将生成式AI深度嵌入核心业务流程。与只提供模型接口或通用助手的厂商不同，Distyl 更像“企业AI落地总包商”，通过自研平台 Distillery、工程团队和行业知识结合，推动医疗、制造、通信等传统行业完成 AI 原生化改造。",
+      "heat": 3,
+      "idx": 12
     }
   ]
 }

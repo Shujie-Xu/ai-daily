@@ -1,268 +1,74 @@
 {
-  "date": "2026-03-29",
-  "searchCount": 29,
+  "date": "2026-03-30",
+  "searchCount": 18,
   "dimensions": "模型/产品/融资/财务/研究/政策/事件",
-  "sourceCount": 13,
+  "sourceCount": 9,
   "articles": [
     {
-      "title": "OpenAI近期功能更新梳理",
-      "summary": "中文观察文章汇总OpenAI近期产品功能变化，涉及使用体验、能力边界与应用场景扩展。",
-      "url": "https://www.techgogogo.com/2025/03/13/OpenAI_%E6%9C%80%E6%96%B0%E5%8F%91%E5%B8%83%E5%8A%9F%E8%83%BD%E8%A7%A3%E8%AF%BB",
-      "best_url": "https://openai.com/index/new-tools-for-building-agents/",
-      "full_content": "OpenAI 近期一轮功能更新的主线非常明确：把“能聊天的模型”升级成“能执行任务的 agent 平台”。其中最关键的是推出 Responses API、Agents SDK，以及内置的 web search、file search 和 computer use 工具。Responses API 被定位为新一代统一接口，兼顾 Chat Completions 的简洁性和 Assistants API 的工具调用能力，OpenAI 还明确表示未来会逐步把 agent 开发重心迁移到这一体系上。\n\n从官方披露的数据看，web search 已直接接入 GPT-4o 系列；computer use 则基于与 Operator 同源的 CUA 模型，在 OSWorld、WebArena、WebVoyager 等基准上给出 38.1%、58.1%、87% 的成绩，虽然离高可靠自动化还有距离，但已足以支撑研究、网页操作和部分流程自动化场景。文件搜索则继续强化企业知识库、客服和文档检索等落地能力。\n\n这轮更新的重要性在于，它不是单点新功能，而是 OpenAI 对 agent 基础设施的一次体系化补齐。对开发者，门槛被显著降低；对生态，平台方开始把搜索、文件与电脑控制这些高价值能力原生打包，意味着未来应用层竞争会更集中在产品设计、行业工作流和数据资产，而不是重复造通用 agent 底座。",
-      "categories": [
-        "product"
-      ],
-      "tags": [
-        "OpenAI",
-        "Responses API",
-        "Agents SDK",
-        "Agent",
-        "开发者工具"
-      ],
+      "title": "Claude新增桌面控制能力并推出AutoDream记忆管理功能",
+      "summary": "Anthropic为Claude Cowork推出Computer Use功能，可控制桌面操作应用；同时上线AutoDream子代理，自动整理跨会话记忆文件防止冗余。",
+      "url": "https://siliconangle.com/2026/03/23/anthropics-claude-gets-computer-use-capabilities-preview/",
+      "best_url": "https://siliconangle.com/2026/03/23/anthropics-claude-gets-computer-use-capabilities-preview/",
+      "full_content": "Anthropic于2026年3月正式向Claude Pro和Max订阅用户推出\"Computer Use\"功能研究预览版，标志着Claude从对话型AI向自主桌面代理的重要跨越。该功能允许Claude像人类用户一样操控电脑——点击按钮、滚动页面、打开文件、操作浏览器，甚至在集成开发环境中提交代码、运行测试，大幅解放开发者的双手。\n\n此次发布与此前推出的移动端工具Dispatch深度配套。用户可以通过手机上的Dispatch向Claude派发任务，Claude随即在桌面端自动执行。当Claude具备相关集成（如Google Calendar、Slack等）时会优先调用API；若无对应连接器，则直接接管屏幕界面完成操作。整个流程采用\"权限优先\"设计，Claude在首次访问新应用前须向用户申请授权，用户也可随时叫停。\n\n目前该功能仍处于早期阶段，存在明显局限：仅支持Mac系统，Windows和Linux用户暂时无法使用；复杂任务可能需要多次尝试；基于屏幕的操作速度也远低于API直连。Anthropic坦承，与Claude在编程和文本交互上的能力相比，Computer Use仍属\"早期\"，并提醒用户在预览期间避免将敏感数据暴露给Claude。\n\n与此同时，Anthropic还推出了AutoDream子代理功能，专门用于跨会话记忆文件的自动整理与去冗余管理，解决长期使用中记忆碎片化的痛点。分析师认为，Computer Use与Dispatch的组合将为开发者带来全新生产力提升，而桌面控制能力也是OpenAI、Google等竞争对手正在竞相攻克的关键赛道。",
+      "categories": ["product", "model"],
+      "tags": ["Claude", "Anthropic", "Computer Use", "桌面代理", "AI Agent"],
       "context": "",
-      "heat": 5,
-      "idx": 2
+      "heat": 4
     },
     {
-      "title": "OpenAI传获四巨头巨额注资",
-      "summary": "证券时报称英伟达、微软、亚马逊等正洽谈对OpenAI进行大额投资，AI基础设施军备赛继续升级。",
-      "url": "https://www.stcn.com/article/detail/3620373.html",
-      "best_url": "https://www.stcn.com/article/detail/3620373.html",
-      "full_content": "OpenAI再度传出超大额融资消息。证券时报援引The Information称，英伟达、微软和亚马逊正洽谈合计最多600亿美元投资，作为OpenAI新一轮最高1000亿美元融资的一部分；软银也被曝可能追加至多300亿美元。若交易最终落地，OpenAI估值最高或升至约8300亿美元，刷新全球AI公司融资纪录。\n\n从出资结构看，这笔钱并不只是财务投资。英伟达拟出资最高300亿美元，微软作为长期战略伙伴洽谈不超过100亿美元，亚马逊则可能投入逾100亿甚至超过200亿美元。背后反映的是同一逻辑：训练和部署前沿模型越来越依赖GPU、云平台和长期基础设施，OpenAI正在把资本、算力与生态绑定在一起。\n\n这一轮军备竞赛也在外溢到同行。报道同步提到，马斯克旗下xAI已完成200亿美元E轮融资，估值达2300亿美元，特斯拉还将追加20亿美元投资。行业影响在于，头部模型公司的竞争门槛已从单纯模型能力，抬升到“资金池+算力池+云伙伴”三位一体，AI基础设施寡头化趋势会进一步加速。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "OpenAI",
-        "融资",
-        "英伟达",
-        "微软",
-        "亚马逊"
-      ],
+      "title": "英伟达黄仁勋宣称AGI已实现：可创造十亿美元级企业",
+      "summary": "英伟达CEO黄仁勋在与Lex Fridman对谈中宣称AGI已经到来，AI可以自主创新、寻找客户并创建十亿美元级企业，但同时表示这一定义取决于你如何定义AGI。",
+      "url": "https://finance.yahoo.com/news/nvidia-ceo-jensen-huang-claims-agi-has-been-achieved-can-create-billion-dollar-businesses-172225126.html",
+      "best_url": "https://sea.mashable.com/tech/43301/nvidia-ceo-jensen-huang-says-agi-is-here-sort-of",
+      "full_content": "在一场与播客人Lex Fridman的深度对谈中，英伟达CEO黄仁勋抛出了一个震动科技圈的断言：\"我认为AGI已经实现了。\"这番话迅速引发热议，但细究其逻辑，背后是一场关于定义的精巧游戏。\n\nFridman给出的AGI定义较为宽泛：能够自主创立、运营并发展一家市值超十亿美元科技公司的AI。黄仁勋对此的回应是——\"我认为现在就已经做到了。\"他描述的场景是：AI创建一款简单的网络服务，病毒式传播后以每用户50美分的收费触达数十亿用户，随后悄然退场。他还援引互联网泡沫时代为佐证，认为当年大多数网站的技术复杂度并不高于今天AI代理所能生成的产品。\n\n然而黄仁勋自己随即戳破了这个论断的泡沫。他补充道：\"十万个这样的AI代理复制英伟达的概率是零。\"这意味着，他所描述的AGI不过是一次性的流量变现，而非能够持续运营、管理人员、应对董事会的真正\"通用智能企业体\"。\n\n这已不是黄仁勋第一次在AGI定义上玩文字游戏。2023年他曾预测AI将在五年内通过\"近似人类智能\"的测试；这一次，他再次选择了最宽松的定义让\"AGI已至\"成为最容易给出的答案。批评者指出，英伟达作为当前AI算力最大受益者，市值约4万亿美元，其CEO关于AGI进展的乐观表态天然带有利益驱动色彩，需理性看待。",
+      "categories": ["event"],
+      "tags": ["英伟达", "黄仁勋", "AGI", "人工通用智能", "Lex Fridman"],
       "context": "",
-      "heat": 5,
-      "idx": 4
+      "heat": 4
     },
     {
-      "title": "2月全球创投被AI大单主导",
-      "summary": "Crunchbase称OpenAI、Anthropic等超大额交易推动2月全球创投规模创纪录，AI继续吸走大部分增量资本。",
-      "url": "https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/",
-      "best_url": "https://news.crunchbase.com/venture/record-setting-global-funding-february-2026-openai-anthropic/",
-      "full_content": "Crunchbase数据显示，2026年2月全球创投融资额达到1890亿美元，创下单月历史新高，但这场“繁荣”几乎完全由少数AI超大额交易支撑。OpenAI单笔融资1100亿美元，Anthropic融资300亿美元，Waymo融资160亿美元，三家公司合计就拿走1560亿美元，占当月全球融资总额的83%。\n\n如果只看总盘子，市场会误以为创投已全面复苏；但拆开结构后会发现，资本正在以前所未有的速度向头部AI资产集中。2月AI相关公司合计吸收1710亿美元，占全球融资总额约90%；美国公司获得1740亿美元，占比高达92%。与之形成反差的是，种子轮融资同比反而下滑约11%至26亿美元，说明早期项目并未同步受益。\n\n这一轮创纪录融资的意义，不只是数字夸张，更在于它揭示了AI时代的资本分层：顶级模型和算力平台可以持续吞噬增量资金，中长尾创业公司却面临更严苛的筛选。对行业来说，这既强化了OpenAI、Anthropic等公司的生态主导地位，也意味着未来创投市场的主题不会是普遍回暖，而是“少数巨头吸走大部分弹药”的高度集中化格局。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "VC",
-        "OpenAI",
-        "Anthropic",
-        "融资",
-        "AI资本市场"
-      ],
+      "title": "美国银行向千名理财顾问部署AI代理",
+      "summary": "美国银行与美林于3月26日正式向约1000名理财顾问推出基于Salesforce Agentforce构建的AI会议助理，可节省每次会议最多4小时的后续工作时间。",
+      "url": "https://www.stocktitan.net/news/BAC/merrill-and-bank-of-america-private-bank-launch-ai-powered-meeting-zv9y37ef8gue.html",
+      "best_url": "https://www.stocktitan.net/news/BAC/merrill-and-bank-of-america-private-bank-launch-ai-powered-meeting-zv9y37ef8gue.html",
+      "full_content": "2026年3月26日，美国银行旗下的美林财富管理和美国银行私人银行正式宣布全面推出\"AI会议旅程\"（AI-Powered Meeting Journey）解决方案，向约1000名理财顾问部署基于Salesforce Agentforce构建的AI会议助理，标志着大型金融机构在客户服务侧规模化落地AI代理的里程碑时刻。\n\n该系统覆盖客户会议的完整生命周期：会前，AI自动检索客户关系数据与近期账户动态，生成个性化会议准备材料；会中，在客户授权前提下充当AI记录员，实时捕捉讨论要点并生成可分享的会议摘要；会后，自动整理决策事项与后续行动步骤，生成任务清单和文档。官方数据显示，该工具可为每次会议节省最多4小时的后续工作时间，对于每年数以百万计的会议而言，累计效益极为可观。\n\n美林首席运营官Patricio Diaz表示，该方案\"代表了财富管理行业运用AI的重要进步\"，将使顾问的精力真正释放至业务增长和深度客户关系维护上。美国银行每年在技术上投入135亿美元，其中40亿用于包括AI在内的新项目。该行AI化布局早有铺垫——2018年推出的虚拟助手Erica迄今已累计服务超32亿次交互，此次AI会议助理正是在同一底层能力基础上的深化延伸。\n\n此次部署是Salesforce Agentforce在头部金融机构的标志性落地，也是传统大型银行将AI从后台效率工具推向前台客户服务核心环节的有力信号。",
+      "categories": ["product", "event"],
+      "tags": ["美国银行", "Salesforce", "Agentforce", "AI Agent", "金融AI"],
+      "context": "Salesforce的Agentforce是面向企业的AI代理平台，正在金融、零售等行业快速落地，此次美国银行部署是大型金融机构在客户服务侧规模化应用AI代理的标志性案例。",
+      "heat": 3
+    },
+    {
+      "title": "大卫·萨克斯卸任白宫AI与加密货币专员",
+      "summary": "风险投资人大卫·萨克斯作为特殊政府雇员的任期届满，正式卸任白宫AI与加密货币专员一职，但表示将继续以顾问身份影响总统AI政策。",
+      "url": "https://www.theverge.com/policy/902140/david-sacks-out-ai-crypto-czar",
+      "best_url": "https://www.theverge.com/policy/902140/david-sacks-out-ai-crypto-czar",
+      "full_content": "大卫·萨克斯于2026年3月26日通过接受彭博电视采访的方式，正式宣布卸任白宫AI与加密货币专员一职。萨克斯以\"特殊政府雇员\"（SGE）身份履职，该身份允许其同时在私营部门和政府任职，但法定上限为130天。他在采访中表示已\"用尽了这段时间\"，正式离开这一职位。\n\n离任后，萨克斯将转任总统科学技术顾问委员会（PCAST）联合主席，与白宫科技政策办公室负责人迈克尔·克拉特西奥斯共同主持该委员会。白宫同期宣布多位科技高管加入PCAST，包括马克·扎克伯格、马克·安德森、黄仁勋和谢尔盖·布林。萨克斯表示，新角色将使他能就更广泛的技术议题向总统提供建议，但不涉及协调联邦政府机构运作。\n\n回顾其任职期间，萨克斯对白宫AI政策影响深远但争议不断。他曾于2024年为特朗普在硅谷举办大型募资活动，并主导推动了多项激进AI政策方向。然而，他试图通过国会和行政令全面封锁各州AI法规的举措，激怒了共和党州长和MAGA民粹主义者，导致多项政策目标受阻。批评者指出，他使白宫在AI政策上陷入文化战争，错失了儿童安全等原本容易推进的政策窗口。\n\n此外，萨克斯近期在其播客《All In》中公开批评总统伊朗政策，认为需要找到\"下台阶\"，此举在特朗普生态圈内被视为越界。分析人士认为，萨克斯卸任后美国AI政策短期内将进入调整期，主导权逐渐向OSTP和PCAST顾问机制回归，但硅谷对白宫AI议题的影响力并未消退。",
+      "categories": ["policy", "event"],
+      "tags": ["大卫萨克斯", "白宫AI政策", "特朗普", "AI监管", "PCAST"],
       "context": "",
-      "heat": 5,
-      "idx": 8
+      "heat": 3
     },
     {
-      "title": "GitHub开源AI项目热榜",
-      "summary": "GitHub梳理近期值得关注的10个开源AI项目，焦点从MCP扩展到多智能体协作。",
-      "url": "https://github.blog/open-source/maintainers/from-mcp-to-multi-agents-the-top-10-open-source-ai-projects-on-github-right-now-and-why-they-matter/",
-      "best_url": "https://github.blog/open-source/maintainers/from-mcp-to-multi-agents-the-top-10-open-source-ai-projects-on-github-right-now-and-why-they-matter/",
-      "full_content": "GitHub 发布了一份开源 AI 新项目热榜，对截至 2025 年 3 月 29 日前 99 天内创建的公开仓库进行筛选，综合参考 stars 增速、fork、流量峰值和贡献者活跃度，给出 10 个最受关注的新项目。这份榜单最鲜明的信号，是开源 AI 的重心正从“单模型能力”转向“工具接入、代理协作与工作流落地”。\n\n上榜项目里，MCP 相关工具占据明显位置，例如将 MCP 工具转成 OpenAPI 服务的 Open WebUI MCP、面向开发者的命令行工具 F/mcptools，以及连接 Blender 与 Claude 的 Blender-MCP，说明标准化工具接口已成为 agent 生态的关键底座。另一方面，OWL、Letta、Second-Me 等项目分别对应多智能体协作、可移植 agent 封装和数字分身，反映出开发者正在把 AI 从“聊天框”推向“可组合的软件实体”。\n\n榜单还显示语音与多模态仍是高活赛道，VoiceStar 与 Sesame CSM 代表开源语音合成继续进化。对行业而言，这份榜单的意义不只在于发现新项目，更在于验证了三条趋势：MCP 正加速成为接口层标准，多 agent 正从研究走向实用，而真正受欢迎的开源项目，越来越强调可接入、可复用、可编排，而不只是模型本身。",
-      "categories": [
-        "product"
-      ],
-      "tags": [
-        "GitHub",
-        "开源AI",
-        "MCP",
-        "Multi-Agent",
-        "AI Agents"
-      ],
+      "title": "Meta发布TRIBE v2：可预测大脑对视频音频文本刺激响应",
+      "summary": "Meta FAIR团队发布三模态大脑编码基础模型TRIBE v2，能以70倍分辨率提升预测fMRI大脑响应，是迄今最精准的跨模态神经活动预测模型。",
+      "url": "https://the-decoder.com/metas-new-ai-model-predicts-how-your-brain-reacts-to-images-sounds-and-speech/",
+      "best_url": "https://the-decoder.com/metas-new-ai-model-predicts-how-your-brain-reacts-to-images-sounds-and-speech/",
+      "full_content": "Meta FAIR实验室近日发布新一代大脑编码基础模型TRIBE v2，这是目前覆盖模态最广、预测分辨率最高的神经活动预测系统。该模型基于超过1000小时的fMRI（功能性磁共振成像）数据训练，覆盖720名受试者，能以70,000个体素的精度预测人脑对视觉、听觉和语言刺激的响应——相较v1版仅预测1,000个体素，精度提升逾70倍。\n\nTRIBE v2采用三模态输入架构：视频通道使用Meta自研的Video-JEPA-2，音频通道使用Wav2Vec-Bert-2.0，文本通道使用Llama 3.2。三类输入分别被编码为嵌入向量，再由统一Transformer联合建模，最后通过个体特定层输出高分辨率脑响应预测图。\n\n在基准测试中，TRIBE v2的预测结果与多名被试平均脑响应的相关性，甚至高于大多数单个被试真实扫描与群体均值的相关性——意味着模型的\"典型性预测\"已超越个体噪声。在经典神经科学实验验证中，模型成功复现了数十年研究积累的发现：精准定位面孔、地点、肢体等视觉刺激对应的专属脑区，并在语言实验中区分出情感痛苦与躯体痛苦的不同神经通路。\n\n值得关注的是，TRIBE v2的预测精度尚未出现平台期，随训练数据增加持续提升，与大语言模型的Scaling Law规律高度吻合。Meta提出三大应用方向：优化神经科学实验设计、构建更具脑科学依据的AI架构，以及未来辅助脑疾病诊断。目前，模型代码、权重和交互演示均已公开发布。",
+      "categories": ["research", "model"],
+      "tags": ["Meta FAIR", "TRIBE v2", "脑科学", "fMRI", "多模态AI"],
+      "context": "TRIBE v2是Meta FAIR实验室的基础神经科学研究成果，核心目标是用AI预测人脑对感官刺激的响应，从而替代昂贵耗时的真实fMRI实验。fMRI通过追踪血氧变化间接测量脑活动，每次实验需要招募真实被试，成本极高。TRIBE v2若成熟落地，可在计算机上\"模拟\"神经科学实验，显著压缩研究周期，并为未来脑机接口（BCI）和神经疾病诊断提供基础能力。",
+      "heat": 3
+    },
+    {
+      "title": "美国3月创业融资降至130亿美元 AI超级大轮减少",
+      "summary": "Crunchbase数据显示，继2月创纪录的1890亿美元后，美国3月创业融资总额降至约130亿美元，AI超大融资轮数量明显减少，热潮出现降温信号。",
+      "url": "https://beamstart.com/news/us-startup-funding-slows-sharply-17742875343390",
+      "best_url": "https://news.crunchbase.com/business/us-startup-funding-slows-march-2026-data/",
+      "full_content": "继2026年1、2月连续创下历史纪录后，美国创业融资市场在3月出现大幅降温。根据Crunchbase最新数据，3月美国初创公司各阶段融资总额约130亿美元，与2月高达1890亿美元的创纪录水平相比骤降逾93%。2月的天量融资主要由三笔巨型交易支撑：OpenAI完成史上规模最大的单笔VC融资1100亿美元（估值8400亿美元）、Anthropic获得300亿美元、自动驾驶公司Waymo完成160亿美元融资。\n\n从结构来看，此次降速呈明显的阶段分化特征：晚期及成长期大轮融资数量锐减，而早期和种子轮融资规模仍与前两个月基本持平，说明市场并非整体退潮，而是缺少能带动总量的超大型AI轮次。基础层面，早期创业活力依然延续。\n\n地缘政治因素亦不可忽视。3月融资降温与2月底爆发的美伊战争时间节点高度吻合，此后美股主要指数持续下行，投资者风险偏好明显收缩，进一步抑制了晚期大额交易的节奏。值得注意的是，同期欧洲创业融资市场却创下年内新高，受益于AI基础设施公司Nscale和图灵奖得主LeCun参与创立的世界模型AI实验室AMI等超大轮推动，欧美市场3月走势形成明显分化。\n\n从更长周期来看，2月的记录极有可能是中期顶部。单笔1100亿美元的融资规模在VC历史上没有先例，短期内难以复制。分析人士认为，超大轮数量的阶段性回落属于正常均值回归，不代表AI投资长期热度消退，更值得关注的是剔除超大轮噪声后常规晚期融资能否维持健康节奏。",
+      "categories": ["finance", "funding"],
+      "tags": ["创业融资", "AI投资", "Crunchbase", "VC", "融资降温"],
       "context": "",
-      "heat": 4,
-      "idx": 0
-    },
-    {
-      "title": "海螺AI新版模型开放",
-      "summary": "MiniMax宣布海螺AI发布新版视频生成模型并向全部用户开放，继续加码多模态内容生成。",
-      "url": "https://www.pingwest.com/w/302559",
-      "best_url": "https://www.minimaxi.com/news/minimax%E5%AF%BC%E6%BC%94%E7%BA%A7%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9E%8B%E4%B8%8A%E7%BA%BF",
-      "full_content": "MiniMax 宣布面向全球用户开放海螺视频新版导演模型，其中图生视频版 I2V-01-Director 与此前推出的文生视频版 T2V-01-Director 共同组成 01-Director 系列，并同步上线海螺视频 App。这次更新的核心不只是“生成更好看的视频”，而是把运镜控制从专业影视语言，进一步下放成普通创作者可直接调用的产品能力。\n\n官方介绍显示，新模型提供 15 种可自由组合的单一运镜，可扩展出上百种镜头组合，支持推、拉、摇、移、跟随、固定镜头等效果，也支持通过自然语言直接触发运镜指令。相比此前大量视频模型更偏重画面质感和人物一致性，海螺这次明显把重点放在“镜头语言”上，试图解决 AI 视频常见的叙事单调、镜头死板和缺乏导演感的问题。\n\n这意味着国内视频生成竞争正从基础模型能力，转向更贴近创作工作流的控制层体验。对 MiniMax 来说，开放 App 与导演模式，是在把海螺从单一模型升级为完整创作入口；对行业来说，这也说明下一阶段 AI 视频的比拼重点，可能不只是清晰度和时长，而是谁能先把“可控叙事”做成真正可消费的产品。",
-      "categories": [
-        "product"
-      ],
-      "tags": [
-        "MiniMax",
-        "海螺AI",
-        "视频生成",
-        "AIGC",
-        "多模态"
-      ],
-      "context": "",
-      "heat": 4,
-      "idx": 1
-    },
-    {
-      "title": "中概科技股押注AI芯片",
-      "summary": "市场报道聚焦中概科技股年内表现，AI芯片与相关IPO预期成为资金重新定价的重要线索。",
-      "url": "https://finance.yahoo.com/news/chinese-tech-stocks-charged-2026-053404474.html",
-      "best_url": "https://finance.yahoo.com/news/chinese-tech-stocks-charged-2026-053404474.html",
-      "full_content": "中概科技股在2026年开年重新获得资金追捧，核心催化来自AI芯片与国产算力链条的估值重估。市场焦点是上海壁仞科技在港股IPO募资约55.8亿港元，上市首日盘中涨幅一度接近120%，显示资本对中国本土AI芯片故事的风险偏好明显回升。\n\n这轮行情并不只是一家公司带动。报道提到，自DeepSeek-R1在去年破圈后，中国AI与半导体板块持续修复，恒生科技指数2025年累计上涨约23%。与此同时，百度半导体子公司昆仑芯等企业也在推进上市，进一步强化了“模型突破—算力需求—芯片融资与IPO”这条主线。\n\n对市场而言，这意味着中概科技股的定价逻辑，正从过去的监管压制和宏观拖累，转向AI基础设施、自主替代和资本开支周期。若后续更多中国AI芯片公司顺利融资或上市，港股与中概科技板块可能迎来一轮围绕算力、模型和应用联动的系统性重估。",
-      "categories": [
-        "finance"
-      ],
-      "tags": [
-        "中概股",
-        "AI芯片",
-        "港股IPO",
-        "壁仞科技",
-        "国产算力"
-      ],
-      "context": "壁仞科技是国内高性能AI GPU代表企业之一，长期被视作中国本土替代英伟达的重要观察样本。其港股IPO表现不仅关乎单家公司融资能力，也常被市场当作中国AI芯片产业链风险偏好、政策支持力度和国产算力商业化进展的风向标。",
-      "heat": 4,
-      "idx": 3
-    },
-    {
-      "title": "AI过亿融资潮持续升温",
-      "summary": "36氪统计显示，AI赛道近期过亿融资高频出现，资金继续向模型、基础设施和应用层头部集中。",
-      "url": "https://eu.36kr.com/zh/p/3546815118159749",
-      "best_url": "https://eu.36kr.com/zh/p/3546815118159749",
-      "full_content": "36氪援引IT桔子数据称，2025年1至10月中国AI领域已出现139笔过亿元融资，总额突破600亿元，说明一级市场虽然不再为纯概念买单，但对AI主线的投入依旧凶猛，只是资金更集中地流向可验证商业化与产业落地的方向。\n\n从结构上看，融资最明显的特征是分层。大模型领域共有29笔过亿融资、累计142亿元，月之暗面、智谱和MiniMax等头部公司继续吸金；但真正成为全年最大热点的是具身智能，73家公司合计融资257亿元，超过大模型，背后支撑来自订单、量产和交付预期。与此同时，AI基础设施也维持高热度，芯片、算力服务和计算底座项目持续获得亿元级押注。\n\n应用层则呈现“价值明确优先”的风格，医疗、零售和工业最受欢迎，其中医疗占15笔过亿应用融资中的6笔。整体来看，资本判断标准已从“讲AGI故事”转向“看收入、看订单、看量产、看算力效率”，这意味着中国AI融资进入产业现实主义阶段，头部集中和赛道分化都会继续加剧。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "AI融资",
-        "一级市场",
-        "具身智能",
-        "大模型",
-        "算力基础设施"
-      ],
-      "context": "",
-      "heat": 4,
-      "idx": 5
-    },
-    {
-      "title": "C3.ai财报不及预期",
-      "summary": "C3.ai季度业绩逊于市场预期，收入与盈利表现承压，引发投资者对AI软件商业兑现的再审视。",
-      "url": "https://www.investing.com/news/earnings/c3ai-earnings-missed-by-011-revenue-fell-short-of-estimates-4525732",
-      "best_url": "https://www.investing.com/news/earnings/c3ai-earnings-missed-by-011-revenue-fell-short-of-estimates-4525732",
-      "full_content": "企业AI软件公司C3.ai最新季度财报明显低于市场预期，再次把“AI商业化到底何时兑现”这个问题摆到台前。根据披露，公司当季营收为5326万美元，不仅较市场预期的7561万美元低出约29%，也低于上年同期的9878万美元；调整后每股亏损40美分，同样差于市场预期的亏损29美分。\n\n更令投资者担忧的是指引全面下修。C3.ai预计下一季度营收仅为4800万至5200万美元，显著低于市场原先预估的7769万美元；全年营收指引也从此前的4.475亿至4.845亿美元，大幅砍至2.467亿至2.507亿美元。与此同时，公司宣布重组与裁员，说明新管理层已判断原有组织与销售体系难以支撑增长目标。\n\n财报发布后，C3.ai股价盘中重挫逾24%。这家公司曾是美股“企业级AI平台”叙事的代表，如今却暴露出客户转化慢、收入确认承压和费用结构失衡的问题。对市场而言，这不仅是单一公司的业绩失速，更是一次提醒：AI软件估值要站稳，最终仍要回到订单、续费和利润率，而不是只靠概念溢价。",
-      "categories": [
-        "finance"
-      ],
-      "tags": [
-        "C3.ai",
-        "财报",
-        "Enterprise AI",
-        "美股",
-        "商业化"
-      ],
-      "context": "",
-      "heat": 4,
-      "idx": 7
-    },
-    {
-      "title": "AI初创估值继续抬升",
-      "summary": "财经报道指出AI初创公司估值仍在翻倍甚至数倍上行，一级市场对稀缺AI资产追逐未降温。",
-      "url": "https://finance.yahoo.com/news/ai-startup-valuations-doubling-tripling-123000921.html",
-      "best_url": "https://finance.yahoo.com/news/ai-startup-valuations-doubling-tripling-123000921.html",
-      "full_content": "最新报道指出，AI初创公司的估值膨胀仍在持续，且不少公司在几个月内就能完成连续融资，估值直接翻倍甚至翻数倍。这种现象已不只出现在OpenAI、Anthropic等基础模型巨头，也蔓延到法律AI、医疗AI、代码生成等垂直赛道，反映出一级市场对“稀缺AI资产”的争抢仍处在高热状态。\n\n文中列举的案例极具代表性：Anthropic在2025年3月以615亿美元估值完成E轮融资，6个月后F轮融资时估值已升至1830亿美元；OpenAI则从年初约1570亿美元估值一路抬升，到后续交易中达到5000亿美元。垂直应用层同样夸张，例如Cursor从2024年底约26亿美元估值，至2025年中融资后升至100亿美元，随后又进一步被市场推高。Harvey、OpenEvidence、Abridge等公司也都在短时间内经历多轮融资和估值跃升。\n\n投资人给出的解释是，这并非简单复制2021年的泡沫，而是AI公司在收入增长、产品渗透和资本竞争上都呈现出前所未见的速度。与此同时，风险同样明显：若企业尚未稳固产品市场匹配，就被高估值和高烧钱节奏裹挟，未来一旦融资环境转冷，员工期权、融资结构和经营现金流都可能承压。换句话说，这轮估值狂飙既是AI商业化加速的证明，也可能埋下下一阶段分化和回调的伏笔。",
-      "categories": [
-        "finance"
-      ],
-      "tags": [
-        "AI估值",
-        "一级市场",
-        "OpenAI",
-        "Anthropic",
-        "Venture Capital"
-      ],
-      "context": "",
-      "heat": 4,
-      "idx": 10
-    },
-    {
-      "title": "AI硬件融资持续领跑",
-      "summary": "创投媒体梳理AI硬件成为融资最活跃方向之一，GPU与端侧设备相关项目仍受资本追捧。",
-      "url": "https://m.cyzone.cn/article/801609",
-      "best_url": "https://m.cyzone.cn/article/801609",
-      "full_content": "AI硬件正重新成为一级市场最拥挤、也最确定的融资方向之一。近期创投媒体梳理显示，资金并没有从AI赛道整体撤退，而是进一步向“卖铲子”和底层基础设施集中，尤其是GPU相关配套、端侧设备、机器人与半导体链条最受追捧。\n\n这波热度背后有很强的产业逻辑：一方面，大模型训练与推理继续推高算力密度，带动芯片、散热、网络、存储、电源等环节同步扩容；另一方面，端侧AI开始从概念走向产品化，具备本地推理、语音交互和Agent能力的智能硬件更容易讲出“设备+订阅”的商业故事。以近期被关注的散热公司Frore Systems为例，其完成1.43亿美元D轮融资后估值达16.4亿美元，反映资本正押注那些不直接造芯片、但能卡住AI基础设施瓶颈的公司。\n\n与上一轮只追模型不同，当前资金明显偏好更接近落地的硬件资产：谁能解决功耗、散热、部署和端云协同问题，谁就更容易拿到钱。这意味着AI投资主线正从“能力炫技”转向“基础设施兑现”，也预示未来一段时间，硬件链条的融资活跃度仍可能高于纯应用层。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "AI硬件",
-        "融资",
-        "GPU",
-        "端侧设备",
-        "半导体基础设施"
-      ],
-      "context": "",
-      "heat": 3,
-      "idx": 6
-    },
-    {
-      "title": "SparkLabs设立5000万美元AI基金",
-      "summary": "SparkLabs完成新基金募集，计划重点投资AI初创公司，反映早期基金仍在积极布局AI周期。",
-      "url": "https://www.scommerce.com/sparklabs-closes-new-50-million-fund-to-back-ai-startups/",
-      "best_url": "https://www.scommerce.com/sparklabs-closes-new-50-million-fund-to-back-ai-startups/",
-      "full_content": "SparkLabs宣布完成一只5000万美元的AI专项基金“​​AIM AI Fund”，继续加码其最擅长的早期科技投资。该机构此前曾押中过OpenAI，也投资过Anthropic、xAI、Vectara、Allganize、Kneron等AI公司，这次新基金的设立，说明即使一级市场整体分化，专注AI的头部早期资本仍在积极募集并提前卡位下一轮创新周期。\n\n从资金分配看，约35%将投向其在沙特推出的AI加速器AIM-X项目，剩余65%将用于全球范围内的A轮和B轮投资。SparkLabs透露，加速器项目的单笔支票通常为20万至50万美元，后续成长轮投资区间则在100万到500万美元之间，整只基金预计投50到70家公司。基金LP中还包含政府背景资金，显示中东官方资本也在持续推动本地AI生态建设。\n\n这笔基金的意义不只是“多了一只AI基金”，更在于它把沙特、中东与全球AI创业网络连接起来。对创业公司而言，这意味着除硅谷外，新的资本和试点场景正在形成；对投资行业而言，则再次验证AI仍是少数能持续吸引跨周期资金、并在全球范围内形成新地缘资本版图的核心主题。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "AI融资",
-        "SparkLabs",
-        "VC",
-        "Saudi Arabia",
-        "早期投资"
-      ],
-      "context": "SparkLabs是较早布局全球创业投资网络的早期VC，创始团队活跃于美国、韩国和中东市场。其新推出的AIM-X加速器落地沙特，背后对应的是沙特“AI Mission”等国家级科技转型计划。对国内读者而言，这条新闻的重点不只在基金规模，更在于中东正在成为AI资本、算力和创业项目的新聚集地。",
-      "heat": 3,
-      "idx": 9
-    },
-    {
-      "title": "Winn.ai获1800万美元A轮",
-      "summary": "销售助手初创Winn.ai完成1800万美元A轮融资，主打实时会议辅助与销售流程自动化。",
-      "url": "https://news.crunchbase.com/venture/startup-winn-ai-seriesa-real-time-assistant/",
-      "best_url": "https://news.crunchbase.com/venture/startup-winn-ai-seriesa-real-time-assistant/",
-      "full_content": "以色列销售AI初创公司Winn.ai宣布完成1800万美元A轮融资，本轮由Insight Partners、S Capital和Mangusta Capital共同领投，Moneta VC、HighSage Ventures、Alumni Ventures、Sarona Ventures和OurCrowd等跟投。公司自2022年成立以来累计融资已达3500万美元，显示销售流程自动化仍是企业级AI里最具付费确定性的方向之一。\n\nWinn.ai的核心产品是“实时销售助手”：在销售与客户通话过程中，系统会同步给出提问建议、流程提醒和信息抓取，并自动连接企业CRM与BI系统，减少会前准备、会中记录和会后录入等行政工作。与大量事后复盘型对话分析工具不同，Winn.ai强调在通话发生的当下提供辅助，帮助销售代表即时调整话术和推进节奏。这种“实时执行”定位，是它区别于传统会话智能工具的关键。\n\n公司透露，其2025年ARR同比增长3倍、过去两年整体增长30倍，客户已包括Deel、Kaseya和Cyera等企业。目前团队规模超过40人，计划用新资金扩展美国市场团队并继续投入研发。放在更大背景下看，AI与销售、营销交叉领域去年获得的风投资金接近40亿美元，说明资本正在把“能直接拉动收入效率”的AI工具视作优先下注方向。Winn.ai此轮融资，也再次验证企业愿意为明确ROI的工作流AI买单。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "Winn.ai",
-        "Sales AI",
-        "企业SaaS",
-        "Series A",
-        "Revenue Tech"
-      ],
-      "context": "Winn.ai是一家总部位于特拉维夫的企业软件初创公司，面向销售团队提供实时AI辅助工具。它所在的“Revenue AI / Sales AI”赛道，核心逻辑不是替代销售，而是通过会议辅助、自动记录、CRM写回和流程标准化，提升成单效率与团队复制能力。相比通用聊天机器人，这类垂直SaaS更强调可量化的业务回报。",
-      "heat": 3,
-      "idx": 11
-    },
-    {
-      "title": "Distyl AI获1.75亿美元B轮",
-      "summary": "企业级AI服务商Distyl AI宣布完成1.75亿美元B轮融资，估值进一步抬升，企业落地能力获资本认可。",
-      "url": "https://news.crunchbase.com/ai/distyl-raises-valuation-175m-seriesb/",
-      "best_url": "https://www.prnewswire.com/news-releases/distyl-ai-raises-175-million-at-1-8-billion-valuation-to-help-global-enterprises-become-ai-native-302564270.html",
-      "full_content": "企业级AI服务商 Distyl AI 宣布完成1.75亿美元B轮融资，估值达到18亿美元，较其上一轮约2亿美元估值大幅跃升近9倍。此轮由 Lightspeed Venture Partners 与 Khosla Ventures 领投，DST Global、Coatue 和 Dell Technologies Capital 参投，公司自2022年成立以来累计融资已超过2亿美元。\n\nDistyl 的核心定位不是单纯卖模型或卖软件，而是帮助《财富》500强企业把 AI 真正嵌入业务流程，推动“AI-native enterprise（AI原生企业）”转型。公司称其服务覆盖医疗、通信、保险、制造和金融等行业，已触达超过1.2亿终端用户，并为客户带来数亿美元级别的经营改善。公开案例显示，其平台曾帮助一家《财富》50强硬件制造商将根因分析速度提升80%，也帮助医疗客户实现2300万美元年度成本节约。\n\n这笔融资反映出资本市场对“企业AI落地层”的持续追捧。相比只押注底层模型，投资人开始更看重谁能把大模型真正转化为组织效率、成本节约和流程重构。Distyl 由两位前 Palantir 员工创立，强调在3个月内交付可验证成果，这种“咨询+工程+平台”的混合模式，或将成为下一阶段企业AI商业化的重要范式。",
-      "categories": [
-        "funding"
-      ],
-      "tags": [
-        "企业AI",
-        "融资",
-        "Distyl AI",
-        "AI-native enterprise",
-        "Palantir系创业"
-      ],
-      "context": "Distyl AI 是一家成立于2022年的美国企业AI初创公司，创始团队出身 Palantir，主打帮助大型企业将生成式AI深度嵌入核心业务流程。与只提供模型接口或通用助手的厂商不同，Distyl 更像“企业AI落地总包商”，通过自研平台 Distillery、工程团队和行业知识结合，推动医疗、制造、通信等传统行业完成 AI 原生化改造。",
-      "heat": 3,
-      "idx": 12
+      "heat": 4
     }
   ]
 }

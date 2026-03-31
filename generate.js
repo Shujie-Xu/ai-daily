@@ -479,7 +479,7 @@ if (require.main === module) {
     new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Shanghai' });
 
   // ── 清理 30 天以上的旧音频 ──
-  cleanupOldAudio(30);
+  cleanupOldAudio(90);
 
   // ── 生成 TTS 音频 ──
   if (!skipTts) {

@@ -1,35 +1,5 @@
 [
   {
-    "title": "英伟达GTC 2026：Vera Rubin登场、DGX桌面超算与NemoClaw企业智能体平台",
-    "date": "2026-03-17",
-    "expires": "2026-03-31"
-  },
-  {
-    "title": "Meta与Nebius签270亿美元AI算力协议：五年期最大算力租赁合同",
-    "date": "2026-03-17",
-    "expires": "2026-03-31"
-  },
-  {
-    "title": "智谱AI发布GLM-5-Turbo：专为智能体工作流打造的闭源专有新模型",
-    "date": "2026-03-17",
-    "expires": "2026-03-31"
-  },
-  {
-    "title": "Meta向WhatsApp AI竞争对手收高额接入费，每条消息最高€0.13",
-    "date": "2026-03-17",
-    "expires": "2026-03-31"
-  },
-  {
-    "title": "FTC要求谷歌、OpenAI、Meta就AI伴侣聊天机器人安全风险作出说明",
-    "date": "2026-03-17",
-    "expires": "2026-03-31"
-  },
-  {
-    "title": "OpenAI暂停ChatGPT成人内容模式上线：安全争议与诉讼压力持续升级",
-    "date": "2026-03-17",
-    "expires": "2026-03-31"
-  },
-  {
     "title": "OpenAI发布GPT-5.4 mini和nano：最强小模型，面向Agent高频调用",
     "date": "2026-03-18",
     "expires": "2026-04-01"
@@ -638,5 +608,41 @@
     "title": "爱奇艺冲刺港股IPO 同步发布AI智能体纳逗Pro",
     "date": "2026-03-31",
     "expires": "2026-04-14"
+  },
+  {
+    "id": "openai-122b-funding-852b-valuation",
+    "title": "OpenAI完成史上最大私募融资：1220亿美元到位，估值达8520亿美元",
+    "date": "2026-04-01",
+    "expires": "2026-04-15"
+  },
+  {
+    "id": "microsoft-copilot-researcher-multi-model",
+    "title": "微软Copilot Researcher推出多模型智能：OpenAI+Anthropic双引擎同时工作，研究准确度超Perplexity",
+    "date": "2026-04-01",
+    "expires": "2026-04-15"
+  },
+  {
+    "id": "alibaba-qwen36-plus-preview",
+    "title": "阿里发布Qwen 3.6 Plus Preview：百万Token上下文+原生链式思考，瞄准大规模Agent场景",
+    "date": "2026-04-01",
+    "expires": "2026-04-15"
+  },
+  {
+    "id": "oracle-federal-ai-data-platform",
+    "title": "Oracle发布联邦政府专属AI数据平台：统一数据架构+FedRAMP认证，军民机构全覆盖",
+    "date": "2026-04-01",
+    "expires": "2026-04-15"
+  },
+  {
+    "id": "runway-10m-builders-fund",
+    "title": "Runway推出1000万美元Builders基金与孵化项目，押注AI视频+世界模拟初创",
+    "date": "2026-04-01",
+    "expires": "2026-04-15"
+  },
+  {
+    "id": "kunlun-wanwei-aigc-zhongguancun-2026",
+    "title": "昆仑万维中关村论坛发布三大模型：Matrix-Game 3.0游戏世界模型、SkyReels V4视频与Mureka V9音乐",
+    "date": "2026-04-01",
+    "expires": "2026-04-15"
   }
 ]

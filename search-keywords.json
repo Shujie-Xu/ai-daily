@@ -81,6 +81,21 @@
       ]
     },
     {
+      "id": "buzz_tracking",
+      "label": "爆词追踪 / 新名词监控",
+      "note": "用高信噪比媒体与榜单页抓突然冒出来的新专有名词、模型代号、产品名；偏发现，不直接等于入选。",
+      "queries": [
+        "site:36kr.com AI 模型 OR AI 产品 OR 智能体",
+        "site:qbitai.com AI 模型 OR 视频模型 OR 智能体",
+        "site:latepost.com AI OR 人工智能 新品",
+        "site:finance.sina.com.cn AI 模型 OR 人工智能 发布",
+        "site:view.inews.qq.com AI 模型 OR 人工智能 发布",
+        "site:cls.cn AI 模型 OR 大模型 OR 智能体",
+        "site:tmtpost.com AI 模型 OR AI 产品 发布",
+        "site:artificialanalysis.ai video OR model"
+      ]
+    },
+    {
       "id": "custom",
       "label": "自定义关注（小妈妈随时添加）",
       "note": "在这里加新的搜索词，下次日报就会覆盖。格式和上方一样，每条 query 是一个字符串。",

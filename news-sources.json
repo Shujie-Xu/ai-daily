@@ -52,6 +52,11 @@
         { "name": "机器之心",            "url": "https://www.jiqizhixin.com",              "site": "jiqizhixin.com",       "tier": 1 },
         { "name": "晚点LatePost",        "url": "https://www.latepost.com",               "site": "latepost.com",         "tier": 1, "note": "深度报道，独家多" },
         { "name": "36Kr AI频道",         "url": "https://36kr.com/information/technology", "site": "36kr.com",             "tier": 1 },
+        { "name": "腾讯新闻科技",        "url": "https://view.inews.qq.com",               "site": "view.inews.qq.com",    "tier": 2, "note": "国内 AI 热点扩散快，适合补抓新名词" },
+        { "name": "新浪财经",            "url": "https://finance.sina.com.cn",             "site": "finance.sina.com.cn",  "tier": 2, "note": "财经快讯密集，适合补抓发布与产业线索" },
+        { "name": "财联社 / 科创板日报", "url": "https://www.cls.cn",                      "site": "cls.cn",               "tier": 2, "note": "快讯能力强，适合追踪模型发布与产业动态" },
+        { "name": "钛媒体",              "url": "https://www.tmtpost.com",                 "site": "tmtpost.com",          "tier": 2 },
+        { "name": "鞭牛士",              "url": "https://www.bianews.com",                 "site": "bianews.com",          "tier": 2 },
         { "name": "极客公园",            "url": "https://www.geekpark.net",               "site": "geekpark.net",         "tier": 2 },
         { "name": "虎嗅科技",            "url": "https://www.huxiu.com/channel/6.html",   "site": "huxiu.com",            "tier": 2 }
       ]

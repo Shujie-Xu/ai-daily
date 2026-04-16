@@ -1,56 +1,67 @@
 {
-  "updated": "2026-03-04",
-  "note": "修改此文件即可调整每日新闻搜索范围，下次 cron 自动生效。所有搜索均自动加 freshness:pd（过去24小时）。",
+  "updated": "2026-04-16",
+  "note": "AI Daily 搜索词库。主流程先做广谱搜索，再做弱信号补漏和定向追踪。默认搜索窗口建议 2-3 天，再按发布时间和事件新鲜度筛选。",
   "dimensions": [
     {
       "id": "newsletter",
       "label": "Newsletter / 周报聚合",
       "queries": [
         "\"last week in AI\" OR \"AI weekly roundup\" latest",
-        "site:substack.com AI news latest"
+        "site:substack.com AI news latest",
+        "site:therundown.ai OR site:tldr.tech OR site:bensbites.co AI latest"
       ]
     },
     {
       "id": "community",
-      "label": "社区热度 / 病毒传播",
+      "label": "社区热度 / 病毒传播 / 开发者信号",
       "queries": [
         "\"viral AI tool\" OR \"AI trending\" site:reddit.com OR site:news.ycombinator.com",
-        "\"GitHub trending AI\" OR \"AI open source\" trending"
+        "\"GitHub trending AI\" OR \"AI open source\" trending",
+        "site:news.ycombinator.com AI model launch OR AI startup OR robotics",
+        "site:reddit.com/r/LocalLLaMA OR site:reddit.com/r/singularity OR site:reddit.com/r/MachineLearning AI"
       ]
     },
     {
       "id": "model",
-      "label": "模型发布 / 产品更新",
+      "label": "模型发布 / 产品更新 / API 变化",
       "queries": [
         "\"AI model release\" OR \"LLM launch\" OR \"foundation model\"",
         "\"大模型\" OR \"AI产品发布\" OR \"AI新功能\"",
-        "OpenAI OR Anthropic OR Google OR Meta AI announcement"
+        "OpenAI OR Anthropic OR Google OR Meta AI announcement",
+        "\"API pricing\" OR \"model pricing\" OR \"enterprise launch\" AI",
+        "\"quietly launched\" OR \"rollout\" AI model OR AI product"
       ]
     },
     {
       "id": "funding",
-      "label": "融资 / 财务 / 股票",
+      "label": "融资 / 财务 / 收购 / 股票",
       "queries": [
         "AI startup \"seed\" OR \"series A\" OR \"series B\" OR \"series C\" funding",
         "\"AI acquisition\" OR \"AI IPO\" OR \"AI股票\" OR \"AI市值\"",
         "\"AI 融资\" OR \"人工智能投资\" site:36kr.com OR site:latepost.com",
-        "AI stock earnings OR results \"beats\" OR \"misses\""
+        "AI stock earnings OR results \"beats\" OR \"misses\"",
+        "\"acquisition talks\" OR \"deal talks\" OR \"explores sale\" AI startup",
+        "\"acqui-hire\" OR \"strategic investment\" AI OR robotics"
       ]
     },
     {
       "id": "research",
-      "label": "研究突破 / 学术",
+      "label": "研究突破 / 学术 / 开源",
       "queries": [
         "\"AI breakthrough\" OR \"AI paper\" latest",
-        "\"state of the art\" machine learning"
+        "\"state of the art\" machine learning",
+        "site:paperswithcode.com AI OR robotics latest",
+        "site:arxiv.org embodied AI OR world model OR robot policy OR VLA"
       ]
     },
     {
       "id": "policy",
-      "label": "监管 / 政策",
+      "label": "监管 / 政策 / 合规变化",
       "queries": [
         "\"AI regulation\" OR \"AI policy\" OR \"AI law\" latest",
-        "\"AI 监管\" OR \"人工智能法案\""
+        "\"AI 监管\" OR \"人工智能法案\"",
+        "\"identity verification\" OR \"实名\" OR \"KYC\" AI platform",
+        "\"policy change\" OR \"safety policy\" OR \"usage policy\" AI company"
       ]
     },
     {
@@ -60,7 +71,44 @@
         "site:crunchbase.com AI raises OR funding 2026",
         "site:techcrunch.com AI startup raises 2026",
         "\"AI startup\" announces \"raises\" OR \"closes\" funding",
-        "晚点LatePost OR 36kr OR IT桔子 AI 融资 初创"
+        "晚点LatePost OR 36kr OR IT桔子 AI 融资 初创",
+        "site:a16z.com OR site:sequoiacap.com AI startup OR robotics"
+      ]
+    },
+    {
+      "id": "embodied_intelligence",
+      "label": "具身智能 / 机器人 / 机器人脑 / 控制与仿真",
+      "queries": [
+        "\"embodied AI\" OR \"embodied intelligence\" latest",
+        "\"robot foundation model\" OR \"vision-language-action\" OR VLA robot",
+        "\"robot brain\" OR \"world model\" robotics OR \"robot policy\"",
+        "\"humanoid robot\" AI model OR robot software OR simulation",
+        "\"具身智能\" OR \"机器人大脑\" OR \"世界模型\" OR \"机器人控制\"",
+        "Figure OR 1X OR Physical Intelligence OR Apptronik OR Agility Robotics AI"
+      ]
+    },
+    {
+      "id": "targeted_entities",
+      "label": "重点公司 / 主体定向追踪",
+      "queries": [
+        "OpenAI latest announcement OR pricing OR enterprise OR acquisition",
+        "Anthropic latest announcement OR verification OR policy OR enterprise",
+        "Google DeepMind OR Gemini latest launch OR benchmark OR enterprise",
+        "Meta AI latest model OR app OR open source OR acquisition",
+        "xAI OR Grok latest launch OR funding OR infrastructure",
+        "Perplexity OR Mistral OR Cohere OR Runway OR Pika OR Synthesia latest",
+        "Cursor OR Windsurf OR Cognition OR Replit AI coding latest",
+        "Figure OR Physical Intelligence OR 1X OR Skild AI OR Covariant OR Dexterity latest"
+      ]
+    },
+    {
+      "id": "rumor_signal_tracking",
+      "label": "传闻 / 弱信号 / 灰度发布追踪",
+      "queries": [
+        "\"rumor\" OR \"reported\" OR \"people familiar\" AI startup",
+        "\"in talks\" OR \"considering\" acquisition AI OR robotics",
+        "\"quietly updated\" OR \"spotted\" OR \"rolling out\" AI product",
+        "site:news.ycombinator.com OR site:reddit.com AI rumor OR robotics rumor"
       ]
     },
     {
@@ -77,7 +125,10 @@
         "site:jiqizhixin.com",
         "site:latepost.com AI OR 人工智能",
         "site:news.crunchbase.com AI raises",
-        "site:paperswithcode.com"
+        "site:paperswithcode.com",
+        "site:theinformation.com AI",
+        "site:openai.com OR site:anthropic.com OR site:deepmind.google AI",
+        "site:figure.ai OR site:physicalintelligence.company OR site:1x.tech robotics AI"
       ]
     },
     {
@@ -92,7 +143,9 @@
         "site:view.inews.qq.com AI 模型 OR 人工智能 发布",
         "site:cls.cn AI 模型 OR 大模型 OR 智能体",
         "site:tmtpost.com AI 模型 OR AI 产品 发布",
-        "site:artificialanalysis.ai video OR model"
+        "site:artificialanalysis.ai video OR model",
+        "site:techcrunch.com AI robotics startup OR acquisition",
+        "site:github.com/trending robot OR embodied OR world model"
       ]
     },
     {

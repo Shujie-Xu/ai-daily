@@ -1,0 +1,88 @@
+{
+  "updated": "2026-04-16",
+  "note": "弱信号发现层配置。先从社区/官网/创业与具身来源中发现潜在事件，再生成定向搜索 query 去确认报道。",
+  "communities": [
+    {
+      "id": "hn",
+      "label": "Hacker News",
+      "sites": ["news.ycombinator.com"],
+      "queries": [
+        "site:news.ycombinator.com AI launch OR AI startup OR AI pricing OR robotics",
+        "site:news.ycombinator.com anthropic OR openai OR grok OR gemini OR robotics"
+      ]
+    },
+    {
+      "id": "reddit_ai",
+      "label": "Reddit AI",
+      "sites": ["reddit.com"],
+      "queries": [
+        "site:reddit.com/r/LocalLLaMA AI latest",
+        "site:reddit.com/r/singularity AI latest",
+        "site:reddit.com/r/OpenAI OR site:reddit.com/r/Anthropic AI policy OR launch",
+        "site:reddit.com/r/MachineLearning embodied AI OR robot OR VLA"
+      ]
+    },
+    {
+      "id": "github_trending",
+      "label": "GitHub Trending / Releases",
+      "sites": ["github.com"],
+      "queries": [
+        "site:github.com/trending AI OR agent OR multimodal",
+        "site:github.com/trending robotics OR embodied OR world model"
+      ]
+    }
+  ],
+  "official_watchlist": [
+    "OpenAI",
+    "Anthropic",
+    "Google DeepMind",
+    "Meta AI",
+    "xAI",
+    "Microsoft AI",
+    "Mistral",
+    "Perplexity",
+    "Runway",
+    "Pika",
+    "Cursor",
+    "Windsurf",
+    "Cognition",
+    "Replit",
+    "Figure",
+    "1X",
+    "Physical Intelligence",
+    "Skild AI",
+    "Apptronik",
+    "Agility Robotics",
+    "Dexterity",
+    "Covariant"
+  ],
+  "themes": [
+    "model launch",
+    "API pricing",
+    "enterprise rollout",
+    "identity verification / real-name policy",
+    "acquisition rumor / deal talks",
+    "funding / strategic investment",
+    "robot brain / embodied foundation model",
+    "vision-language-action model",
+    "robotics software / simulation / control stack",
+    "humanoid deployment / factory pilot"
+  ],
+  "search_templates": [
+    "{entity} {theme}",
+    "{entity} latest {theme}",
+    "{entity} {theme} Reuters OR TechCrunch OR VentureBeat OR The Information",
+    "site:{site} {entity} {theme}"
+  ],
+  "site_hints": {
+    "OpenAI": ["openai.com", "theinformation.com", "techcrunch.com"],
+    "Anthropic": ["anthropic.com", "theinformation.com", "venturebeat.com"],
+    "Google DeepMind": ["deepmind.google", "blog.google", "technologyreview.com"],
+    "Meta AI": ["ai.meta.com", "theverge.com", "techcrunch.com"],
+    "xAI": ["x.ai", "reuters.com", "techcrunch.com"],
+    "Figure": ["figure.ai", "techcrunch.com", "fortune.com"],
+    "1X": ["1x.tech", "techcrunch.com", "venturebeat.com"],
+    "Physical Intelligence": ["physicalintelligence.company", "technologyreview.com", "venturebeat.com"],
+    "Skild AI": ["skild.ai", "fortune.com", "techcrunch.com"]
+  }
+}

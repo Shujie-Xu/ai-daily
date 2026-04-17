@@ -26,31 +26,32 @@ merge.js 会做：URL 去重（含跨次 `state/seen-urls.json`）、Tavily scor
 
 stdout 末尾：`merge: X in → Y out`。输出到 `tmp/merged.json`（数组，每条有 url/title/content/score/published）。
 
-## 3. LLM 去重（本步骤由你来做，不调脚本）
+## 3. LLM 去重 — 外包给 gpt5.4（严谨判断）
 
-读两份数据：
-- `tmp/merged.json`（本次 N 条候选）
-- `state/seen-events.json` 里 14 天内未过期的事件（`expires >= 今天`）
+把去重交给 `gpt5.4` subagent（代码专家擅长结构化模式匹配）。你需要：
 
-**两类重复都要判**：
+1. 读两份数据并拼成它的 prompt：
+   - `tmp/merged.json`（候选）
+   - `state/seen-events.json` 里 14 天内未过期事件（`expires >= 今天`）
 
-**A. 指纹库重复** — 候选里某条的标题/核心事件，和库里已有事件（14 天内）是**同一件事**（不要求字面一致，看语义）。比如库里有 "OpenAI 发布 Codex 升级"，今天新闻是 "OpenAI Codex 支持后台操作电脑"，是同一件事的跟进报道 → 算重复，丢掉。
+2. 调用：
+   ```bash
+   bash ~/.local/bin/delegate gpt5.4 "<完整 prompt>"
+   ```
 
-**B. 当天多源重复** — 候选内部，**同一事件被多家媒体报道**。看标题 + body_text 前几段判断是否同事件。同事件只保留 **一条最权威或最详细的**（优先级：官方博客 > tier1 媒体 > tier2 媒体 > 社区；body 更长更细的优先）。
+prompt 必须明确两类去重：
+- **A. 指纹库重复**：候选标题/核心事件和库里已有事件**同一件事**（语义判断，不看字面）。例如库里 "OpenAI 发布 Codex 升级"，今天 "OpenAI Codex 支持后台操作电脑" 是同事件跟进 → 丢弃。
+- **B. 当天多源重复**：候选内部同事件多家报道。同事件只保留最权威或最详细那条（官方 > tier1 > tier2 > 社区；body 长 > 短）。
 
-去重后，把保留下来的候选写到：
-
-```
-tmp/final-candidates.json       # 数组，保留原 merged.json 的字段（url/title/content/score/published/body_text）
-```
-
-同时在回复里报告：
+要求 gpt5.4 输出 JSON 数组（保留下来的条目，原字段不变），你接收后写到 `tmp/final-candidates.json`，同时在回复里报告：
 
 ```
 dedup: N in → M out
   · 指纹库命中并丢弃: [标题列表，最多 5 条]
   · 当天多源合并: [保留的 → 合并掉的，示例 3 组]
 ```
+
+**Fallback**：如果 gpt5.4 超时（>10 min）/ 报错 / 输出格式坏 / 返回空 → 你（主 agent）自己做，按上面 A/B 规则判断后写 `tmp/final-candidates.json`，不要中断流程。
 
 ## 4.5 正文抓取（脚本，对 final-candidates 跑）
 
@@ -60,33 +61,43 @@ npm run fetch:bodies -- tmp/final-candidates.json
 
 parallel.js 并行抓每条 url 的正文（提取 `<article>/<main>`，最多 10KB），**原地** 给 final-candidates 加 `body_text`。失败的留空字符串。放在 dedup 之后做 = 不浪费抓后面会被淘汰掉的文章。
 
-## 5. 按 schema 写作
+## 5. 按 schema 写作 — 外包给 sonnet（中文写作专员）
 
-对 `tmp/final-candidates.json` **每一条**（不再挑选），基于 body_text 展开写，按固定 schema：
+把写作交给 `sonnet` subagent。一次性把所有候选给它，让它批量产出 articles 数组。
 
-```json
-{
-  "title":        "<原标题或更清晰的中文重写>",
-  "summary":      "<1-2 句话要点，抓住核心事件>",
-  "full_content": "<4-6 句展开，保留具体数字 / 人名 / 时间 / 金额 / 产品名。可 '1. ... 2. ...' 分点>",
-  "context":      "<可选，1-2 句背景：这事为啥值得关注 / 和什么关联>",
-  "url":          "<原 url>",
-  "categories":   ["model" | "funding" | "policy" | "embodied" | "research" | "product" | ...],
-  "tags":         ["OpenAI", "Claude", ...],
-  "heat":         1-5
-}
+prompt 必须包含：
+
+1. **schema 规范**：
+   ```json
+   {
+     "title":        "<原标题或更清晰的中文重写>",
+     "summary":      "<1-2 句话要点，抓住核心事件>",
+     "full_content": "<4-6 句展开，保留具体数字 / 人名 / 时间 / 金额 / 产品名>",
+     "context":      "<可选，1-2 句背景：为啥重要 / 和什么关联>",
+     "url":          "<原 url>",
+     "categories":   ["model" | "funding" | "policy" | "embodied" | "research" | "product" | ...],
+     "tags":         ["OpenAI", "Claude", ...],
+     "heat":         1-5
+   }
+   ```
+
+2. **写作规范**（一定要写进 prompt 里）：
+   - `full_content` 平均 200-400 字（不是 100 字）
+   - 每条必含至少 1 个具体事实（数字 / 人名 / 时间 / 金额 / 产品代号）
+   - body_text 为空时用 content snippet + 背景知识，末尾注 "(基于摘要)"
+   - context 没东西可补就省略
+   - 输出**只有** JSON 数组，无前后说明文字
+
+3. **输入数据**：把 `tmp/final-candidates.json` 完整内容拼进 prompt（每条带 body_text）
+
+调用：
+```bash
+bash ~/.local/bin/delegate sonnet "<完整 prompt>"
 ```
 
-写作规范：
-- `full_content` 平均 200-400 字，**不是** 100 字
-- 每条必含至少 1 个具体事实（数字 / 人名 / 时间 / 金额 / 产品代号）
-- 若 body_text 为空（抓取失败）则用 content snippet + 你的背景知识，full_content 可稍短并在末尾注 "(基于摘要)"
-- `context` 没啥可补就省略，不强行凑
+接收 sonnet 返回的 JSON 数组，包成 `{ "date": "YYYY-MM-DD", "articles": [...] }` 写到仓库根目录的 `latest-news.json`。
 
-把结果写到仓库根目录的 `latest-news.json`：
-```json
-{ "date": "YYYY-MM-DD", "articles": [ ... ] }
-```
+**Fallback**：sonnet 超时（>10 min）/ 报错 / 返回非 JSON → 你（主 agent）自己按 schema 写，规范一致，不要中断。
 
 ## 6. Push + 指纹库更新
 

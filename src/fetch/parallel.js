@@ -18,6 +18,7 @@ const http  = require('http');
 const fs    = require('fs');
 const path  = require('path');
 const { URL } = require('url');
+const cheerio = require('cheerio');
 
 const args        = process.argv.slice(2);
 const ROOT        = path.resolve(__dirname, '../..');
@@ -30,21 +31,37 @@ const outFile     = argVal('--out', inputFile);  // default: in-place
 const concurrency = parseInt(argVal('--concurrency', '6'), 10);
 const TIMEOUT_MS  = 12000;
 
-function extractText(html) {
-  const mainMatch =
-    html.match(/<article[\s\S]*?<\/article>/i) ||
-    html.match(/<main[\s\S]*?<\/main>/i) ||
-    html.match(/<div[^>]+class="[^"]*(?:article|post|content|story|body)[^"]*"[\s\S]*?<\/div>/i);
-  const src = mainMatch ? mainMatch[0] : html;
+// Selector priority: try semantic tags first, then common WordPress / news CMS classes,
+// then bare ".article" (qbitai-style). Each selector returns the first matching element's text.
+const CONTENT_SELECTORS = [
+  'article',
+  'main',
+  '.article-content', '.entry-content', '.post-content', '.story-body', '.story-content',
+  '.markdown-body',                          // GitHub-style
+  '.RichTextStoryBody', '.story-card',       // VentureBeat / TechCrunch variants
+  '#article-body', '#main-content',
+  '.article', '.post', '.entry', '.content', // bare class names (qbitai uses .article)
+];
 
-  return src
-    .replace(/<(script|style|nav|footer|aside|header|noscript|iframe|figure)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<\/(p|h[1-6]|li|blockquote|div)>/gi, '\n')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
-    .replace(/&#\d+;/g, ' ')
+function extractText(html) {
+  const $ = cheerio.load(html);
+  // Remove non-content elements globally first
+  $('script, style, noscript, iframe, nav, footer, aside, header, .comments, .related, .sidebar, .nav, .menu').remove();
+
+  let text = '';
+  for (const sel of CONTENT_SELECTORS) {
+    const node = $(sel).first();
+    if (node.length) {
+      text = node.text();
+      if (text.replace(/\s+/g, '').length > 200) break;  // good enough
+    }
+  }
+  // Fallback: whole body if no selector worked
+  if (text.replace(/\s+/g, '').length < 200) {
+    text = $('body').text();
+  }
+
+  return text
     .split('\n').map(l => l.trim()).filter(l => l.length > 20).join('\n')
     .replace(/\n{3,}/g, '\n\n')
     .slice(0, 10000)
@@ -105,9 +122,12 @@ function fetchUrl(url, depth = 0) {
 }
 
 async function main() {
-  const items = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
-  if (!Array.isArray(items)) {
-    console.error('parallel: expected a JSON array in ' + inputFile);
+  const raw = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+  // Accept both shapes: a flat array OR { articles: [...] } (latest-news.json)
+  const items = Array.isArray(raw) ? raw : (raw.articles || []);
+  const isWrapped = !Array.isArray(raw);
+  if (items.length === 0) {
+    console.error('parallel: no items in ' + inputFile);
     process.exit(1);
   }
   console.error(`parallel: ${items.length} urls, concurrency=${concurrency}`);
@@ -128,7 +148,8 @@ async function main() {
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
   const ok      = items.filter(x => (x.body_text || '').length > 200).length;
   const avgLen  = ok ? Math.round(items.reduce((s, x) => s + (x.body_text || '').length, 0) / ok) : 0;
-  fs.writeFileSync(outFile, JSON.stringify(items, null, 2));
+  // Preserve outer shape on write (array vs {articles:[...]} wrapper)
+  fs.writeFileSync(outFile, JSON.stringify(isWrapped ? { ...raw, articles: items } : items, null, 2));
   console.error(`parallel: ${ok}/${items.length} bodies in ${elapsed}s (avg ${avgLen} chars) → ${outFile}`);
 }
 

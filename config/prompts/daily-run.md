@@ -26,18 +26,10 @@ merge.js 会做：URL 去重（含跨次 `state/seen-urls.json`）、Tavily scor
 
 stdout 末尾：`merge: X in → Y out`。输出到 `tmp/merged.json`（数组，每条有 url/title/content/score/published）。
 
-## 3. 正文抓取
-
-```bash
-npm run fetch:bodies
-```
-
-parallel.js 会并行抓每条 url 的正文（提取 `<article>/<main>` 纯文本，最多 10KB），**原地** 给 merged.json 加 `body_text`。失败的留空字符串。
-
-## 4. LLM 去重（本步骤由你来做，不调脚本）
+## 3. LLM 去重（本步骤由你来做，不调脚本）
 
 读两份数据：
-- `tmp/merged.json`（本次 N 条候选，带 body_text）
+- `tmp/merged.json`（本次 N 条候选）
 - `state/seen-events.json` 里 14 天内未过期的事件（`expires >= 今天`）
 
 **两类重复都要判**：
@@ -59,6 +51,14 @@ dedup: N in → M out
   · 指纹库命中并丢弃: [标题列表，最多 5 条]
   · 当天多源合并: [保留的 → 合并掉的，示例 3 组]
 ```
+
+## 4.5 正文抓取（脚本，对 final-candidates 跑）
+
+```bash
+npm run fetch:bodies -- tmp/final-candidates.json
+```
+
+parallel.js 并行抓每条 url 的正文（提取 `<article>/<main>`，最多 10KB），**原地** 给 final-candidates 加 `body_text`。失败的留空字符串。放在 dedup 之后做 = 不浪费抓后面会被淘汰掉的文章。
 
 ## 5. 按 schema 写作
 

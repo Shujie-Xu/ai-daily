@@ -77,4 +77,10 @@ merged.sort((a, b) => {
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
 fs.writeFileSync(outFile, JSON.stringify(merged, null, 2));
+
+// Persist new URLs so future runs skip them
+for (const url of seen) seenUrls.add(url);
+fs.mkdirSync(path.dirname(seenUrlsFile), { recursive: true });
+fs.writeFileSync(seenUrlsFile, JSON.stringify([...seenUrls], null, 2));
+
 console.log(`merge: ${allItems.length} in → ${merged.length} out (deduped, last ${days}d) → ${outFile}`);

@@ -1,49 +1,49 @@
 #!/usr/bin/env node
-const fs = require('fs');
+/**
+ * weak-signal.js — Generate targeted Tavily queries for the entity watchlist.
+ *
+ * Reads:  config/entities.yaml (entities, themes, search_templates)
+ * Writes: tmp/weak-signal-queries.json
+ */
+'use strict';
+const fs   = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
-const ROOT    = path.resolve(__dirname, '../..');
-const cfgPath = path.join(ROOT, 'config', 'weak-signal-sources.json');
-const outPath = path.join(ROOT, 'tmp', 'weak-signal-queries.json');
-const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+const ROOT     = path.resolve(__dirname, '../..');
+const cfgPath  = path.join(ROOT, 'config', 'entities.yaml');
+const outPath  = path.join(ROOT, 'tmp', 'weak-signal-queries.json');
+const cfg      = yaml.load(fs.readFileSync(cfgPath, 'utf8'));
 
-function unique(list) {
-  return [...new Set(list.filter(Boolean))];
-}
+const unique = list => [...new Set(list.filter(Boolean))];
 
-function expandTemplates(entity, siteHints, templates, themes) {
-  const queries = [];
+function expand(entityName, siteHints, templates, themes) {
+  const out = [];
   for (const theme of themes) {
-    for (const template of templates) {
-      if (template.includes('{site}')) {
+    for (const tpl of templates) {
+      if (tpl.includes('{site}')) {
         for (const site of siteHints) {
-          queries.push(template.replaceAll('{entity}', entity).replaceAll('{theme}', theme).replaceAll('{site}', site));
+          out.push(tpl.replaceAll('{entity}', entityName).replaceAll('{theme}', theme).replaceAll('{site}', site));
         }
       } else {
-        queries.push(template.replaceAll('{entity}', entity).replaceAll('{theme}', theme));
+        out.push(tpl.replaceAll('{entity}', entityName).replaceAll('{theme}', theme));
       }
     }
   }
-  return queries;
+  return out;
 }
 
+const targeted = (cfg.entities || []).map(e => ({
+  entity:  e.name,
+  queries: unique(expand(e.name, e.site_hints || [], cfg.search_templates || [], cfg.themes || [])),
+}));
+
 const generated = {
-  generated_at: new Date().toISOString(),
-  communities: cfg.communities.map(group => ({
-    id: group.id,
-    label: group.label,
-    queries: group.queries
-  })),
-  targeted_entities: cfg.official_watchlist.map(entity => ({
-    entity,
-    queries: unique(expandTemplates(entity, cfg.site_hints[entity] || [], cfg.search_templates, cfg.themes))
-  }))
+  generated_at:      new Date().toISOString(),
+  targeted_entities: targeted,
+  all_queries:       unique(targeted.flatMap(t => t.queries)),
 };
 
-generated.all_queries = unique([
-  ...generated.communities.flatMap(x => x.queries),
-  ...generated.targeted_entities.flatMap(x => x.queries)
-]);
-
+fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, JSON.stringify(generated, null, 2));
-console.log(`wrote ${generated.all_queries.length} queries to ${outPath}`);
+console.log(`weak-signal: ${generated.all_queries.length} queries → ${outPath}`);

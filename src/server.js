@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 7788;
-const PUBLIC_DIR = path.join(__dirname, 'docs');
+const PUBLIC_DIR = path.resolve(__dirname, '..', 'docs');
 
 if (!fs.existsSync(PUBLIC_DIR)) fs.mkdirSync(PUBLIC_DIR, { recursive: true });
 

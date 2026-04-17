@@ -453,12 +453,12 @@ function generate(newsData) {
   return { latestFile, date: fileDate, og: ogResult };
 }
 
-// CLI usage: node generate.js news.json [--push] [--date YYYY-MM-DD] [--no-tts] [--force-tts]
+// CLI usage: node generate.js [news.json] [--push] [--date YYYY-MM-DD] [--no-tts] [--force-tts]
+// Default input: tmp/merged.json (output of src/pipeline/merge.js)
 if (require.main === module) {
   const { execSync } = require('child_process');
-  // argv[2] 是输入文件，但如果以 -- 开头则视为 flag，用默认文件
   const arg2 = process.argv[2];
-  const inputFile = (arg2 && !arg2.startsWith('--')) ? arg2 : path.join(__dirname, 'latest-news.json');
+  const inputFile = (arg2 && !arg2.startsWith('--')) ? arg2 : path.join(ROOT, 'tmp', 'merged.json');
   const shouldPush  = process.argv.includes('--push');
   const skipTts     = process.argv.includes('--no-tts');
   const forceTts    = process.argv.includes('--force-tts');
@@ -519,12 +519,34 @@ if (require.main === module) {
   console.log('🌐 Output:', result.latestFile);
 
   if (shouldPush) {
-    try {
-      execSync(`cd ${__dirname} && git add docs/ && git commit -m "📰 AI日报更新 ${result.date}" && git push`, { stdio: 'inherit' });
-      console.log('🚀 已推送到 GitHub Pages！');
-    } catch (e) {
-      console.error('⚠️ git push 失败:', e.message);
+    pushDocsToGhPages(OUTPUT_DIR, result.date);
+  }
+}
+
+// Publish docs/ to the gh-pages branch via a temporary git worktree.
+// Keeps main free of generated artifacts; gh-pages holds only the site.
+function pushDocsToGhPages(docsDir, date) {
+  const { execSync } = require('child_process');
+  const os = require('os');
+  const wt = path.join(os.tmpdir(), `ai-daily-pages-${Date.now()}`);
+  const sh = (cmd, opts = {}) => execSync(cmd, { stdio: 'inherit', ...opts });
+  try {
+    sh(`git -C "${ROOT}" fetch origin gh-pages`);
+    sh(`git -C "${ROOT}" worktree add -B gh-pages "${wt}" origin/gh-pages`);
+    fs.cpSync(docsDir, path.join(wt, 'docs'), { recursive: true });
+    sh(`git -C "${wt}" add docs/`);
+    const dirty = execSync(`git -C "${wt}" status --porcelain`).toString().trim();
+    if (!dirty) {
+      console.log('🟰 docs/ 无变化，跳过推送');
+      return;
     }
+    sh(`git -C "${wt}" commit -m "📰 AI日报更新 ${date}"`);
+    sh(`git -C "${wt}" push origin gh-pages`);
+    console.log('🚀 已推送到 gh-pages');
+  } catch (e) {
+    console.error('⚠️ 推送 gh-pages 失败:', e.message);
+  } finally {
+    try { execSync(`git -C "${ROOT}" worktree remove --force "${wt}"`); } catch {}
   }
 }
 

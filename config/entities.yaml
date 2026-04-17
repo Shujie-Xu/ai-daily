@@ -1,14 +1,104 @@
-# AI Daily — Entity watchlist
-# Used for targeted search and dedup hints.
-# TODO: expand as needed
+# AI Daily — Entity watchlist & weak-signal templates
+# Used by src/fetch/weak-signal.js to generate targeted queries.
 
+updated: "2026-04-17"
+
+# Templates expanded per (entity × theme). Placeholders: {entity}, {theme}, {site}
+search_templates:
+  - "{entity} {theme}"
+  - "{entity} latest {theme}"
+  - "{entity} {theme} Reuters OR TechCrunch OR VentureBeat OR The Information"
+  - "site:{site} {entity} {theme}"
+
+# Themes paired with each entity.
+themes:
+  - "model launch"
+  - "API pricing"
+  - "enterprise rollout"
+  - "identity verification / real-name policy"
+  - "acquisition rumor / deal talks"
+  - "funding / strategic investment"
+  - "robot brain / embodied foundation model"
+  - "vision-language-action model"
+  - "robotics software / simulation / control stack"
+  - "humanoid deployment / factory pilot"
+
+# Tracked entities. site_hints feed the {site} placeholder above.
 entities:
-  - { name: OpenAI,      aliases: [ChatGPT, GPT-5, o3, o4],        lang: both }
-  - { name: Anthropic,   aliases: [Claude, Dario Amodei],           lang: both }
-  - { name: Google,      aliases: [Gemini, DeepMind, Veo, Imagen],  lang: both }
-  - { name: Meta,        aliases: [Llama, Meta AI],                  lang: both }
-  - { name: xAI,         aliases: [Grok],                            lang: both }
-  - { name: Mistral,     aliases: [],                                 lang: en   }
-  - { name: Perplexity,  aliases: [],                                 lang: en   }
-  - { name: Figure,      aliases: [Figure 02],                        lang: both }
-  - { name: "Physical Intelligence", aliases: [pi.ai, π0],           lang: en   }
+  - name: OpenAI
+    aliases: [ChatGPT, GPT-5, o3, o4]
+    lang: both
+    site_hints: [openai.com, theinformation.com, techcrunch.com]
+
+  - name: Anthropic
+    aliases: [Claude, Dario Amodei]
+    lang: both
+    site_hints: [anthropic.com, theinformation.com, venturebeat.com]
+
+  - name: Google DeepMind
+    aliases: [Gemini, DeepMind, Veo, Imagen]
+    lang: both
+    site_hints: [deepmind.google, blog.google, technologyreview.com]
+
+  - name: Meta AI
+    aliases: [Llama]
+    lang: both
+    site_hints: [ai.meta.com, theverge.com, techcrunch.com]
+
+  - name: xAI
+    aliases: [Grok]
+    lang: both
+    site_hints: [x.ai, reuters.com, techcrunch.com]
+
+  - name: Microsoft AI
+    aliases: [Copilot]
+    lang: en
+
+  - name: Mistral
+    lang: en
+
+  - name: Perplexity
+    lang: en
+
+  - name: Cursor
+    lang: en
+
+  - name: Windsurf
+    lang: en
+
+  - name: Cognition
+    aliases: [Devin]
+    lang: en
+
+  - name: Replit
+    lang: en
+
+  - name: Figure
+    aliases: [Figure 02]
+    lang: both
+    site_hints: [figure.ai, techcrunch.com, fortune.com]
+
+  - name: 1X
+    lang: both
+    site_hints: [1x.tech, techcrunch.com, venturebeat.com]
+
+  - name: Physical Intelligence
+    aliases: [pi.ai, π0]
+    lang: en
+    site_hints: [physicalintelligence.company, technologyreview.com, venturebeat.com]
+
+  - name: Skild AI
+    lang: en
+    site_hints: [skild.ai, fortune.com, techcrunch.com]
+
+  - name: Apptronik
+    lang: en
+
+  - name: Agility Robotics
+    lang: en
+
+  - name: Dexterity
+    lang: en
+
+  - name: Covariant
+    lang: en

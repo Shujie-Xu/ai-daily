@@ -51,7 +51,8 @@ ai-daily/
 |---|---|
 | 添加/删除新闻源或 RSS | `config/sources.yaml` → `sites` |
 | 调整搜索维度或关键词 | `config/sources.yaml` → `dimensions` |
-| 追踪新实体（公司/人物） | `config/entities.yaml` |
+| 追踪新实体（公司/人物） | `config/entities.yaml`（`entities[]` + `site_hints`） |
+| 调整定向查询模板 / themes | `config/entities.yaml`（`search_templates`, `themes`） |
 | 修改 agent 日常提示词 | `config/prompts/daily-run.md` |
 | 修改搜索参数（深度、时间窗口） | `config/sources.yaml` → `search_api` |
 
@@ -61,12 +62,23 @@ ai-daily/
 cp .env.example .env        # 填入 API keys
 npm install
 
-npm run fetch               # Tavily 搜索抓取 → tmp/tavily-results.json
-npm run fetch:rss           # RSS 批量抓取 → tmp/rss.json
-npm run merge tmp/tavily-results.json tmp/rss.json  # 合并去重 → tmp/merged.json
-npm run render              # 生成 HTML → docs/
-npm run render:push         # 生成 HTML + 推送 gh-pages
+# 抓取
+npm run fetch               # Tavily 搜索 → tmp/tavily-results.json
+npm run fetch:rss           # RSS 批量 → tmp/rss.json
+npm run fetch:weak          # 实体定向查询生成 → tmp/weak-signal-queries.json
+
+# 合并去重（npm 脚本传参需要 -- 分隔）
+npm run merge -- tmp/tavily-results.json tmp/rss.json
+# 或直接：node src/pipeline/merge.js tmp/tavily-results.json tmp/rss.json
+
+# 渲染（默认读 tmp/merged.json，写到 docs/）
+npm run render
+npm run render:push         # 渲染 + 通过 git worktree 推送到 gh-pages 分支
 ```
+
+### 推送机制
+
+`render:push` 在 `$TMPDIR` 下临时 checkout `gh-pages` 分支，把本地 `docs/` 复制进去，commit + push 后清理 worktree。main 分支永远不会被污染。
 
 ## 防熵规则
 

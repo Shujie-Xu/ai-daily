@@ -1,19 +1,22 @@
 #!/usr/bin/env node
 /**
  * clean-audio.js — 删除超过 N 天的音频文件
- * 默认保留 45 天，可通过参数 --days=N 修改
- * 用法：node clean-audio.js [--days=45] [--dry-run]
+ * 默认保留 45 天，目录默认 docs/audio（相对 repo 根）
+ * 用法：node clean-audio.js [--days=45] [--dir=PATH] [--dry-run]
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '../..');
-const AUDIO_DIR = path.join(ROOT, 'docs', 'audio');
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
-const daysArg = args.find(a => a.startsWith('--days='));
-const KEEP_DAYS = daysArg ? parseInt(daysArg.split('=')[1], 10) : 45;
+const argVal = (flag, dflt) => {
+  const a = args.find(x => x.startsWith(`${flag}=`));
+  return a ? a.split('=')[1] : dflt;
+};
+const KEEP_DAYS = parseInt(argVal('--days', '45'), 10);
+const AUDIO_DIR = path.resolve(argVal('--dir', path.join(ROOT, 'docs', 'audio')));
 
 const cutoff = new Date();
 cutoff.setDate(cutoff.getDate() - KEEP_DAYS);

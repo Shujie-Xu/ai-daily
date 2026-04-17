@@ -1,0 +1,36 @@
+name: Clean expired events
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 10:00 Asia/Shanghai / 02:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean-events:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Remove expired events from state/seen-events.json
+        run: node src/pipeline/clean-events.js
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- state/seen-events.json; then
+            echo "No expired events to clean"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/seen-events.json
+          git commit -m "chore: clean expired seen-events"
+          git push

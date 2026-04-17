@@ -12,9 +12,10 @@ jobs:
   clean-audio:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout gh-pages
         uses: actions/checkout@v4
         with:
+          ref: gh-pages
           fetch-depth: 0
 
       - name: Setup Node
@@ -22,16 +23,21 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Checkout main for script
+        run: |
+          git fetch origin main
+          git checkout origin/main -- src/pipeline/clean-audio.js
+
       - name: Remove audio older than 45 days
-        run: node clean-audio.js --days=45
+        run: node src/pipeline/clean-audio.js --days=45
 
       - name: Commit and push if changed
         run: |
+          rm -f src/pipeline/clean-audio.js
           if git diff --quiet -- docs/audio/; then
             echo "No expired audio to delete"
             exit 0
           fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/audio/

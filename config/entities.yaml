@@ -1,0 +1,14 @@
+# AI Daily — Entity watchlist
+# Used for targeted search and dedup hints.
+# TODO: expand as needed
+
+entities:
+  - { name: OpenAI,      aliases: [ChatGPT, GPT-5, o3, o4],        lang: both }
+  - { name: Anthropic,   aliases: [Claude, Dario Amodei],           lang: both }
+  - { name: Google,      aliases: [Gemini, DeepMind, Veo, Imagen],  lang: both }
+  - { name: Meta,        aliases: [Llama, Meta AI],                  lang: both }
+  - { name: xAI,         aliases: [Grok],                            lang: both }
+  - { name: Mistral,     aliases: [],                                 lang: en   }
+  - { name: Perplexity,  aliases: [],                                 lang: en   }
+  - { name: Figure,      aliases: [Figure 02],                        lang: both }
+  - { name: "Physical Intelligence", aliases: [pi.ai, π0],           lang: en   }

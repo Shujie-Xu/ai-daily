@@ -1,0 +1,24 @@
+{
+  "name": "ai-daily",
+  "version": "0.3.0",
+  "description": "Daily AI news digest — auto-fetched, rendered, pushed to GitHub Pages",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "fetch": "node src/fetch/tavily.js",
+    "fetch:rss": "node src/fetch/rss.js",
+    "fetch:weak": "node src/fetch/weak-signal.js",
+    "merge": "node src/pipeline/merge.js",
+    "render": "node src/render/generate.js",
+    "render:push": "node src/render/generate.js --push",
+    "clean:events": "node src/pipeline/clean-events.js",
+    "clean:audio": "node src/pipeline/clean-audio.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.1",
+    "rss-parser": "^3.13.0"
+  }
+}

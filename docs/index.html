@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
+<title>AI Daily · 2026/04/16</title>
+<meta name="description" content="今日 3 条 · 来自 2 个信息源 · 斯坦福AI指数：中美模型差距基本抹平 · DEEPX联手现代做生成式AI机器人芯片平台 · ASML上调2026指引：AI芯片设备需求超预期">
+<meta property="og:title" content="AI Daily · 2026/04/16">
+<meta property="og:description" content="今日 3 条 · 来自 2 个信息源 · 斯坦福AI指数：中美模型差距基本抹平 · DEEPX联手现代做生成式AI机器人芯片平台 · ASML上调2026指引：AI芯片设备需求超预期">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og/2026-04-16.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://shujie-xu.github.io/ai-daily/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://shujie-xu.github.io/ai-daily/og/2026-04-16.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button{font-family:inherit;cursor:pointer}
+a{text-decoration:none}
+
+/* ── Theme tokens ── */
+:root{
+  --bg:#f0f0f4;--card:#f0f0f4;--subtle:#e8e8ed;--muted:#e0e0e6;
+  --border:#d8d8de;--border-s:#e0e0e6;
+  --t1:#09090b;--t2:#3f3f46;--t3:#71717a;--t4:#a1a1aa;--t5:#d4d4d8;
+  --pill:#09090b;--pill-txt:#ffffff;
+  --accent:#09090b;--acc-txt:#ffffff;
+  --hov:rgba(0,0,0,0.012);
+  --modal-ov:rgba(0,0,0,0.18);
+  --shadow:0 32px 80px rgba(0,0,0,0.08);
+  --hdr-bg:rgba(240,240,244,0.88);
+  --ctx:rgba(0,0,0,0.06);
+  --ctx-border:#d4d4d8;
+  --neu-raised:-7px -7px 14px rgba(255,255,255,0.9),7px 7px 14px rgba(174,174,192,0.42);
+  --neu-hover:-5px -5px 10px rgba(255,255,255,0.9),5px 5px 10px rgba(174,174,192,0.55);
+  --neu-press:inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 7px rgba(174,174,192,0.38);
+}
+[data-theme="dark"]{
+  --bg:#1a1a1f;--card:#1a1a1f;--subtle:#222228;--muted:#2a2a30;
+  --border:#2e2e35;--border-s:#262630;
+  --t1:#fafafa;--t2:#d4d4d8;--t3:#a1a1aa;--t4:#71717a;--t5:#52525b;
+  --pill:#fafafa;--pill-txt:#0a0a0c;
+  --accent:#fafafa;--acc-txt:#09090b;
+  --hov:rgba(255,255,255,0.025);
+  --modal-ov:rgba(0,0,0,0.72);
+  --shadow:0 32px 80px rgba(0,0,0,0.55);
+  --hdr-bg:rgba(26,26,31,0.88);
+  --ctx:rgba(255,255,255,0.04);
+  --ctx-border:#3b3b42;
+  --neu-raised:-5px -5px 10px rgba(255,255,255,0.05),6px 6px 12px rgba(0,0,0,0.7);
+  --neu-hover:-3px -3px 7px rgba(255,255,255,0.06),4px 4px 9px rgba(0,0,0,0.75);
+  --neu-press:inset -2px -2px 5px rgba(255,255,255,0.04),inset 3px 3px 7px rgba(0,0,0,0.65);
+}
+
+/* ── Base ── */
+body{
+  -webkit-tap-highlight-color:transparent;
+  background:var(--bg);color:var(--t1);
+  font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif;
+  font-size:15px;line-height:1.6;min-height:100vh;
+  transition:background .25s,color .25s;
+  -webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(128,128,128,.2);border-radius:4px}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes archDrop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.entered .a0{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) 0s both}
+.entered .a1{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .06s both}
+.entered .a2{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .12s both}
+.entered .a3{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .16s both}
+.entered .a4{animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .20s both}
+
+/* ── Header ── */
+header{
+  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  background:var(--hdr-bg);
+  isolation:isolate;
+}
+.hdr{max-width:880px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:48px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--t1)}
+.logo-txt{font-size:13.5px;font-weight:600;letter-spacing:-.02em}
+/* ── Theme toggle (sliding pill) ── */
+.theme-toggle{
+  width:52px;height:28px;border-radius:999px;
+  border:1px solid var(--border);background:var(--subtle);
+  position:relative;cursor:pointer;transition:background .3s,border-color .3s;
+  flex-shrink:0;
+}
+.theme-knob{
+  position:absolute;top:3px;left:3px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--t1);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s;
+}
+[data-theme="dark"] .theme-knob{transform:translateX(24px)}
+.theme-knob svg{width:10px;height:10px;stroke:var(--bg);fill:none;stroke-width:1.8;transition:opacity .2s}
+
+/* ── Main ── */
+main{max-width:880px;margin:0 auto;padding:0 24px}
+
+/* ── Hero ── */
+.hero{padding:48px 0 36px}
+.date-nav{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.nav-btn{
+  width:28px;height:28px;border-radius:7px;
+  border:1px solid var(--border);background:transparent;color:var(--t3);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .12s;padding:0;flex-shrink:0;
+}
+.nav-btn:disabled{opacity:.35;cursor:default}
+.nav-btn:not(:disabled):hover{background:var(--subtle)}
+.arch-wrap{position:relative}
+.arch-toggle{
+  padding:5px 12px;border-radius:7px;
+  border:1px solid var(--border);background:transparent;color:var(--t3);
+  font-size:12px;font-family:'SF Mono','Menlo','Consolas',monospace;font-weight:500;
+  display:flex;align-items:center;gap:6px;transition:all .12s;
+}
+.arch-toggle.open{background:var(--subtle)}
+.arch-chev{transition:transform .15s}
+.arch-chev.open{transform:rotate(180deg)}
+.arch-drop{
+  position:fixed;z-index:9999;
+  border-radius:12px;width:252px;
+  box-shadow:0 8px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.1);
+  overflow:hidden;display:none;
+}
+/* ── Calendar ── */
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px}
+.cal-mon{font-size:13px;font-weight:600;color:var(--t1)}
+.cal-nav{background:none;border:none;cursor:pointer;font-size:17px;color:var(--t3);padding:2px 6px;border-radius:5px;line-height:1;transition:background .1s}
+.cal-nav:hover{background:var(--subtle)}
+.cal-nav:disabled{opacity:.22;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:0 10px 10px}
+.cal-dn{text-align:center;font-size:10px;font-weight:600;color:var(--t4);padding:3px 0 5px}
+.cal-d{text-align:center;font-size:12.5px;border-radius:6px;padding:6px 0;position:relative;line-height:1.2}
+.cal-has{cursor:pointer;color:var(--t1);font-weight:500}
+.cal-has:hover{background:var(--subtle)}
+.cal-no{color:var(--t5);cursor:default}
+.cal-sel{background:var(--t1)!important;color:var(--bg)!important;font-weight:700}
+.cal-dot{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--t4)}
+.hero-title{
+  font-size:clamp(32px,4.5vw,44px);font-weight:300;
+  letter-spacing:-.04em;line-height:1.08;
+}
+.hero-stats{margin-top:12px;display:flex;align-items:center;gap:12px;color:var(--t3);font-size:13px}
+.stat-live{display:flex;align-items:center;gap:5px}
+.dot-green{width:5px;height:5px;border-radius:50%;background:#22c55e}
+.sep{width:2px;height:2px;border-radius:50%;background:var(--t5);flex-shrink:0}
+
+/* ── Filters ── */
+.filters{
+  display:flex;gap:5px;padding-bottom:20px;
+  overflow-x:auto;scrollbar-width:none;
+}
+.filters::-webkit-scrollbar{display:none}
+.f-btn{
+  padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:500;
+  border:1px solid var(--border);background:transparent;color:var(--t4);
+  white-space:nowrap;transition:all .12s;display:flex;align-items:center;gap:4px;
+}
+.f-btn.on{background:var(--pill);color:var(--pill-txt);border-color:var(--pill)}
+.f-cnt{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10px;opacity:.45}
+
+/* ── Cat label ── */
+.cat{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);line-height:1}
+
+/* ── Featured ── */
+.featured{
+  padding:24px 22px 22px;border-radius:16px;cursor:pointer;
+  background:var(--card);border:none;
+  box-shadow:var(--neu-raised);
+  transition:box-shadow .18s,transform .18s;
+  margin-bottom:0;padding-bottom:20px;border-bottom:1px solid var(--t4);
+  display:block;
+  will-change:transform;
+}
+.featured:hover{box-shadow:var(--neu-hover);transform:translateY(-1px)}
+.feat-cats{display:flex;align-items:center;gap:6px;margin-top:14px}
+.card-dot{width:2px;height:2px;border-radius:50%;background:var(--t5);flex-shrink:0}
+.feat-title{
+  font-size:clamp(20px,2.8vw,26px);font-weight:500;
+  line-height:1.35;letter-spacing:-.02em;transition:opacity .15s;
+}
+.feat-summary{font-size:14.5px;line-height:1.7;color:var(--t3);margin-top:8px;max-width:580px}
+.feat-meta{margin-top:16px;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:11px;color:var(--t4);display:flex;align-items:center;gap:8px}
+
+/* ── News grid (neumorphic cards) ── */
+.news-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  padding-top:20px;
+}
+@media(max-width:560px){.news-list{grid-template-columns:1fr;gap:16px}}
+.n-item{
+  color:inherit;
+  display:flex;flex-direction:column;
+  padding:18px 18px 14px;
+  border-radius:16px;
+  background:var(--card);
+  border:none;
+  box-shadow:var(--neu-raised);
+  cursor:pointer;
+  text-align:left;
+  transition:box-shadow .18s,transform .18s;
+  width:100%;
+}
+.n-item:hover{box-shadow:var(--neu-hover);transform:translateY(-2px)}
+.n-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.n-cats{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.n-title{font-size:14px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--t1)}
+.n-summary{font-size:12.5px;line-height:1.55;color:var(--t3);margin-top:2px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.n-src{display:none}
+
+/* ── Footer ── */
+footer{
+  padding:24px 0;margin-top:16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.foot-l{font-size:11.5px;color:var(--t4);font-family:'SF Mono','Menlo','Consolas',monospace}
+.foot-r{display:flex;align-items:center;gap:6px}
+.foot-dot{width:4px;height:4px;border-radius:50%;background:var(--t5)}
+.foot-brand{font-size:11.5px;font-weight:500;color:var(--t4)}
+
+/* ── Modal overlay ── */
+.m-ov{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:0 16px 16px;
+  background:rgba(0,0,0,0);
+  backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
+  transition:background .2s ease,backdrop-filter .2s ease,-webkit-backdrop-filter .2s ease;
+  display:none;
+}
+.m-ov.vis{
+  background:var(--modal-ov);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.m-sheet{
+  background:var(--card);border:none;
+  border-radius:20px;width:100%;max-width:620px;max-height:88vh;
+  display:flex;flex-direction:column;
+  box-shadow:-4px -4px 8px rgba(255,255,255,0.65),4px 4px 10px rgba(174,174,192,0.28),0 20px 48px rgba(0,0,0,0.1);
+  transform:translateY(24px);opacity:0;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),opacity .2s ease;
+}
+.m-sheet.vis{transform:translateY(0);opacity:1}
+[data-theme="dark"] .m-sheet{box-shadow:-3px -3px 7px rgba(255,255,255,0.04),4px 4px 10px rgba(0,0,0,0.65),0 20px 48px rgba(0,0,0,0.4)}
+.m-sheet .btn-tts,.m-sheet .m-nav-btn,.m-sheet .m-close,.m-sheet .btn-read{
+  --neu-raised:-3px -3px 6px rgba(255,255,255,0.85),3px 3px 6px rgba(174,174,192,0.38);
+  --neu-hover:-2px -2px 4px rgba(255,255,255,0.85),2px 2px 5px rgba(174,174,192,0.5);
+  --neu-press:inset -2px -2px 4px rgba(255,255,255,0.75),inset 2px 2px 4px rgba(174,174,192,0.3);
+}
+[data-theme="dark"] .m-sheet .btn-tts,[data-theme="dark"] .m-sheet .m-nav-btn,[data-theme="dark"] .m-sheet .m-close,[data-theme="dark"] .m-sheet .btn-read{
+  --neu-raised:-2px -2px 5px rgba(255,255,255,0.04),3px 3px 6px rgba(0,0,0,0.6);
+  --neu-hover:-1px -1px 4px rgba(255,255,255,0.05),2px 2px 5px rgba(0,0,0,0.65);
+  --neu-press:inset -1px -1px 3px rgba(255,255,255,0.03),inset 2px 2px 4px rgba(0,0,0,0.55);
+}
+.m-handle-row{display:none}
+.m-hdr{padding:20px 28px 16px}
+.m-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.m-meta-l{display:flex;align-items:center;gap:8px}
+.m-time{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4)}
+.m-close{
+  width:28px;height:28px;border-radius:8px;border:none;
+  background:var(--card);color:var(--t3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;padding:0;cursor:pointer;
+  box-shadow:var(--neu-raised);
+  transition:box-shadow .12s;
+}
+.m-close:hover{box-shadow:var(--neu-hover)}
+.m-close:active{box-shadow:var(--neu-press)}
+.m-title{
+  font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif;
+  font-size:clamp(20px,3.2vw,26px);font-weight:500;
+  line-height:1.35;letter-spacing:-.02em;
+}
+.src-dot{width:4px;height:4px;border-radius:50%;background:var(--t1);flex-shrink:0}
+.src-name{font-size:12px;font-weight:500;color:var(--t3)}
+/* ── Modal slide animation ── */
+@keyframes slideInL{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes slideInR{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+.slide-l{animation:slideInL .22s cubic-bezier(.16,1,.3,1) both}
+.slide-r{animation:slideInR .22s cubic-bezier(.16,1,.3,1) both}
+/* ── Spring UX (Apple-style simultaneous) ── */
+@keyframes cardTap{
+  0%  {transform:scale(1)}
+  50% {transform:scale(0.925)}
+  75% {transform:scale(0.94)}
+  100%{transform:scale(0.93)}
+}
+.card-popping{
+  animation:cardTap .45s cubic-bezier(.45,.1,.3,1) forwards !important;
+  pointer-events:none;
+}
+.card-popping,.card-popping:hover{
+  transition:none !important;
+  box-shadow:var(--neu-raised) !important;
+}
+@keyframes sheetExpand{
+  0%  {transform:scale(0.7) translateY(14px);opacity:0}
+  55% {transform:scale(1.03) translateY(-2px);opacity:1}
+  78% {transform:scale(0.99) translateY(1px);opacity:1}
+  100%{transform:scale(1)    translateY(0);   opacity:1}
+}
+.m-sheet.spring{
+  will-change:transform,opacity;
+}
+.m-sheet{will-change:transform,opacity}
+.m-title,.m-body{transition:filter .2s ease,transform .2s ease,opacity .2s ease}
+.m-title.nav-out-l,.m-body.nav-out-l{filter:blur(5px);transform:translateX(-30px) scale(0.97);opacity:0}
+.m-title.nav-out-r,.m-body.nav-out-r{filter:blur(5px);transform:translateX(30px) scale(0.97);opacity:0}
+.m-title.nav-in-l,.m-body.nav-in-l{filter:blur(5px);transform:translateX(30px) scale(0.97);opacity:0}
+.m-title.nav-in-r,.m-body.nav-in-r{filter:blur(5px);transform:translateX(-30px) scale(0.97);opacity:0}
+/* ── Progress bar fused into header bottom border ── */
+.m-progress{
+  height:2px;background:var(--border);margin:14px 0 0;flex-shrink:0;overflow:hidden;
+}
+.m-progress-inner{height:100%;width:0%;background:var(--t1);transition:width .1s linear}
+.m-body{flex:1;overflow-y:auto;padding:24px 28px 8px}
+.m-content{font-size:15px;line-height:1.9;color:var(--t2);letter-spacing:.005em;font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif}
+.m-content p{margin-bottom:16px}
+.m-content p:last-child{margin-bottom:0}
+.m-ctx{margin-top:24px;padding-left:16px;border-left:2px solid var(--ctx-border)}
+.m-ctx-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--t4);margin-bottom:6px}
+.m-ctx-txt{font-size:13.5px;line-height:1.7;color:var(--t3)}
+.m-tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px}
+.m-tag{
+  font-size:11px;font-weight:500;color:var(--t4);
+  padding:3px 10px;border:1px solid var(--border);border-radius:999px;
+  font-family:'Sora',sans-serif;letter-spacing:.01em;
+  transition:color .12s,border-color .12s;
+}
+.m-tag:hover{color:var(--t2);border-color:var(--t4)}
+.m-foot{
+  padding:14px 28px 20px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+}
+.m-nav{display:flex;align-items:center;gap:4px}
+.m-nav-btn{
+  width:28px;height:28px;border-radius:7px;
+  border:none;background:var(--card);color:var(--t3);
+  display:flex;align-items:center;justify-content:center;padding:0;
+  cursor:pointer;transition:box-shadow .12s;
+  box-shadow:var(--neu-raised);
+}
+.m-nav-btn:disabled{opacity:.35;cursor:default;box-shadow:none}
+.m-nav-btn:not(:disabled):hover{box-shadow:var(--neu-hover)}
+.m-nav-btn:not(:disabled):active{box-shadow:var(--neu-press)}
+.m-nav-cnt{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:10.5px;color:var(--t4);margin:0 10px}
+.m-actions{display:flex;align-items:center;gap:8px}
+.btn-tts{
+  width:32px;height:32px;border-radius:8px;
+  border:none;background:var(--card);color:var(--t3);
+  display:flex;align-items:center;justify-content:center;padding:0;
+  cursor:pointer;transition:box-shadow .12s,color .12s;
+  box-shadow:var(--neu-raised);
+}
+.btn-tts:hover{box-shadow:var(--neu-hover)}
+.btn-tts:active{box-shadow:var(--neu-press)}
+.btn-tts.playing{color:var(--t1);box-shadow:var(--neu-press)}
+@keyframes ttsPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-tts.playing svg{animation:ttsPulse 1.6s ease-in-out infinite}
+.btn-read{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:8px;
+  background:var(--card);color:var(--t2);
+  border:none;font-size:13px;font-weight:500;font-family:'Sora',sans-serif;
+  cursor:pointer;transition:box-shadow .12s;
+  box-shadow:var(--neu-raised);
+}
+.btn-read:hover{box-shadow:var(--neu-hover);color:var(--t1)}
+.btn-read:active{box-shadow:var(--neu-press)}
+
+/* ── Touch swipe hint ── */
+@media (max-width:640px){
+  .m-sheet{border-radius:20px 20px 16px 16px}
+  .m-hdr{padding:16px 20px 0}
+  .m-body{padding:20px 20px 8px}
+  .m-foot{padding:12px 20px 16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span class="logo-txt">AI Daily</span>
+    </div>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换主题" aria-label="切换主题">
+      <div class="theme-knob" id="themeKnob">
+        <!-- sun (light mode) -->
+        <svg id="iconSun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+        <!-- moon (dark mode) -->
+        <svg id="iconMoon" viewBox="0 0 24 24" style="position:absolute;opacity:0"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </div>
+    </button>
+  </div>
+</header>
+
+<main id="mainWrap">
+
+  <!-- Hero -->
+  <section class="hero a0">
+    <div class="date-nav">
+      <button class="nav-btn" id="btnPrev" onclick="navDate(-1)" title="前一天">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="arch-wrap">
+        <button class="arch-toggle" id="archToggle" onclick="toggleArch()">
+          <span id="archLabel"></span>
+          <svg class="arch-chev" id="archChev" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <button class="nav-btn" id="btnNext" onclick="navDate(1)" title="后一天">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <h1 class="hero-title" id="heroTitle"></h1>
+    <div class="hero-stats">
+      <span class="stat-live"><span class="dot-green"></span><span id="totalStat">3</span> 条新闻</span>
+      <span class="sep"></span>
+      <span><span id="srcStat">2</span> 个来源</span>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <nav class="filters a1" id="filterBar"></nav>
+
+  <!-- Content -->
+  <div id="contentArea" class="a2"></div>
+
+  <!-- Archive section (populated by archive.js) -->
+  <div id="archiveSection"></div>
+
+  <!-- Footer -->
+  <footer class="a3">
+    <span class="foot-l">26/04/16 11:00 CST</span>
+    <div class="foot-r">
+      <div class="foot-dot"></div>
+      <span class="foot-brand">powered by 小豹包</span>
+    </div>
+  </footer>
+
+</main>
+
+<!-- Modal -->
+<div class="m-ov" id="mOv" onclick="handleOvClick(event)">
+  <div class="m-sheet" id="mSheet">
+    <div class="m-handle-row"><div class="m-handle"></div></div>
+    <div class="m-hdr">
+      <div class="m-meta">
+        <div style="display:flex;align-items:center;position:relative;width:100%">
+          <div style="display:flex;align-items:center">
+            <button class="btn-tts" id="btnTts" onclick="toggleTts()" title="朗读正文">
+              <svg id="ttsIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
+              </svg>
+            </button>
+          </div>
+          <div style="position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:4px">
+            <button class="m-nav-btn" id="btnMPrev" onclick="navModal(-1)" title="上一篇">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <span class="m-nav-cnt" id="mNavCnt"></span>
+            <button class="m-nav-btn" id="btnMNext" onclick="navModal(1)" title="下一篇">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div style="margin-left:auto">
+            <button class="m-close" onclick="closeModal()">✕</button>
+          </div>
+        </div>
+      </div>
+      <h2 class="m-title" id="mTitle"></h2>
+    </div>
+    <div class="m-progress"><div class="m-progress-inner" id="mProgressBar"></div></div>
+    <div style="position:relative;flex:1;display:flex;flex-direction:column;min-height:0">
+      <!-- invisible edge tap zones -->
+      <div id="tapL" onclick="navModal(-1)" style="position:absolute;left:0;top:0;bottom:0;width:28px;z-index:10;cursor:pointer"></div>
+      <div id="tapR" onclick="navModal(1)"  style="position:absolute;right:0;top:0;bottom:0;width:28px;z-index:10;cursor:pointer"></div>
+      <div class="m-body" id="mBody"></div>
+    </div>
+    <div class="m-foot">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="src-dot"></div>
+        <span class="src-name" id="mSrc"></span>
+      </div>
+      <div class="m-actions">
+        <a class="btn-read" id="btnRead" href="#" target="_blank" rel="noopener">
+          阅读原文
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>window.ARTICLES_DATA = [{"title":"斯坦福AI指数：中美模型差距基本抹平","summary":"斯坦福 2026 AI 指数显示，前沿模型能力继续猛增，中美顶尖模型性能差距已基本抹平，行业竞争正从单纯比模型转向比落地、效率与治理。","full_content":"斯坦福 HAI 发布《2026 AI Index》并提炼出 12 个关键结论，核心信号是 AI 正从单点能力竞赛转向系统性扩散。报告显示，前沿模型在 Humanity's Last Exam 等高难基准上一年提升约 30 个百分点，头部模型之间的分差继续缩小，能力开始向数学、法律、金融、税务与企业流程等专业场景外溢。更受关注的是，报告认为中美顶尖模型的性能差距已基本抹平，开放模型与闭源模型的差距则在 2025 年重新拉大。\n\n除能力之外，报告还强调成本、能源与治理压力同步上升：推理需求快速扩张，透明度不足与基准失效并存，行业正在进入“性能、效率、合规”三线并跑的新阶段。对产业和投资端而言，这意味着未来竞争不再只看参数和榜单，而是看谁能把模型稳定落到真实工作流、谁能承受算力与电力成本、以及谁能在监管与信任问题上更早建立护城河。","url":"https://hai.stanford.edu/news/inside-the-ai-index-12-takeaways-from-the-2026-report","best_url":"https://hai.stanford.edu/news/inside-the-ai-index-12-takeaways-from-the-2026-report","categories":["research","event"],"tags":["Stanford HAI","AI Index","Benchmark","中美模型","治理"],"context":"AI Index 是斯坦福 HAI 每年发布的行业总报告，常被政策制定者、企业战略团队和投资机构当作年度温度计。相比单篇论文或公司自测，这类报告的价值在于把模型能力、资本流向、算力、能源和监管放进同一张图里，帮助判断 AI 行业是继续加速，还是进入比拼商业化与治理能力的新阶段。","heat":4,"audio_url":"audio/2026-04-16-4a7842a7.mp3"},{"title":"DEEPX联手现代做生成式AI机器人芯片平台","summary":"韩国芯片公司 DEEPX 扩大与现代合作，拟用第二代低功耗芯片打造生成式 AI 机器人平台，并同步推进超 4 亿美元融资与 IPO 预备。","full_content":"韩国 AI 芯片初创 DEEPX 宣布扩大与现代汽车集团的合作，双方将围绕生成式 AI 机器人开发新的边缘计算平台，核心是 DEEPX 第二代低功耗芯片 DX-M2。根据路透与转述媒体披露，这批芯片计划在明年量产，并将采用三星 2 纳米工艺。公司称其现有芯片在功耗效率上可达到英伟达 Jetson Orin 的约 20 倍，同时成本更低，目标是解决人形机器人和持续运行设备在发热、续航与本地推理上的瓶颈。\n\n这笔合作也与资本动作绑定推进。DEEPX 正在进行新一轮融资，目标募资超过 6000 亿韩元，约合 4.08 亿美元，为潜在韩国 IPO 做准备。对行业来说，这不是单一零部件新闻，而是“机器人边缘 AI 芯片 + 车厂场景验证 + 一级市场融资”三件事叠加，说明具身智能产业链正在从模型热度转向真实硬件平台与量产路线竞争。","url":"https://www.reuters.com/business/autos-transportation/korean-ai-chip-startup-deepx-hyundai-work-robots-powered-by-generative-ai-2026-04-15/","best_url":"https://www.reuters.com/business/autos-transportation/korean-ai-chip-startup-deepx-hyundai-work-robots-powered-by-generative-ai-2026-04-15/","categories":["product","funding"],"tags":["DEEPX","Hyundai","Edge AI","机器人芯片","IPO"],"context":"DEEPX 属于近两年兴起的边缘 AI 芯片创业公司，主打在机器人、车载设备、摄像头等本地终端完成推理，而不是把任务全部送回云端。这个方向的意义在于更低延迟、更低带宽消耗和更可控的功耗，尤其适合具身智能和自动驾驶等必须实时响应的场景。","heat":4,"audio_url":"audio/2026-04-16-6f67d2b6.mp3"},{"title":"ASML上调2026指引：AI芯片设备需求超预期","summary":"ASML 上调 2026 年业绩指引，称 AI 芯片需求持续超过供给，并释放 EUV 设备扩产信号，显示底层算力资本开支仍在加速。","full_content":"全球光刻设备龙头 ASML 公布一季度业绩后上调 2026 年展望，理由是 AI 芯片需求强于预期，带动先进制程设备订单回暖。根据路透及转引媒体信息，公司预计 2026 年收入较此前预期进一步抬升，管理层明确表示“芯片需求正在超过供给”，尤其数据中心与 AI 训练、推理基础设施仍在持续拉货。作为全球唯一可大规模提供 EUV 光刻设备的厂商，ASML 的指引往往被市场视作先进算力投资的先行指标。\n\n更关键的是，ASML 同时给出了产能爬坡信号：2026 年低数值孔径 EUV 设备出货量预计可达 60 台，较 2025 年再增约 25%，2027 年产能甚至有望扩到 80 台。对 AI 产业链而言，这意味着即便终端模型竞争反复波动，底层晶圆厂和设备资本开支仍未降温。对投资判断来说，AI 热度已经不只体现在应用层，而是继续向半导体设备、先进制程和数据中心基础设施传导。","url":"https://www.reuters.com/business/asml-lifts-2026-outlook-back-stronger-ai-demand-2026-04-15/","best_url":"https://www.reuters.com/business/asml-lifts-2026-outlook-back-stronger-ai-demand-2026-04-15/","categories":["product","event"],"tags":["ASML","EUV","AI芯片","半导体设备","数据中心"],"context":"","heat":4,"audio_url":"audio/2026-04-16-384871ff.mp3"}];</script>
+<script src="archive.js"></script>
+<script>
+(function(){
+'use strict';
+
+// ── Helpers ──────────────────────────────────────────────────────
+const MONO = "'SF Mono','Menlo','Consolas',monospace";
+const CAT_ZH = {model:'模型',product:'产品',funding:'融资',finance:'财务',research:'研究',policy:'政策',event:'事件'};
+const CAT_EN = Object.fromEntries(Object.entries(CAT_ZH).map(([k,v])=>[v,k]));
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function src(a){ try{ return new URL(a.best_url||a.url||'').hostname.replace('www.',''); }catch{ return ''; } }
+function catZh(c){ return CAT_ZH[c]||c; }
+
+function fmtShort(s){
+  const d=new Date(s+'T00:00:00');
+  const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return m[d.getMonth()]+' '+d.getDate();
+}
+function fmtFull(s){
+  const d=new Date(s+'T00:00:00');
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const mons=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return days[d.getDay()]+', '+mons[d.getMonth()]+' '+d.getDate();
+}
+
+// ── Proxy for live article data ──────────────────────────────────
+const articles = new Proxy([], { get(_,p){ return (window.ARTICLES_DATA||[])[p]; } });
+function allArticles(){ return Array.from({length:articles.length},(_,i)=>articles[i]); }
+
+// ── State ────────────────────────────────────────────────────────
+let curCat = '全部';
+let modalOpen = false;
+let filteredCache = [];
+let modalIdx = 0;
+const allDates = window.ARCHIVE_DATES || [];
+let pageDate = allDates[0] || '2026/04/16';
+let archOpen = false;
+
+// Touch swipe
+let touchX0 = null, touchT0 = null;
+
+// ── Theme ────────────────────────────────────────────────────────
+function applyThemeIcons(t){
+  const sun = document.getElementById('iconSun');
+  const moon = document.getElementById('iconMoon');
+  if(!sun||!moon) return;
+  if(t==='dark'){ sun.style.opacity='0'; moon.style.opacity='1'; }
+  else { sun.style.opacity='1'; moon.style.opacity='0'; }
+}
+(function initTheme(){
+  const t = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  applyThemeIcons(t);
+})();
+
+window.toggleTheme = function(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  applyThemeIcons(next);
+  // 同步更新日历弹窗背景
+  const drop = document.getElementById('archDrop');
+  if(drop){ drop.style.backgroundColor = next==='dark' ? '#111114' : '#ffffff'; drop.style.color = next==='dark' ? '#fafafa' : '#09090b'; }
+};
+
+// ── Archive ──────────────────────────────────────────────────────
+function updateArchLabel(){
+  const el = document.getElementById('archLabel');
+  if(el) el.textContent = fmtShort(pageDate);
+}
+function updateHeroTitle(){
+  const el = document.getElementById('heroTitle');
+  if(el) el.textContent = fmtFull(pageDate);
+}
+function updateNavBtns(){
+  const idx = allDates.indexOf(pageDate);
+  const p = document.getElementById('btnPrev');
+  const n = document.getElementById('btnNext');
+  if(p) p.disabled = idx >= allDates.length-1;
+  if(n) n.disabled = idx <= 0;
+}
+
+let calYear=null, calMonth=null;
+
+function buildCalendar(){
+  const today = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai'}).format(new Date());
+  const list = document.getElementById('archList');
+  if(!list) return;
+
+  // init to pageDate's month on first open
+  if(calYear===null){
+    calYear  = parseInt(pageDate.slice(0,4));
+    calMonth = parseInt(pageDate.slice(5,7)) - 1;
+  }
+
+  const datesSet = new Set(allDates);
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const firstDay    = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const allYM  = [...new Set(allDates.map(d=>d.slice(0,7)))].sort();
+  const curYM  = `${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const canPrev = allYM.length && allYM[0] < curYM;
+  const canNext = allYM.length && allYM[allYM.length-1] > curYM;
+
+  const dayNames = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  let cells = dayNames.map(d=>`<div class="cal-dn">${d}</div>`).join('');
+  for(let i=0;i<firstDay;i++) cells+=`<div class="cal-d"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const has=datesSet.has(ds), sel=ds===pageDate, tod=ds===today;
+    const cls=['cal-d',has?'cal-has':'cal-no',sel?'cal-sel':''].filter(Boolean).join(' ');
+    cells+=`<div class="${cls}" ${has?`onclick="selectDate('${ds}')"`:''}>
+      ${d}${tod&&!sel?'<span class="cal-dot"></span>':''}
+    </div>`;
+  }
+
+  list.innerHTML=`
+    <div class="cal-hdr">
+      <button class="cal-nav" onclick="calNav(-1)" ${!canPrev?'disabled':''}>‹</button>
+      <span class="cal-mon">${MONTHS[calMonth]} ${calYear}</span>
+      <button class="cal-nav" onclick="calNav(1)" ${!canNext?'disabled':''}>›</button>
+    </div>
+    <div class="cal-grid">${cells}</div>
+  `;
+}
+
+window.calNav = function(dir){
+  calMonth += dir;
+  if(calMonth<0){calMonth=11;calYear--;}
+  if(calMonth>11){calMonth=0;calYear++;}
+  buildCalendar();
+};
+
+function archDropBg(){
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  const drop = document.getElementById('archDrop');
+  drop.style.backgroundColor = dark ? '#111114' : '#ffffff';
+  drop.style.color = dark ? '#fafafa' : '#09090b';
+  drop.style.border = '1px solid ' + (dark ? '#27272a' : '#e4e4e7');
+}
+
+window.toggleArch = function(){
+  archOpen = !archOpen;
+  const drop = document.getElementById('archDrop');
+  const btn  = document.getElementById('archToggle');
+  btn.classList.toggle('open', archOpen);
+  document.getElementById('archChev').classList.toggle('open', archOpen);
+  if(archOpen){
+    const r = btn.getBoundingClientRect();
+    drop.style.top     = (r.bottom + 6) + 'px';
+    drop.style.left    = r.left + 'px';
+    drop.style.display = 'block';
+    archDropBg();
+    calYear=null; calMonth=null; buildCalendar();
+  } else {
+    drop.style.display = 'none';
+  }
+};
+
+function closeArch(){
+  archOpen=false;
+  document.getElementById('archDrop').style.display='none';
+  document.getElementById('archToggle').classList.remove('open');
+  document.getElementById('archChev').classList.remove('open');
+}
+
+document.addEventListener('mousedown', function(e){
+  if(!archOpen) return;
+  const wrap = document.querySelector('.arch-wrap');
+  const drop = document.getElementById('archDrop');
+  if(wrap && !wrap.contains(e.target) && !drop.contains(e.target)) closeArch();
+});
+
+window.selectDate = function(date){
+  closeArch();
+  loadDateData(date);
+};
+
+window.navDate = function(dir){
+  // dir=-1: older (prev), dir=1: newer (next)
+  const idx = allDates.indexOf(pageDate);
+  const ni = idx - dir; // allDates[0]=latest, so "next/newer" = lower index
+  if(ni>=0 && ni<allDates.length) loadDateData(allDates[ni]);
+};
+
+// calendarSetDate called by loadDateData
+window.calendarSetDate = function(date){
+  pageDate = date;
+  updateArchLabel();
+  updateHeroTitle();
+  updateNavBtns();
+};
+
+// ── Filter bar ───────────────────────────────────────────────────
+const ALL_CATS = ['全部','模型','产品','财务','研究','融资','政策','事件'];
+
+function renderFilterBar(){
+  const arts = allArticles();
+  const bar = document.getElementById('filterBar');
+  if(!bar) return;
+  bar.innerHTML = ALL_CATS.map(c=>{
+    const eng = CAT_EN[c];
+    const cnt = c==='全部' ? arts.length : arts.filter(a=>a.categories&&a.categories.includes(eng)).length;
+    if(cnt===0 && c!=='全部') return '';
+    return `<button class="f-btn${c===curCat?' on':''}" onclick="setFilter('${c}')">${c}<span class="f-cnt">${cnt}</span></button>`;
+  }).join('');
+}
+
+window.setFilter = function(cat){
+  curCat = cat;
+  renderFilterBar();
+  renderContent();
+};
+
+// ── Content rendering ────────────────────────────────────────────
+function getFiltered(){
+  const arts = allArticles();
+  if(curCat==='全部') return arts;
+  const eng = CAT_EN[curCat]||curCat;
+  return arts.filter(a=>a.categories&&a.categories.includes(eng));
+}
+
+function renderContent(){
+  const filtered = getFiltered();
+  filteredCache = filtered;
+
+  // Featured = highest heat
+  let featIdx = 0;
+  filtered.forEach((a,i)=>{ if((a.heat||0)>(filtered[featIdx].heat||0)) featIdx=i; });
+  const featured = filtered[featIdx];
+  const rest = filtered.filter((_,i)=>i!==featIdx);
+
+  let html = '';
+
+  if(featured){
+    const cats = (featured.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('<span class="card-dot"></span>');
+    html += `
+      <article class="featured a2" onclick="openModal(${featIdx},this)">
+        <h2 class="feat-title">${esc(featured.title)}</h2>
+        <p class="feat-summary">${esc(featured.summary)}</p>
+        <div class="feat-cats">${cats}</div>
+      </article>
+    `;
+  }
+
+  html += '<div class="news-list">';
+  rest.forEach((item)=>{
+    const originalIdx = filtered.indexOf(item);
+    const cats = (item.categories||[]).map(c=>`<span class="cat">${esc(catZh(c))}</span>`).join('<span class="card-dot"></span>');
+    html += `
+      <button class="n-item" onclick="openModal(${originalIdx},this)">
+        <div class="n-body">
+          <div class="n-cats">${cats}</div>
+          <div class="n-title">${esc(item.title)}</div>
+          <div class="n-summary">${esc(item.summary)}</div>
+        </div>
+      </button>
+    `;
+  });
+  html += '</div>';
+
+  document.getElementById('contentArea').innerHTML = html;
+  document.getElementById('totalStat').textContent = filtered.length;
+}
+
+// ── Modal ────────────────────────────────────────────────────────
+// Haptic feedback (mobile)
+function haptic(style){
+  if(navigator.vibrate) navigator.vibrate(style==='heavy'?[12]:style==='light'?[4]:[8]);
+}
+
+window.openModal = function(filteredIdx, triggerEl){
+  filteredCache = getFiltered();
+  modalIdx = filteredIdx;
+  ttsStop();
+  renderModal();
+
+  // Card tap animation
+  if(triggerEl){
+    triggerEl.classList.add('card-popping');
+    setTimeout(()=>triggerEl.classList.remove('card-popping'), 672);
+  }
+
+  const ov = document.getElementById('mOv');
+  const sh = document.getElementById('mSheet');
+  ov.style.display = 'flex';
+  sh.classList.remove('spring');
+  void sh.offsetHeight;
+
+  // Calculate aspect-ratio morph: start from card's proportions
+  let startSx = 0.7, startSy = 0.7;
+  if(triggerEl){
+    const cardR = triggerEl.getBoundingClientRect();
+    const shR = sh.getBoundingClientRect();
+    startSx = Math.min(cardR.width / shR.width, 0.95);
+    startSy = Math.min(cardR.height / shR.height, 0.7);
+    const cx = cardR.left + cardR.width/2 - shR.left;
+    const cy = cardR.top + cardR.height/2 - shR.top;
+    sh.style.transformOrigin = cx + 'px ' + cy + 'px';
+  } else {
+    sh.style.transformOrigin = 'center center';
+  }
+
+  const delay = triggerEl ? 140 : 0;
+  setTimeout(()=>{
+    requestAnimationFrame(()=>{
+      ov.classList.add('vis');
+      sh.classList.add('vis');
+      haptic('medium');
+
+      // Two dimensions: size + aspect ratio morph simultaneously
+      // Width narrows slightly at first then expands; height always grows
+      const narrowSx = startSx * 0.92;  // width dips ~8%
+      const midSy = startSy + (1 - startSy) * 0.35;  // height at ~35% progress
+      const anim = sh.animate([
+        { transform: `scaleX(${startSx}) scaleY(${startSy})`, opacity: 0, filter: 'blur(6px)' },
+        { transform: `scaleX(${narrowSx}) scaleY(${startSy + (1-startSy)*0.12})`, opacity: 0.5, filter: 'blur(4px)', offset: 0.18 },
+        { transform: `scaleX(${narrowSx*1.02}) scaleY(${midSy})`, opacity: 0.8, filter: 'blur(1.5px)', offset: 0.40 },
+        { transform: 'scaleX(0.92) scaleY(0.88)', opacity: 0.95, filter: 'blur(0px)', offset: 0.60 },
+        { transform: 'scaleX(1.01) scaleY(1.012)', opacity: 1, filter: 'blur(0px)', offset: 0.82 },
+        { transform: 'scaleX(0.998) scaleY(0.997)', opacity: 1, filter: 'blur(0px)', offset: 0.92 },
+        { transform: 'scaleX(1) scaleY(1)', opacity: 1, filter: 'blur(0px)' }
+      ], {
+        duration: 780,
+        easing: 'cubic-bezier(.38,.05,.25,1)',
+        fill: 'forwards'
+      });
+      anim.onfinish = () => {
+        anim.cancel();
+        sh.style.transformOrigin = 'center center';
+      };
+    });
+    modalOpen = true;
+    document.body.style.overflow = 'hidden';
+    history.replaceState(null,'','#article-'+filteredIdx);
+  }, delay);
+};
+
+window.closeModal = function(){
+  haptic('light');
+  ttsStop();
+  const ov = document.getElementById('mOv');
+  const sh = document.getElementById('mSheet');
+  ov.classList.remove('vis'); sh.classList.remove('vis');
+  setTimeout(()=>{ ov.style.display='none'; },220);
+  modalOpen = false;
+  document.body.style.overflow = ''; // restore scroll
+  history.replaceState(null,'',location.pathname);
+};
+
+window.handleOvClick = function(e){
+  if(e.target===e.currentTarget) closeModal();
+};
+
+let _slideDir = 0;
+window.navModal = function(dir){
+  haptic('light');
+  const ni = modalIdx+dir;
+  if(ni<0 || ni>=filteredCache.length) return;
+  _slideDir=dir;
+  const title = document.getElementById('mTitle');
+  const body = document.getElementById('mBody');
+  const outCls = dir>0 ? 'nav-out-l' : 'nav-out-r';
+  const inCls  = dir>0 ? 'nav-in-l'  : 'nav-in-r';
+  title.classList.add(outCls);
+  body.classList.add(outCls);
+  setTimeout(()=>{
+    modalIdx=ni; ttsStop(); renderModal();
+    // Remove out, add in (start from opposite side)
+    title.classList.remove(outCls);
+    body.classList.remove(outCls);
+    title.classList.add(inCls);
+    body.classList.add(inCls);
+    // Force reflow then remove in class to trigger slide-in
+    void title.offsetWidth;
+    requestAnimationFrame(()=>{
+      title.classList.remove(inCls);
+      body.classList.remove(inCls);
+    });
+  }, 200);
+};
+
+function renderModal(){
+  const item = filteredCache[modalIdx];
+  if(!item) return;
+
+  // meta row (category tags removed; TTS moved to top bar)
+
+  // title
+  document.getElementById('mTitle').textContent = item.title||'';
+
+  // source
+  document.getElementById('mSrc').textContent = src(item);
+
+  // body
+  let body = '<div class="m-content">';
+  if(item.full_content && item.full_content.trim()){
+    const paras = item.full_content.trim().split(/\n+/).filter(Boolean);
+    body += paras.map(p=>{
+      let h = esc(p);
+      // render **bold** as <strong>
+      h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      return `<p>${h}</p>`;
+    }).join('');
+  } else {
+    body += `<p>${esc(item.summary||'')}</p>`;
+  }
+  body += '</div>';
+
+  if(item.context && item.context.trim()){
+    body += `<div class="m-ctx"><div class="m-ctx-lbl">背景</div><div class="m-ctx-txt">${esc(item.context)}</div></div>`;
+  }
+  if(item.tags && item.tags.length){
+    body += `<div class="m-tags">${item.tags.map(t=>`<span class="m-tag">#${esc(t)}</span>`).join('')}</div>`;
+  }
+
+  const mBody = document.getElementById('mBody');
+  // slide animation
+  if(_slideDir!==0){
+    const cls = _slideDir>0 ? 'slide-l' : 'slide-r';
+    mBody.classList.remove('slide-l','slide-r');
+    void mBody.offsetWidth; // reflow
+    mBody.classList.add(cls);
+    // also animate title
+    const titleEl = document.getElementById('mTitle');
+    titleEl.classList.remove('slide-l','slide-r');
+    void titleEl.offsetWidth;
+    titleEl.classList.add(cls);
+    _slideDir=0;
+  }
+  mBody.innerHTML = body;
+  mBody.scrollTop = 0;
+  // reset progress
+  document.getElementById('mProgressBar').style.width = '0%';
+  mBody.onscroll = function(){
+    const el = this;
+    const pct = el.scrollHeight <= el.clientHeight ? 100
+      : Math.min(100, Math.round(el.scrollTop / (el.scrollHeight - el.clientHeight) * 100));
+    document.getElementById('mProgressBar').style.width = pct + '%';
+  };
+
+  // nav
+  const hasPrev = modalIdx>0, hasNext = modalIdx<filteredCache.length-1;
+  document.getElementById('btnMPrev').disabled = !hasPrev;
+  document.getElementById('btnMNext').disabled = !hasNext;
+  document.getElementById('mNavCnt').textContent = `${modalIdx+1} / ${filteredCache.length}`;
+  // edge tap zones: only active when there's something to navigate to
+  const tL=document.getElementById('tapL'), tR=document.getElementById('tapR');
+  if(tL) tL.style.display = hasPrev ? 'block' : 'none';
+  if(tR) tR.style.display = hasNext ? 'block' : 'none';
+
+  // read link
+  document.getElementById('btnRead').href = item.best_url||item.url||'#';
+
+  // hash
+  history.replaceState(null,'','#article-'+modalIdx);
+}
+
+// ── Keyboard & swipe ────────────────────────────────────────────
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape'){
+    if(modalOpen) closeModal();
+    else if(archOpen) closeArch();
+  }
+  if(modalOpen){
+    if(e.key==='ArrowLeft') navModal(-1);
+    if(e.key==='ArrowRight') navModal(1);
+  }
+});
+
+const mOvEl = document.getElementById('mOv');
+// Block browser swipe-back/forward when modal is open
+mOvEl.addEventListener('touchstart', function(e){
+  touchX0 = e.touches[0].clientX; touchT0 = Date.now();
+},{passive:true});
+mOvEl.addEventListener('touchmove', function(e){
+  if(!modalOpen) return;
+  const dx = Math.abs(e.touches[0].clientX - (touchX0||0));
+  const dy = Math.abs(e.touches[0].clientY - (e.touches[0].clientY)); // always 0, just guard
+  // If horizontal movement dominates, block browser navigation gesture
+  if(dx > 8) e.preventDefault();
+},{passive:false});
+mOvEl.addEventListener('touchend', function(e){
+  if(touchX0===null) return;
+  const dx = e.changedTouches[0].clientX - touchX0;
+  const dt = Date.now() - touchT0;
+  touchX0=null;
+  if(dt>400||Math.abs(dx)<50) return;
+  if(window.getSelection&&window.getSelection().toString()) return;
+  navModal(dx>0 ? -1 : 1);
+},{passive:true});
+
+// ── TTS ──────────────────────────────────────────────────────────
+const synth = window.speechSynthesis;
+let ttsState=0, ttsUtt=null, ttsAudio=null, ttsMode='none';
+
+const SVG_SPK='<path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>';
+const SVG_PAU='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+
+function updateTtsBtn(){
+  const btn=document.getElementById('btnTts');
+  const ico=document.getElementById('ttsIcon');
+  if(!btn) return;
+  btn.classList.toggle('playing', ttsState===1);
+  ico.innerHTML = ttsState===1 ? SVG_PAU : SVG_SPK;
+}
+
+function ttsStop(){
+  if(ttsMode==='speech'&&synth) synth.cancel();
+  if(ttsMode==='audio'&&ttsAudio){ttsAudio.pause();ttsAudio=null;}
+  ttsState=0;ttsMode='none';ttsUtt=null;updateTtsBtn();
+}
+
+function pickVoice(){
+  if(!synth) return null;
+  const vv=synth.getVoices();
+  // Prefer calm/neutral female voices; avoid expressive/cheerful ones
+  const pref=[
+    'Microsoft Xiaomo','Microsoft Xiaohan',   // calm neutral zh-CN
+    'Microsoft Yunxi',                          // neutral male fallback
+    'Tingting','Meijia',                        // macOS zh
+    'Microsoft Xiaoxiao',                       // slightly warmer but acceptable
+    'Yu-shu','Microsoft Huihui','Microsoft Yaoyao',
+  ];
+  for(const n of pref){ const v=vv.find(v=>v.name.includes(n)); if(v) return v; }
+  return vv.find(v=>v.lang==='zh-CN')||vv.find(v=>v.lang.startsWith('zh'))||null;
+}
+
+function startWebSpeech(){
+  if(!synth) return;
+  const item=filteredCache[modalIdx];
+  if(!item) return;
+  const text=(item.title+'。'+(item.full_content||item.summary||'')).replace(/<[^>]+>/g,'').replace(/\*\*/g,'').replace(/\s+/g,' ').trim();
+  ttsUtt=new SpeechSynthesisUtterance(text);
+  ttsUtt.lang='zh-CN'; ttsUtt.rate=0.92; ttsUtt.pitch=0.82;
+  const setV=()=>{const v=pickVoice();if(v)ttsUtt.voice=v;};
+  setV();
+  if(!synth.getVoices().length) synth.addEventListener('voiceschanged',setV,{once:true});
+  ttsMode='speech';
+  ttsUtt.onstart=()=>{ttsState=1;updateTtsBtn();};
+  ttsUtt.onpause=()=>{ttsState=2;updateTtsBtn();};
+  ttsUtt.onresume=()=>{ttsState=1;updateTtsBtn();};
+  ttsUtt.onend=ttsUtt.onerror=()=>{ttsState=0;ttsMode='none';updateTtsBtn();};
+  synth.speak(ttsUtt);
+}
+
+window.toggleTts=function(){
+  if(ttsState===1){
+    if(ttsMode==='speech'&&synth){synth.pause();ttsState=2;updateTtsBtn();return;}
+    if(ttsMode==='audio'&&ttsAudio){ttsAudio.pause();return;}
+  }
+  if(ttsState===2){
+    if(ttsMode==='speech'&&synth){synth.resume();ttsState=1;updateTtsBtn();return;}
+    if(ttsMode==='audio'&&ttsAudio){ttsAudio.play();return;}
+  }
+  ttsStop();
+  const item=filteredCache[modalIdx];
+  if(!item) return;
+  if(item.audio_url){
+    ttsAudio=new Audio(item.audio_url);
+    ttsMode='audio';
+    ttsAudio.onplay=()=>{ttsState=1;updateTtsBtn();};
+    ttsAudio.onpause=()=>{if(ttsAudio&&!ttsAudio.ended){ttsState=2;updateTtsBtn();}};
+    ttsAudio.onended=()=>{ttsState=0;ttsAudio=null;updateTtsBtn();};
+    ttsAudio.onerror=()=>{ttsAudio=null;ttsMode='none';startWebSpeech();};
+    ttsAudio.play().catch(()=>{ttsAudio=null;ttsMode='none';startWebSpeech();});
+  } else {
+    startWebSpeech();
+  }
+};
+
+// ── loadDateData (archive switching) ────────────────────────────
+window.loadDateData = function(date){
+  fetch('data/'+date+'.json')
+    .then(r=>r.json())
+    .then(data=>{
+      const sorted=(data.articles||[]).slice().sort((a,b)=>(b.heat||0)-(a.heat||0));
+      window.ARTICLES_DATA=sorted;
+      window.calendarSetDate(date);
+      // update sources count
+      const hosts=new Set(sorted.map(a=>{try{return new URL(a.best_url||a.url||'').hostname;}catch{return '';}}).filter(Boolean));
+      document.getElementById('srcStat').textContent=hosts.size||data.sources||'?';
+      curCat='全部';
+      renderFilterBar();
+      renderContent();
+    })
+    .catch(err=>console.error('loadDateData error:',err));
+};
+
+// ── Init ─────────────────────────────────────────────────────────
+updateArchLabel();
+updateHeroTitle();
+updateNavBtns();
+renderFilterBar();
+renderContent();
+
+// Enter animation
+setTimeout(()=>{ document.getElementById('mainWrap').classList.add('entered'); }, 60);
+
+// Deep link
+const hash = location.hash;
+if(hash && hash.startsWith('#article-')){
+  const idx=parseInt(hash.slice(9));
+  if(!isNaN(idx)) setTimeout(()=>openModal(idx),300);
+}
+
+})();
+</script>
+<!-- arch-drop 挂在 body 上，脱离 header 合成层 -->
+<div class="arch-drop" id="archDrop">
+  <div id="archList"></div>
+</div>
+</body>
+</html>

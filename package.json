@@ -8,6 +8,7 @@
     "fetch": "node src/fetch/search.js",
     "fetch:rss": "node src/fetch/rss.js",
     "fetch:weak": "node src/fetch/weak-signal.js",
+    "fetch:bodies": "node src/fetch/parallel.js",
     "merge": "node src/pipeline/merge.js",
     "dedup:events": "node src/pipeline/dedup-events.js",
     "record:events": "node src/pipeline/record-events.js",

@@ -1,35 +1,36 @@
 #!/usr/bin/env node
 /**
- * fetch-parallel.js — 并行抓取多篇文章正文
+ * parallel.js — 并行抓取文章 URL 的正文，原地给每条加 body_text 字段
  *
- * 输入：latest-news.json (含 articles[].url)
- * 输出：/tmp/ai-daily-fetched.json
- *       格式：[ { idx, url, text, error } ]
+ * Input:  tmp/merged.json（数组，每项有 url/best_url）
+ * Output: 同一文件（原地写回，给每条加 body_text），除非 --out 指定
  *
  * 用法：
- *   node fetch-parallel.js [input.json] [--concurrency=N] [--out=/tmp/xxx.json]
- *   默认：input=latest-news.json, concurrency=6, out=/tmp/ai-daily-fetched.json
+ *   node src/fetch/parallel.js                        # in-place 增强 tmp/merged.json
+ *   node src/fetch/parallel.js tmp/foo.json           # 换输入
+ *   node src/fetch/parallel.js --concurrency=8 --out=tmp/merged-bodies.json
+ *
+ * 失败的条目 body_text 留空字符串，不影响 agent 继续用 content/snippet 做判断。
  */
-
-const https   = require('https');
-const http    = require('http');
-const fs      = require('fs');
-const path    = require('path');
+'use strict';
+const https = require('https');
+const http  = require('http');
+const fs    = require('fs');
+const path  = require('path');
 const { URL } = require('url');
 
-// ── 参数解析 ────────────────────────────────────────────────────────────────
-const args       = process.argv.slice(2);
+const args        = process.argv.slice(2);
 const ROOT        = path.resolve(__dirname, '../..');
-const inputFile   = args.find(a => !a.startsWith('--')) ||
-                    path.join(ROOT, 'tmp', 'latest-news.json');
-const concurrency = parseInt((args.find(a => a.startsWith('--concurrency=')) || '').split('=')[1] || '6', 10);
-const outFile     = (args.find(a => a.startsWith('--out=')) || '').split('=')[1] ||
-                    path.join(ROOT, 'tmp', 'fetched.json');
+const argVal      = (flag, dflt) => {
+  const a = args.find(x => x.startsWith(`${flag}=`));
+  return a ? a.split('=')[1] : dflt;
+};
+const inputFile   = args.find(a => !a.startsWith('--')) || path.join(ROOT, 'tmp', 'merged.json');
+const outFile     = argVal('--out', inputFile);  // default: in-place
+const concurrency = parseInt(argVal('--concurrency', '6'), 10);
 const TIMEOUT_MS  = 12000;
 
-// ── HTML → 纯文本提取 ───────────────────────────────────────────────────────
 function extractText(html) {
-  // 1. 先尝试提取 <article> / <main> / [class*=content] 主体区域
   const mainMatch =
     html.match(/<article[\s\S]*?<\/article>/i) ||
     html.match(/<main[\s\S]*?<\/main>/i) ||
@@ -37,26 +38,19 @@ function extractText(html) {
   const src = mainMatch ? mainMatch[0] : html;
 
   return src
-    // 删除 script/style/nav/footer/aside
     .replace(/<(script|style|nav|footer|aside|header|noscript|iframe|figure)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
-    // 删除注释
     .replace(/<!--[\s\S]*?-->/g, ' ')
-    // 段落/标题换行
     .replace(/<\/(p|h[1-6]|li|blockquote|div)>/gi, '\n')
-    // 删除剩余标签
     .replace(/<[^>]+>/g, ' ')
-    // HTML 实体
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
     .replace(/&#\d+;/g, ' ')
-    // 清理多余空白
     .split('\n').map(l => l.trim()).filter(l => l.length > 20).join('\n')
     .replace(/\n{3,}/g, '\n\n')
-    .slice(0, 10000)  // 最多 10KB 给 AI
+    .slice(0, 10000)
     .trim();
 }
 
-// ── 单个 URL 抓取（含重定向、超时） ──────────────────────────────────────────
 function fetchUrl(url, depth = 0) {
   return new Promise(resolve => {
     if (depth > 3) return resolve({ url, error: 'too many redirects', text: '' });
@@ -67,12 +61,10 @@ function fetchUrl(url, depth = 0) {
       resolve({ url, error: 'timeout', text: '' });
     }, TIMEOUT_MS);
 
-    const proto   = url.startsWith('https') ? https : http;
+    const proto = url.startsWith('https') ? https : http;
     const options = {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
-                      'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-                      'Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8',
       },
@@ -81,34 +73,25 @@ function fetchUrl(url, depth = 0) {
     try {
       const req = proto.get(url, options, res => {
         if (timedOut) return;
-
-        // 重定向
         if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
           clearTimeout(timer);
           const next = new URL(res.headers.location, url).href;
           fetchUrl(next, depth + 1).then(resolve);
           return;
         }
-
         if (res.statusCode !== 200) {
           clearTimeout(timer);
           return resolve({ url, error: `HTTP ${res.statusCode}`, text: '' });
         }
-
         const chunks = [];
         res.on('data', chunk => chunks.push(chunk));
         res.on('end', () => {
           if (timedOut) return;
           clearTimeout(timer);
-          const html = Buffer.concat(chunks).toString('utf8');
-          resolve({ url, text: extractText(html), error: null });
+          resolve({ url, text: extractText(Buffer.concat(chunks).toString('utf8')), error: null });
         });
-        res.on('error', e => {
-          clearTimeout(timer);
-          resolve({ url, error: e.message, text: '' });
-        });
+        res.on('error', e => { clearTimeout(timer); resolve({ url, error: e.message, text: '' }); });
       });
-
       req.on('error', e => {
         if (timedOut) return;
         clearTimeout(timer);
@@ -121,41 +104,32 @@ function fetchUrl(url, depth = 0) {
   });
 }
 
-// ── 并发控制：分批 Promise.all ───────────────────────────────────────────────
-async function fetchAll(items, concurrency) {
-  const results = [];
+async function main() {
+  const items = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+  if (!Array.isArray(items)) {
+    console.error('parallel: expected a JSON array in ' + inputFile);
+    process.exit(1);
+  }
+  console.error(`parallel: ${items.length} urls, concurrency=${concurrency}`);
+  const t0 = Date.now();
+
   for (let i = 0; i < items.length; i += concurrency) {
     const batch    = items.slice(i, i + concurrency);
-    const t0       = Date.now();
-    const batchRes = await Promise.all(batch.map(item => fetchUrl(item.url)));
-    const elapsed  = ((Date.now() - t0) / 1000).toFixed(1);
-    const ok       = batchRes.filter(r => !r.error).length;
-    console.error(
-      `  batch ${Math.floor(i / concurrency) + 1} (${batch.length} URLs): ` +
-      `${ok} ok, ${batch.length - ok} failed — ${elapsed}s`
-    );
-    results.push(...batchRes.map((r, j) => ({ ...r, idx: batch[j].idx })));
+    const batchRes = await Promise.all(batch.map(it => fetchUrl(it.url || it.best_url || it.link)));
+    batchRes.forEach((r, j) => {
+      const target = items[i + j];
+      target.body_text = r.text || '';
+      if (r.error) target.body_fetch_error = r.error;
+    });
+    const ok = batchRes.filter(r => r.text && r.text.length > 200).length;
+    console.error(`  batch ${Math.floor(i / concurrency) + 1} (${batch.length}): ${ok} bodies ≥200 chars, ${batch.length - ok} thin/failed`);
   }
-  return results;
-}
 
-// ── main ────────────────────────────────────────────────────────────────────
-async function main() {
-  const raw   = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
-  const items = (raw.articles || raw).map((a, i) => ({
-    idx: i,
-    url: a.best_url || a.url,
-  }));
-
-  console.error(`fetch-parallel: ${items.length} URLs, concurrency=${concurrency}`);
-  const t0      = Date.now();
-  const results = await fetchAll(items, concurrency);
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-  const ok      = results.filter(r => !r.error).length;
-  console.error(`done: ${ok}/${items.length} succeeded in ${elapsed}s`);
-
-  fs.writeFileSync(outFile, JSON.stringify(results, null, 2));
-  console.log(outFile);  // 把输出路径打到 stdout 方便调用方读取
+  const ok      = items.filter(x => (x.body_text || '').length > 200).length;
+  const avgLen  = ok ? Math.round(items.reduce((s, x) => s + (x.body_text || '').length, 0) / ok) : 0;
+  fs.writeFileSync(outFile, JSON.stringify(items, null, 2));
+  console.error(`parallel: ${ok}/${items.length} bodies in ${elapsed}s (avg ${avgLen} chars) → ${outFile}`);
 }
 
 main().catch(e => { console.error('fatal:', e.message); process.exit(1); });

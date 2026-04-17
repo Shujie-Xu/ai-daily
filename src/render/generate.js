@@ -535,6 +535,32 @@ function pushDocsToGhPages(docsDir, date) {
     sh(`git -C "${ROOT}" fetch origin gh-pages`);
     sh(`git -C "${ROOT}" worktree add -B gh-pages "${wt}" origin/gh-pages`);
     fs.cpSync(docsDir, path.join(wt, 'docs'), { recursive: true });
+
+    // Rebuild manifest from the full set of data/YYYY-MM-DD.json files on gh-pages,
+    // otherwise local's today-only manifest clobbers the history.
+    const wtDataDir = path.join(wt, 'docs', 'data');
+    if (fs.existsSync(wtDataDir)) {
+      const entries = fs.readdirSync(wtDataDir)
+        .filter(f => /^\d{4}-\d{2}-\d{2}\.json$/.test(f))
+        .map(f => {
+          try {
+            const d = JSON.parse(fs.readFileSync(path.join(wtDataDir, f), 'utf8'));
+            return { date: f.replace('.json', ''), total: (d.articles || []).length };
+          } catch { return null; }
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.date.localeCompare(a.date));
+      fs.writeFileSync(path.join(wtDataDir, 'manifest.json'), JSON.stringify(entries));
+
+      // archive.js (calendar clickability) must match the full manifest, not local's today-only
+      const archiveDates = entries.map(e => e.date);
+      fs.writeFileSync(
+        path.join(wt, 'docs', 'archive.js'),
+        `// Auto-generated\nwindow.ARCHIVE_DATES = ${JSON.stringify(archiveDates)};\n`
+      );
+      console.log(`📇 rebuilt manifest + archive.js: ${entries.length} dates`);
+    }
+
     sh(`git -C "${wt}" add docs/`);
     const dirty = execSync(`git -C "${wt}" status --porcelain`).toString().trim();
     if (!dirty) {

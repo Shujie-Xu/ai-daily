@@ -7,9 +7,10 @@
 const fs = require('fs');
 const path = require('path');
 
+const ROOT = path.resolve(__dirname, '../..');
 const TEMPLATE = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const OG_TEMPLATE_PATH = path.join(__dirname, 'og-template.html');
-const OUTPUT_DIR = path.join(__dirname, 'docs');
+const OUTPUT_DIR = path.join(ROOT, 'docs');
 const AUDIO_DIR  = path.join(OUTPUT_DIR, 'audio');
 const OG_DIR = path.join(OUTPUT_DIR, 'og');
 const TTS_SCRIPT = path.join(__dirname, 'tts_gen.py');

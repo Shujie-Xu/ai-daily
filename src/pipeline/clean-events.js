@@ -8,7 +8,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const EVENTS_FILE = path.join(__dirname, 'seen-events.json');
+const ROOT = path.resolve(__dirname, '../..');
+const EVENTS_FILE = path.join(ROOT, 'state', 'seen-events.json');
 const today = new Date().toISOString().slice(0, 10);
 
 let events = [];

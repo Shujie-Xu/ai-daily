@@ -3,7 +3,7 @@
 const fs   = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname);
+const ROOT = path.resolve(__dirname, '../..');  // repo root
 
 // ── Key validation ──────────────────────────────────────────────────────────
 const API_KEY1 = process.env.TAVILY_API_KEY_1;
@@ -14,8 +14,8 @@ if (!API_KEY1 || !API_KEY2) {
 }
 
 const keywords   = JSON.parse(fs.readFileSync(path.join(ROOT, 'search-keywords.json')));
-const seenUrls   = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'seen-urls.json'))));
-const seenEvents = JSON.parse(fs.readFileSync(path.join(ROOT, 'seen-events.json')));
+const seenUrls   = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'state', 'seen-urls.json'))));
+const seenEvents = JSON.parse(fs.readFileSync(path.join(ROOT, 'state', 'seen-events.json')));
 
 let currentKey = API_KEY1;
 
@@ -66,7 +66,8 @@ async function main() {
     }
   }
 
-  fs.writeFileSync(path.join(ROOT, 'tavily-results.json'), JSON.stringify(uniqueResults, null, 2));
+  fs.mkdirSync(path.join(ROOT, 'tmp'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, 'tmp', 'tavily-results.json'), JSON.stringify(uniqueResults, null, 2));
   console.log(`Found ${uniqueResults.length} new unique articles.`);
 }
 

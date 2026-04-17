@@ -19,11 +19,12 @@ const { URL } = require('url');
 
 // ── 参数解析 ────────────────────────────────────────────────────────────────
 const args       = process.argv.slice(2);
-const inputFile  = args.find(a => !a.startsWith('--')) ||
-                   path.join(__dirname, 'latest-news.json');
+const ROOT        = path.resolve(__dirname, '../..');
+const inputFile   = args.find(a => !a.startsWith('--')) ||
+                    path.join(ROOT, 'tmp', 'latest-news.json');
 const concurrency = parseInt((args.find(a => a.startsWith('--concurrency=')) || '').split('=')[1] || '6', 10);
 const outFile     = (args.find(a => a.startsWith('--out=')) || '').split('=')[1] ||
-                   '/tmp/ai-daily-fetched.json';
+                    path.join(ROOT, 'tmp', 'fetched.json');
 const TIMEOUT_MS  = 12000;
 
 // ── HTML → 纯文本提取 ───────────────────────────────────────────────────────

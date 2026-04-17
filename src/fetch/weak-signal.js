@@ -2,8 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const cfgPath = path.join(__dirname, 'weak-signal-sources.json');
-const outPath = path.join(__dirname, 'weak-signal-queries.generated.json');
+const ROOT    = path.resolve(__dirname, '../..');
+const cfgPath = path.join(ROOT, 'config', 'weak-signal-sources.json');
+const outPath = path.join(ROOT, 'tmp', 'weak-signal-queries.json');
 const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
 
 function unique(list) {

@@ -8,7 +8,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const AUDIO_DIR = path.join(__dirname, 'docs', 'audio');
+const ROOT = path.resolve(__dirname, '../..');
+const AUDIO_DIR = path.join(ROOT, 'docs', 'audio');
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
 const daysArg = args.find(a => a.startsWith('--days='));

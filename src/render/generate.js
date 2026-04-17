@@ -473,7 +473,8 @@ if (require.main === module) {
     console.error('❌ News JSON not found:', inputFile);
     process.exit(1);
   }
-  const data = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+  let data = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+  if (Array.isArray(data)) { data = { articles: data }; }
 
   // 确定日期（与 generate() 内部逻辑保持一致）
   const fileDate = process.env._GENERATE_DATE_OVERRIDE || data.date ||

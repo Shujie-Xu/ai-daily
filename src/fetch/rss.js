@@ -22,29 +22,43 @@ const healthFile = path.join(ROOT, 'state', 'source-health.json');
 
 const cfg    = yaml.load(fs.readFileSync(path.join(ROOT, 'config', 'sources.yaml'), 'utf8'));
 const cutoff = new Date(Date.now() - windowH * 3600 * 1000);
-const parser = new Parser({ timeout: 10000, headers: { 'User-Agent': 'ai-daily-rss/1.0' } });
+// Reddit + some CDNs reject generic user agents — use a browser UA for compatibility.
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36';
+const parser = new Parser({
+  timeout: 20000,  // 20s — Vercel free tier function cap is 10s; we add buffer for TLS/DNS
+  headers: {
+    'User-Agent': UA,
+    'Accept':     'application/atom+xml, application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+  },
+});
 
-// Collect all sources with a non-empty rss field
 const sources = Object.values(cfg.sites).flat().filter(s => s.rss);
 
+async function fetchOnce(source) {
+  const feed = await parser.parseURL(source.rss);
+  return (feed.items || [])
+    .filter(item => {
+      const pub = item.pubDate ? new Date(item.pubDate) : null;
+      return pub && pub >= cutoff;
+    })
+    .map(item => ({
+      title:     item.title || '',
+      url:       item.link  || '',
+      published: item.pubDate || '',
+      source:    source.name,
+      lang:      source.lang || 'en',
+    }));
+}
+
+// Single retry for transient failures (Vercel cold-start, network blips)
 async function fetchSource(source) {
-  try {
-    const feed  = await parser.parseURL(source.rss);
-    const items = (feed.items || [])
-      .filter(item => {
-        const pub = item.pubDate ? new Date(item.pubDate) : null;
-        return pub && pub >= cutoff;
-      })
-      .map(item => ({
-        title:     item.title || '',
-        url:       item.link  || '',
-        published: item.pubDate || '',
-        source:    source.name,
-        lang:      source.lang || 'en',
-      }));
-    return { ok: true, source: source.name, items };
-  } catch (err) {
-    return { ok: false, source: source.name, error: err.message, items: [] };
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const items = await fetchOnce(source);
+      return { ok: true, source: source.name, items };
+    } catch (err) {
+      if (attempt === 2) return { ok: false, source: source.name, error: err.message, items: [] };
+    }
   }
 }
 

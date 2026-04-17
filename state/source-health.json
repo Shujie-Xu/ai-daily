@@ -1,0 +1,82 @@
+{
+  "OpenAI Blog": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 3
+  },
+  "Anthropic News": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 1
+  },
+  "Anthropic Engineering": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 0
+  },
+  "Google DeepMind": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 1
+  },
+  "Hugging Face Blog": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 3
+  },
+  "VentureBeat AI": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 0
+  },
+  "MIT Tech Review AI": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 10
+  },
+  "TechCrunch AI": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 19
+  },
+  "Ars Technica AI": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 20
+  },
+  "Import AI": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 0
+  },
+  "量子位": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 10
+  },
+  "晚点LatePost": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 5
+  },
+  "钛媒体": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 30
+  },
+  "财联社深度": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 41
+  },
+  "财联社热点": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 13
+  },
+  "Hacker News": {
+    "status": "ok",
+    "last_ok": "2026-04-17T12:45:41.027Z",
+    "items": 22
+  }
+}

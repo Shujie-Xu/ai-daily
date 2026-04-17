@@ -5,10 +5,12 @@
   "type": "commonjs",
   "private": true,
   "scripts": {
-    "fetch": "node src/fetch/tavily.js",
+    "fetch": "node src/fetch/search.js",
     "fetch:rss": "node src/fetch/rss.js",
     "fetch:weak": "node src/fetch/weak-signal.js",
     "merge": "node src/pipeline/merge.js",
+    "dedup:events": "node src/pipeline/dedup-events.js",
+    "record:events": "node src/pipeline/record-events.js",
     "render": "node src/render/generate.js",
     "render:push": "node src/render/generate.js --push",
     "clean:events": "node src/pipeline/clean-events.js",

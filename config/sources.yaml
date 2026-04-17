@@ -17,19 +17,20 @@ search_api:
 # site: used for auto-generated site: queries (tier 1 only)
 sites:
   official_en:
-    - { name: OpenAI Blog,         site: openai.com,          rss: "https://openai.com/blog/rss.xml",                                                   tier: 1, lang: en }
-    - { name: Anthropic News,      site: anthropic.com,       rss: "https://www.anthropic.com/news/rss",                                                 tier: 1, lang: en }
-    - { name: Google DeepMind,     site: deepmind.google,     rss: "",                                                                                   tier: 1, lang: en }
-    - { name: Google AI Blog,      site: blog.google,         rss: "",                                                                                   tier: 1, lang: en }
-    - { name: Meta AI Blog,        site: ai.meta.com,         rss: "",                                                                                   tier: 1, lang: en }
-    - { name: Microsoft AI Blog,   site: blogs.microsoft.com, rss: "",                                                                                   tier: 1, lang: en }
-    - { name: Hugging Face Blog,   site: huggingface.co,      rss: "https://huggingface.co/blog/feed.xml",                                               tier: 1, lang: en }
-    - { name: Mistral Blog,        site: mistral.ai,          rss: "",                                                                                   tier: 1, lang: en }
-    - { name: xAI / Grok,         site: x.ai,                rss: "",                                                                                   tier: 1, lang: en }
+    - { name: OpenAI Blog,           site: openai.com,          rss: "https://openai.com/blog/rss.xml",                                                   tier: 1, lang: en }
+    - { name: Anthropic News,        site: anthropic.com,       rss: "https://rsshub-blush-six.vercel.app/anthropic/news",                                tier: 1, lang: en, note: "via RSSHub on Vercel" }
+    - { name: Anthropic Engineering, site: anthropic.com,       rss: "https://rsshub-blush-six.vercel.app/anthropic/engineering",                         tier: 1, lang: en, note: "via RSSHub on Vercel" }
+    - { name: Google DeepMind,       site: deepmind.google,     rss: "https://rsshub-blush-six.vercel.app/deepmind/blog",                                 tier: 1, lang: en, note: "via RSSHub on Vercel" }
+    - { name: Google AI Blog,        site: blog.google,         rss: "",                                                                                  tier: 1, lang: en }
+    - { name: Meta AI Blog,          site: ai.meta.com,         rss: "",                                                                                  tier: 1, lang: en, note: "RSSHub route 503s; Tavily targeted_entities covers" }
+    - { name: Microsoft AI Blog,     site: blogs.microsoft.com, rss: "",                                                                                  tier: 1, lang: en }
+    - { name: Hugging Face Blog,     site: huggingface.co,      rss: "https://huggingface.co/blog/feed.xml",                                              tier: 1, lang: en }
+    - { name: Mistral Blog,          site: mistral.ai,          rss: "",                                                                                  tier: 1, lang: en }
+    - { name: xAI / Grok,            site: x.ai,                rss: "",                                                                                  tier: 1, lang: en }
 
   media_en:
     - { name: The Information,     site: theinformation.com,  rss: "",                                                                                   tier: 1, lang: en, note: "paywall, abstract only" }
-    - { name: VentureBeat AI,      site: venturebeat.com,     rss: "https://venturebeat.com/ai/feed/",                                                   tier: 1, lang: en }
+    - { name: VentureBeat AI,      site: venturebeat.com,     rss: "https://venturebeat.com/category/ai/feed/",                                          tier: 1, lang: en }
     - { name: MIT Tech Review AI,  site: technologyreview.com,rss: "https://www.technologyreview.com/feed/",                                             tier: 1, lang: en }
     - { name: TechCrunch AI,       site: techcrunch.com,      rss: "https://techcrunch.com/category/artificial-intelligence/feed/",                      tier: 1, lang: en }
     - { name: Wired AI,            site: wired.com,           rss: "",                                                                                   tier: 2, lang: en }
@@ -45,141 +46,90 @@ sites:
 
   media_cn:
     - { name: 量子位,              site: qbitai.com,          rss: "https://www.qbitai.com/feed",                                                        tier: 1, lang: zh }
-    - { name: 机器之心,            site: jiqizhixin.com,      rss: "https://www.jiqizhixin.com/rss",                                                     tier: 1, lang: zh }
-    - { name: 晚点LatePost,        site: latepost.com,        rss: "",                                                                                   tier: 1, lang: zh, note: "独家深度报道" }
-    - { name: 36Kr AI,             site: 36kr.com,            rss: "",                                                                                   tier: 1, lang: zh }
-    - { name: 钛媒体,              site: tmtpost.com,         rss: "",                                                                                   tier: 2, lang: zh }
+    - { name: 机器之心,            site: jiqizhixin.com,      rss: "",                                                                                   tier: 1, lang: zh, note: "no RSSHub route; Tavily buzz_cn covers" }
+    - { name: 晚点LatePost,        site: latepost.com,        rss: "https://rsshub-blush-six.vercel.app/latepost",                                       tier: 1, lang: zh, note: "via RSSHub" }
+    - { name: 36Kr AI,             site: 36kr.com,            rss: "",                                                                                   tier: 1, lang: zh, note: "RSSHub /36kr/hot-list works but has no pubDate (ranking feed); Tavily buzz_cn covers" }
+    - { name: 钛媒体,              site: tmtpost.com,         rss: "https://rsshub-blush-six.vercel.app/tmtpost/new",                                    tier: 2, lang: zh, note: "via RSSHub" }
     - { name: 极客公园,            site: geekpark.net,        rss: "",                                                                                   tier: 2, lang: zh }
-    - { name: 虎嗅科技,            site: huxiu.com,           rss: "",                                                                                   tier: 2, lang: zh }
+    - { name: 虎嗅科技,            site: huxiu.com,           rss: "",                                                                                   tier: 2, lang: zh, note: "RSSHub route times out; Tavily covers" }
     - { name: 腾讯新闻科技,        site: view.inews.qq.com,   rss: "",                                                                                   tier: 2, lang: zh }
     - { name: 新浪财经,            site: finance.sina.com.cn, rss: "",                                                                                   tier: 2, lang: zh }
-    - { name: 财联社,              site: cls.cn,              rss: "",                                                                                   tier: 2, lang: zh }
+    - { name: 财联社深度,          site: cls.cn,              rss: "https://rsshub-blush-six.vercel.app/cls/depth",                                      tier: 2, lang: zh, note: "via RSSHub" }
+    - { name: 财联社热点,          site: cls.cn,              rss: "https://rsshub-blush-six.vercel.app/cls/hot",                                        tier: 2, lang: zh, note: "via RSSHub" }
     - { name: 鞭牛士,              site: bianews.com,         rss: "",                                                                                   tier: 2, lang: zh }
 
   vc_funding:
     - { name: Crunchbase News,     site: news.crunchbase.com, rss: "",                                                                                   tier: 1, lang: en }
-    - { name: a16z Blog,           site: a16z.com,            rss: "https://a16z.com/feed/",                                                             tier: 1, lang: en }
+    - { name: a16z Blog,           site: a16z.com,            rss: "",                                                                                   tier: 1, lang: en, note: "RSS killed; funding_vc Tavily dim covers" }
     - { name: Sequoia Blog,        site: sequoiacap.com,      rss: "",                                                                                   tier: 2, lang: en }
     - { name: Y Combinator,        site: ycombinator.com,     rss: "",                                                                                   tier: 2, lang: en }
     - { name: IT桔子,              site: itjuzi.com,          rss: "",                                                                                   tier: 2, lang: zh }
 
   research:
     - { name: Papers With Code,    site: paperswithcode.com,  rss: "",                                                                                   tier: 1, lang: en }
-    - { name: ArXiv CS.AI,         site: arxiv.org,           rss: "https://rss.arxiv.org/rss/cs.AI",                                                    tier: 1, lang: en }
+    # ArXiv CS.AI removed: 350+ papers/day swamps the digest. Track via separate weekly project.
 
   community:
     - { name: Hacker News,         site: news.ycombinator.com,rss: "https://news.ycombinator.com/rss",                                                   tier: 1, lang: en }
-    - { name: Reddit ML,           site: reddit.com,          rss: "https://www.reddit.com/r/MachineLearning/.rss",                                      tier: 2, lang: en }
+    - { name: Reddit ML,           site: reddit.com,          rss: "",                                                                                   tier: 2, lang: en, note: "Reddit blocks server-side RSS; Tavily community dim covers via site:reddit.com" }
 
 # ── Search dimensions ────────────────────────────────────────────────────────
-# These become Tavily queries. tier1_sources dimension is auto-generated
-# from sites above (tier=1) — do not maintain manually.
+# Tavily 的核心使命：补 RSS 没覆盖的源（中文媒体、Crunchbase、DeepMind/Meta/xAI 等无 feed 的 tier1）。
+# 主题词查询保留少量精华（model/funding/policy/embodied/rumor），其余靠 site: 限定 + 实体词。
 dimensions:
-  - id: newsletter
-    label: "Newsletter / 周报聚合"
-    queries:
-      - '"last week in AI" OR "AI weekly roundup" latest'
-      - "site:substack.com AI news latest"
-      - "site:therundown.ai OR site:tldr.tech OR site:bensbites.co AI latest"
-
-  - id: community
-    label: "社区热度 / 开发者信号"
-    queries:
-      - '"viral AI tool" OR "AI trending" site:reddit.com OR site:news.ycombinator.com'
-      - '"GitHub trending AI" OR "AI open source" trending'
-      - "site:news.ycombinator.com AI model launch OR AI startup OR robotics"
-      - "site:reddit.com/r/LocalLLaMA OR site:reddit.com/r/singularity OR site:reddit.com/r/MachineLearning AI"
-
   - id: model
-    label: "模型发布 / 产品更新 / API"
+    label: "模型发布 / 产品更新（主题词）"
     queries:
-      - '"AI model release" OR "LLM launch" OR "foundation model"'
-      - '"大模型" OR "AI产品发布" OR "AI新功能"'
-      - "OpenAI OR Anthropic OR Google OR Meta AI announcement"
+      - '"AI model release" OR "LLM launch" OR "foundation model" latest'
       - '"API pricing" OR "model pricing" OR "enterprise launch" AI'
-      - '"quietly launched" OR "rollout" AI model OR AI product'
+      - '"大模型" OR "AI产品发布" 2026'
 
-  - id: funding
-    label: "融资 / 财务 / 收购 / 股票"
-    queries:
-      - 'AI startup "seed" OR "series A" OR "series B" OR "series C" funding'
-      - '"AI acquisition" OR "AI IPO" OR "AI股票" OR "AI市值"'
-      - '"AI 融资" OR "人工智能投资" site:36kr.com OR site:latepost.com'
-      - 'AI stock earnings OR results "beats" OR "misses"'
-      - '"acquisition talks" OR "deal talks" OR "explores sale" AI startup'
-      - '"acqui-hire" OR "strategic investment" AI OR robotics'
-
-  - id: research
-    label: "研究突破 / 学术 / 开源"
-    queries:
-      - '"AI breakthrough" OR "AI paper" latest'
-      - '"state of the art" machine learning'
-      - "site:paperswithcode.com AI OR robotics latest"
-      - "site:arxiv.org embodied AI OR world model OR robot policy OR VLA"
-
-  - id: policy
-    label: "监管 / 政策 / 合规"
-    queries:
-      - '"AI regulation" OR "AI policy" OR "AI law" latest'
-      - '"AI 监管" OR "人工智能法案"'
-      - '"identity verification" OR "实名" OR "KYC" AI platform'
-      - '"policy change" OR "safety policy" OR "usage policy" AI company'
-
-  - id: vc
-    label: "一级市场 / VC 圈"
+  - id: funding_vc
+    label: "融资 / 收购（侧重 Crunchbase + 中文 VC）"
     queries:
       - "site:crunchbase.com AI raises OR funding 2026"
-      - "site:techcrunch.com AI startup raises 2026"
-      - '"AI startup" announces "raises" OR "closes" funding'
-      - "晚点LatePost OR 36kr OR IT桔子 AI 融资 初创"
-      - "site:a16z.com OR site:sequoiacap.com AI startup OR robotics"
+      - 'AI startup "series A" OR "series B" OR "series C" raises 2026'
+      - '"AI acquisition" OR "acqui-hire" OR "strategic investment" AI OR robotics'
+      - "AI 融资 OR 人工智能投资 site:36kr.com OR site:latepost.com OR site:itjuzi.com"
+
+  - id: policy
+    label: "监管 / 政策"
+    queries:
+      - '"AI regulation" OR "AI policy" OR "AI law" 2026'
+      - '"AI 监管" OR "人工智能法案" 2026'
 
   - id: embodied_intelligence
     label: "具身智能 / 机器人"
     queries:
-      - '"embodied AI" OR "embodied intelligence" latest'
-      - '"robot foundation model" OR "vision-language-action" OR VLA robot'
-      - '"robot brain" OR "world model" robotics OR "robot policy"'
-      - '"humanoid robot" AI model OR robot software OR simulation'
-      - '"具身智能" OR "机器人大脑" OR "世界模型" OR "机器人控制"'
-      - "Figure OR 1X OR Physical Intelligence OR Apptronik OR Agility Robotics AI"
-
-  - id: targeted_entities
-    label: "重点实体定向追踪"
-    queries:
-      - "OpenAI latest announcement OR pricing OR enterprise OR acquisition"
-      - "Anthropic latest announcement OR verification OR policy OR enterprise"
-      - "Google DeepMind OR Gemini latest launch OR benchmark OR enterprise"
-      - "Meta AI latest model OR app OR open source OR acquisition"
-      - "xAI OR Grok latest launch OR funding OR infrastructure"
-      - "Perplexity OR Mistral OR Cohere OR Runway OR Pika OR Synthesia latest"
-      - "Cursor OR Windsurf OR Cognition OR Replit AI coding latest"
-      - "Figure OR Physical Intelligence OR 1X OR Skild AI OR Covariant OR Dexterity latest"
+      - '"embodied AI" OR "vision-language-action" OR "world model" 2026'
+      - '"humanoid robot" deployment OR pilot OR funding'
+      - '"具身智能" OR "机器人大脑" 2026'
 
   - id: rumor_signal
-    label: "传闻 / 弱信号追踪"
+    label: "传闻 / 弱信号"
     queries:
       - '"rumor" OR "reported" OR "people familiar" AI startup'
-      - '"in talks" OR "considering" acquisition AI OR robotics'
-      - '"quietly updated" OR "spotted" OR "rolling out" AI product'
-      - "site:news.ycombinator.com OR site:reddit.com AI rumor OR robotics rumor"
+      - '"in talks" OR "deal talks" OR "explores sale" AI'
 
   - id: buzz_cn
-    label: "中文热度追踪"
+    label: "中文媒体（核心使命：补 RSS 缺口）"
     queries:
-      - "site:36kr.com AI 模型 OR AI 产品 OR 智能体"
-      - "site:qbitai.com AI 模型 OR 视频模型 OR 智能体"
-      - "site:latepost.com AI OR 人工智能 新品"
-      - "site:finance.sina.com.cn AI 模型 OR 人工智能 发布"
-      - "site:view.inews.qq.com AI 模型 OR 人工智能 发布"
-      - "site:cls.cn AI 模型 OR 大模型 OR 智能体"
-      - "site:tmtpost.com AI 模型 OR AI 产品 发布"
-      - "site:techcrunch.com AI robotics startup OR acquisition"
-      - "site:github.com/trending robot OR embodied OR world model"
+      - "site:36kr.com AI 模型 OR 智能体 OR 大模型"
+      - "site:latepost.com AI OR 人工智能"
+      - "site:tmtpost.com AI 模型 OR AI 产品"
+      - "site:cls.cn AI 大模型 OR 智能体"
+      - "site:finance.sina.com.cn AI 模型 OR 人工智能"
+      - "site:huxiu.com AI 模型 OR 人工智能"
 
-  # tier1_sources: auto-generated at runtime from sites[*][tier=1].site
-  # Do not add queries here manually — edit sites section above instead.
-  - id: tier1_sources
-    label: "一级来源定向搜索（自动生成）"
-    auto_from_tier1: true
-    queries: []   # populated by src/fetch/tavily.js at runtime
+  - id: targeted_entities
+    label: "无 RSS 的 tier1 实体（DeepMind / Meta / xAI / Information）"
+    queries:
+      - "site:deepmind.google OR site:blog.google Gemini OR DeepMind"
+      - "site:ai.meta.com Llama OR Meta AI latest"
+      - "site:x.ai Grok OR xAI launch"
+      - "site:theinformation.com AI OR OpenAI OR Anthropic"
+      - "Cursor OR Cognition OR Windsurf AI coding 2026"
+
+  # 已删 dimensions:
+  #  - community: HN/Reddit RSS 已覆盖
+  #  - research:  paperswithcode/arxiv 已通过 RSS（CSAI 删除前）和 funding_vc 间接覆盖

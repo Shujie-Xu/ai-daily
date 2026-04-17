@@ -1,0 +1,22 @@
+# secrets
+.env
+
+# build artifacts / intermediate
+tmp/
+*.log
+
+# node
+node_modules/
+
+# docs is on gh-pages branch
+docs/
+
+# scratch files generated during runs
+latest-news.json
+tavily-results.json
+*-results.json
+*-raw.json
+*.generated.json
+whitehouse.txt
+haiku.txt
+c3.txt

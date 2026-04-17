@@ -1,11 +1,22 @@
-const fs = require('fs');
+#!/usr/bin/env node
+'use strict';
+const fs   = require('fs');
+const path = require('path');
 
-const keywords = JSON.parse(fs.readFileSync('/home/rosamund/.openclaw/workspace/ai-daily/search-keywords.json'));
-const seenUrls = new Set(JSON.parse(fs.readFileSync('/home/rosamund/.openclaw/workspace/ai-daily/seen-urls.json')));
-const seenEvents = JSON.parse(fs.readFileSync('/home/rosamund/.openclaw/workspace/ai-daily/seen-events.json'));
+const ROOT = path.resolve(__dirname);
 
-const API_KEY1 = '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';
-const API_KEY2 = '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';
+// ── Key validation ──────────────────────────────────────────────────────────
+const API_KEY1 = process.env.TAVILY_API_KEY_1;
+const API_KEY2 = process.env.TAVILY_API_KEY_2;
+if (!API_KEY1 || !API_KEY2) {
+  console.error('ERROR: TAVILY_API_KEY_1 and TAVILY_API_KEY_2 must be set in .env');
+  process.exit(1);
+}
+
+const keywords   = JSON.parse(fs.readFileSync(path.join(ROOT, 'search-keywords.json')));
+const seenUrls   = new Set(JSON.parse(fs.readFileSync(path.join(ROOT, 'seen-urls.json'))));
+const seenEvents = JSON.parse(fs.readFileSync(path.join(ROOT, 'seen-events.json')));
+
 let currentKey = API_KEY1;
 
 async function fetchTavily(query) {
@@ -38,25 +49,24 @@ async function fetchTavily(query) {
 async function main() {
   const queries = keywords.dimensions.flatMap(d => d.queries);
   let allResults = [];
-  
+
   console.log(`Starting search for ${queries.length} queries...`);
   for (const q of queries) {
     const results = await fetchTavily(q);
     allResults.push(...results);
   }
-  
+
   // Deduplicate by URL
   const uniqueResults = [];
   const urls = new Set();
-  
   for (const r of allResults) {
     if (!urls.has(r.url) && !seenUrls.has(r.url)) {
       urls.add(r.url);
       uniqueResults.push(r);
     }
   }
-  
-  fs.writeFileSync('/home/rosamund/.openclaw/workspace/ai-daily/tavily-results.json', JSON.stringify(uniqueResults, null, 2));
+
+  fs.writeFileSync(path.join(ROOT, 'tavily-results.json'), JSON.stringify(uniqueResults, null, 2));
   console.log(`Found ${uniqueResults.length} new unique articles.`);
 }
 

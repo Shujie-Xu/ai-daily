@@ -1,53 +1,5 @@
 [
   {
-    "id": "anthropic-google-cloud-next-2026",
-    "title": "Anthropic亮相Google Cloud Next 2026：Claude进Vertex AI企业深度集成",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "claude-code-april-updates",
-    "title": "Claude Code密集更新：MCP修复、子Agent命名、Windows PowerShell支持上线",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "mistral-830m-debt-paris-datacenter",
-    "title": "Mistral完成8.3亿美元债务融资：购1.38万块英伟达芯片建巴黎数据中心",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "openai-anthropic-google-agent-standards",
-    "title": "OpenAI、Anthropic、谷歌将联合发布AI Agent跨平台互操作标准",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "oracle-layoffs-30000-ai-datacenter",
-    "title": "Oracle宣布裁员最多3万人：砍掉18%员工为AI数据中心扩张融资",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "q1-2026-vc-297b-record",
-    "title": "Q1 2026全球风险投资创纪录：AI驱动2970亿美元融资，超越历史所有季度",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "greater-bay-robotics-q1-funding",
-    "title": "大湾区具身智能Q1盘点：逐际动力、智平方、自变量合计融资超40亿元",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
-    "id": "google-veo-31-lite-launch",
-    "title": "谷歌发布Veo 3.1 Lite：最低成本视频生成模型，不到Fast一半价格",
-    "date": "2026-04-02",
-    "expires": "2026-04-16"
-  },
-  {
     "title": "2026年Q1中国具身智能融资超200亿元：机器人月均2.6起融资",
     "date": "2026-04-03",
     "expires": "2026-04-18"
@@ -58,49 +10,9 @@
     "expires": "2026-04-18"
   },
   {
-    "title": "Anthropic意外泄露Claude Code源码：59.8MB暴露完整架构和未发布功能",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
-    "title": "Arcee发布Trinity-Large-Thinking：美国自研400B开源推理模型正式可用",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
-    "title": "Intuit AI代理达85%复用率：300万用户证明人机协作是企业落地关键",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
-    "title": "Kilo推出KiloClaw企业版：GitLab联创要用OpenClaw终结企业影子AI",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
     "title": "OpenAI年化营收突破250亿美元，加速推进上市最早2026年底",
     "date": "2026-04-03",
     "expires": "2026-04-18"
-  },
-  {
-    "title": "Salesforce为Slack新增30项AI功能：Slackbot进化成企业级AI操作系统",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
-    "title": "Softr发布AI原生平台：用户描述需求，AI直接生成生产就绪商业软件",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
-    "title": "ThinkLabs AI完成2800万美元A轮：英伟达加持AI电网模拟应对能源危机",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
-  },
-  {
-    "title": "微软发布MAI三款自研模型：语音/图像全面直击OpenAI和谷歌",
-    "date": "2026-04-03",
-    "expires": "2026-04-17"
   },
   {
     "title": "纽约时报：经济学家改变立场，开始正视AI对就业市场的威胁",

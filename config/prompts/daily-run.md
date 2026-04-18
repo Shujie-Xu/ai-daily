@@ -102,7 +102,7 @@ bash ~/.local/bin/delegate poet "<完整 prompt>"
 ## 6. Push + 指纹库更新
 
 ```bash
-node src/render/generate.js latest-news.json --push --no-tts
+node src/render/generate.js latest-news.json --push
 npm run record:events
 ```
 

@@ -45,7 +45,14 @@ let seenUrls = new Set();
 try { seenUrls = new Set(JSON.parse(fs.readFileSync(seenUrlsFile, 'utf8'))); } catch {}
 
 const cutoff = new Date(Date.now() - days * 86_400_000);
-const stats  = { in: 0, dupUrl: 0, lowScore: 0, tooOld: 0, undated: 0, hostCapped: 0 };
+const stats  = { in: 0, dupUrl: 0, lowScore: 0, nonAi: 0, tooOld: 0, undated: 0, hostCapped: 0 };
+
+const AI_INCLUDE_RE = /(\b(ai|agi|llm|gpt|gemini|claude|grok|copilot|agent|agents|robot|robotics|humanoid|autonomous\s*driving|self-?driving|vla|world\s*model|diffusion|inference|training|fine-?tuning|foundation\s*model|chip|chips|gpu|hbm|asic|semiconductor|data\s*center|cloud|developer\s*tool|coding\s*assistant|openai|anthropic|deepmind|hugging\s*face|mistral|xai|tesla|nvidia|tsmc)\b|人工智能|AI|智能体|大模型|模型|机器人|具身智能|自动驾驶|芯片|算力|推理|训练|数据中心|云计算|编程工具|开发者工具|半导体)/i;
+
+function isAiRelevant(item) {
+  const text = [item.title, item.summary, item.source, item.url].filter(Boolean).join(' ');
+  return AI_INCLUDE_RE.test(text);
+}
 
 function normalizeUrl(url) {
   try {
@@ -79,6 +86,9 @@ for (const item of allItems) {
   // Tavily score filter (RSS items have no score → keep them)
   const score = typeof item.score === 'number' ? item.score : null;
   if (score !== null && score < minScore) { stats.lowScore++; continue; }
+
+  // One-line topical filter: keep only clearly AI / tech-relevant items.
+  if (!isAiRelevant(item)) { stats.nonAi++; continue; }
 
   // Date is required — no date means we can't trust freshness (typically digests / SEO pages)
   const pubStr = item.published || item.pubDate || item.date || null;
@@ -130,7 +140,7 @@ fs.writeFileSync(seenUrlsFile, JSON.stringify([...seenUrls], null, 2));
 const limitMsg = limit > 0 && capped.length === limit ? `, capped to ${limit}` : '';
 console.log(
   `merge: ${stats.in} in → ${capped.length} out${limitMsg} → ${outFile}\n` +
-  `       drops: dup-url=${stats.dupUrl}, low-score(<${minScore})=${stats.lowScore}, ` +
+  `       drops: dup-url=${stats.dupUrl}, low-score(<${minScore})=${stats.lowScore}, non-ai=${stats.nonAi}, ` +
   `undated=${stats.undated}, too-old(>${days}d)=${stats.tooOld}, ` +
   `host-cap(>${maxPerHost})=${stats.hostCapped}`
 );

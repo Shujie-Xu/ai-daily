@@ -49,13 +49,13 @@ sites:
     - { name: 机器之心,            site: jiqizhixin.com,      rss: "",                                                                                   tier: 1, lang: zh, note: "no RSSHub route; Tavily buzz_cn covers" }
     - { name: 晚点LatePost,        site: latepost.com,        rss: "https://rsshub-blush-six.vercel.app/latepost",                                       tier: 1, lang: zh, note: "via RSSHub" }
     - { name: 36Kr AI,             site: 36kr.com,            rss: "",                                                                                   tier: 1, lang: zh, note: "RSSHub /36kr/hot-list works but has no pubDate (ranking feed); Tavily buzz_cn covers" }
-    - { name: 钛媒体,              site: tmtpost.com,         rss: "https://rsshub-blush-six.vercel.app/tmtpost/new",                                    tier: 2, lang: zh, note: "via RSSHub" }
+    - { name: 钛媒体,              site: tmtpost.com,         rss: "",                                                                                  tier: 2, lang: zh, note: "RSS disabled: feed too broad for AI Daily; keep only via targeted Tavily queries" }
     - { name: 极客公园,            site: geekpark.net,        rss: "",                                                                                   tier: 2, lang: zh }
     - { name: 虎嗅科技,            site: huxiu.com,           rss: "",                                                                                   tier: 2, lang: zh, note: "RSSHub route times out; Tavily covers" }
     - { name: 腾讯新闻科技,        site: view.inews.qq.com,   rss: "",                                                                                   tier: 2, lang: zh }
     - { name: 新浪财经,            site: finance.sina.com.cn, rss: "",                                                                                   tier: 2, lang: zh }
-    - { name: 财联社深度,          site: cls.cn,              rss: "https://rsshub-blush-six.vercel.app/cls/depth",                                      tier: 2, lang: zh, note: "via RSSHub" }
-    - { name: 财联社热点,          site: cls.cn,              rss: "https://rsshub-blush-six.vercel.app/cls/hot",                                        tier: 2, lang: zh, note: "via RSSHub" }
+    - { name: 财联社深度,          site: cls.cn,              rss: "",                                                                                  tier: 2, lang: zh, note: "RSS disabled: feed too broad for AI Daily; keep only via targeted Tavily queries" }
+    - { name: 财联社热点,          site: cls.cn,              rss: "",                                                                                  tier: 2, lang: zh, note: "RSS disabled: feed too broad for AI Daily; keep only via targeted Tavily queries" }
     - { name: 鞭牛士,              site: bianews.com,         rss: "",                                                                                   tier: 2, lang: zh }
 
   vc_funding:

@@ -7,15 +7,16 @@ Bot token：从 `~/.pi/agent/telegram.json` 的 `botToken` 字段读
 
 ## 检查步骤
 
-1. 看 systemd 日志：`journalctl --user -u pi-ai-daily -n 50 --since "today"` — 看 09:30 那次运行结果
-2. 看仓库根目录 `~/cron-jobs/ai-daily/latest-news.json` 的 `date` 字段是不是今天 (`date -I`)
-3. 看 gh-pages 远端最新 commit：`cd ~/cron-jobs/ai-daily && git log origin/gh-pages -1 --format=%s`，应该是 `📰 AI日报更新 YYYY-MM-DD`（今天日期）
+1. 先看服务状态：`systemctl --user show pi-ai-daily.service -p ExecMainStartTimestamp -p ExecMainExitTimestamp -p Result -p ExecMainStatus`，确认今天 09:00 那次已经跑完且退出码为 0
+2. 看本地日志：`tail -n 80 ~/cron-jobs/ai-daily/state/run.log`，确认末尾有今天这次运行的 start/end 记录，且没有明显报错
+3. 看仓库根目录 `~/cron-jobs/ai-daily/latest-news.json` 的 `date` 字段是不是今天 (`date -I`)
+4. 看 gh-pages 远端最新 commit：`cd ~/cron-jobs/ai-daily && git log origin/gh-pages -1 --format=%s`，应该是 `📰 AI日报更新 YYYY-MM-DD`（今天日期）
 
-三个条件齐了，算成功。
+四个条件齐了，算成功。
 
 ## 三种分支
 
-### A. 成功（三个条件都满足）
+### A. 成功（四个条件都满足）
 
 读 `latest-news.json` 拿 articles 数量 N，然后用 Telegram bot 给家庭群发：
 
@@ -29,14 +30,14 @@ https://shujie-xu.github.io/ai-daily/
 今天精选了 ${N} 条。祝你们今天工作顺利～"
 ```
 
-### B. 失败但可能临时（日报跑挂了 / latest-news 不是今天 / gh-pages 没今天的 commit）
+### B. 失败但可能临时（服务失败 / run.log 有临时报错 / latest-news 不是今天 / gh-pages 没今天的 commit）
 
-1. 从 journal 找错误关键词（quota / 429 / timeout / fetch / merge / push）判断原因
+1. 从 `~/cron-jobs/ai-daily/state/run.log` 末尾找错误关键词（quota / 429 / timeout / fetch / merge / push）判断原因
 2. 如果是临时问题（API quota / 网络 / 源站点 5xx），重新触发：
    ```bash
    systemctl --user start pi-ai-daily.service
    ```
-3. 等 8 分钟（`sleep 480`，oneshot 一般 5-7 分钟跑完），再查一次 3 个条件
+3. 等 8 分钟（`sleep 480`，oneshot 一般 5-7 分钟跑完），再查一次 4 个条件
 4. 如果这次成功了 → 走 **A**
 5. 如果还是失败 → 走 **C**
 

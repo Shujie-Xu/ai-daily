@@ -1,45 +1,9 @@
 [
   {
-    "id": "atlassian-confluence-visual-ai-agents-2026-04-08",
-    "title": "Atlassian为Confluence加入可视化AI创作与第三方Agent",
-    "date": "2026-04-08",
-    "expires": "2026-04-22"
-  },
-  {
-    "id": "claude-major-outage-second-day-2026-04-08",
-    "title": "Claude与Claude Code再现大面积宕机，连续第二天中断",
-    "date": "2026-04-08",
-    "expires": "2026-04-22"
-  },
-  {
-    "id": "google-finance-ai-expand-100-countries-2026-04-08",
-    "title": "Google Finance的AI研究工具扩展至100多个国家",
-    "date": "2026-04-08",
-    "expires": "2026-04-22"
-  },
-  {
     "title": "Meta发布Muse Spark重做AI助手",
     "date": "2026-04-08",
     "expires": "2026-04-24",
     "id": "meta-muse-spark-launch"
-  },
-  {
-    "id": "narwhal-labs-20m-funding-2026-04-08",
-    "title": "Narwhal Labs获2000万英镑融资，做企业自治通信Agent平台",
-    "date": "2026-04-08",
-    "expires": "2026-04-22"
-  },
-  {
-    "id": "openai-child-safety-blueprint-2026-04-08",
-    "title": "OpenAI发布儿童安全蓝图，针对AI生成剥削内容升级治理",
-    "date": "2026-04-08",
-    "expires": "2026-04-22"
-  },
-  {
-    "id": "digua-robotics-b2-funding-2026-04-08",
-    "title": "地瓜机器人完成1.5亿美元B2轮融资，B轮累计达2.7亿美元",
-    "date": "2026-04-08",
-    "expires": "2026-04-22"
   },
   {
     "title": "Anthropic推Project Glasswing防守零日漏洞",

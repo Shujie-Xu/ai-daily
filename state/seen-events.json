@@ -1,38 +1,5 @@
 [
   {
-    "title": "Anthropic发布Claude Haiku 4.5全量开放",
-    "date": "2026-04-15",
-    "expires": "2026-04-29"
-  },
-  {
-    "title": "白宫国家AI框架主张联邦统一监管",
-    "date": "2026-04-15",
-    "expires": "2026-04-29"
-  },
-  {
-    "title": "C3.ai三季度营收5330万美元仍承压",
-    "date": "2026-04-15",
-    "expires": "2026-04-29"
-  },
-  {
-    "id": "google-gemini-robotics-er-1-6-launch",
-    "title": "谷歌发布 Gemini Robotics ER-1.6，强化机器人空间推理与仪表读取",
-    "date": "2026-04-15",
-    "expires": "2026-04-29"
-  },
-  {
-    "id": "fluidstack-1b-fundraising-talks-18b-valuation",
-    "title": "AI 数据中心新贵 Fluidstack 据称洽谈 10 亿美元融资，估值或达 180 亿美元",
-    "date": "2026-04-15",
-    "expires": "2026-04-29"
-  },
-  {
-    "id": "meta-broadcom-custom-ai-chip-deal",
-    "title": "Meta 联手 Broadcom 推进 1GW 自研 AI 芯片部署，定制算力路线再升级",
-    "date": "2026-04-15",
-    "expires": "2026-04-29"
-  },
-  {
     "id": "stanford-ai-index-2026-report",
     "title": "斯坦福AI指数：中美模型差距基本抹平",
     "date": "2026-04-16",

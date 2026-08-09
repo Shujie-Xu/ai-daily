@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
-<title>AI Daily · 2026/08/08</title>
-<meta name="description" content="今日 5 条 · 来自 4 个信息源 · 甲骨文禁止 OpenJDK 引入 AI 生成代码，与其内部全面采用 AI 研发形成鲜明对比 · Cloudflare 推出 Kitesurf：首款专为 AI 智能体设计的无头云浏览器 · OpenAI 紧急推迟下一代模型 Astra 发布，测试触发“关键级”网络安全风险阈值">
-<meta property="og:title" content="AI Daily · 2026/08/08">
-<meta property="og:description" content="今日 5 条 · 来自 4 个信息源 · 甲骨文禁止 OpenJDK 引入 AI 生成代码，与其内部全面采用 AI 研发形成鲜明对比 · Cloudflare 推出 Kitesurf：首款专为 AI 智能体设计的无头云浏览器 · OpenAI 紧急推迟下一代模型 Astra 发布，测试触发“关键级”网络安全风险阈值">
+<title>AI Daily · 2026/08/09</title>
+<meta name="description" content="今日 3 条 · 来自 2 个信息源 · 亚马逊德州拟建数据中心或成美国最大气候污染源 · OpenAI收购演示文稿生成初创公司NextSlide · 盛大孵化EverMind发布三篇论文，推出首个全栈自进化AI技术栈">
+<meta property="og:title" content="AI Daily · 2026/08/09">
+<meta property="og:description" content="今日 3 条 · 来自 2 个信息源 · 亚马逊德州拟建数据中心或成美国最大气候污染源 · OpenAI收购演示文稿生成初创公司NextSlide · 盛大孵化EverMind发布三篇论文，推出首个全栈自进化AI技术栈">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og/2026-08-08.jpg">
+<meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og/2026-08-09.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://shujie-xu.github.io/ai-daily/og/2026-08-08.jpg">
+<meta name="twitter:image" content="https://shujie-xu.github.io/ai-daily/og/2026-08-09.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
@@ -437,9 +437,9 @@ footer{
     </div>
     <h1 class="hero-title" id="heroTitle"></h1>
     <div class="hero-stats">
-      <span class="stat-live"><span class="dot-green"></span><span id="totalStat">5</span> 条新闻</span>
+      <span class="stat-live"><span class="dot-green"></span><span id="totalStat">3</span> 条新闻</span>
       <span class="sep"></span>
-      <span><span id="srcStat">4</span> 个来源</span>
+      <span><span id="srcStat">2</span> 个来源</span>
     </div>
   </section>
 
@@ -454,7 +454,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/08/08 09:08 CST</span>
+    <span class="foot-l">26/08/09 09:06 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -516,7 +516,7 @@ footer{
   </div>
 </div>
 
-<script>window.ARTICLES_DATA = [{"title":"Cloudflare 推出 Kitesurf：首款专为 AI 智能体设计的无头云浏览器","summary":"Cloudflare 发布了基于其 Workers 边缘计算平台运行的无头浏览器 Kitesurf。该浏览器彻底摒弃了人类视觉界面，专为 AI 智能体定制，大幅降低了 CPU 和内存开销。","full_content":"网络基础设施巨头 Cloudflare 宣布推出名为 Kitesurf 的云端托管无头浏览器（Headless Browser，指没有图形用户界面、通过编程控制的浏览器），这是首款完全为 AI 智能体（AI Agents，能够自主规划和执行网页任务的 AI 系统）定制的浏览器。传统浏览器（如 Chromium）是为人类设计的，拥有标签页、主题和视觉渲染等功能，这对高并发的 AI 智能体来说存在巨大的计算和内存开销。\n\nKitesurf 彻底摒弃了人类视觉界面。它完全运行在 Cloudflare Workers 边缘计算平台的 V8 隔离区（V8 isolates，一种极轻量级沙箱容器技术）中。在技术架构上，Kitesurf 放弃了笨重的 Chromium 内核，而是采用了 Blitz 模块化渲染引擎、Firefox 的 Stylo CSS 解析器以及基于 Rust 编写的 Boa JS 引擎。这种极简设计大幅提升了资源效率。Cloudflare 官方测试数据显示，在执行屏幕截图和 HTML 提取等 AI 智能体常见任务时，Kitesurf 的 CPU 消耗比 Chromium 低 3.1 至 3.8 倍，内存占用降低 4.7 至 7.0 倍。不过在实际运行时间（Wall Time）上，Chromium 仍比 Kitesurf 快约 1.7 至 1.8 倍。\n\nKitesurf 支持 Chrome DevTools Protocol（CDP 协议），意味着现有的 Puppeteer、Playwright 等自动化工具只需更改参数即可无缝接入。目前 Kitesurf 已通过超过 21.5 万项 Web 平台测试，在公测期间免费向开发者开放。业内关注点在于，Kitesurf 的出现解决了 AI 智能体大规模网页导航、表单填写和 DOM 交互时的算力瓶颈与代币（Token）成本痛点，但也带来了如何防御针对 AI 浏览器的即时贴注入（Prompt Injection）等新型安全威胁的挑战。","url":"https://techcrunch.com/2026/08/07/cloudflare-launches-kitesurf-a-browser-built-for-ai-agents","best_url":"https://techcrunch.com/2026/08/07/cloudflare-launches-kitesurf-a-browser-built-for-ai-agents","categories":["infrastructure","engineering"],"tags":["Cloudflare","Kitesurf","AI Agent","Headless Browser"],"context":"Cloudflare Workers 是 Cloudflare 提供的 Serverless（无服务器）边缘计算服务；V8 Isolates 是一种比虚拟机和容器更轻量化的代码隔离执行技术，启动仅需几微秒。","heat":5,"audio_url":"audio/2026-08-08-c0d2dcaf.mp3"},{"title":"OpenAI 紧急推迟下一代模型 Astra 发布，测试触发“关键级”网络安全风险阈值","summary":"由于在最新安全评估中触发了其《准备度框架》中的最高“关键”级别网络安全警报，OpenAI 紧急宣布放缓下一代大模型 Astra（GPT-6）的开发与公开发布进程。","full_content":"2026年8月7日，OpenAI 官方博客发布安全通告，宣布紧急放缓其下一代大模型 Astra（外界普遍称为 GPT-6）的内部开发与发布进程。原因是在前一日的内部安全评估中，测试团队无法排除该模型已具备“关键级”（Critical）网络安全攻击能力。这是 OpenAI 历史上首次因触发其《准备度框架》（Preparedness Framework）的最高安全警报而暂停模型发布。\n\n根据披露，Astra 的预评估结果显示其展现出了极强的自主网络攻防能力。在安全领域，“关键级”能力意味着模型能够全自动、端到端地对高防护目标实施网络攻击，或自主发现并利用具有重大运营影响的零日漏洞（Zero-day，指尚未公开且无补丁的安全漏洞）。根据 OpenAI 的框架规则，一旦模型跨过“高”（High）或“关键”风险门槛，必须立即启动强制性防御干预，并在引入可验证的缓解措施前，禁止对公众部署或整合到商业 API 中。\n\n前沿 AI 模型的“武器化”风险正成为全行业最大的担忧。在今年4月，竞争对手 Anthropic 发布的 Claude Mythos Preview 模型也展现出了类似的破坏性网络能力，不仅能跨主流操作系统发现零日漏洞，甚至找出了 OpenBSD 系统中长达 27 年的安全漏洞。当前，英国 AI 安全研究所（AISI）也曾警告，前沿模型的自主网络能力正以“双周级”的速度翻倍增长，这打破了传统的防御循环。OpenAI 此次紧急“刹车”并扩大与政府及 AI 安全机构的合作测试，虽然推迟了商业化步伐，但也确立了行业在面临颠覆性网络威胁时主动妥协的先例。","url":"https://openai.com/index/responding-next-frontier-critical-cyber-capabilities","best_url":"https://openai.com/index/responding-next-frontier-critical-cyber-capabilities","categories":["policy","model"],"tags":["OpenAI","Astra","Cybersecurity","AI Safety"],"context":"《准备度框架》（Preparedness Framework）是 OpenAI 设立的用于评估和预防前沿模型严重风险的安全协议，将风险划分为低、中、高、关键四个级别，并与发布权限严格挂钩。","heat":5,"audio_url":"audio/2026-08-08-c25642d9.mp3"},{"title":"甲骨文禁止 OpenJDK 引入 AI 生成代码，与其内部全面采用 AI 研发形成鲜明对比","summary":"甲骨文正式禁止向开源 Java 项目 OpenJDK 提交 AI 生成的代码，以防范版权和安全风险，但这与其内部大力推广 AI 写代码的策略以及700亿美元的数据中心扩张计划形成矛盾冲突。","full_content":"甲骨文（Oracle）日前宣布，正式禁止向其维护的开源 Java 项目 OpenJDK 提交任何由 AI 生成的代码。这一禁令涵盖了代码库、拉取请求（Pull Requests，指开发者请求合并代码的机制）以及其他所有项目渠道。甲骨文给出的官方理由是出于代码安全性、知识产权合规性以及系统漏洞等潜在风险的考量。不过，甲骨文表示开发者仍可私下使用大语言模型（LLM）进行代码调试和审查。\n\n令人关注的是，此政策与甲骨文内部的激进 AI 策略形成鲜明对比。其联合创始人拉里·埃里森（Larry Ellison）近期曾公开宣称“甲骨文自己不写代码，全靠 AI 模型来写”，共同 CEO 迈克·西西里亚（Mike Sicilia）也称 AI 工具让更小规模的工程团队能以更快速度交付。此外，甲骨文今年计划在数据中心扩张上投资 700 亿美元，这一巨额支出已导致评级机构标普（S&P）因其“投资回报不确定”将甲骨文的信用评级下调至 BBB-（仅比垃圾级高出一档）。这一事件暴露出行业在拥抱 AI 效率与维护开源生态合规安全之间的深刻矛盾。","url":"https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code","best_url":"https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code","categories":["policy","engineering"],"tags":["Oracle","OpenJDK","AI Code Generation"],"context":"OpenJDK 是 Java 编程语言的开源参考实现，由甲骨文主导和维护，是全球绝大多数 Java 运行环境的基础。","heat":4,"audio_url":"audio/2026-08-08-1a0b88b2.mp3"},{"title":"阿里推出一站式 AI 语音平台 CosyVoice Studio，语义理解赋能三大核心场景","summary":"阿里巴巴正式推出国内首个一站式 AI 语音平台 CosyVoice Studio，基于全球评测第一的 Qwen-Audio 大模型打造，提供语音键盘、智能随记和语音 Agent 等功能。","full_content":"8月7日，阿里巴巴正式推出国内首个一站式 AI 语音生产力平台 CosyVoice Studio。该平台基于自研的 Qwen-Audio 语音大模型打造，该模型此前在全球权威 AI 评测平台 Artificial Analysis 的语音识别（ASR）、实时交互（RealTime）和语音合成（TTS）三大赛道均斩获全球第一。\n\nCosyVoice Studio 的核心亮点在于将深度的语义理解与语音能力融合，推出三大功能：首先是“语音键盘”，它不仅能转写语音，还能自动过滤“嗯、啊”等口语填充词，并支持口误自我修正，直接输出结构化的清晰文本；其次是面向会议和课堂的“随记”模式，支持长达 6 小时的录音转写、声纹识别区分发言人并自动生成纪要与翻译；最后是“CosyAgent”（语音智能体）和“CosyCreative”（音频内容创作工具），支持多角色播客创作和企业级客服对话。\n\n目前，个人用户已可在各大应用商店免费下载体验 CosyVoice App，而面向企业的智能体和内容工具则采用白名单邀请制进行测试。随着端到端语音 Agent 技术的成熟，散点式的语音工具正在向高集成度的生产力平台演变，阿里的这一布局旨在抢占语音交互新入口。","url":"https://www.qbitai.com/2026/08/468324.html","best_url":"https://www.qbitai.com/2026/08/468324.html","categories":["application","model"],"tags":["Alibaba","CosyVoice Studio","Voice AI","Qwen-Audio"],"context":"ASR（自动语音识别）是指将人类语音转化为文本的技术；TTS（语音合成）则是将文本转化为接近真人发声的语音的技术。","heat":4,"audio_url":"audio/2026-08-08-6008395b.mp3"},{"title":"AI 漏洞报告“垃圾洪流”轰炸安全行业，苹果被迫收紧 Bug 赏金计划通道","summary":"由于大量业余选手使用 ChatGPT 等 AI 工具批量扫描并提交带有“幻觉”的漏洞报告，苹果宣布对 Bug 赏金计划设置冷静期和数量限制，同时行业也面临 AI 攻防节奏极速失衡的挑战。","full_content":"大语言模型在网络安全领域的快速普及，正给传统的漏洞披露体系带来前所未有的冲击。由于业余研究人员大量利用 ChatGPT 等工具批量扫描代码并生成报告，导致含有大量“AI 幻觉”（即生成看似合理实则不存在的虚假漏洞）的垃圾报告泛滥。为此，苹果公司于 8 月 2 日正式在其安全门户上引入了“数量上限”和“30天冷静期”，以缓解审核团队面临的“垃圾报告洪流”。\n\n这一现象在行业中已具普遍性。据预测，2026 年全球公开披露的网络安全漏洞列表（CVE）登记量将达到 66,000 个，较原始估算高出 46%。大量低质量的 AI 生成报告严重堵塞了防守方的审核通道。Curl 创始人透露其收到的 20 份报告中无一真实漏洞；Google、Nextcloud 和 GitHub 等巨头在今年上半年已相继宣布拒收 AI 报告、暂停赏金计划或设立仅限邀请的 VIP 通道。\n\n然而，AI 发现漏洞的真正实力同样惊人。2026 年 5 月，安全公司 Calif 仅凭 3 人团队、利用 Claude Mythos Preview 模型，在短短 5 天内就串联并突破了苹果耗时 5 年研发的“内存完整执行”（MIE）底层硬件保护，获取了 M5 芯片 macOS 的最高权限。在 7 月 27 日发布的 macOS Tahoe 26.6 更新中，苹果一口气修复了 194 个独立安全漏洞，并历史上首次正式向 Anthropic 的 Claude、OpenAI 的 Codex 等 AI 团队致谢。这种攻防节奏的极度不对称，正迫使企业将安全更新的节奏压缩到极致，防御者正面临巨大的兼容性与部署暴露期挑战。","url":"https://www.qbitai.com/2026/08/466738.html","best_url":"https://www.qbitai.com/2026/08/466738.html","categories":["application","policy"],"tags":["Apple","Bug Bounty","AI Safety","CVE","Cybersecurity"],"context":"苹果漏洞赏金计划自 2016 年推出，旨在奖励发现其软硬件漏洞的安全研究员，最高单笔奖金可达 500 万美元。MIE（内存完整执行）是苹果最新的基于硬件和系统深度整合的内存保护技术，用于防御内存篡改攻击。","heat":4,"audio_url":"audio/2026-08-08-ac5ebff0.mp3"}];</script>
+<script>window.ARTICLES_DATA = [{"title":"盛大孵化EverMind发布三篇论文，推出首个全栈自进化AI技术栈","summary":"盛大集团旗下的AI团队EverMind近期连续发布三篇重量级论文，从技能层、脚手架层和模型权重层三个维度，首次系统性地提出了自进化AI（Self-Evolving AI）的全栈解决方案，向下一代自主迭代AI迈出关键一步。","full_content":"伴随全球“NeoLab”（指由顶尖研究员出走创立、专注于前沿技术长期主义的新一代AI实验室）浪潮涌动，由盛大集团孵化的中国团队EverMind用连续三篇论文，交出了自进化AI领域的全栈答卷。所谓“自进化AI”是指AI部署后能通过持续学习自我迭代提升能力，无需人工重新训练。团队针对自进化面临的三大瓶颈给出了系统性解法。首先在脚手架层（指包裹在模型外围、控制运行逻辑和提示词的框架），论文《HarnessBank》引入语义基因库和确定性验证机制，让模型诊断失败并重写代码逻辑，防止自我更新中的幻觉和过拟合，在SWE-bench等七个基准上实现了5.1%至15.4%的性能提升。其次在技能层，论文《SkillCorpus》从82万原始技能中精选并分类出近10万个高质量技能，建立动态强化与淘汰机制，使Agent在SkillsBench上的表现提升7.5%。最后在权重层，论文《DASH》针对“同策略自我蒸馏（OPSD）”（即模型通过自身推理轨迹进行自我学习）提出自适应传播门技术，精细化分配长序列推理中的错误监督信号，大幅提升了模型的学习效率。相比海外如RSI（估值46.5亿美元）等尚处于理论或细分方向探索的同行，EverMind率先实现了全栈技术的端到端闭环，为产业界构建越用越强的AI Agent提供了坚实的科学和工程范式。","url":"https://www.qbitai.com/2026/08/468555.html","best_url":"https://www.qbitai.com/2026/08/468555.html","categories":["research","model"],"tags":["EverMind","自进化AI","NeoLab","盛大集团"],"context":"EverMind是由盛大集团孵化的研究型AI团队，承袭了早期盛大创新院的研究基因，此前曾推出EverOS记忆操作系统和Raven智能体框架。","heat":5,"audio_url":"audio/2026-08-09-af486b94.mp3"},{"title":"亚马逊德州拟建数据中心或成美国最大气候污染源","summary":"亚马逊计划在德克萨斯州佩科斯县新建数据中心，其配套的天然气自备电厂每年获批排放3300万吨二氧化碳，恐将成为美国最大的单一碳排放源。这凸显了AI热潮下科技巨头清洁能源承诺与庞大电力需求之间的尖锐冲突。","full_content":"亚马逊计划在德克萨斯州佩科斯县（Pecos County）建设一座大型数据中心，并配套建设一座现场天然气发电厂。据《纽约时报》披露，该电厂已获批每年排放高达3300万吨二氧化碳，这一数字将使其超越美国现有的任何单一发电厂，成为全美最大的气候污染源。对此，亚马逊发言人予以证实，并表示采用“自备电厂”（指直接在用电现场发电，不接入或不依赖公共电网，以保障供电稳定性并降低居民电费负担）是为避免推高当地家庭的电费。然而，这一决策与亚马逊“2040年实现净零碳排放”的承诺背道而驰。数据表明，受AI算力需求驱动，亚马逊去年的碳排放量已反弹16%。目前，微软、谷歌等同行同样面临类似的“算力脱碳”困境，在清洁电网建设滞后的情况下，科技巨头正不得不重新拥抱核能和天然气等传统高密度能源，这使得科技行业的可持续发展前景充满不确定性。","url":"https://techcrunch.com/2026/08/08/planned-amazon-data-center-could-become-the-biggest-climate-polluter-in-the-u-s","best_url":"https://techcrunch.com/2026/08/08/planned-amazon-data-center-could-become-the-biggest-climate-polluter-in-the-u-s","categories":["green-tech","infrastructure"],"tags":["Amazon","Data Center","Carbon Emission"],"context":"亚马逊曾于2019年联合发起《气候声明》（The Climate Pledge），承诺到2040年实现零碳排放。","heat":4,"audio_url":"audio/2026-08-09-13cd60db.mp3"},{"title":"OpenAI收购演示文稿生成初创公司NextSlide","summary":"OpenAI已悄然完成了对演示文稿生成初创公司NextSlide的收购，其团队已并入ChatGPT部门，旨在提升AI在视觉沟通与多模态内容创作方面的能力。","full_content":"演示文稿生成初创公司NextSlide日前宣布加入OpenAI，其团队成员目前已开始在ChatGPT部门工作。NextSlide创始人阿哈迈德·贝什里（Ahmed Beshry）透露，此次收购实际发生于“今年早些时候”，目前公布属于延迟宣布，具体的交易金额及财务细节尚未披露。NextSlide的核心产品功能是利用人工智能将提示词、笔记、文档或研究成果转化为设计精美且可编辑的演示文稿（PPT）。此前，创始人贝什里曾是无人收银技术初创公司Caper AI的联合创始人，该公司于2021年被Instacart收购。本次收购反映出OpenAI在强化ChatGPT办公生产力生态方面的意图。在微软Copilot、Gamma、Tome等竞品在AI制图和演示生成领域快速铺开的背景下，OpenAI通过收购NextSlide能够快速补齐其在结构化视觉输出和多模态应用场景上的短板，直接将演示文稿生成能力原生化。","url":"https://techcrunch.com/2026/08/08/openai-acquires-presentation-startup-nextslide","best_url":"https://techcrunch.com/2026/08/08/openai-acquires-presentation-startup-nextslide","categories":["business","model"],"tags":["OpenAI","NextSlide","M&A","ChatGPT"],"context":"NextSlide是一家专注于AI生成演示文稿的初创公司，旨在通过自然语言处理和排版算法将文档快速转化为PPT。","heat":4,"audio_url":"audio/2026-08-09-fddadfc1.mp3"}];</script>
 <script src="archive.js"></script>
 <script>
 (function(){
@@ -553,7 +553,7 @@ let modalOpen = false;
 let filteredCache = [];
 let modalIdx = 0;
 const allDates = window.ARCHIVE_DATES || [];
-let pageDate = allDates[0] || '2026/08/08';
+let pageDate = allDates[0] || '2026/08/09';
 let archOpen = false;
 
 // Touch swipe

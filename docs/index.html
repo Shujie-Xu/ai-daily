@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
-<title>AI Daily · 2026/10/04</title>
-<meta name="description" content="今日 3 条 · 来自 2 个信息源 · 微软与Hugging Face联合推出ThinkingBox：首个基于数据库状态验证的AI Agent可靠性基准 · OpenAI安全团队地震持续：透明度负责人辞职，三名员工因向外部泄密被开除 · 估值跃升至100亿美元！TypeSafe AI推出机器原生决策模型Jev，主打极限性价比与可编程对齐">
-<meta property="og:title" content="AI Daily · 2026/10/04">
-<meta property="og:description" content="今日 3 条 · 来自 2 个信息源 · 微软与Hugging Face联合推出ThinkingBox：首个基于数据库状态验证的AI Agent可靠性基准 · OpenAI安全团队地震持续：透明度负责人辞职，三名员工因向外部泄密被开除 · 估值跃升至100亿美元！TypeSafe AI推出机器原生决策模型Jev，主打极限性价比与可编程对齐">
+<title>AI Daily · 2026/10/05</title>
+<meta name="description" content="今日 2 条 · 来自 2 个信息源 · 谷歌因AI“幻觉”报告暴增，宣布暂停开源漏洞赏金计划 · 马斯克Terafab芯片项目探讨与台积电合作，万亿级算力帝国引入“双轨制”">
+<meta property="og:title" content="AI Daily · 2026/10/05">
+<meta property="og:description" content="今日 2 条 · 来自 2 个信息源 · 谷歌因AI“幻觉”报告暴增，宣布暂停开源漏洞赏金计划 · 马斯克Terafab芯片项目探讨与台积电合作，万亿级算力帝国引入“双轨制”">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og/2026-10-04.jpg">
+<meta property="og:image" content="https://shujie-xu.github.io/ai-daily/og/2026-10-05.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://shujie-xu.github.io/ai-daily/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://shujie-xu.github.io/ai-daily/og/2026-10-04.jpg">
+<meta name="twitter:image" content="https://shujie-xu.github.io/ai-daily/og/2026-10-05.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
@@ -437,7 +437,7 @@ footer{
     </div>
     <h1 class="hero-title" id="heroTitle"></h1>
     <div class="hero-stats">
-      <span class="stat-live"><span class="dot-green"></span><span id="totalStat">3</span> 条新闻</span>
+      <span class="stat-live"><span class="dot-green"></span><span id="totalStat">2</span> 条新闻</span>
       <span class="sep"></span>
       <span><span id="srcStat">2</span> 个来源</span>
     </div>
@@ -454,7 +454,7 @@ footer{
 
   <!-- Footer -->
   <footer class="a3">
-    <span class="foot-l">26/10/04 09:05 CST</span>
+    <span class="foot-l">26/10/05 09:06 CST</span>
     <div class="foot-r">
       <div class="foot-dot"></div>
       <span class="foot-brand">powered by 小豹包</span>
@@ -516,7 +516,7 @@ footer{
   </div>
 </div>
 
-<script>window.ARTICLES_DATA = [{"title":"微软与Hugging Face联合推出ThinkingBox：首个基于数据库状态验证的AI Agent可靠性基准","summary":"微软与Hugging Face合作推出ThinkingBox评测基准，不再仅凭文本生成或工具调用是否成功来评估智能体（Agent），而是直接对终端数据库的真实状态和副作用进行可执行检查。","full_content":"微软与Hugging Face联合推出了全新的AI智能体（Agent）评估基准 ThinkingBox，并已在Hugging Face平台上线。该基准直击当前AI Agent在企业实际落地中的最大痛点——“表面完成、底层出错”。在传统的Agent评估中，系统通常只检查模型是否生成了合理解释，或是否成功调用了API（工具）。然而，ThinkingBox则通过隔离的MCP（Model Context Protocol，模型上下文协议）工具会话运行Agent，并对最终的数据库状态（State）及产生的副作用（Side effects，指程序在返回结果外对外部环境、数据库等产生的状态改变）进行严格的可执行检查（Executable checks）。\n\n在针对12款主流大模型进行的121,680次评测中，高达79,853次尝试未能通过数据库状态检查。令人震惊的是，在这些失败的尝试中，有67.24%的Agent运行在表面上“完美结束”，既没有返回任何工具调用错误，也成功报告了任务完成，但最终的数据库字段却存在错误（其中77.61%字段值错误、43.30%产生多余副作用）。为了测量Agent在实际生产环境中的一致性与可靠性，ThinkingBox要求每项任务必须连续成功运行20次（20/20）。评测结果显示，月之暗面的Kimi-K3在任务覆盖度上表现最佳，解决了93.89%（507个任务中的476个）的任务，但在“20次连续成功”的严苛测试下仅通过了68个任务；相比之下，Claude Opus 5.5在一致性上夺冠，成功在241个任务中实现了20/20的完全通过。在成本方面，GPT-5.4在可信任务上的平均消耗最低，为每项任务6.80美元，而GPT-5.6 Sol则实现了单次成功尝试的最低成本（0.127美元）。","url":"https://huggingface.co/blog/microsoft/thinkingbox","best_url":"https://huggingface.co/blog/microsoft/thinkingbox","categories":["infrastructure"],"tags":["Microsoft","Hugging Face","ThinkingBox","AI Agent","Benchmark"],"context":"随着AI智能体从概念探索（Demo）迈向企业核心业务场景，如何定量评估Agent在多步复杂工具调用中的底层状态一致性，已成为产业落地（尤其是金融、零售等数据库事务场景）的迫切需求。","heat":5,"audio_url":"audio/2026-10-04-decf9b96.mp3"},{"title":"OpenAI安全团队地震持续：透明度负责人辞职，三名员工因向外部泄密被开除","summary":"OpenAI安全系统团队“安全透明度”职能负责人David Robinson宣布离职并公开发文警告风险；同时，三名从事安全与模型对齐的研究人员因向外部机构共享敏感信息被公司开除。","full_content":"OpenAI安全团队近期再度陷入剧烈动荡。负责公司政策规划与安全透明度的核心人物David Robinson宣布离职，OpenAI发言人已向媒体确认这一变动。Robinson此前在Safety Systems团队中担任要职，主要负责撰写和发布模型的“系统卡”（System Card，用于向公众详细说明模型训练方法、安全评估、潜在高风险能力以及安全边界的说明文档），他也是OpenAI最新发布的《防范框架2.0》（Preparedness Framework 2.0，前沿AI安全红线追踪与干预机制）的主要起草人。离职后，Robinson在《大西洋月刊》撰文警告称，顶级AI公司在降低风险上做得远远不够，目前“通过反复试错发展壮大”的路线正在随着AI能力的膨胀而带来不可估量的失败风险。\n\n几乎在此期间，OpenAI还解雇了三名安全与模型对齐领域的研究人员（Jasmine Wang、Tomek Korbak和Mikita Balesni）。据《华尔街日报》报道，调查显示这三人涉嫌将公司的基础设施架构等敏感机密信息，分享给了一家外部AI安全机构。其中，Tomek Korbak此前曾是OpenAI与第三方评估机构（如METR、Redwood Research）之间的技术联络人。频繁的人事流失和泄密风波反映出OpenAI在安全治理与商业化速度之间的激烈内耗。在Robinson起草的《防范框架2.0》中，OpenAI对前沿模型的生物、网络安全以及自我改进能力设置了高风险门槛。例如，其最新深度研究模型Deep Research在生物学评估上已“接近”High门槛（即开始具备帮助非专业人士制造已知生物威胁的能力）。随着模型能力逼近红线，安全团队内部对于公司安全改革速度的质疑以及与管理层的路线分歧，正成为高管和研究员密集出走的主因。","url":"https://www.qbitai.com/2026/10/501368.html","best_url":"https://www.qbitai.com/2026/10/501368.html","categories":["governance"],"tags":["OpenAI","David Robinson","AI Safety","System Card"],"context":"OpenAI的安全治理团队近年来因频繁的高层人事出走（如前超级对齐团队负责人Ilya Sutskever、Jan Leike等）而持续承压，内部路线斗争激烈。","heat":5,"audio_url":"audio/2026-10-04-16fe12a5.mp3"},{"title":"估值跃升至100亿美元！TypeSafe AI推出机器原生决策模型Jev，主打极限性价比与可编程对齐","summary":"由前OpenAI员工Diogo Almeida创立的TypeSafe AI凭借其“机器原生决策模型”Jev，估值已达100亿美元。Jev不用于日常聊天，而是专门为嵌入程序、输出结构化可编程决策而设计。","full_content":"由前OpenAI核心成员Diogo Almeida联合创立的TypeSafe AI近日在硅谷引发广泛关注，公司估值已飙升至100亿美元。其核心产品Jev被定义为“System-One（机器原生、大型可编程模型）”决策模型。Jev的名字来源于著名的“杰文斯悖论”（Jevons Paradox，即技术进步提高资源利用效率，反而会导致该资源的总消耗量激增），暗示其将通过死磕极限性价比，促成AI决策在软件工程中的大爆发。目前，Jev的日Token吞吐量已突破1万亿（1 Trillion），且夜间机器自动化调用流量持续高企，表明其已被大量开发者深度嵌入到后台工作流中。\n\nAlmeida在访谈中指出，当前AI行业最大的问题在于盲目卷速度和成本，却丢掉了“可靠性”，导致高达数万亿美元估值的SaaS软件难以将关键业务决策真正交托给AI。Jev的设计彻底抛弃了传统的“聊天对话”范式。传统的LLM依赖RLHF（人类反馈强化学习），容易产生输出拒绝（如遇到敏感输入直接返回“我无法回答”），这对于作为后台系统依赖的软件是灾难性的。为了解决这一问题，TypeSafe AI采用了“能力对齐”（Capability Alignment）路径，通过RLCD（以程序闭环验证为目标的强化学习，通过代码执行结果作为反馈信号进行模型微调）对模型进行训练，确保模型在复杂编程场景下输出绝对可预测、不随意拒绝、格式完全符合代码读取要求。目前，JevBench v1.2.1综合榜中，Jev 1.13.0以75.3分位列榜首。TypeSafe AI正计划公开适配智能体（Coding Agent）的设计模式文档，力求在未来五年内将社会全要素生产率（TFP）拉动3%。","url":"https://www.qbitai.com/2026/10/500148.html","best_url":"https://www.qbitai.com/2026/10/500148.html","categories":["model"],"tags":["TypeSafe AI","Jev","Diogo Almeida","System-One Model"],"context":"Diogo Almeida曾是OpenAI早期核心成员，其创立的TypeSafe AI旨在解决大模型在软件工程闭环中的不确定性痛点，获得了硅谷顶级风投的大力支持。","heat":4,"audio_url":"audio/2026-10-04-d09f16cc.mp3"}];</script>
+<script>window.ARTICLES_DATA = [{"title":"马斯克Terafab芯片项目探讨与台积电合作，万亿级算力帝国引入“双轨制”","summary":"马斯克证实正与台积电探讨Terafab超大规模芯片项目的制造合作，以对冲此前唯一合作伙伴英特尔14A工艺的量产风险，保障其庞大的AI自研芯片需求。","full_content":"10月3日，埃隆·马斯克在社交平台X上证实，正与全球晶圆代工巨头台积电（TSMC）讨论其“Terafab”超大规模芯片制造项目的合作。Terafab是马斯克旗下特斯拉（Tesla）、SpaceX及xAI共同推进的垂直整合芯片项目，其首期投资达168亿美元，长期潜在总投资额高达1190亿美元，规划建筑面积超1亿平方英尺，最终目标是实现年产约1TW（太瓦）的AI算力。此前，英特尔（Intel）是该项目唯一被公开的合作伙伴，计划为其提供14A（约1.4nm级）先进工艺。该制程预计于2027年风险试产、2028年量产。鉴于项目节奏极紧且算力需求巨大，马斯克接触台积电被视为“双轨布局”以对冲单一供应商风险的举措。目前业界推测双方可能存在三种合作方案：一是台积电直接运营新厂并由SpaceX等下达长期订单；二是SpaceX控股并由台积电负责运营并引入工艺技术；三是英特尔负责14A前端制造，而台积电补足后端封装、良率及运营。台积电对此尚未作出官方回应。该项目今年8月已于得州格赖姆斯县（Grimes County）选址并启动早期工程，计划于2026年12月开始大规模施工，一期目标2028年底完工。这表明马斯克正加速将定制芯片自给方案落地，以支撑其FSD、Optimus机器人及太空算力等庞大产业版图。","url":"https://www.qbitai.com/2026/10/501605.html","best_url":"https://www.qbitai.com/2026/10/501605.html","categories":["hardware","infrastructure"],"tags":["Elon Musk","TSMC","Intel","Terafab","AI Chip"],"context":"Terafab是马斯克主导的半导体自给自足项目，一期投资168亿美元，旨在为特斯拉FSD、xAI的Grok模型及SpaceX星链网络等提供源源不断的自研定制AI芯片。","heat":5,"audio_url":"audio/2026-10-05-62cc55b6.mp3"},{"title":"谷歌因AI“幻觉”报告暴增，宣布暂停开源漏洞赏金计划","summary":"谷歌于2026年10月1日起暂停其开源软件漏洞奖励计划（OSS VRP），主因是大量由AI工具自动生成的虚假与“幻觉”报告令审核系统不堪重负，预计将于2027年第一季度提供更新进展。","full_content":"谷歌于2026年10月1日宣布暂停其“开源软件漏洞奖励计划”（OSS VRP），并承诺在2027年第一季度提供最新进展。此举主因是AI工具泛滥导致自动化漏洞提交量暴增，而其中绝大多数报告存在“AI幻觉”——即AI模型生成的看似合理、实则不存在的虚假漏洞，导致谷歌工程师与开源维护者不堪重负。漏洞赏金计划（Bug Bounty Program）是一种通过现金奖励吸引外部安全专家发现系统漏洞的机制。然而，随着大语言模型（LLM）的普及，外部人员开始大量使用AI自动扫描并生成报告，导致“AI垃圾信息”（AI Slop）充斥审核系统。除开源漏洞项目外，谷歌鼓励参与者转向其其他未受影响的安全赏金计划。这一事件凸显了AI时代网络安全治理面临的双刃剑难题：AI在提高漏洞挖掘效率的同时，也因极低的低质报告生成成本，对现有的安全防御和人工审核体系造成了严重的“拒绝服务”式冲击。","url":"https://techcrunch.com/2026/10/04/google-froze-its-open-source-bug-bounty-program-due-to-a-significant-rise-in-ai-submissions","best_url":"https://techcrunch.com/2026/10/04/google-froze-its-open-source-bug-bounty-program-due-to-a-significant-rise-in-ai-submissions","categories":["security","open_source"],"tags":["Google","Bug Bounty","AI Slop","Cybersecurity"],"context":"谷歌的“开源软件漏洞奖励计划”（OSS VRP）是其安全生态的重要一环，旨在通过现金激励外部白帽子安全研究人员，发现并修补其开源软件中的漏洞。","heat":4,"audio_url":"audio/2026-10-05-e7226d7c.mp3"}];</script>
 <script src="archive.js"></script>
 <script>
 (function(){
@@ -553,7 +553,7 @@ let modalOpen = false;
 let filteredCache = [];
 let modalIdx = 0;
 const allDates = window.ARCHIVE_DATES || [];
-let pageDate = allDates[0] || '2026/10/04';
+let pageDate = allDates[0] || '2026/10/05';
 let archOpen = false;
 
 // Touch swipe
